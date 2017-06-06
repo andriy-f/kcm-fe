@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { Route, Link } from 'react-router-dom';
 import logo from '../logo.svg';
 import '../App.css';
+import intro from '../components/intro';
+import contactList from '../components/contactList';
 
 class App extends Component {
   render() {
@@ -8,11 +11,20 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>K Contact Manager React</h2>
+          <ul className="App-nav">
+            <li>
+              <Link to="/">Intro</Link>
+            </li>
+            <li>
+              <Link to="/contacts">Contacts</Link>
+            </li>
+          </ul>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="App-body">
+          <Route exact path="/" component={intro} />
+          <Route path="/contacts" component={contactList} />
+        </div>
       </div>
     );
   }

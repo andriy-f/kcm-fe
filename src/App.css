@@ -14,6 +14,16 @@
   color: white;
 }
 
+.App-header ul.App-nav {
+  list-style: none;
+  margin: 1em 0;
+}
+
+.App-header ul.App-nav li {
+  display: inline-block;
+  margin: 0 1em;
+}
+
 .App-intro {
   font-size: large;
 }
