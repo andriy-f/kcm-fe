@@ -4,6 +4,7 @@ import logo from '../logo.svg';
 import '../App.css';
 import intro from '../components/intro';
 import contactList from '../components/contactList';
+import contactDetails from '../components/contactDetails';
 
 class App extends Component {
   render() {
@@ -23,7 +24,8 @@ class App extends Component {
         </div>
         <div className="App-body">
           <Route exact path="/" component={intro} />
-          <Route path="/contacts" component={contactList} />
+          <Route exact path="/contacts" component={contactList} />
+          <Route exact path="/contact/:contactId" component={contactDetails} />
         </div>
       </div>
     );
