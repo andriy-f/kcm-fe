@@ -1,13 +1,13 @@
 // State sample
 // ...
 
-import { REQUEST_CONTACTS } from './actions';
+import { RECEIVE_CONTACTS } from './actions';
 import { combineReducers } from 'redux';
 
 function contacts(state = [], action) {
     switch (action.type) {
-        case REQUEST_CONTACTS:
-            return state.slice();// TODO
+        case RECEIVE_CONTACTS:
+            return action.payload;
         default:
             return state;
     }
