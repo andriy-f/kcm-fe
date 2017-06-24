@@ -3,7 +3,7 @@ import { Route, Link } from 'react-router-dom';
 import logo from '../logo.svg';
 import '../App.css';
 import intro from '../components/intro';
-import authorize from '../containers/authorize';
+import authenticate from '../containers/authenticate';
 import contactList from '../containers/contactList';
 import contactDetails from '../components/contactDetails';
 
@@ -28,7 +28,7 @@ class App extends Component {
         </div>
         <div className="App-body">
           <Route exact path="/" component={intro} />
-          <Route exact path="/authorize" component={authorize} />
+          <Route exact path="/authorize" component={authenticate} />
           <Route exact path="/contacts" component={contactList} />
           <Route exact path="/contact/:contactId" component={contactDetails} />
         </div>
