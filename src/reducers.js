@@ -13,10 +13,18 @@ function contacts(state = [], action) {
     }
 }
 
-const currentUser = (state = [], action) => {
+const currentUser = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_AUTHENTICATE:
-            return action.payload;
+            let respData = action.payload;
+            if(respData.success){
+                return {
+                    loggedin: true,
+                    data: respData 
+                }
+            } else {
+                return state;
+            }
         default:
             return state;
     }
