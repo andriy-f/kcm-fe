@@ -30,8 +30,18 @@ const currentUser = (state = {}, action) => {
     }
 }
 
+const authenticationPage = (state = {}, action) => {
+    switch (action.type) {
+        case RECEIVE_AUTHENTICATE:
+            let respData = action.payload;
+            return { response: respData };
+        default:
+            return state;
+    }
+}
 const rootReducer = combineReducers({
     currentUser,
+    authenticationPage,
     contacts
 })
 

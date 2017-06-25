@@ -17,7 +17,7 @@ const requestAuthenticateEpic = action$ =>
         .mergeMap(action => {
             return ajax.post('http://localhost:3000/authenticate',
                 { login: action.login, password: action.password })
-                .map(response => receiveAuthenticate(response))
+                .map(response => receiveAuthenticate(response.response))
         });
 
 const rootEpic = combineEpics(
