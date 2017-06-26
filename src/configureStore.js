@@ -6,17 +6,31 @@ import { epicMiddleware } from './middleware/epics'
 import { isDev } from './utils'
 
 const loggerMiddleware = createLogger()
-const composeEnhancers = isDev ?
-  (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose) :
-  compose;
+let configureStore
 
-export default function configureStore(preloadedState) {
-  return createStore(
-    rootReducer,
-    preloadedState,
-    composeEnhancers(applyMiddleware(
-      loggerMiddleware,
-      epicMiddleware
-    ))
-  )
+if (isDev) {
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+  configureStore = (preloadedState) => {
+    return createStore(
+      rootReducer,
+      preloadedState,
+      composeEnhancers(applyMiddleware(
+        loggerMiddleware,
+        epicMiddleware
+      ))
+    )
+  }
+} else {
+  configureStore = (preloadedState) => {
+    return createStore(
+      rootReducer,
+      preloadedState,
+      applyMiddleware(
+        epicMiddleware
+      )
+    )
+  }
 }
+
+export default configureStore
