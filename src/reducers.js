@@ -1,8 +1,10 @@
 // State sample
 // ...
 
-import { RECEIVE_CONTACTS, RECEIVE_AUTHENTICATE } from './actions';
 import { combineReducers } from 'redux';
+
+import { RECEIVE_CONTACTS, RECEIVE_AUTHENTICATE, RECEIVE_AUTHENTICATE_ERROR } from './actions';
+import * as jwt_decode from 'jwt-decode';
 
 function contacts(state = [], action) {
     switch (action.type) {
@@ -18,10 +20,8 @@ const currentUser = (state = {}, action) => {
         case RECEIVE_AUTHENTICATE:
             let respData = action.payload;
             if(respData.success){
-                return {
-                    loggedin: true,
-                    data: respData 
-                }
+                let decodedToken = jwt_decode(respData.token);
+                return decodedToken;
             } else {
                 return state;
             }
@@ -35,6 +35,9 @@ const authenticationPage = (state = {}, action) => {
         case RECEIVE_AUTHENTICATE:
             let respData = action.payload;
             return { response: respData };
+        case RECEIVE_AUTHENTICATE_ERROR:
+            let respData2 = action.payload;
+            return { response: respData2 };
         default:
             return state;
     }
