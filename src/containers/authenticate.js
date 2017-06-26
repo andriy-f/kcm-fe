@@ -11,9 +11,14 @@ class Authorize extends React.Component {
     }
 
     render() {
+        const response = this.props.authenticationPage.response;
+        const errorMessage = response && response.message;
         return (
             <div className="authenticate">
                 <form onSubmit={this.handleSubmit}>
+                    <div>
+                        {errorMessage}
+                    </div>
                     <div>
                         <label htmlFor="kcm-authenticate-login">Login</label>
                         <input id="kcm-authenticate-login" type="text" name="login" ref={(input) => this.loginInput = input} />
@@ -32,10 +37,11 @@ class Authorize extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    const { currentUser } = state;
+    const { currentUser, authenticationPage } = state;
 
     return {
-        currentUser
+        currentUser,
+        authenticationPage
     }
 };
 
