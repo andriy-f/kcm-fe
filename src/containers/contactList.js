@@ -5,6 +5,9 @@ import { requestContacts } from '../actions';
 
 class ContactList extends React.Component {
 
+    componentDidMount() {
+        this.props.reloadContacts();
+    }
 
     handleReloadContacts = () => {
         this.props.reloadContacts();
@@ -13,6 +16,7 @@ class ContactList extends React.Component {
     render() {
         return (
             <div className="contactList">
+                <div>{this.props.errorMessage}</div>
                 <button onClick={this.handleReloadContacts}>Refresh</button>
                 <ul>
                     {this.props.contacts && this.props.contacts.map(c =>
@@ -25,10 +29,12 @@ class ContactList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    const { contacts } = state;
+    const { contactsPage } = state;
+    const error = contactsPage.error;
 
     return {
-        contacts
+        contacts: contactsPage.items,
+        errorMessage: error && error.xhr.response && error.xhr.response.message
     }
 }
 
