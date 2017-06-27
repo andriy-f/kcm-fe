@@ -9,9 +9,9 @@ import * as jwt_decode from 'jwt-decode';
 function contactsPage(state = {}, action) {
     switch (action.type) {
         case RECEIVE_CONTACTS:
-            return { items: action.payload };
+            return { items: action.payload }
         case RECEIVE_CONTACTS_ERROR:
-            return { error: JSON.stringify(action.payload) }
+            return { error: action.payload }
         default:
             return state;
     }
@@ -21,12 +21,7 @@ const currentUser = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_AUTHENTICATE:
             let respData = action.payload;
-            if(respData.success){
-                let decodedToken = jwt_decode(respData.token);
-                return decodedToken;
-            } else {
-                return state;
-            }
+            return jwt_decode(respData.token);
         default:
             return state;
     }
@@ -35,11 +30,9 @@ const currentUser = (state = {}, action) => {
 const authenticationPage = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_AUTHENTICATE:
-            let respData = action.payload;
-            return { response: respData };
+            return { response: action.payload };
         case RECEIVE_AUTHENTICATE_ERROR:
-            let respData2 = action.payload;
-            return { response: respData2 };
+            return { error: action.payload };
         default:
             return state;
     }

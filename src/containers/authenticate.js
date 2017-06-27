@@ -11,8 +11,9 @@ class Authorize extends React.Component {
     }
 
     render() {
-        const response = this.props.authenticationPage.response;
-        const errorMessage = response && response.message;
+        const error = this.props.authenticationPage.error;
+        const errorResp = error && error.xhr.response;
+        const errorMessage = errorResp && errorResp.message;
         return (
             <div className="authenticate">
                 <form onSubmit={this.handleSubmit}>

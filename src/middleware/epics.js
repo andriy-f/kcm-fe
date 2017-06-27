@@ -30,7 +30,7 @@ const requestAuthenticateEpic = action$ =>
             body: { login: action.login, password: action.password }
         })
             .map(response => receiveAuthenticate(response.response))
-            .catch(error => Observable.of(receiveAuthenticateError(error.xhr.response)))
+            .catch(error => Observable.of(receiveAuthenticateError(error)))
         );
 
 const rootEpic = combineEpics(

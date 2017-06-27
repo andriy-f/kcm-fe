@@ -30,10 +30,11 @@ class ContactList extends React.Component {
 
 const mapStateToProps = (state) => {
     const { contactsPage } = state;
+    const error = contactsPage.error;
 
     return {
         contacts: contactsPage.items,
-        errorMessage: contactsPage.error
+        errorMessage: error && error.xhr.response && error.xhr.response.message
     }
 }
 
