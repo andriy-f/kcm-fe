@@ -3,13 +3,15 @@
 
 import { combineReducers } from 'redux';
 
-import { RECEIVE_CONTACTS, RECEIVE_AUTHENTICATE, RECEIVE_AUTHENTICATE_ERROR } from './actions';
+import { RECEIVE_CONTACTS, RECEIVE_CONTACTS_ERROR, RECEIVE_AUTHENTICATE, RECEIVE_AUTHENTICATE_ERROR } from './actions';
 import * as jwt_decode from 'jwt-decode';
 
-function contacts(state = [], action) {
+function contactsPage(state = {}, action) {
     switch (action.type) {
         case RECEIVE_CONTACTS:
-            return action.payload;
+            return { items: action.payload };
+        case RECEIVE_CONTACTS_ERROR:
+            return { error: JSON.stringify(action.payload) }
         default:
             return state;
     }
@@ -45,7 +47,7 @@ const authenticationPage = (state = {}, action) => {
 const rootReducer = combineReducers({
     currentUser,
     authenticationPage,
-    contacts
+    contactsPage
 })
 
 export default rootReducer

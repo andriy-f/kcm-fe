@@ -1,5 +1,6 @@
 export const REQUEST_CONTACTS = 'REQUEST_CONTACTS';
 export const RECEIVE_CONTACTS = 'RECEIVE_CONTACTS';
+export const RECEIVE_CONTACTS_ERROR = 'RECEIVE_CONTACTS_ERROR';
 
 export const REQUEST_AUTHENTICATE = 'REQUEST_AUTHENTICATE';
 export const RECEIVE_AUTHENTICATE = 'RECEIVE_AUTHENTICATE';
@@ -14,6 +15,11 @@ export const receiveContacts = (payload) => ({
     payload
 });
 
+export const receiveContactsError = (payload) => ({
+    type: RECEIVE_CONTACTS_ERROR,
+    payload,
+    error: true
+});
 export const requestAuthenticate = (login, password) => ({
     type: REQUEST_AUTHENTICATE,
     login,
