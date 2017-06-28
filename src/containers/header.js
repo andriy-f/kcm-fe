@@ -21,7 +21,10 @@ const Header = (props) => {
                 </li>
                 <li>
                     {isLoggedIn ? (
-                        <span>Hello, {currentUser.name}</span>
+                        <span>
+                            <span>Hello, {currentUser.name}</span>
+                            <Link to="/logoff">Logoff</Link>
+                        </span>
                     ) : (
                             <Link to="/authorize">Login</Link>
                         )}
