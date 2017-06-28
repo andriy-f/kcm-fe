@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 
 import logo from '../logo.svg';
 
-const Header = () => {
-    // const currentUser = this.props.currentUser
-    // const isLoggedIn = !!currentUser
+const Header = (props) => {
+    const currentUser = props.currentUser
+    const isLoggedIn = Object.keys(currentUser).length !== 0
 
     return (
         <div className="App-header">
@@ -17,18 +17,15 @@ const Header = () => {
                     <Link to="/">Intro</Link>
                 </li>
                 <li>
-                    <Link to="/authorize">Authorize</Link>
-                </li>
-                <li>
                     <Link to="/contacts">Contacts</Link>
                 </li>
-                {/*<li>
+                <li>
                     {isLoggedIn ? (
-                        <span>Hello, </span>
+                        <span>Hello, {currentUser.name}</span>
                     ) : (
-                            <span>Login</span>
+                            <Link to="/authorize">Login</Link>
                         )}
-                </li>*/}
+                </li>
             </ul>
         </div>
     )
