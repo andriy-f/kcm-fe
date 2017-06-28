@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { createLogger } from 'redux-logger'
+import { autoRehydrate } from 'redux-persist'
 
 import rootReducer from './reducers'
 import { epicMiddleware } from './middleware/epics'
@@ -15,10 +16,13 @@ if (isDev) {
     return createStore(
       rootReducer,
       preloadedState,
-      composeEnhancers(applyMiddleware(
-        loggerMiddleware,
-        epicMiddleware
-      ))
+      composeEnhancers(
+        applyMiddleware(
+          loggerMiddleware,
+          epicMiddleware
+        ),
+        autoRehydrate()
+      )
     )
   }
 } else {
@@ -26,8 +30,11 @@ if (isDev) {
     return createStore(
       rootReducer,
       preloadedState,
-      applyMiddleware(
-        epicMiddleware
+      compose(
+        applyMiddleware(
+          epicMiddleware
+        ),
+        autoRehydrate()
       )
     )
   }
