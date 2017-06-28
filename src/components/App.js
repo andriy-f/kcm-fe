@@ -1,43 +1,17 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Route, Link } from 'react-router-dom';
+import { Route} from 'react-router-dom';
 
-import logo from '../logo.svg';
 import '../App.css';
 import intro from '../components/intro';
 import authenticate from '../containers/authenticate';
 import contactList from '../containers/contactList';
 import contactDetails from '../components/contactDetails';
-
+import Header from '../containers/header'
 class App extends Component {
   render() {
-    const currentUser = this.props.currentUser
-    const isLoggedIn = !!currentUser
-
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>K Contact Manager React</h2>
-          <ul className="App-nav">
-            <li>
-              <Link to="/">Intro</Link>
-            </li>
-            <li>
-              <Link to="/authorize">Authorize</Link>
-            </li>
-            <li>
-              <Link to="/contacts">Contacts</Link>
-            </li>
-            <li>
-              {isLoggedIn ? (
-                <span>Hello, </span>
-              ) : (
-                  <span>Login</span>
-                )}
-            </li>
-          </ul>
-        </div>
+        <Header />        
         <div className="App-body">
           <Route exact path="/" component={intro} />
           <Route exact path="/authorize" component={authenticate} />
@@ -49,12 +23,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { currentUser } = state;
-
-  return {
-    currentUser
-  }
-};
-
-export default connect(mapStateToProps)(App);
+export default App
