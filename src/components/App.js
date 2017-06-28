@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Route, Link } from 'react-router-dom';
+
 import logo from '../logo.svg';
 import '../App.css';
 import intro from '../components/intro';
@@ -9,6 +11,9 @@ import contactDetails from '../components/contactDetails';
 
 class App extends Component {
   render() {
+    const currentUser = this.props.currentUser
+    const isLoggedIn = !!currentUser
+
     return (
       <div className="App">
         <div className="App-header">
@@ -24,6 +29,13 @@ class App extends Component {
             <li>
               <Link to="/contacts">Contacts</Link>
             </li>
+            <li>
+              {isLoggedIn ? (
+                <span>Hello, </span>
+              ) : (
+                  <span>Login</span>
+                )}
+            </li>
           </ul>
         </div>
         <div className="App-body">
@@ -37,4 +49,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  const { currentUser } = state;
+
+  return {
+    currentUser
+  }
+};
+
+export default connect(mapStateToProps)(App);
