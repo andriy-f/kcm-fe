@@ -1,22 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { requestLogoff } from '../actions';
+import { isUserLoggedIn } from '../utils'
 
 class LogOut extends React.Component {
-    componentDidMount(){
+    componentDidMount() {
         this.props.initiateLogoff();
     }
 
     render() {
-        return (
-           <span>Logging out...</span>
-        )
+        const currentUser = this.props.currentUser
+        const isLoggedIn = isUserLoggedIn(currentUser)
+
+        return isLoggedIn ? (
+            <span>Logging out...</span>
+        ) : (
+                <Redirect to="/" />
+            )
     }
 }
+
+const mapStateToProps = (state) => ({
+    currentUser: state.currentUser
+})
 
 const mapDispatchToProps = dispatch => ({
     initiateLogoff: () => dispatch(requestLogoff())
 })
 
-export default connect(null, mapDispatchToProps)(LogOut)
+export default connect(mapStateToProps, mapDispatchToProps)(LogOut)
