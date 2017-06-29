@@ -3,8 +3,8 @@ import { Route} from 'react-router-dom';
 
 import '../App.css';
 import intro from '../components/intro';
-import authenticate from '../containers/authenticate';
-import logoff from '../containers/logoff';
+import logInPage from '../containers/logIn';
+import logoff from '../containers/logOut';
 import contactList from '../containers/contactList';
 import contactDetails from '../components/contactDetails';
 import Header from '../containers/header'
@@ -17,7 +17,7 @@ class App extends Component {
         <Header />        
         <div className="App-body">
           <Route exact path="/" component={intro} />
-          <Route exact path="/authorize" component={authenticate} />
+          <Route exact path="/logIn" component={logInPage} />
           <Route exact path="/userProfile" component={userProfile} />
           <Route exact path="/logoff" component={logoff} />
           <Route exact path="/contacts" component={contactList} />

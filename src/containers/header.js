@@ -23,9 +23,9 @@ const Header = (props) => {
                 {isLoggedIn ?
                     <li>Hello, <Link to="/userProfile">{currentUser.name}</Link></li>
                     :
-                    <li><Link to="/authorize">Login</Link></li>
+                    <li><Link to="/logIn">Log in</Link></li>
                 }
-                {isLoggedIn && <li><Link to="/logoff">Logoff</Link></li>}
+                {isLoggedIn && <li><Link to="/logoff">Log out</Link></li>}
             </ul>
         </div>
     )

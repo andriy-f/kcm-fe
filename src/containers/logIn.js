@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { requestAuthenticate } from '../actions';
 
-class Authorize extends React.Component {
+class LogIn extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.initAuthenticate(this.loginInput.value, this.passwordInput.value);
@@ -29,7 +29,7 @@ class Authorize extends React.Component {
                         <input id="kcm-authenticate-password" type="password" name="password" ref={(input) => this.passwordInput = input} />
                     </div>
                     <div>
-                        <input type="submit" value="Logon" />
+                        <input type="submit" value="Log in" />
                     </div>
                 </form>
             </div>
@@ -50,4 +50,4 @@ const mapDispatchToProps = (dispatch) => ({
     initAuthenticate: (login, password) => dispatch(requestAuthenticate(login, password))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Authorize);
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn);

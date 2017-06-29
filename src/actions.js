@@ -2,9 +2,9 @@ export const REQUEST_CONTACTS = 'REQUEST_CONTACTS';
 export const RECEIVE_CONTACTS = 'RECEIVE_CONTACTS';
 export const RECEIVE_CONTACTS_ERROR = 'RECEIVE_CONTACTS_ERROR';
 
-export const REQUEST_AUTHENTICATE = 'REQUEST_AUTHENTICATE';
-export const RECEIVE_AUTHENTICATE = 'RECEIVE_AUTHENTICATE';
-export const RECEIVE_AUTHENTICATE_ERROR = 'RECEIVE_AUTHENTICATE_ERROR';
+export const REQUEST_LOGIN = 'REQUEST_LOGIN';
+export const RECEIVE_LOGIN = 'RECEIVE_LOGIN';
+export const RECEIVE_LOGIN_ERROR = 'RECEIVE_LOGIN_ERROR';
 
 export const REQUEST_LOGOFF = 'REQUEST_LOGOFF';
 export const RECEIVE_LOGOFF = 'RECEIVE_LOGOFF';
@@ -26,18 +26,18 @@ export const receiveContactsError = (payload) => ({
 });
 
 export const requestAuthenticate = (login, password) => ({
-    type: REQUEST_AUTHENTICATE,
+    type: REQUEST_LOGIN,
     login,
     password
 });
 
 export const receiveAuthenticate = (payload) => ({
-    type: RECEIVE_AUTHENTICATE,
+    type: RECEIVE_LOGIN,
     payload
 });
 
 export const receiveAuthenticateError = (payload) => ({
-    type: RECEIVE_AUTHENTICATE_ERROR,
+    type: RECEIVE_LOGIN_ERROR,
     payload,
     error: true
 });

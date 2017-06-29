@@ -7,7 +7,7 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { commonAjaxRequestSettings } from '../utils'
 import {
     REQUEST_CONTACTS, receiveContacts, receiveContactsError,
-    REQUEST_AUTHENTICATE, receiveAuthenticate, receiveAuthenticateError,
+    REQUEST_LOGIN, receiveAuthenticate, receiveAuthenticateError,
     REQUEST_LOGOFF, receiveLogoff, receiveLogoffError
 } from '../actions';
 
@@ -23,7 +23,7 @@ const requestContactsEpic = action$ =>
         );
 
 const requestAuthenticateEpic = action$ =>
-    action$.ofType(REQUEST_AUTHENTICATE)
+    action$.ofType(REQUEST_LOGIN)
         .mergeMap(action => ajax({
             ...commonAjaxRequestSettings,
             url: 'http://localhost:3000/authenticate',

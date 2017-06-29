@@ -6,7 +6,7 @@ import * as jwt_decode from 'jwt-decode';
 
 import {
     RECEIVE_CONTACTS, RECEIVE_CONTACTS_ERROR,
-    RECEIVE_AUTHENTICATE, RECEIVE_AUTHENTICATE_ERROR,
+    RECEIVE_LOGIN, RECEIVE_LOGIN_ERROR,
     RECEIVE_LOGOFF, RECEIVE_LOGOFF_ERROR
 } from './actions';
 
@@ -23,7 +23,7 @@ function contactsPage(state = {}, action) {
 
 const currentUser = (state = {}, action) => {
     switch (action.type) {
-        case RECEIVE_AUTHENTICATE:
+        case RECEIVE_LOGIN:
             let respData = action.payload;
             return jwt_decode(respData.token);
         case RECEIVE_LOGOFF:
@@ -35,9 +35,9 @@ const currentUser = (state = {}, action) => {
 
 const authenticationPage = (state = {}, action) => {
     switch (action.type) {
-        case RECEIVE_AUTHENTICATE:
+        case RECEIVE_LOGIN:
             return { response: action.payload };
-        case RECEIVE_AUTHENTICATE_ERROR:
+        case RECEIVE_LOGIN_ERROR:
             return { error: action.payload };
         default:
             return state;
