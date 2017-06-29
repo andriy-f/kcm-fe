@@ -6,8 +6,9 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable';
 
 import { commonAjaxRequestSettings } from '../utils'
 import {
-    REQUEST_AUTHENTICATE, REQUEST_CONTACTS,
-    receiveContacts, receiveContactsError, receiveAuthenticate, receiveAuthenticateError
+    REQUEST_CONTACTS, receiveContacts, receiveContactsError,
+    REQUEST_AUTHENTICATE, receiveAuthenticate, receiveAuthenticateError,
+    REQUEST_LOGOFF, receiveLogoff, receiveLogoffError
 } from '../actions';
 
 const requestContactsEpic = action$ =>
@@ -33,9 +34,21 @@ const requestAuthenticateEpic = action$ =>
             .catch(error => Observable.of(receiveAuthenticateError(error)))
         );
 
+const requestLogoffEpic = action$ =>
+    action$.ofType(REQUEST_LOGOFF)
+        .mergeMap(action => ajax({
+            ...commonAjaxRequestSettings,
+            url: 'http://localhost:3000/logoff',
+            method: 'POST'
+        })
+            .map(response => receiveLogoff(response.response))
+            .catch(error => Observable.of(receiveLogoffError(error)))
+        );
+
 const rootEpic = combineEpics(
     requestContactsEpic,
-    requestAuthenticateEpic
+    requestAuthenticateEpic,
+    requestLogoffEpic
 );
 
 export const epicMiddleware = createEpicMiddleware(rootEpic);

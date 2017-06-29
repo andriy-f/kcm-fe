@@ -8,7 +8,8 @@ export const RECEIVE_AUTHENTICATE_ERROR = 'RECEIVE_AUTHENTICATE_ERROR';
 
 export const REQUEST_LOGOFF = 'REQUEST_LOGOFF';
 export const RECEIVE_LOGOFF = 'RECEIVE_LOGOFF';
-export const RECEIVE_LOGOFF_ERROR = 'RECEIVE_CONTACTS_ERROR';
+export const RECEIVE_LOGOFF_ERROR = 'RECEIVE_LOGOFF_ERROR';
+
 export const requestContacts = () => ({
     type: REQUEST_CONTACTS
 });
@@ -23,6 +24,7 @@ export const receiveContactsError = (payload) => ({
     payload,
     error: true
 });
+
 export const requestAuthenticate = (login, password) => ({
     type: REQUEST_AUTHENTICATE,
     login,
@@ -36,6 +38,22 @@ export const receiveAuthenticate = (payload) => ({
 
 export const receiveAuthenticateError = (payload) => ({
     type: RECEIVE_AUTHENTICATE_ERROR,
+    payload,
+    error: true
+});
+
+
+export const requestLogoff = () => ({
+    type: REQUEST_LOGOFF
+});
+
+export const receiveLogoff = (payload) => ({
+    type: RECEIVE_LOGOFF,
+    payload
+});
+
+export const receiveLogoffError = (payload) => ({
+    type: RECEIVE_LOGOFF_ERROR,
     payload,
     error: true
 });
