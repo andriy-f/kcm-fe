@@ -19,7 +19,7 @@ class App extends Component {
           <Route exact path="/" component={intro} />
           <Route exact path="/logIn" component={logInPage} />
           <Route exact path="/userProfile" component={userProfile} />
-          <Route exact path="/logoff" component={logoff} />
+          <Route exact path="/logOut" component={logoff} />
           <Route exact path="/contacts" component={contactList} />
           <Route exact path="/contact/:contactId" component={contactDetails} />
         </div>

@@ -18,7 +18,7 @@ class UserProfile extends React.Component {
                 <div>isLoggedIn: {isLoggedInStr}</div>
                 <div>Logged in at: {iatStr}</div>
                 <div>Login expires(ed) at: {expStr}</div>
-                {isLoggedIn && <Link to="/logoff">Logoff</Link>}
+                {isLoggedIn && <Link to="/logOut">Log out</Link>}
             </div>
         )
     }

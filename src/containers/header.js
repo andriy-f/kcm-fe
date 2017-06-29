@@ -25,7 +25,7 @@ const Header = (props) => {
                     :
                     <li><Link to="/logIn">Log in</Link></li>
                 }
-                {isLoggedIn && <li><Link to="/logoff">Log out</Link></li>}
+                {isLoggedIn && <li><Link to="/logOut">Log out</Link></li>}
             </ul>
         </div>
     )

@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 
 import { requestLogoff } from '../actions';
 
-class Logoff extends React.Component {
+class LogOut extends React.Component {
     componentDidMount(){
         this.props.initiateLogoff();
     }
 
     render() {
         return (
-           <span>Logging off...</span>
+           <span>Logging out...</span>
         )
     }
 }
@@ -19,4 +19,4 @@ const mapDispatchToProps = dispatch => ({
     initiateLogoff: () => dispatch(requestLogoff())
 })
 
-export default connect(null, mapDispatchToProps)(Logoff)
+export default connect(null, mapDispatchToProps)(LogOut)
