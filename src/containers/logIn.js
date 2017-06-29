@@ -1,8 +1,9 @@
-
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { requestAuthenticate } from '../actions';
+import { isUserLoggedIn } from '../utils'
 
 class LogIn extends React.Component {
     handleSubmit = (event) => {
@@ -11,29 +12,34 @@ class LogIn extends React.Component {
     }
 
     render() {
+        const currentUser = this.props.currentUser
+        const isLoggedIn = isUserLoggedIn(currentUser)
         const error = this.props.authenticationPage.error;
         const errorResp = error && error.xhr.response;
         const errorMessage = errorResp && errorResp.message;
-        return (
-            <div className="authenticate">
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        {errorMessage}
-                    </div>
-                    <div>
-                        <label htmlFor="kcm-authenticate-login">Login</label>
-                        <input id="kcm-authenticate-login" type="text" name="login" ref={(input) => this.loginInput = input} />
-                    </div>
-                    <div>
-                        <label htmlFor="kcm-authenticate-password">Password</label>
-                        <input id="kcm-authenticate-password" type="password" name="password" ref={(input) => this.passwordInput = input} />
-                    </div>
-                    <div>
-                        <input type="submit" value="Log in" />
-                    </div>
-                </form>
-            </div>
-        );
+
+        return isLoggedIn ? (
+            <Redirect to="/" />
+        ) : (
+                <div className="authenticate">
+                    <form onSubmit={this.handleSubmit}>
+                        <div>
+                            {errorMessage}
+                        </div>
+                        <div>
+                            <label htmlFor="kcm-authenticate-login">Login</label>
+                            <input id="kcm-authenticate-login" type="text" name="login" ref={(input) => this.loginInput = input} />
+                        </div>
+                        <div>
+                            <label htmlFor="kcm-authenticate-password">Password</label>
+                            <input id="kcm-authenticate-password" type="password" name="password" ref={(input) => this.passwordInput = input} />
+                        </div>
+                        <div>
+                            <input type="submit" value="Log in" />
+                        </div>
+                    </form>
+                </div>
+            );
     }
 }
 
