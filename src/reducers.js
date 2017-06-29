@@ -26,6 +26,8 @@ const currentUser = (state = {}, action) => {
         case RECEIVE_AUTHENTICATE:
             let respData = action.payload;
             return jwt_decode(respData.token);
+        case RECEIVE_LOGOFF:
+            return {};
         default:
             return state;
     }

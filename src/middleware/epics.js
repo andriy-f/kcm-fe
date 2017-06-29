@@ -38,7 +38,7 @@ const requestLogoffEpic = action$ =>
     action$.ofType(REQUEST_LOGOFF)
         .mergeMap(action => ajax({
             ...commonAjaxRequestSettings,
-            url: 'http://localhost:3000/logoff',
+            url: 'http://localhost:3000/logout',
             method: 'POST'
         })
             .map(response => receiveLogoff(response.response))

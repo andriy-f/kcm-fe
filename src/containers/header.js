@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import logo from '../logo.svg';
+import { isUserLoggedIn } from '../utils'
 
 const Header = (props) => {
     const currentUser = props.currentUser
-    const isLoggedIn = Object.keys(currentUser).length !== 0
+    const isLoggedIn = isUserLoggedIn(currentUser)
 
     return (
         <div className="App-header">
@@ -19,16 +20,12 @@ const Header = (props) => {
                 <li>
                     <Link to="/contacts">Contacts</Link>
                 </li>
-                <li>
-                    {isLoggedIn ? (
-                        <span>
-                            <span>Hello, {currentUser.name}</span>
-                            <Link to="/logoff">Logoff</Link>
-                        </span>
-                    ) : (
-                            <Link to="/authorize">Login</Link>
-                        )}
-                </li>
+                {isLoggedIn ?
+                    <li>Hello, <Link to="/userProfile">{currentUser.name}</Link></li>
+                    :
+                    <li><Link to="/authorize">Login</Link></li>
+                }
+                {isLoggedIn && <li><Link to="/logoff">Logoff</Link></li>}
             </ul>
         </div>
     )

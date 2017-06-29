@@ -8,6 +8,8 @@ import logoff from '../containers/logoff';
 import contactList from '../containers/contactList';
 import contactDetails from '../components/contactDetails';
 import Header from '../containers/header'
+import userProfile from '../containers/userProfile'
+
 class App extends Component {
   render() {
     return (
@@ -16,6 +18,7 @@ class App extends Component {
         <div className="App-body">
           <Route exact path="/" component={intro} />
           <Route exact path="/authorize" component={authenticate} />
+          <Route exact path="/userProfile" component={userProfile} />
           <Route exact path="/logoff" component={logoff} />
           <Route exact path="/contacts" component={contactList} />
           <Route exact path="/contact/:contactId" component={contactDetails} />
