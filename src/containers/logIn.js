@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import Button from 'react-toolbox/lib/button/Button'
 
 import { requestAuthenticate } from '../actions';
 import { isUserLoggedIn } from '../utils'
@@ -35,7 +36,7 @@ class LogIn extends React.Component {
                             <input id="kcm-authenticate-password" type="password" name="password" ref={(input) => this.passwordInput = input} />
                         </div>
                         <div>
-                            <input type="submit" value="Log in" />
+                            <Button label="Log in" type="submit" />
                         </div>
                     </form>
                 </div>
