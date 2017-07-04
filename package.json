@@ -29,6 +29,9 @@
   },
   "reactToolbox": {
     "include": [
+      "APP_BAR",
+      "NAVIGATION",
+      "LINK",
       "BUTTON",
       "DATE_PICKER"
     ]
