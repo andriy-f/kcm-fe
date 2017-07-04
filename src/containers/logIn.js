@@ -22,20 +22,29 @@ class LogIn extends React.Component {
         return isLoggedIn ? (
             <Redirect to="/" />
         ) : (
-                <div className="authenticate">
+                <div className="authenticate k-form-container">
                     <form onSubmit={this.handleSubmit}>
+                        <h3 className="k-text-center">Log into site</h3>
                         <div>
                             {errorMessage}
                         </div>
-                        <div>
-                            <label htmlFor="kcm-authenticate-login">Login</label>
-                            <input id="kcm-authenticate-login" type="text" name="login" ref={(input) => this.loginInput = input} />
+                        <div className="row">
+                            <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <label htmlFor="kcm-authenticate-login">Login</label>
+                            </div>
+                            <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <input id="kcm-authenticate-login" type="text" name="login" ref={(input) => this.loginInput = input} />
+                            </div>
                         </div>
-                        <div>
-                            <label htmlFor="kcm-authenticate-password">Password</label>
-                            <input id="kcm-authenticate-password" type="password" name="password" ref={(input) => this.passwordInput = input} />
+                        <div className="row">
+                            <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <label htmlFor="kcm-authenticate-password">Password</label>
+                            </div>
+                            <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <input id="kcm-authenticate-password" type="password" name="password" ref={(input) => this.passwordInput = input} />
+                            </div>
                         </div>
-                        <div>
+                        <div className="k-text-center">
                             <Button label="Log in" type="submit" />
                         </div>
                     </form>

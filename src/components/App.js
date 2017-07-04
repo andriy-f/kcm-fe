@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import theme from '../toolbox/theme'
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import '../toolbox/theme.css'
+import 'flexboxgrid/dist/flexboxgrid.min.css'
 
 import '../App.css';
 import intro from '../components/intro';
