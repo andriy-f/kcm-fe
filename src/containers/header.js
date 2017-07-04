@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AppBar from 'react-toolbox/lib/app_bar/AppBar';
+import Navigation from 'react-toolbox/lib/navigation/Navigation';
+import RTLink from 'react-toolbox/lib/link/Link';
 import { connect } from 'react-redux';
 
 import logo from '../logo.svg';
@@ -10,24 +13,21 @@ const Header = (props) => {
     const isLoggedIn = isUserLoggedIn(currentUser)
 
     return (
-        <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2>K Contact Manager React</h2>
-            <ul className="App-nav">
-                <li>
+        <header className="App-header">
+            <AppBar title='K Contact Manager' leftIcon='menu' rightIcon={<img src={logo} className="App-logo" alt="logo" />}>
+                <Navigation type='horizontal'>
                     <Link to="/">Intro</Link>
-                </li>
-                <li>
                     <Link to="/contacts">Contacts</Link>
-                </li>
-                {isLoggedIn ?
-                    <li>Hello, <Link to="/userProfile">{currentUser.name}</Link></li>
-                    :
-                    <li><Link to="/logIn">Log in</Link></li>
-                }
-                {isLoggedIn && <li><Link to="/logOut">Log out</Link></li>}
-            </ul>
-        </div>
+                    {isLoggedIn ?
+                        <span>Hello, <Link to="/userProfile">{currentUser.name}</Link></span>
+                        :
+                        <Link to="/logIn">Log in</Link>
+                    }
+                    {isLoggedIn && <Link to="/logOut">Log out</Link>}
+                    <RTLink href='http://goo.gl' active label='Profile' icon='person' />
+                </Navigation>
+            </AppBar>
+        </header>
     )
 }
 
