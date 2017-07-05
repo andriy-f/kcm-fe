@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Button } from 'react-toolbox/lib/button'
+import { kFormContainer, kTextCenter } from '../App.css'
 
 import { requestAuthenticate } from '../actions';
 import { isUserLoggedIn } from '../utils'
@@ -22,9 +23,9 @@ class LogIn extends React.Component {
         return isLoggedIn ? (
             <Redirect to="/" />
         ) : (
-                <div className="authenticate k-form-container">
+                <div className={kFormContainer}>
                     <form onSubmit={this.handleSubmit}>
-                        <h3 className="k-text-center">Log into site</h3>
+                        <h3 className={kTextCenter}>Log into site</h3>
                         <div>
                             {errorMessage}
                         </div>
@@ -44,8 +45,8 @@ class LogIn extends React.Component {
                                 <input id="kcm-authenticate-password" type="password" name="password" ref={(input) => this.passwordInput = input} />
                             </div>
                         </div>
-                        <div className="k-text-center">
-                            <Button label="Log in" type="submit" />
+                        <div className={kTextCenter}>
+                            <Button label="Log in" type="submit" raised primary />
                         </div>
                     </form>
                 </div>
