@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import 'flexboxgrid/dist/flexboxgrid.min.css'
 
-// react-toolbox and it's theming
-// import theme from '../toolbox/theme'
-// import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
-// import '../toolbox/theme.css'
-
-import '../App.css';
 import intro from '../components/intro';
 import logInPage from '../containers/logIn';
 import logoff from '../containers/logOut';

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Button } from 'react-toolbox/lib/button'
 import { kFormContainer, kTextCenter } from '../App.css'
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { requestAuthenticate } from '../actions';
 import { isUserLoggedIn } from '../utils'
@@ -29,27 +30,29 @@ class LogIn extends React.Component {
                         <div>
                             {errorMessage}
                         </div>
-                        <div className="row">
-                            <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label htmlFor="kcm-authenticate-login">Login</label>
+                        <Grid fluid>
+                            <Row>
+                                <Col xs={12} md={3}>
+                                    <label htmlFor="kcm-authenticate-login">Login</label>
+                                </Col>
+                                <Col xs={12} md={9}>
+                                    <input id="kcm-authenticate-login" type="text" name="login" ref={(input) => this.loginInput = input} />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={12} md={3}>
+                                    <label htmlFor="kcm-authenticate-password">Password</label>
+                                </Col>
+                                <Col xs={12} md={9}>
+                                    <input id="kcm-authenticate-password" type="password" name="password" ref={(input) => this.passwordInput = input} />
+                                </Col>
+                            </Row>
+                            <div className={kTextCenter}>
+                                <Button label="Log in" type="submit" raised primary />
                             </div>
-                            <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <input id="kcm-authenticate-login" type="text" name="login" ref={(input) => this.loginInput = input} />
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label htmlFor="kcm-authenticate-password">Password</label>
-                            </div>
-                            <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <input id="kcm-authenticate-password" type="password" name="password" ref={(input) => this.passwordInput = input} />
-                            </div>
-                        </div>
-                        <div className={kTextCenter}>
-                            <Button label="Log in" type="submit" raised primary />
-                        </div>
+                        </Grid>
                     </form>
-                </div>
+                </div >
             );
     }
 }
