@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AppBar from 'react-toolbox/lib/app_bar/AppBar';
-import Navigation from 'react-toolbox/lib/navigation/Navigation';
-import RTLink from 'react-toolbox/lib/link/Link';
+import { AppBar } from 'react-toolbox/lib/app_bar';
+import { Navigation } from 'react-toolbox/lib/navigation';
+import { Link as RTLink } from 'react-toolbox/lib/link';
 import { connect } from 'react-redux';
 
 import logo from '../logo.svg';

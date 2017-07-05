@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Button from 'react-toolbox/lib/button/Button'
+import { Button } from 'react-toolbox/lib/button'
 
 import { requestAuthenticate } from '../actions';
 import { isUserLoggedIn } from '../utils'

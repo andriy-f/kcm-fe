@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import 'flexboxgrid/dist/flexboxgrid.min.css'
 
 // react-toolbox and it's theming
-import theme from '../toolbox/theme'
-import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
-import '../toolbox/theme.css'
-import 'flexboxgrid/dist/flexboxgrid.min.css'
+// import theme from '../toolbox/theme'
+// import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
+// import '../toolbox/theme.css'
 
 import '../App.css';
 import intro from '../components/intro';
@@ -19,7 +19,7 @@ import userProfile from '../containers/userProfile'
 class App extends Component {
   render() {
     return (
-      <ThemeProvider theme={theme}>
+      // <ThemeProvider theme={theme}>
         <div className="App">
           <Header />
           <div className="App-body">
@@ -31,7 +31,7 @@ class App extends Component {
             <Route exact path="/contact/:contactId" component={contactDetails} />
           </div>
         </div>
-      </ThemeProvider>
+      // </ThemeProvider>
     );
   }
 }
