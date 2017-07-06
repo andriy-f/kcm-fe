@@ -48,7 +48,7 @@ class LogIn extends React.Component {
                                 </Col>
                             </Row>
                             <div className={kTextCenter}>
-                                <Button label="Log in" type="submit" raised primary />
+                                <Button label="Log in" type="submit" flat />
                             </div>
                         </Grid>
                     </form>

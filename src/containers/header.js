@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Button } from 'react-toolbox/lib/button'
 import { withRouter } from 'react-router-dom'
 
+import appStyle from '../App.css'
 import logo from '../logo.svg';
 import { isUserLoggedIn, withReactRouterLink } from '../utils'
 const RTButtonLink = withReactRouterLink(Button);
@@ -15,7 +16,7 @@ const Header = (props) => {
 
     return (
         <header className="App-header">
-            <AppBar title='K Contact Manager' leftIcon='menu' rightIcon={<img src={logo} className={logo} alt="logo" />}>
+            <AppBar title='K Contact Manager' leftIcon='menu' rightIcon={<img src={logo} className={appStyle.logo} alt="logo" />}>
                 <Navigation type='horizontal'>
                     <RTButtonLink to='/'>Intro</RTButtonLink>
                     <RTButtonLink to='/contacts' label='Contacts' />
