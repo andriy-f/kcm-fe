@@ -41,11 +41,11 @@ class LogIn extends React.Component {
         this.props.initAuthenticate(values.login, values.password)
     }
 
-    handleSnackbarClick = (event, instance) => {
+    handleSnackbarClick = () => {
         this.setState({ showMessage: false })
     }
 
-    handleSnackbarTimeout = (event, instance) => {
+    handleSnackbarTimeout = () => {
         this.setState({ showMessage: false })
     }
 
@@ -66,6 +66,7 @@ class LogIn extends React.Component {
                 <div className={kFormContainer}>
                     <LoginFormReduxed onSubmit={this.handleSubmit} />
                     <Snackbar
+                        action='Dismiss'
                         active={this.state.showMessage && !!errorMessage}
                         label={errorMessage}
                         timeout={2000}
