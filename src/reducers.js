@@ -37,7 +37,7 @@ const currentUser = (state = {}, action) => {
 const authenticationPage = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_LOGIN:
-            return { response: action.payload };
+            return { response: { success: true } };
         case RECEIVE_LOGIN_ERROR:
             return { error: action.payload };
         default:
