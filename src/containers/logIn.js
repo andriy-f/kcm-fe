@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Button } from 'react-toolbox/lib/button'
 import { Input } from 'react-toolbox/lib/input'
+import { Snackbar } from 'react-toolbox/lib/snackbar'
 import { Field, reduxForm } from 'redux-form'
 
 import { kFormContainer, kTextCenter } from '../App.css'
@@ -31,8 +32,25 @@ const LoginFormReduxed = reduxForm({
 })(LoginForm)
 
 class LogIn extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { showMessage: true };
+    }
+
     handleSubmit = (values) => {
         this.props.initAuthenticate(values.login, values.password)
+    }
+
+    handleSnackbarClick = (event, instance) => {
+        this.setState({ showMessage: false })
+    }
+
+    handleSnackbarTimeout = (event, instance) => {
+        this.setState({ showMessage: false })
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({ showMessage: true })
     }
 
     render() {
@@ -47,9 +65,14 @@ class LogIn extends React.Component {
         ) : (
                 <div className={kFormContainer}>
                     <LoginFormReduxed onSubmit={this.handleSubmit} />
-                    <div>
-                        {errorMessage}
-                    </div>
+                    <Snackbar
+                        active={this.state.showMessage && !!errorMessage}
+                        label={errorMessage}
+                        timeout={2000}
+                        onClick={this.handleSnackbarClick}
+                        onTimeout={this.handleSnackbarTimeout}
+                        type='cancel'
+                    />
                 </div >
             )
     }
@@ -65,7 +88,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    initAuthenticate: (login, password) => dispatch(requestAuthenticate(login, password))
+    initAuthenticate: (login, password) => dispatch(requestAuthenticate(login, password)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn)
