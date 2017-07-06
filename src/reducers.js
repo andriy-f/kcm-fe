@@ -3,6 +3,7 @@
 
 import { combineReducers } from 'redux';
 import * as jwt_decode from 'jwt-decode';
+import { reducer as formReducer } from 'redux-form'
 
 import {
     RECEIVE_CONTACTS, RECEIVE_CONTACTS_ERROR,
@@ -59,7 +60,8 @@ const rootReducer = combineReducers({
     currentUser,
     authenticationPage,
     logoffPage,
-    contactsPage
+    contactsPage,
+    form: formReducer
 })
 
 export default rootReducer
