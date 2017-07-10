@@ -2,7 +2,6 @@
 // ...
 
 import { combineReducers } from 'redux';
-import * as jwt_decode from 'jwt-decode';
 import { reducer as formReducer } from 'redux-form'
 
 import {
@@ -26,7 +25,10 @@ const currentUser = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_LOGIN:
             let respData = action.payload;
-            return jwt_decode(respData.token);
+            return {
+                ...respData.userData,
+                tokenExpiresOn: action.payload.tokenExpiresOn
+            }
         case RECEIVE_LOGOFF:
             return {};
         default:

@@ -26,7 +26,7 @@ const requestAuthenticateEpic = action$ =>
     action$.ofType(REQUEST_LOGIN)
         .mergeMap(action => ajax({
             ...commonAjaxRequestSettings,
-            url: 'http://localhost:3000/authenticate',
+            url: 'http://localhost:3000/account/logInWithCookie',
             method: 'POST',
             body: { login: action.login, password: action.password }
         })
@@ -38,7 +38,7 @@ const requestLogoffEpic = action$ =>
     action$.ofType(REQUEST_LOGOFF)
         .mergeMap(action => ajax({
             ...commonAjaxRequestSettings,
-            url: 'http://localhost:3000/logout',
+            url: 'http://localhost:3000/account/clearCookie',
             method: 'POST'
         })
             .map(response => receiveLogoff(response.response))

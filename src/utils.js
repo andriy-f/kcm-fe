@@ -10,11 +10,12 @@ export const commonAjaxRequestSettings = {
 }
 
 export const isUserLoggedIn = (currentUser) => {
-    return Object.keys(currentUser).length !== 0 && currentUser.exp * 1000 >= Date.now();
+    return Object.keys(currentUser).length !== 0
+        && currentUser.tokenExpiresOn >= Date.now();
 }
 
 const isModifiedEvent = (event) =>
-  !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey)
+    !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey)
 
 export const withReactRouterLink = Component =>
     class Decorated extends React.Component {
