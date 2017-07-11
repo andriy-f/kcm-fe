@@ -9,13 +9,15 @@ import contactDetails from '../components/contactDetails';
 import Header from '../containers/header'
 import userProfile from '../containers/userProfile'
 
+import { app } from '../App.css'
+
 class App extends Component {
   render() {
     return (
       // <ThemeProvider theme={theme}>
-        <div className="App">
+        <div className={app}>
           <Header />
-          <div className="App-body">
+          <div>
             <Route exact path="/" component={intro} />
             <Route exact path="/logIn" component={logInPage} />
             <Route exact path="/userProfile" component={userProfile} />
