@@ -37,6 +37,18 @@ class LogIn extends React.Component {
         this.state = { showMessage: true };
     }
 
+    getErrorMessage = () => {
+        let errorMessage = undefined
+        const error = this.props.authenticationPage.error
+        errorMessage = error && error.message
+
+        const errorResp = error && error.xhr.response
+        const errorRespMessage = errorResp && errorResp.message
+        errorMessage = errorMessage ? errorMessage + ' ' + errorRespMessage : errorRespMessage
+
+        return errorMessage
+    }
+
     handleSubmit = (values) => {
         this.props.initAuthenticate(values.login, values.password)
     }
@@ -56,9 +68,7 @@ class LogIn extends React.Component {
     render() {
         const currentUser = this.props.currentUser
         const isLoggedIn = isUserLoggedIn(currentUser)
-        const error = this.props.authenticationPage.error
-        const errorResp = error && error.xhr.response
-        const errorMessage = errorResp && errorResp.message
+        const errorMessage = this.getErrorMessage()
 
         return isLoggedIn ? (
             <Redirect to="/" />
