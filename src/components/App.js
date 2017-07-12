@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
 
-import intro from '../components/intro';
-import logInPage from '../containers/logIn';
-import logoff from '../containers/logOut';
-import contactList from '../containers/contactList';
-import contactDetails from '../components/contactDetails';
 import Header from '../containers/header'
-import userProfile from '../containers/userProfile'
-
+import Routes from '../Routes'
 import { app } from '../App.css'
 
 class App extends Component {
@@ -17,14 +10,7 @@ class App extends Component {
       // <ThemeProvider theme={theme}>
         <div className={app}>
           <Header />
-          <div>
-            <Route exact path="/" component={intro} />
-            <Route exact path="/logIn" component={logInPage} />
-            <Route exact path="/userProfile" component={userProfile} />
-            <Route exact path="/logOut" component={logoff} />
-            <Route exact path="/contacts" component={contactList} />
-            <Route exact path="/contact/:contactId" component={contactDetails} />
-          </div>
+          <Routes />
         </div>
       // </ThemeProvider>
     );

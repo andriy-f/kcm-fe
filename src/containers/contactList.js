@@ -1,8 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Table, TableHead, TableRow, TableCell } from 'react-toolbox/lib/table'
+import { Button } from 'react-toolbox/lib/button'
 
 import { requestContacts } from '../actions'
+import { withReactRouterLink } from '../utils'
+
+const RTButtonLink = withReactRouterLink(Button);
 
 class ContactList extends React.Component {
     state = { selected: [] }
@@ -37,6 +41,7 @@ class ContactList extends React.Component {
                             <TableCell>{item.lastName}</TableCell>
                             <TableCell>{item.email}</TableCell>
                             <TableCell>{item.phoneNumber}</TableCell>
+                            <TableCell><RTButtonLink to={"/contacts/" + item._id}>Edit</RTButtonLink></TableCell>
                         </TableRow>
                     ))}
                 </Table>
