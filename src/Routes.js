@@ -5,7 +5,7 @@ import intro from './components/intro';
 import logInPage from './containers/logIn';
 import logoff from './containers/logOut';
 import contactList from './containers/contactList';
-import contactDetails from './components/contactDetails';
+import ContactEdit from './components/ContactEdit';
 import userProfile from './containers/userProfile'
 import NotFound from './components/NotFound'
 
@@ -16,7 +16,7 @@ export default () => (
         <Route exact path="/userProfile" component={userProfile} />
         <Route exact path="/logOut" component={logoff} />
         <Route exact path="/contacts" component={contactList} />
-        <Route path="/contacts/:id" component={contactDetails} />
+        <Route path="/contacts/:id" component={ContactEdit} />
         <Route component={NotFound} />>
     </Switch>
 )
