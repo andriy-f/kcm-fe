@@ -8,6 +8,7 @@ import { BACKEND_URL } from '../config'
 import { commonAjaxRequestSettings } from '../utils'
 import {
     REQUEST_CONTACTS, receiveContacts, receiveContactsError,
+    REQUEST_CONTACT, receiveContact, receiveContactError,
     REQUEST_LOGIN, receiveAuthenticate, receiveAuthenticateError,
     REQUEST_LOGOFF, receiveLogoff, receiveLogoffError
 } from '../actions';
@@ -22,6 +23,17 @@ const requestContactsEpic = action$ =>
                 .map(response => receiveContacts(response.response.value))
                 .catch(error => Observable.of(receiveContactsError(error)))
         );
+
+const requestContactEpic = action$ =>
+    action$.ofType(REQUEST_CONTACT)
+        .mergeMap(action =>
+            ajax({
+                ...commonAjaxRequestSettings,
+                url: BACKEND_URL + `/odata/Contacts('${action.id}')`
+            })
+                .map(response => receiveContact(response.response))
+                .catch(error => Observable.of(receiveContactError(error)))
+        )
 
 const requestAuthenticateEpic = action$ =>
     action$.ofType(REQUEST_LOGIN)
@@ -48,6 +60,7 @@ const requestLogoffEpic = action$ =>
 
 const rootEpic = combineEpics(
     requestContactsEpic,
+    requestContactEpic,
     requestAuthenticateEpic,
     requestLogoffEpic
 );

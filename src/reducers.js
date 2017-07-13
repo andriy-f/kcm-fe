@@ -6,6 +6,7 @@ import { reducer as formReducer } from 'redux-form'
 
 import {
     RECEIVE_CONTACTS, RECEIVE_CONTACTS_ERROR,
+    RECEIVE_CONTACT, RECEIVE_CONTACT_ERROR,
     RECEIVE_LOGIN, RECEIVE_LOGIN_ERROR,
     RECEIVE_LOGOFF, RECEIVE_LOGOFF_ERROR
 } from './actions';
@@ -21,6 +22,16 @@ function contactsPage(state = {}, action) {
     }
 }
 
+const contactEdit = (state = {}, action) => {
+    switch (action.type) {
+        case RECEIVE_CONTACT:
+            return { data: action.payload }
+        case RECEIVE_CONTACT_ERROR:
+            return { error: action.payload }
+        default:
+            return state;
+    }
+}
 const currentUser = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_LOGIN:
@@ -60,6 +71,7 @@ const logoffPage = (state = {}, action) => {
 
 const rootReducer = combineReducers({
     currentUser,
+    contactEdit,
     authenticationPage,
     logoffPage,
     contactsPage,
