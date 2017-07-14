@@ -67,4 +67,6 @@ export const withReactRouterLink = Component =>
                 />
             );
         }
-    };
+    }
+
+export const json = body => JSON.stringify(body !== undefined ? body : {})

@@ -7,6 +7,7 @@ import { reducer as formReducer } from 'redux-form'
 import {
     RECEIVE_CONTACTS, RECEIVE_CONTACTS_ERROR,
     RECEIVE_CONTACT, RECEIVE_CONTACT_ERROR,
+    SAVE_CONTACT_DONE, SAVE_CONTACT_ERROR,
     RECEIVE_LOGIN, RECEIVE_LOGIN_ERROR,
     RECEIVE_LOGOFF, RECEIVE_LOGOFF_ERROR
 } from './actions';
@@ -28,6 +29,10 @@ const contactEdit = (state = {}, action) => {
             return { data: action.payload }
         case RECEIVE_CONTACT_ERROR:
             return { error: action.payload }
+        case SAVE_CONTACT_DONE:
+            return { ...state, saved: true }
+        case SAVE_CONTACT_ERROR:
+            return { ...state, error: action.payload }
         default:
             return state;
     }

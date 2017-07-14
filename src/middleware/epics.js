@@ -5,10 +5,11 @@ import 'rxjs/add/operator/map'
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 
 import { BACKEND_URL } from '../config'
-import { commonAjaxRequestSettings } from '../utils'
+import { commonAjaxRequestSettings, json } from '../utils'
 import {
     REQUEST_CONTACTS, receiveContacts, receiveContactsError,
     REQUEST_CONTACT, receiveContact, receiveContactError,
+    SAVE_CONTACT_REQUEST, saveContactDone, saveContactError,
     REQUEST_LOGIN, receiveAuthenticate, receiveAuthenticateError,
     REQUEST_LOGOFF, receiveLogoff, receiveLogoffError
 } from '../actions';
@@ -33,6 +34,20 @@ const requestContactEpic = action$ =>
             })
                 .map(response => receiveContact(response.response))
                 .catch(error => Observable.of(receiveContactError(error)))
+        )
+
+const saveContactEpic = action$ =>
+    action$.ofType(SAVE_CONTACT_REQUEST)
+        .mergeMap(action =>
+            ajax({
+                ...commonAjaxRequestSettings,
+                headers: { 'Content-Type': 'application/json' },
+                url: BACKEND_URL + `/odata/Contacts('${action.payload._id}')`,
+                method: 'PATCH',
+                body: json(action.payload)
+            })
+                .map(response => saveContactDone(response.response))
+                .catch(error => Observable.of(saveContactError(error)))
         )
 
 const requestAuthenticateEpic = action$ =>
@@ -61,6 +76,7 @@ const requestLogoffEpic = action$ =>
 const rootEpic = combineEpics(
     requestContactsEpic,
     requestContactEpic,
+    saveContactEpic,
     requestAuthenticateEpic,
     requestLogoffEpic
 );

@@ -5,14 +5,13 @@ import { Button } from 'react-toolbox/lib/button'
 import { Field, reduxForm } from 'redux-form'
 
 import { kFormContainer, kTextCenter } from '../App.css'
-import { requestContact } from '../actions'
+import { requestContact, saveContactRequest } from '../actions'
 
 const TextInput = ({ input: { value, onChange }, label }) => <Input type='text' label={label} value={value} onChange={onChange} />
 
 class ContactEditForm extends Component {
     reload = () => {
-        const { match: { params: { id } }, load } = this.props
-        // const { load, id } = this.props
+        const { load, id } = this.props
         load(id)
     }
 
@@ -47,36 +46,29 @@ class ContactEditForm extends Component {
 
 ContactEditForm = reduxForm({ form: 'contactEdit', enableReinitialize: true })(ContactEditForm)
 
-// const handleSubmit = (event) => {
-//     event.preventDefault()
-//     alert('Form submited!')
-// }
+class ContactEditPage extends Component {
 
-// class ContactEditPage extends Component {
+    submit = (data) => {
+        this.props.save({ _id: data._id, firstName: data.firstName, lastName: data.lastName, email: data.email, phoneNumber: data.phoneNumber })
+    }
 
-//     // componentDidMount() {
-//     //     const { match: { params: { id } }, load } = this.props
-//     //     id && load(id)
-//     // }
-
-//     render() {
-//         // const { match: { params: { id } }, load, initialValues } = this.props
-//         const { match, load, initialValues } = this.props
-//         return (
-//             <section className={kFormContainer} >
-//                 {/* <ContactEditForm handleSubmit={handleSubmit} id={id} load={load} initialValues={initialValues} /> */}
-//                 <ContactEditForm handleSubmit={handleSubmit} load={load} initialValues={initialValues} match={match} />
-//             </section>
-//         )
-//     }
-// }
+    render() {
+        const { match: { params: { id } }, load, initialValues } = this.props
+        return (
+            <section className={kFormContainer} >
+                <ContactEditForm onSubmit={this.submit} id={id} load={load} initialValues={initialValues} />
+            </section>
+        )
+    }
+}
 
 const mapStateToProps = (state) => ({
     initialValues: state.contactEdit.data,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    load: id => dispatch(requestContact(id))
+    load: id => dispatch(requestContact(id)),
+    save: data => dispatch(saveContactRequest(data))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactEditForm)
+export default connect(mapStateToProps, mapDispatchToProps)(ContactEditPage)

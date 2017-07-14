@@ -6,6 +6,10 @@ export const REQUEST_CONTACT = 'REQUEST_CONTACT'
 export const RECEIVE_CONTACT = 'RECEIVE_CONTACT'
 export const RECEIVE_CONTACT_ERROR = 'RECEIVE_CONTACT_ERROR'
 
+export const SAVE_CONTACT_REQUEST = 'SAVE_CONTACT_REQUEST'
+export const SAVE_CONTACT_DONE = 'SAVE_CONTACT_DONE'
+export const SAVE_CONTACT_ERROR = 'SAVE_CONTACT_ERROR'
+
 export const REQUEST_LOGIN = 'REQUEST_LOGIN';
 export const RECEIVE_LOGIN = 'RECEIVE_LOGIN';
 export const RECEIVE_LOGIN_ERROR = 'RECEIVE_LOGIN_ERROR';
@@ -41,6 +45,22 @@ export const receiveContact = (payload) => ({
 
 export const receiveContactError = (payload) => ({
     type: RECEIVE_CONTACT_ERROR,
+    payload,
+    error: true
+})
+
+export const saveContactRequest = (payload) => ({
+    type: SAVE_CONTACT_REQUEST,
+    payload
+})
+
+export const saveContactDone = (payload) => ({
+    type: SAVE_CONTACT_DONE,
+    payload
+})
+
+export const saveContactError = (payload) => ({
+    type: SAVE_CONTACT_ERROR,
     payload,
     error: true
 })
