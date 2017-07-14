@@ -45,7 +45,7 @@ class ContactEditForm extends Component {
     }
 }
 
-ContactEditForm = reduxForm({ form: 'contactEdit' })(ContactEditForm)
+ContactEditForm = reduxForm({ form: 'contactEdit', enableReinitialize: true })(ContactEditForm)
 
 // const handleSubmit = (event) => {
 //     event.preventDefault()
@@ -73,7 +73,6 @@ ContactEditForm = reduxForm({ form: 'contactEdit' })(ContactEditForm)
 
 const mapStateToProps = (state) => ({
     initialValues: state.contactEdit.data,
-    enableReinitialize: true,
 })
 
 const mapDispatchToProps = (dispatch) => ({
