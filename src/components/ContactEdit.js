@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { Input } from 'react-toolbox/lib/input'
 import { Button } from 'react-toolbox/lib/button'
+import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 
 import { kFormContainer, kTextCenter } from '../App.css'
-import { requestContact, saveContactRequest } from '../actions'
+import { requestContact, saveContactRequest, clearContact } from '../actions'
 
 const TextInput = ({ input: { value, onChange }, label }) => <Input type='text' label={label} value={value} onChange={onChange} />
 
@@ -52,23 +53,28 @@ class ContactEditPage extends Component {
         this.props.save({ _id: data._id, firstName: data.firstName, lastName: data.lastName, email: data.email, phoneNumber: data.phoneNumber })
     }
 
+    componentWillUnmount() {
+        this.props.clear()
+    }
+
     render() {
-        const { match: { params: { id } }, load, initialValues } = this.props
-        return (
-            <section className={kFormContainer} >
-                <ContactEditForm onSubmit={this.submit} id={id} load={load} initialValues={initialValues} />
-            </section>
-        )
+        const { match: { params: { id } }, page: { data, justSaved }, load } = this.props
+        return justSaved ? (
+            <Redirect to="/contacts" />
+        ) : (
+                <section className={kFormContainer} >
+                    <ContactEditForm onSubmit={this.submit} id={id} load={load} initialValues={data} />
+                </section>
+            )
     }
 }
 
-const mapStateToProps = (state) => ({
-    initialValues: state.contactEdit.data,
-})
+const mapStateToProps = (state) => ({ page: state.contactEdit })
 
 const mapDispatchToProps = (dispatch) => ({
     load: id => dispatch(requestContact(id)),
-    save: data => dispatch(saveContactRequest(data))
+    save: data => dispatch(saveContactRequest(data)),
+    clear: () => dispatch(clearContact())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactEditPage)

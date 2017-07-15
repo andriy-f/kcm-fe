@@ -9,6 +9,7 @@ export const RECEIVE_CONTACT_ERROR = 'RECEIVE_CONTACT_ERROR'
 export const SAVE_CONTACT_REQUEST = 'SAVE_CONTACT_REQUEST'
 export const SAVE_CONTACT_DONE = 'SAVE_CONTACT_DONE'
 export const SAVE_CONTACT_ERROR = 'SAVE_CONTACT_ERROR'
+export const CLEAR_CONTACT = 'CLEAR_CONTACT'
 
 export const REQUEST_LOGIN = 'REQUEST_LOGIN';
 export const RECEIVE_LOGIN = 'RECEIVE_LOGIN';
@@ -63,6 +64,10 @@ export const saveContactError = (payload) => ({
     type: SAVE_CONTACT_ERROR,
     payload,
     error: true
+})
+
+export const clearContact = () => ({
+    type: CLEAR_CONTACT,
 })
 
 export const requestAuthenticate = (login, password) => ({
