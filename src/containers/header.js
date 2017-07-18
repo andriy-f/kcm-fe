@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom'
 
 import appStyle from '../App.css'
 import logo from '../logo.svg';
-import { isUserLoggedIn, withReactRouterLink } from '../utils'
+import { isUserLoggedIn, withReactRouterLink, isDev } from '../utils'
 const RTButtonLink = withReactRouterLink(Button);
 
 const Header = (props) => {
@@ -20,6 +20,7 @@ const Header = (props) => {
                 <Navigation type='horizontal'>
                     <RTButtonLink to='/'>Intro</RTButtonLink>
                     <RTButtonLink to='/contacts' label='Contacts' />
+                    { isDev && <RTButtonLink to='/dev'>Dev</RTButtonLink>}
                     {isLoggedIn ?
                         <span>
                             <RTButtonLink to='/userProfile' label={currentUser.name} />
