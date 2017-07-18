@@ -11,7 +11,6 @@ export default class DevPage extends Component {
         factory({
             oDataServiceHost: BACKEND_URL + "/odata",
             withCredentials: true,
-            crossDomain: true,
         })
             .onReady()
             .then(ctx => ctx.Contacts.toArray())
