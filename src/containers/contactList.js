@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Table, TableHead, TableRow, TableCell } from 'react-toolbox/lib/table'
 import { Button } from 'react-toolbox/lib/button'
 
-import { requestContacts } from '../actions'
+import { requestContacts, clearContactList as clearContactListAction } from '../actions'
 import { withReactRouterLink } from '../utils'
 
 const RTButtonLink = withReactRouterLink(Button);
@@ -12,15 +12,20 @@ class ContactList extends React.Component {
     state = { selected: [] }
 
     componentDidMount() {
-        this.props.reloadContacts();
+        this.props.clearContactList()
+        this.props.reloadContacts()
+    }
+
+    componentWillUnmount() {
+        this.props.clearContactList()
     }
 
     handleReloadContacts = () => {
-        this.props.reloadContacts();
+        this.props.reloadContacts()
     }
 
     handleRowSelect = selected => {
-        this.setState({ selected });
+        this.setState({ selected })
     }
 
     render() {
@@ -56,12 +61,13 @@ const mapStateToProps = (state) => {
 
     return {
         contacts: contactsPage.items,
-        errorMessage: error && error.xhr.response && error.xhr.response.message
+        errorMessage: error && error.xhr && error.xhr.response && error.xhr.response.message
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    reloadContacts: () => dispatch(requestContacts())
+    reloadContacts: () => dispatch(requestContacts()),
+    clearContactList: () => dispatch(clearContactListAction())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

@@ -6,7 +6,7 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable'
 
 import { BACKEND_URL } from '../config'
 import { commonAjaxRequestSettings, json } from '../utils'
-// import { factory as ctxFactory } from '../services/JayContext'
+import { factory as ctxFactory } from '../services/JayContext'
 import {
     REQUEST_CONTACTS, receiveContacts, receiveContactsError,
     REQUEST_CONTACT, receiveContact, receiveContactError,
@@ -15,7 +15,15 @@ import {
     REQUEST_LOGOFF, receiveLogoff, receiveLogoffError
 } from '../actions'
 
-// const jayObservable = Observable.fromCallback(ctxFactory().onReady())
+
+const dataContext = ctxFactory()
+// dataContext.onReady().then(ctx => {
+//     ctx.Contacts.toArray().then(contacts => {
+//         console.log(contacts)
+//     })
+// })
+const dataObservable = Observable.fromPromise(dataContext.onReady())
+
 const requestContactsEpic = action$ =>
     action$.ofType(REQUEST_CONTACTS)
         .mergeMap(action =>
@@ -23,6 +31,7 @@ const requestContactsEpic = action$ =>
                 ...commonAjaxRequestSettings,
                 url: BACKEND_URL + '/odata/Contacts'
             })
+            // dataObservable
                 .map(response => receiveContacts(response.response.value))
                 .catch(error => Observable.of(receiveContactsError(error)))
         );
