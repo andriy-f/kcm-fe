@@ -20,7 +20,13 @@ const dataContextPromise = ctxFactory().onReady()
 const requestContactsEpic = action$ =>
     action$.ofType(FETCH_CONTACTS)
         .mergeMap(action =>
-            Observable.fromPromise(dataContextPromise.then(ctx => ctx.Contacts.toArray()))
+            Observable.fromPromise(dataContextPromise
+                .then(ctx => ctx.Contacts
+                    // .filter(c => c.firstName === 'John')
+                    // .filter(c => c.firstName.toLowerCase === 'John')
+                    // .filter(c => c.firstName.toLowerCase.startsWith('j'))
+                    // .filter(c => c.firstName.startsWith('J'))
+                    .toArray()))
                 .map(response => receiveContacts(response))
                 .catch(error => Observable.of(receiveContactsError(error)))
         )
