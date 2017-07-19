@@ -18,7 +18,8 @@
     "redux-logger": "^3.0.6",
     "redux-observable": "^0.14.1",
     "redux-persist": "^4.8.1",
-    "rxjs": "^5.4.0"
+    "rxjs": "^5.4.0",
+    "serve": "^6.0.2"
   },
   "devDependencies": {
     "babel-core": "6.24.1",
@@ -65,7 +66,8 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "toolbox": "react-toolbox-themr",
-    "genjdcontext": "jaysvcutil -m http://localhost:3000/odata -o JayContext.js -t JayContext.d.ts"
+    "genjdcontext": "jaysvcutil -m http://localhost:3000/odata -o JayContext.js -t JayContext.d.ts",
+    "heroku-postbuild": "npm run build"
   },
   "reactToolbox": {
     "include": [
