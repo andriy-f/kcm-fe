@@ -2,18 +2,20 @@ import { ajax } from 'rxjs/observable/dom/ajax';
 import { Observable } from 'rxjs'
 import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/map'
-import { combineEpics, createEpicMiddleware } from 'redux-observable';
+import { combineEpics, createEpicMiddleware } from 'redux-observable'
 
 import { BACKEND_URL } from '../config'
 import { commonAjaxRequestSettings, json } from '../utils'
+// import { factory as ctxFactory } from '../services/JayContext'
 import {
     REQUEST_CONTACTS, receiveContacts, receiveContactsError,
     REQUEST_CONTACT, receiveContact, receiveContactError,
     SAVE_CONTACT_REQUEST, saveContactDone, saveContactError,
     REQUEST_LOGIN, receiveAuthenticate, receiveAuthenticateError,
     REQUEST_LOGOFF, receiveLogoff, receiveLogoffError
-} from '../actions';
+} from '../actions'
 
+// const jayObservable = Observable.fromCallback(ctxFactory().onReady())
 const requestContactsEpic = action$ =>
     action$.ofType(REQUEST_CONTACTS)
         .mergeMap(action =>

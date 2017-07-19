@@ -19,8 +19,9 @@ export const REQUEST_LOGOFF = 'REQUEST_LOGOFF';
 export const RECEIVE_LOGOFF = 'RECEIVE_LOGOFF';
 export const RECEIVE_LOGOFF_ERROR = 'RECEIVE_LOGOFF_ERROR';
 
-export const requestContacts = () => ({
-    type: REQUEST_CONTACTS
+export const requestContacts = (payload) => ({
+    type: REQUEST_CONTACTS,
+    payload
 });
 
 export const receiveContacts = (payload) => ({
