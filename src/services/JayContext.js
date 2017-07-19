@@ -1,10 +1,11 @@
-(function(mod) {
+(function (mod) {
     if (typeof exports === "object" && typeof module === "object") return mod(exports, require("@andriyf/jaydata/core")); // CommonJS
-})(function(exports, $data) {
+})(function (exports, $data) {
+    require('@andriyf/jaydata/odata');
 
     exports.$data = $data;
 
-    var types = {};
+    var types = {}, BACKEND_URL = require('../config').BACKEND_URL;
 
     types["Default.Contact"] = $data("$data.Entity").extend("Default.Contact", {
         _id: {
@@ -41,12 +42,12 @@
     exports.Default = types["Default.Default"];
 
     var ctxType = exports.type;
-    exports.factory = function(config) {
+    exports.factory = function (config) {
         if (ctxType) {
             var cfg = $data.typeSystem.extend({
                 name: "oData",
-                oDataServiceHost: "http://localhost:3000/odata",
-                withCredentials: false,
+                oDataServiceHost: BACKEND_URL + "/odata",
+                withCredentials: true,
                 maxDataServiceVersion: "4.0"
             }, config);
             return new ctxType(cfg);

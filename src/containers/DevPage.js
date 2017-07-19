@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
-import { } from '@andriyf/jaydata/odata'
 
 import { isDev } from '../utils'
 import { factory } from '../services/JayContext'
-import { BACKEND_URL } from '../config'
 
 export default class DevPage extends Component {
 
     componentDidMount() {
-        factory({
-            oDataServiceHost: BACKEND_URL + "/odata",
-            withCredentials: true,
-        })
+        factory()
             .onReady()
             .then(ctx => ctx.Contacts.toArray())
             .then(contacts => {
