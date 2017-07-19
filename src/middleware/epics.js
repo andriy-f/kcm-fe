@@ -8,7 +8,7 @@ import { BACKEND_URL } from '../config'
 import { commonAjaxRequestSettings, json } from '../utils'
 import { factory as ctxFactory } from '../services/JayContext'
 import {
-    REQUEST_CONTACTS, receiveContacts, receiveContactsError,
+    FETCH_CONTACTS, receiveContacts, receiveContactsError,
     REQUEST_CONTACT, receiveContact, receiveContactError,
     SAVE_CONTACT_REQUEST, saveContactDone, saveContactError,
     REQUEST_LOGIN, receiveAuthenticate, receiveAuthenticateError,
@@ -18,7 +18,7 @@ import {
 const dataContextPromise = ctxFactory().onReady()
 
 const requestContactsEpic = action$ =>
-    action$.ofType(REQUEST_CONTACTS)
+    action$.ofType(FETCH_CONTACTS)
         .mergeMap(action =>
             Observable.fromPromise(dataContextPromise.then(ctx => ctx.Contacts.toArray()))
                 .map(response => receiveContacts(response))

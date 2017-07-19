@@ -7,9 +7,9 @@
 
 // ACTION - FETCH_USER
 
-export const REQUEST_CONTACTS = 'REQUEST_CONTACTS'
-export const RECEIVE_CONTACTS = 'RECEIVE_CONTACTS'
-export const RECEIVE_CONTACTS_ERROR = 'RECEIVE_CONTACTS_ERROR'
+export const FETCH_CONTACTS = 'FETCH_CONTACTS'
+export const FETCH_CONTACTS_DONE = 'FETCH_CONTACTS_DONE'
+export const FETCH_CONTACTS_ERROR = 'FETCH_CONTACTS_ERROR'
 export const CLEAR_CONTACT_LIST = 'CLEAR_CONTACT_LIST'
 
 export const REQUEST_CONTACT = 'REQUEST_CONTACT'
@@ -30,7 +30,7 @@ export const RECEIVE_LOGOFF = 'RECEIVE_LOGOFF';
 export const RECEIVE_LOGOFF_ERROR = 'RECEIVE_LOGOFF_ERROR';
 
 export const requestContacts = (payload) => ({
-    type: REQUEST_CONTACTS,
+    type: FETCH_CONTACTS,
     payload
 });
 
@@ -39,12 +39,12 @@ export const clearContactList = () => ({
 })
 
 export const receiveContacts = (payload) => ({
-    type: RECEIVE_CONTACTS,
+    type: FETCH_CONTACTS_DONE,
     payload
 });
 
 export const receiveContactsError = (payload) => ({
-    type: RECEIVE_CONTACTS_ERROR,
+    type: FETCH_CONTACTS_ERROR,
     payload,
     error: true
 });
