@@ -8,6 +8,7 @@ import contactList from './containers/contactList';
 import ContactEdit from './components/ContactEdit';
 import userProfile from './containers/userProfile'
 import NotFound from './components/NotFound'
+import DevPage from './containers/DevPage'
 
 export default () => (
     <Switch>
@@ -16,6 +17,7 @@ export default () => (
         <Route exact path="/userProfile" component={userProfile} />
         <Route exact path="/logOut" component={logoff} />
         <Route exact path="/contacts" component={contactList} />
+        <Route path="/dev" component={DevPage} />
         <Route path="/contacts/:id" component={ContactEdit} />
         <Route component={NotFound} />>
     </Switch>
