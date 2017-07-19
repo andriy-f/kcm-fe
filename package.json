@@ -61,10 +61,11 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
+    "watch": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "toolbox": "react-toolbox-themr",
-    "genjdcontext": "jaysvcutil -m http://localhost:3000/odata -o JayContext.js -t JayContext.d.ts" 
+    "genjdcontext": "jaysvcutil -m http://localhost:3000/odata -o JayContext.js -t JayContext.d.ts"
   },
   "reactToolbox": {
     "include": [
