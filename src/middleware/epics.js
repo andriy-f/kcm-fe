@@ -15,26 +15,15 @@ import {
     REQUEST_LOGOFF, receiveLogoff, receiveLogoffError
 } from '../actions'
 
-
-const dataContext = ctxFactory()
-// dataContext.onReady().then(ctx => {
-//     ctx.Contacts.toArray().then(contacts => {
-//         console.log(contacts)
-//     })
-// })
-const dataObservable = Observable.fromPromise(dataContext.onReady())
+const dataContextPromise = ctxFactory().onReady()
 
 const requestContactsEpic = action$ =>
     action$.ofType(REQUEST_CONTACTS)
         .mergeMap(action =>
-            ajax({
-                ...commonAjaxRequestSettings,
-                url: BACKEND_URL + '/odata/Contacts'
-            })
-            // dataObservable
-                .map(response => receiveContacts(response.response.value))
+            Observable.fromPromise(dataContextPromise.then(ctx => ctx.Contacts.toArray()))
+                .map(response => receiveContacts(response))
                 .catch(error => Observable.of(receiveContactsError(error)))
-        );
+        )
 
 const requestContactEpic = action$ =>
     action$.ofType(REQUEST_CONTACT)
