@@ -1,5 +1,5 @@
 (function(mod) {
-    if (typeof exports === "object" && typeof module === "object") return mod(exports, require("jaydata/core")); // CommonJS
+    if (typeof exports === "object" && typeof module === "object") return mod(exports, require("@andriyf/jaydata/core")); // CommonJS
 })(function(exports, $data) {
 
     exports.$data = $data;

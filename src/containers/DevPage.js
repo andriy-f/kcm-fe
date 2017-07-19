@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { } from 'jaydata/odata'
+import { } from '@andriyf/jaydata/odata'
 
 import { isDev } from '../utils'
 import { factory } from '../services/JayContext'
