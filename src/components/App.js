@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { AppBar, Layout, NavDrawer, Sidebar, Panel } from 'react-toolbox'
-import Checkbox from 'react-toolbox/lib/checkbox'
+import { AppBar, Layout, NavDrawer, Sidebar, Panel, Checkbox } from 'react-toolbox'
 
 import MainNav from '../containers/MainNav'
 import Routes from '../Routes'
