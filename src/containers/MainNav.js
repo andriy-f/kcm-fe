@@ -14,6 +14,7 @@ const MainNav = (props) => {
         <Navigation type='vertical'>
             <RTButtonLink to='/'>Intro</RTButtonLink>
             <RTButtonLink to='/contacts' label='Contacts' />
+            <RTButtonLink to='/settings' label='Settings' />
             {isDev && <RTButtonLink to='/dev'>Dev</RTButtonLink>}
             {isLoggedIn && <RTButtonLink to='/userProfile' label={currentUser.name} />}
             {isLoggedIn && <RTButtonLink to='/logOut' label='Log out' />}
