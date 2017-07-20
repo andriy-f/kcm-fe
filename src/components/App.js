@@ -7,23 +7,15 @@ import MainNav from '../containers/MainNav'
 import Routes from '../Routes'
 import { app, mainContent } from '../App.css'
 import { BACKEND_URL } from '../config'
+import { toggleSetting } from '../actions'
 
 class App extends Component {
-  state = {
-    bodyScrolled: false,
-    sideNavActive: false,
-    sideNavPinned: false,
-    sideNavClipped: true,
-    rightSideNavActive: false,
-    rightSideNavPinned: false,
-    rightSideNavClipped: true
+  handleToggle = param => {
+    this.props.toggleSetting(param)
   }
 
-  handleToggle = param => {
-    this.setState({ [param]: !this.state[param] })
-  }
   render() {
-    const { sideNavActive, rightSideNavActive } = this.state
+    const { sideNavActive, rightSideNavActive } = this.props
     const isBEConfigured = !!BACKEND_URL
     return (
       // <ThemeProvider theme={theme}>
@@ -34,10 +26,9 @@ class App extends Component {
         <Layout>
           <NavDrawer
             active={sideNavActive}
-            clipped={this.state.sideNavClipped}
+            clipped={this.props.sideNavClipped}
             onOverlayClick={this.handleToggle.bind(this, 'sideNavActive')}
-            permanentAt="xxxl"
-            pinned={this.state.sideNavPinned}
+            pinned={this.props.sideNavPinned}
           >
             <MainNav />
           </NavDrawer>
@@ -53,43 +44,43 @@ class App extends Component {
             />
           </header>
 
-          <Panel bodyScroll={this.state.bodyScrolled} >
+          <Panel bodyScroll={this.props.bodyScrolled} >
             <section className={mainContent}>
               <Routes />
               <h5 style={{ marginBottom: 20 }}>SideNav State</h5>
               <Checkbox
                 label='Pinned'
-                checked={this.state.sideNavPinned}
+                checked={this.props.sideNavPinned}
                 onChange={this.handleToggle.bind(this, 'sideNavPinned')}
               />
 
               <Checkbox
                 label='Clipped'
-                checked={this.state.sideNavClipped}
+                checked={this.props.sideNavClipped}
                 onChange={this.handleToggle.bind(this, 'sideNavClipped')}
               />
 
               <Checkbox
                 label="Right SideNav Active"
-                checked={this.state.rightSideNavActive}
+                checked={this.props.rightSideNavActive}
                 onChange={this.handleToggle.bind(this, 'rightSideNavActive')}
               />
 
               <Checkbox
                 label="Right SideNav Pinned"
-                checked={this.state.rightSideNavPinned}
+                checked={this.props.rightSideNavPinned}
                 onChange={this.handleToggle.bind(this, 'rightSideNavPinned')}
               />
 
               <Checkbox
                 label="Right SideNav Clipped"
-                checked={this.state.rightSideNavClipped}
+                checked={this.props.rightSideNavClipped}
                 onChange={this.handleToggle.bind(this, 'rightSideNavClipped')}
               />
 
               <Checkbox
                 label="Body scrolled"
-                checked={this.state.bodyScrolled}
+                checked={this.props.bodyScrolled}
                 onChange={this.handleToggle.bind(this, 'bodyScrolled')}
               />
             </section>
@@ -98,8 +89,8 @@ class App extends Component {
           <Sidebar
             active={rightSideNavActive}
             onOverlayClick={this.handleToggle.bind(this, 'rightSideNavActive')}
-            clipped={this.state.rightSideNavClipped}
-            pinned={this.state.rightSideNavPinned}
+            clipped={this.props.rightSideNavClipped}
+            pinned={this.props.rightSideNavPinned}
             right
           >
             <p>Sidebar content.</p>
@@ -111,4 +102,25 @@ class App extends Component {
   }
 }
 
-export default withRouter(connect()(App))
+const mapStateToProps = (state) => {
+  const { settings: { bodyScrolled, sideNavActive, sideNavPinned,
+    sideNavClipped, rightSideNavActive, rightSideNavPinned, rightSideNavClipped } } = state;
+
+  return ({
+    bodyScrolled,
+    sideNavActive,
+    sideNavPinned,
+    sideNavClipped,
+    rightSideNavActive,
+    rightSideNavPinned,
+    rightSideNavClipped,
+  })
+}
+
+const mapDispathToProps = dispatch => {
+  return {
+    toggleSetting: (name) => dispatch(toggleSetting({name}))
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispathToProps)(App))

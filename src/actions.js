@@ -25,9 +25,11 @@ export const REQUEST_LOGIN = 'REQUEST_LOGIN';
 export const RECEIVE_LOGIN = 'RECEIVE_LOGIN';
 export const RECEIVE_LOGIN_ERROR = 'RECEIVE_LOGIN_ERROR';
 
-export const REQUEST_LOGOFF = 'REQUEST_LOGOFF';
-export const RECEIVE_LOGOFF = 'RECEIVE_LOGOFF';
-export const RECEIVE_LOGOFF_ERROR = 'RECEIVE_LOGOFF_ERROR';
+export const REQUEST_LOGOFF = 'REQUEST_LOGOFF'
+export const RECEIVE_LOGOFF = 'RECEIVE_LOGOFF'
+export const RECEIVE_LOGOFF_ERROR = 'RECEIVE_LOGOFF_ERROR'
+
+export const TOGGLE_SETTING = 'TOGGLE_SETTING'
 
 export const requestContacts = (payload) => ({
     type: FETCH_CONTACTS,
@@ -116,4 +118,9 @@ export const receiveLogoffError = (payload) => ({
     type: RECEIVE_LOGOFF_ERROR,
     payload,
     error: true
+})
+
+export const toggleSetting = (payload) => ({
+    type: TOGGLE_SETTING,
+    payload
 })

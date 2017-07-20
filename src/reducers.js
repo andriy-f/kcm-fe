@@ -9,7 +9,8 @@ import {
     RECEIVE_CONTACT, RECEIVE_CONTACT_ERROR,
     SAVE_CONTACT_DONE, SAVE_CONTACT_ERROR, CLEAR_CONTACT,
     RECEIVE_LOGIN, RECEIVE_LOGIN_ERROR,
-    RECEIVE_LOGOFF, RECEIVE_LOGOFF_ERROR
+    RECEIVE_LOGOFF, RECEIVE_LOGOFF_ERROR,
+    TOGGLE_SETTING
 } from './actions';
 
 function contactsPage(state = {}, action) {
@@ -78,12 +79,32 @@ const logoffPage = (state = {}, action) => {
     }
 }
 
+const settings = (state = {
+    bodyScrolled: false,
+    sideNavActive: false,
+    sideNavPinned: false,
+    sideNavClipped: true,
+    rightSideNavActive: false,
+    rightSideNavPinned: false,
+    rightSideNavClipped: true
+}, action) => {
+    switch (action.type) {
+        case TOGGLE_SETTING:
+            let name = action.payload.name
+            let oldSettingValue = state[name]
+            return { ...state, [name]: !oldSettingValue }
+        default:
+            return state;
+    }
+}
+
 const rootReducer = combineReducers({
     currentUser,
     contactEdit,
     authenticationPage,
     logoffPage,
     contactsPage,
+    settings,
     form: formReducer
 })
 
