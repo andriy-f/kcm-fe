@@ -16,6 +16,10 @@
   text-align: center;
 }
 
+.mainContent {
+  margin: 4rem 1.8rem 1.8rem;
+}
+
 .intro {
   font-size: large;
 }
