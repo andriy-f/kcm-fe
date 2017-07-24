@@ -11,6 +11,7 @@ export const FETCH_CONTACTS = 'FETCH_CONTACTS'
 export const FETCH_CONTACTS_DONE = 'FETCH_CONTACTS_DONE'
 export const FETCH_CONTACTS_ERROR = 'FETCH_CONTACTS_ERROR'
 export const CLEAR_CONTACT_LIST = 'CLEAR_CONTACT_LIST'
+export const SET_CONTACTS_FILTER_TEXT = 'SET_CONTACTS_FILTER_TEXT'
 
 export const REQUEST_CONTACT = 'REQUEST_CONTACT'
 export const RECEIVE_CONTACT = 'RECEIVE_CONTACT'
@@ -49,7 +50,12 @@ export const receiveContactsError = (payload) => ({
     type: FETCH_CONTACTS_ERROR,
     payload,
     error: true
-});
+})
+
+export const setContactsFilterText = payload => ({
+    type: SET_CONTACTS_FILTER_TEXT,
+    payload
+})
 
 export const requestContact = (id) => ({
     type: REQUEST_CONTACT,

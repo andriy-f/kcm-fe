@@ -5,7 +5,7 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form'
 
 import {
-    FETCH_CONTACTS_DONE, FETCH_CONTACTS_ERROR, CLEAR_CONTACT_LIST,
+    FETCH_CONTACTS_DONE, FETCH_CONTACTS_ERROR, CLEAR_CONTACT_LIST, SET_CONTACTS_FILTER_TEXT,
     RECEIVE_CONTACT, RECEIVE_CONTACT_ERROR,
     SAVE_CONTACT_DONE, SAVE_CONTACT_ERROR, CLEAR_CONTACT,
     RECEIVE_LOGIN, RECEIVE_LOGIN_ERROR,
@@ -21,6 +21,8 @@ function contactsPage(state = {}, action) {
             return { error: action.payload }
         case CLEAR_CONTACT_LIST:
             return {}
+        case SET_CONTACTS_FILTER_TEXT:
+            return { ...state, filterText: action.payload.value }
         default:
             return state;
     }
