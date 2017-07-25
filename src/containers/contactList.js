@@ -17,6 +17,7 @@ class ContactList extends React.Component {
     state = { selected: [] }
 
     componentDidMount() {
+        console.log('cdm')
         this.props.clearContactList()
         this.props.reloadContacts()
     }
@@ -78,7 +79,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
     reloadContacts: () => dispatch(requestContacts()),
     clearContactList: () => dispatch(clearContactListAction()),
-    setContactsFilterText: (value) => dispatch(setContactsFilterText({ value }))
+    setContactsFilterText: (value) => dispatch(setContactsFilterText(value))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

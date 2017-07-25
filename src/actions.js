@@ -52,9 +52,9 @@ export const receiveContactsError = (payload) => ({
     error: true
 })
 
-export const setContactsFilterText = payload => ({
+export const setContactsFilterText = filterText => ({
     type: SET_CONTACTS_FILTER_TEXT,
-    payload
+    payload: { filterText }
 })
 
 export const requestContact = (id) => ({

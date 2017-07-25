@@ -14,15 +14,17 @@ import {
 } from './actions';
 
 function contactsPage(state = {}, action) {
+    const payload = action.payload
+
     switch (action.type) {
         case FETCH_CONTACTS_DONE:
-            return { items: action.payload }
+            return { ...state, items: action.payload, error: null }
         case FETCH_CONTACTS_ERROR:
-            return { error: action.payload }
+            return { ...state, items: [], error: action.payload }
         case CLEAR_CONTACT_LIST:
             return {}
         case SET_CONTACTS_FILTER_TEXT:
-            return { ...state, filterText: action.payload.value }
+            return { ...state, ...payload }
         default:
             return state;
     }
