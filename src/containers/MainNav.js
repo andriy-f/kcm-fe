@@ -1,10 +1,9 @@
 import React from 'react';
 import { Navigation } from 'react-toolbox/lib/navigation';
 import { connect } from 'react-redux';
-import { Button } from 'react-toolbox/lib/button'
 
-import { isUserLoggedIn, withReactRouterLink, isDev } from '../utils'
-const RTButtonLink = withReactRouterLink(Button);
+import { isUserLoggedIn, isDev } from '../utils'
+import RTButtonLink from '../components/RTButtonLink'
 
 const MainNav = (props) => {
     const currentUser = props.currentUser

@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Table, TableHead, TableRow, TableCell } from 'react-toolbox/lib/table'
-import { Button } from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 
 import {
@@ -9,9 +8,7 @@ import {
     clearContactList as clearContactListAction,
     setContactsFilterText
 } from '../actions'
-import { withReactRouterLink } from '../utils'
-
-const RTButtonLink = withReactRouterLink(Button);
+import RTButtonLink from '../components/RTButtonLink'
 
 class ContactList extends React.Component {
     state = { selected: [] }
@@ -42,7 +39,6 @@ class ContactList extends React.Component {
         return (
             <div className="contactList">
                 <div>{this.props.errorMessage}</div>
-                {/* <button onClick={this.handleReloadContacts}>Refresh</button> */}
                 <Input type="text" label="Filter" value={this.props.filterText} onChange={this.handleFilter} />
                 <Table multiSelectable onRowSelect={this.handleRowSelect}>
                     <TableHead>
