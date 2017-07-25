@@ -17,7 +17,6 @@ class ContactList extends React.Component {
     state = { selected: [] }
 
     componentDidMount() {
-        console.log('cdm')
         this.props.clearContactList()
         this.props.reloadContacts()
     }

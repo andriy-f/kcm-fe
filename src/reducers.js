@@ -13,7 +13,8 @@ import {
     TOGGLE_SETTING
 } from './actions';
 
-function contactsPage(state = {}, action) {
+const defaultContactsPageState = {items: [], filterText: ''}
+function contactsPage(state = defaultContactsPageState, action) {
     const payload = action.payload
 
     switch (action.type) {
@@ -22,7 +23,7 @@ function contactsPage(state = {}, action) {
         case FETCH_CONTACTS_ERROR:
             return { ...state, items: [], error: action.payload }
         case CLEAR_CONTACT_LIST:
-            return {}
+            return defaultContactsPageState
         case SET_CONTACTS_FILTER_TEXT:
             return { ...state, ...payload }
         default:
