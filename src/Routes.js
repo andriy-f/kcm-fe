@@ -5,7 +5,7 @@ import intro from './components/intro';
 import logInPage from './containers/logIn';
 import logoff from './containers/logOut';
 import contactList from './containers/contactList';
-import ContactEdit from './components/ContactEdit';
+import ContactEdit from './containers/ContactEdit';
 import userProfile from './containers/userProfile'
 import NotFound from './components/NotFound'
 import DevPage from './containers/DevPage'
