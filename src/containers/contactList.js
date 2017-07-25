@@ -18,7 +18,7 @@ class ContactList extends React.Component {
 
     componentDidMount() {
         this.props.clearContactList()
-        this.props.reloadContacts()
+        this.props.reloadContacts(this.props.filterText)
     }
 
     componentWillUnmount() {
@@ -26,7 +26,7 @@ class ContactList extends React.Component {
     }
 
     handleReloadContacts = () => {
-        this.props.reloadContacts()
+        this.props.reloadContacts(this.props.filterText)
     }
 
     handleRowSelect = selected => {
@@ -35,13 +35,14 @@ class ContactList extends React.Component {
 
     handleFilter = value => {
         this.props.setContactsFilterText(value)
+        this.props.reloadContacts(value)
     }
 
     render() {
         return (
             <div className="contactList">
                 <div>{this.props.errorMessage}</div>
-                <button onClick={this.handleReloadContacts}>Refresh</button>
+                {/* <button onClick={this.handleReloadContacts}>Refresh</button> */}
                 <Input type="text" label="Filter" value={this.props.filterText} onChange={this.handleFilter} />
                 <Table multiSelectable onRowSelect={this.handleRowSelect}>
                     <TableHead>
@@ -76,7 +77,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    reloadContacts: () => dispatch(requestContacts()),
+    reloadContacts: (filterText) => dispatch(requestContacts(filterText)),
     clearContactList: () => dispatch(clearContactListAction()),
     setContactsFilterText: (value) => dispatch(setContactsFilterText(value))
 })

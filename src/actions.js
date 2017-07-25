@@ -32,9 +32,9 @@ export const RECEIVE_LOGOFF_ERROR = 'RECEIVE_LOGOFF_ERROR'
 
 export const TOGGLE_SETTING = 'TOGGLE_SETTING'
 
-export const requestContacts = (payload) => ({
+export const requestContacts = (filterText) => ({
     type: FETCH_CONTACTS,
-    payload
+    payload: { filterText }
 });
 
 export const clearContactList = () => ({
