@@ -10,7 +10,7 @@ export const commonAjaxRequestSettings = {
 }
 
 export const isUserLoggedIn = (currentUser) => {
-    return Object.keys(currentUser).length !== 0
+    return currentUser && Object.keys(currentUser).length !== 0
         && currentUser.tokenExpiresOn >= Date.now();
 }
 
