@@ -60,7 +60,7 @@ class ContactList extends React.Component {
                     ))}
                 </Table>
                 <div className={addItemButtonContainer}>
-                        <RTButtonLink icon='add' floating accent to="/" />
+                        <RTButtonLink icon='add' floating accent to="/contacts/new" />
                 </div>
             </div >
         )

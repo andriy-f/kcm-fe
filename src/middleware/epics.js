@@ -11,6 +11,7 @@ import {
     FETCH_CONTACTS, receiveContacts, receiveContactsError,
     REQUEST_CONTACT, receiveContact, receiveContactError,
     SAVE_CONTACT_REQUEST, saveContactDone, saveContactError,
+    ADD_CONTACT, addContactDone, addContactError,
     REQUEST_LOGIN, receiveAuthenticate, receiveAuthenticateError,
     REQUEST_LOGOFF, receiveLogoff, receiveLogoffError
 } from '../actions'
@@ -60,6 +61,20 @@ const saveContactEpic = action$ =>
                 .catch(error => Observable.of(saveContactError(error)))
         )
 
+const addContactEpic = action$ =>
+    action$.ofType(ADD_CONTACT)
+        .mergeMap(action =>
+            ajax({
+                ...commonAjaxRequestSettings,
+                headers: { 'Content-Type': 'application/json' },
+                url: BACKEND_URL + `/odata/Contacts`,
+                method: 'POST',
+                body: json(action.payload)
+            })
+                .map(response => addContactDone(response.response))
+                .catch(error => Observable.of(addContactError(error)))
+        )
+
 const requestAuthenticateEpic = action$ =>
     action$.ofType(REQUEST_LOGIN)
         .mergeMap(action => ajax({
@@ -87,6 +102,7 @@ const rootEpic = combineEpics(
     requestContactsEpic,
     requestContactEpic,
     saveContactEpic,
+    addContactEpic,
     requestAuthenticateEpic,
     requestLogoffEpic
 );

@@ -22,9 +22,14 @@ export const SAVE_CONTACT_DONE = 'SAVE_CONTACT_DONE'
 export const SAVE_CONTACT_ERROR = 'SAVE_CONTACT_ERROR'
 export const CLEAR_CONTACT = 'CLEAR_CONTACT'
 
-export const REQUEST_LOGIN = 'REQUEST_LOGIN';
-export const RECEIVE_LOGIN = 'RECEIVE_LOGIN';
-export const RECEIVE_LOGIN_ERROR = 'RECEIVE_LOGIN_ERROR';
+export const ADD_CONTACT = 'ADD_CONTACT'
+export const ADD_CONTACT_DONE = 'ADD_CONTACT_DONE'
+export const ADD_CONTACT_ERROR = 'ADD_CONTACT_ERROR'
+export const CLEAR_ADD_CONTACT_PAGE = 'CLEAR_ADD_CONTACT_PAGE'
+
+export const REQUEST_LOGIN = 'REQUEST_LOGIN'
+export const RECEIVE_LOGIN = 'RECEIVE_LOGIN'
+export const RECEIVE_LOGIN_ERROR = 'RECEIVE_LOGIN_ERROR'
 
 export const REQUEST_LOGOFF = 'REQUEST_LOGOFF'
 export const RECEIVE_LOGOFF = 'RECEIVE_LOGOFF'
@@ -87,6 +92,26 @@ export const saveContactError = (payload) => ({
     type: SAVE_CONTACT_ERROR,
     payload,
     error: true
+})
+
+export const addContact = (payload) => ({
+    type: ADD_CONTACT,
+    payload
+})
+
+export const addContactDone = (payload) => ({
+    type: ADD_CONTACT_DONE,
+    payload
+})
+
+export const addContactError = (payload) => ({
+    type: ADD_CONTACT_ERROR,
+    payload,
+    error: true
+})
+
+export const clearAddContactPage = () => ({
+    type: CLEAR_ADD_CONTACT_PAGE
 })
 
 export const clearContact = () => ({

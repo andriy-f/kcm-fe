@@ -8,6 +8,7 @@ import {
     FETCH_CONTACTS_DONE, FETCH_CONTACTS_ERROR, CLEAR_CONTACT_LIST, SET_CONTACTS_FILTER_TEXT,
     RECEIVE_CONTACT, RECEIVE_CONTACT_ERROR,
     SAVE_CONTACT_DONE, SAVE_CONTACT_ERROR, CLEAR_CONTACT,
+    ADD_CONTACT_DONE, ADD_CONTACT_ERROR, CLEAR_ADD_CONTACT_PAGE,
     RECEIVE_LOGIN, RECEIVE_LOGIN_ERROR,
     RECEIVE_LOGOFF, RECEIVE_LOGOFF_ERROR,
     TOGGLE_SETTING
@@ -47,6 +48,20 @@ const contactEdit = (state = {}, action) => {
             return state;
     }
 }
+
+const addContactPage = (state = {}, action) => {
+    switch (action.type) {
+        case ADD_CONTACT_DONE:
+            return { ...state, justSaved: true }
+        case ADD_CONTACT_ERROR:
+            return { ...state, error: action.payload }
+        case CLEAR_ADD_CONTACT_PAGE:
+            return {}
+        default:
+            return state;
+    }
+}
+
 const currentUser = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_LOGIN:
@@ -106,6 +121,7 @@ const settings = (state = {
 const rootReducer = combineReducers({
     currentUser,
     contactEdit,
+    addContactPage,
     authenticationPage,
     logoffPage,
     contactsPage,
