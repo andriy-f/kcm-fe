@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Table, TableHead, TableRow, TableCell } from 'react-toolbox/lib/table'
 import Input from 'react-toolbox/lib/input'
-import Button from 'react-toolbox/lib/button'
 
 import { addItemButtonContainer } from '../App.css'
 
@@ -61,7 +60,7 @@ class ContactList extends React.Component {
                     ))}
                 </Table>
                 <div className={addItemButtonContainer}>
-                    <Button icon='add' floating accent />
+                        <RTButtonLink icon='add' floating accent to="/" />
                 </div>
             </div >
         )
