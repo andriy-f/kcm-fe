@@ -2,6 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Table, TableHead, TableRow, TableCell } from 'react-toolbox/lib/table'
 import Input from 'react-toolbox/lib/input'
+import Button from 'react-toolbox/lib/button'
+
+import { addItemButtonContainer } from '../App.css'
 
 import {
     requestContacts,
@@ -57,6 +60,9 @@ class ContactList extends React.Component {
                         </TableRow>
                     ))}
                 </Table>
+                <div className={addItemButtonContainer}>
+                    <Button icon='add' floating accent />
+                </div>
             </div >
         )
     }
