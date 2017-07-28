@@ -9,12 +9,14 @@ import {
     RECEIVE_CONTACT, RECEIVE_CONTACT_ERROR,
     SAVE_CONTACT_DONE, SAVE_CONTACT_ERROR, CLEAR_CONTACT,
     ADD_CONTACT_DONE, ADD_CONTACT_ERROR, CLEAR_ADD_CONTACT_PAGE,
+    CONFIRM_DELETE_CONTACT, CANCEL_DELETE_CONTACT, 
+    DELETE_CONTACT_DONE, DELETE_CONTACT_ERROR,
     RECEIVE_LOGIN, RECEIVE_LOGIN_ERROR,
     RECEIVE_LOGOFF, RECEIVE_LOGOFF_ERROR,
-    TOGGLE_SETTING
+    TOGGLE_SETTING,
 } from './actions';
 
-const defaultContactsPageState = {items: [], filterText: ''}
+const defaultContactsPageState = { items: [], filterText: '' }
 function contactsPage(state = defaultContactsPageState, action) {
     const payload = action.payload
 
@@ -26,6 +28,10 @@ function contactsPage(state = defaultContactsPageState, action) {
         case CLEAR_CONTACT_LIST:
             return defaultContactsPageState
         case SET_CONTACTS_FILTER_TEXT:
+        case DELETE_CONTACT_DONE:
+        case DELETE_CONTACT_ERROR:
+        case CONFIRM_DELETE_CONTACT:
+        case CANCEL_DELETE_CONTACT:
             return { ...state, ...payload }
         default:
             return state;

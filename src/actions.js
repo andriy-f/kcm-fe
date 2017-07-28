@@ -27,6 +27,13 @@ export const ADD_CONTACT_DONE = 'ADD_CONTACT_DONE'
 export const ADD_CONTACT_ERROR = 'ADD_CONTACT_ERROR'
 export const CLEAR_ADD_CONTACT_PAGE = 'CLEAR_ADD_CONTACT_PAGE'
 
+export const DELETE_CONTACT = 'DELETE_CONTACT'
+export const DELETE_CONTACT_DONE = 'DELETE_CONTACT_DONE'
+export const DELETE_CONTACT_ERROR = 'DELETE_CONTACT_ERROR'
+
+export const CONFIRM_DELETE_CONTACT = 'CONFIRM_DELETE_CONTACT'
+export const CANCEL_DELETE_CONTACT = 'CANCEL_DELETE_CONTACT'
+
 export const REQUEST_LOGIN = 'REQUEST_LOGIN'
 export const RECEIVE_LOGIN = 'RECEIVE_LOGIN'
 export const RECEIVE_LOGIN_ERROR = 'RECEIVE_LOGIN_ERROR'
@@ -116,6 +123,32 @@ export const clearAddContactPage = () => ({
 
 export const clearContact = () => ({
     type: CLEAR_CONTACT,
+})
+
+export const deleteContact = (id) => ({
+    type: DELETE_CONTACT,
+    payload: { id }
+})
+
+export const deleteContactDone = () => ({
+    type: DELETE_CONTACT_DONE,
+    payload: { contactToDeleteId: null }
+})
+
+export const deleteContactError = (error) => ({
+    type: DELETE_CONTACT_ERROR,
+    payload: { error: error },
+    error: true
+})
+
+export const confirmDeleteContact = (id) => ({
+    type: CONFIRM_DELETE_CONTACT,
+    payload: { contactToDeleteId: id }
+})
+
+export const cancelDeleteContact = () => ({
+    type: CANCEL_DELETE_CONTACT,
+    payload: { contactToDeleteId: null }
 })
 
 export const requestAuthenticate = (login, password) => ({

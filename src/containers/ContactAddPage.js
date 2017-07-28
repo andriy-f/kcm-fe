@@ -5,7 +5,7 @@ import { Button } from 'react-toolbox/lib/button'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 
-import RTButtonLink from '../components/RTButtonLink'
+import { RTButtonLink } from '../components/RTButtonLink'
 import { kFormContainer, kTextCenter } from '../App.css'
 import { addContact, clearAddContactPage } from '../actions'
 

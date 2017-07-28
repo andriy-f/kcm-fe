@@ -8,10 +8,11 @@ import { BACKEND_URL } from '../config'
 import { commonAjaxRequestSettings, json } from '../utils'
 import { factory as ctxFactory } from '../services/JayContext'
 import {
-    FETCH_CONTACTS, receiveContacts, receiveContactsError,
+    FETCH_CONTACTS, requestContacts, receiveContacts, receiveContactsError,
     REQUEST_CONTACT, receiveContact, receiveContactError,
     SAVE_CONTACT_REQUEST, saveContactDone, saveContactError,
     ADD_CONTACT, addContactDone, addContactError,
+    DELETE_CONTACT, deleteContactDone, deleteContactError,
     REQUEST_LOGIN, receiveAuthenticate, receiveAuthenticateError,
     REQUEST_LOGOFF, receiveLogoff, receiveLogoffError
 } from '../actions'
@@ -75,6 +76,24 @@ const addContactEpic = action$ =>
                 .catch(error => Observable.of(addContactError(error)))
         )
 
+const deleteContactEpic = (action$, store) =>
+    action$.ofType(DELETE_CONTACT)
+        .mergeMap(action =>
+            ajax({
+                ...commonAjaxRequestSettings,
+                headers: { 'Content-Type': 'application/json' },
+                url: BACKEND_URL + `/odata/Contacts('${action.payload.id}')`,
+                method: 'DELETE',
+            })
+                .mergeMap(response => {
+                    const filterText = store.getState().contactsPage.filterText
+                    return Observable.concat(
+                        Observable.of(deleteContactDone()),
+                        Observable.of(requestContacts(filterText)))
+                })
+                .catch(error => Observable.of(deleteContactError(error)))
+        )
+
 const requestAuthenticateEpic = action$ =>
     action$.ofType(REQUEST_LOGIN)
         .mergeMap(action => ajax({
@@ -103,6 +122,7 @@ const rootEpic = combineEpics(
     requestContactEpic,
     saveContactEpic,
     addContactEpic,
+    deleteContactEpic,
     requestAuthenticateEpic,
     requestLogoffEpic
 );

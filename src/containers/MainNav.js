@@ -3,7 +3,7 @@ import { Navigation } from 'react-toolbox/lib/navigation';
 import { connect } from 'react-redux';
 
 import { isUserLoggedIn, isDev } from '../utils'
-import RTButtonLink from '../components/RTButtonLink'
+import { RTButtonLink }  from '../components/RTButtonLink'
 
 const MainNav = (props) => {
     const currentUser = props.currentUser
