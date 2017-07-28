@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map'
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
 
 import { BACKEND_URL } from '../config'
-import { commonAjaxRequestSettings, json } from '../utils'
+import { commonAjaxRequestSettings, commonAjaxODataRequestSettings, json } from '../utils'
 import { factory as ctxFactory } from '../services/JayContext'
 import {
     FETCH_CONTACTS, FETCH_CONTACTS_ABORT, requestContacts, receiveContacts, receiveContactsError,
@@ -42,7 +42,7 @@ const requestContactEpic = action$ =>
     action$.ofType(REQUEST_CONTACT)
         .mergeMap(action =>
             ajax({
-                ...commonAjaxRequestSettings,
+                ...commonAjaxODataRequestSettings,
                 url: BACKEND_URL + `/odata/Contacts('${action.id}')`
             })
                 .map(response => receiveContact(response.response))
@@ -53,8 +53,7 @@ const saveContactEpic = action$ =>
     action$.ofType(SAVE_CONTACT_REQUEST)
         .mergeMap(action =>
             ajax({
-                ...commonAjaxRequestSettings,
-                headers: { 'Content-Type': 'application/json' },
+                ...commonAjaxODataRequestSettings,
                 url: BACKEND_URL + `/odata/Contacts('${action.payload._id}')`,
                 method: 'PATCH',
                 body: json(action.payload)
@@ -67,8 +66,7 @@ const addContactEpic = action$ =>
     action$.ofType(ADD_CONTACT)
         .mergeMap(action =>
             ajax({
-                ...commonAjaxRequestSettings,
-                headers: { 'Content-Type': 'application/json' },
+                ...commonAjaxODataRequestSettings,
                 url: BACKEND_URL + `/odata/Contacts`,
                 method: 'POST',
                 body: json(action.payload)
@@ -82,7 +80,6 @@ const deleteContactEpic = (action$, store) =>
         .mergeMap(action =>
             ajax({
                 ...commonAjaxRequestSettings,
-                headers: { 'Content-Type': 'application/json' },
                 url: BACKEND_URL + `/odata/Contacts('${action.payload.id}')`,
                 method: 'DELETE',
             })
