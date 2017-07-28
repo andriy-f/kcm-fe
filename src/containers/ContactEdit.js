@@ -5,6 +5,7 @@ import { Button } from 'react-toolbox/lib/button'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 
+import RTButtonLink from '../components/RTButtonLink'
 import { kFormContainer, kTextCenter } from '../App.css'
 import { requestContact, saveContactRequest, clearContact } from '../actions'
 
@@ -21,15 +22,12 @@ class ContactEditForm extends Component {
     }
 
     render() {
-        const { handleSubmit, pristine, reset, submitting } = this.props
+        const { handleSubmit, pristine, submitting } = this.props
         return (
             <section className={kFormContainer} >
                 <form onSubmit={handleSubmit}>
 
                     <h3 className={kTextCenter}>Edit Contact</h3>
-
-                    <button type="button" onClick={this.reload}>Reload</button>
-                    <button type="button" onClick={reset}>Reset</button>
 
                     <Field name="firstName" component={TextInput} label="First Name" />
                     <Field name="lastName" component={TextInput} label="Last Name" />
@@ -38,6 +36,7 @@ class ContactEditForm extends Component {
 
                     <div className={kTextCenter}>
                         <Button label="Save" type="submit" disabled={pristine || submitting} flat />
+                        <RTButtonLink label="Cancel" to="/contacts" />
                     </div>
                 </form>
             </section>

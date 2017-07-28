@@ -5,6 +5,7 @@ import { Button } from 'react-toolbox/lib/button'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 
+import RTButtonLink from '../components/RTButtonLink'
 import { kFormContainer, kTextCenter } from '../App.css'
 import { addContact, clearAddContactPage } from '../actions'
 
@@ -26,6 +27,7 @@ class ContactAddForm extends Component {
 
                     <div className={kTextCenter}>
                         <Button label="Save" type="submit" disabled={pristine || submitting} flat />
+                        <RTButtonLink label="Cancel" to="/contacts" />
                     </div>
                 </form>
             </section>
