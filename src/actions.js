@@ -9,6 +9,7 @@
 
 export const FETCH_CONTACTS = 'FETCH_CONTACTS'
 export const FETCH_CONTACTS_DONE = 'FETCH_CONTACTS_DONE'
+export const FETCH_CONTACTS_ABORT = 'FETCH_CONTACTS_ABORT'
 export const FETCH_CONTACTS_ERROR = 'FETCH_CONTACTS_ERROR'
 export const CLEAR_CONTACT_LIST = 'CLEAR_CONTACT_LIST'
 export const SET_CONTACTS_FILTER_TEXT = 'SET_CONTACTS_FILTER_TEXT'
@@ -56,7 +57,11 @@ export const clearContactList = () => ({
 export const receiveContacts = (payload) => ({
     type: FETCH_CONTACTS_DONE,
     payload
-});
+})
+
+export const abortFetchContacts = () => ({
+    type: FETCH_CONTACTS_ABORT,
+})
 
 export const receiveContactsError = (payload) => ({
     type: FETCH_CONTACTS_ERROR,

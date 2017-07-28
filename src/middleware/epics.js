@@ -8,7 +8,7 @@ import { BACKEND_URL } from '../config'
 import { commonAjaxRequestSettings, json } from '../utils'
 import { factory as ctxFactory } from '../services/JayContext'
 import {
-    FETCH_CONTACTS, requestContacts, receiveContacts, receiveContactsError,
+    FETCH_CONTACTS, FETCH_CONTACTS_ABORT, requestContacts, receiveContacts, receiveContactsError,
     REQUEST_CONTACT, receiveContact, receiveContactError,
     SAVE_CONTACT_REQUEST, saveContactDone, saveContactError,
     ADD_CONTACT, addContactDone, addContactError,
@@ -34,6 +34,7 @@ const requestContactsEpic = action$ =>
                 return res.toArray()
             }))
             .map(response => receiveContacts(response))
+            .takeUntil(action$.ofType(FETCH_CONTACTS_ABORT))
             .catch(error => Observable.of(receiveContactsError(error)))
         )
 

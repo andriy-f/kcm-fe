@@ -9,6 +9,7 @@ import { addItemButtonContainer } from '../App.css'
 
 import {
     requestContacts,
+    abortFetchContacts,
     clearContactList as clearContactListAction,
     setContactsFilterText,
     deleteContact,
@@ -25,6 +26,7 @@ class ContactList extends React.Component {
     }
 
     componentWillUnmount() {
+        this.props.abortFetchContacts()
         this.props.clearContactList()
     }
 
@@ -34,10 +36,6 @@ class ContactList extends React.Component {
 
     handleRowSelect = selected => {
         this.setState({ selected })
-    }
-
-    reload = () => {
-        this.props.reloadContacts(this.props.filterText)
     }
 
     handleFilter = value => {
@@ -118,6 +116,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
     reloadContacts: (filterText) => dispatch(requestContacts(filterText)),
     clearContactList: () => dispatch(clearContactListAction()),
+    abortFetchContacts: () => dispatch(abortFetchContacts()),
     setContactsFilterText: (value) => dispatch(setContactsFilterText(value)),
     confirmDelete: (id) => dispatch(confirmDeleteContact(id)),
     cancelDelete: () => dispatch(cancelDeleteContact()),
