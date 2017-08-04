@@ -25,10 +25,12 @@ const requestContactsEpic = action$ =>
             .then(ctx => {
                 const filterText = action.payload.filterText
                 const res = filterText ?
-                    ctx.Contacts.filter(c => c.firstName.contains(filterText)
-                        || c.lastName.contains(filterText)
-                        || c.email.contains(filterText)
-                        || c.phoneNumber.contains(filterText), { filterText })
+                    ctx.Contacts.filter(function (c) {
+                        return c.firstName.contains(this.filterText) // use this.param to avid prod error
+                            || c.lastName.contains(this.filterText)
+                            || c.email.contains(this.filterText)
+                            || c.phoneNumber.contains(this.filterText)
+                    }, { filterText })
                     : ctx.Contacts
 
                 return res.toArray()
