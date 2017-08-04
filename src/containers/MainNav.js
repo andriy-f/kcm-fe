@@ -15,7 +15,7 @@ const MainNav = (props) => {
             <RTButtonLink to='/contacts' label='Contacts' />
             <RTButtonLink to='/settings' label='Settings' />
             {isDev && <RTButtonLink to='/dev'>Dev</RTButtonLink>}
-            {isLoggedIn && <RTButtonLink to='/userProfile' label={currentUser.name} />}
+            {isLoggedIn && <RTButtonLink to='/userProfile' label={'Hi, ' + currentUser.name} />}
             {isLoggedIn && <RTButtonLink to='/logOut' label='Log out' />}
             {!isLoggedIn && <RTButtonLink to="/logIn" label='Log in' />}
         </Navigation>
