@@ -5,26 +5,28 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form'
 
 import {
-    FETCH_CONTACTS_DONE, FETCH_CONTACTS_ERROR, CLEAR_CONTACT_LIST, SET_CONTACTS_FILTER_TEXT,
+    FETCH_CONTACTS, FETCH_CONTACTS_DONE, FETCH_CONTACTS_ERROR, CLEAR_CONTACT_LIST, SET_CONTACTS_FILTER_TEXT,
     RECEIVE_CONTACT, RECEIVE_CONTACT_ERROR,
     SAVE_CONTACT_DONE, SAVE_CONTACT_ERROR, CLEAR_CONTACT,
     ADD_CONTACT_DONE, ADD_CONTACT_ERROR, CLEAR_ADD_CONTACT_PAGE,
-    CONFIRM_DELETE_CONTACT, CANCEL_DELETE_CONTACT, 
+    CONFIRM_DELETE_CONTACT, CANCEL_DELETE_CONTACT,
     DELETE_CONTACT_DONE, DELETE_CONTACT_ERROR,
     RECEIVE_LOGIN, RECEIVE_LOGIN_ERROR,
     RECEIVE_LOGOFF, RECEIVE_LOGOFF_ERROR,
     TOGGLE_SETTING,
 } from './actions';
 
-const defaultContactsPageState = { items: [], filterText: '' }
+const defaultContactsPageState = { items: [], filterText: '', isFetching: false }
 function contactsPage(state = defaultContactsPageState, action) {
     const payload = action.payload
 
     switch (action.type) {
+        case FETCH_CONTACTS:
+            return { ...state, isFetching: true }
         case FETCH_CONTACTS_DONE:
-            return { ...state, items: action.payload, error: null }
+            return { ...state, items: payload, error: null, isFetching: false }
         case FETCH_CONTACTS_ERROR:
-            return { ...state, items: [], error: action.payload }
+            return { ...state, items: [], error: payload, isFetching: false }
         case CLEAR_CONTACT_LIST:
             return defaultContactsPageState
         case SET_CONTACTS_FILTER_TEXT:
