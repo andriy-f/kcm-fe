@@ -1,56 +1,51 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { AppBar, Layout, NavDrawer, Sidebar, Panel } from 'react-toolbox'
+import { AppBar, Layout, NavDrawer, Panel } from 'react-toolbox'
 
 import MainNav from '../containers/MainNav'
 import { mainContent } from '../App.css'
 import { toggleSetting } from '../actions'
 
-const AppLayout = (props) => (
-    <Layout>
-        <NavDrawer
-            active={props.sideNavActive}
-            clipped={props.sideNavClipped}
-            onOverlayClick={props.toggleSetting.bind(null, 'sideNavActive')}
-            pinned={props.sideNavPinned}
-        >
-            <MainNav />
-        </NavDrawer>
+class AppLayout extends React.Component {
+    toggleSideNavActive = () => {
+        this.props.toggleSetting('sideNavActive')
+    }
 
-        <header>
-            <AppBar
-                fixed
-                rightIcon='more'
-                leftIcon='menu'
-                onLeftIconClick={props.toggleSetting.bind(this, 'sideNavActive')}
-                onRightIconClick={props.toggleSetting.bind(this, 'rightSideNavActive')}
-                title="K Contact Manager"
-            />
-        </header>
+    render() {
+        return (
+            <Layout>
+                <NavDrawer
+                    active={this.props.sideNavActive}
+                    clipped={this.props.sideNavClipped}
+                    onOverlayClick={this.toggleSideNavActive}
+                    pinned={this.props.sideNavPinned}
+                >
+                    <MainNav />
+                </NavDrawer>
 
-        <Panel bodyScroll={props.bodyScrolled} >
-            <section className={mainContent}>
-                {props.children}
-            </section>
-        </Panel>
+                <header>
+                    <AppBar
+                        fixed
+                        leftIcon='menu'
+                        onLeftIconClick={this.toggleSideNavActive}
+                        title='K Contact Manager'
+                    />
+                </header>
 
-        <Sidebar
-            active={props.rightSideNavActive}
-            onOverlayClick={props.toggleSetting.bind(this, 'rightSideNavActive')}
-            clipped={props.rightSideNavClipped}
-            pinned={props.rightSideNavPinned}
-            right
-        >
-            <p>Sidebar content.</p>
-        </Sidebar>
-    </Layout>
-)
+                <Panel bodyScroll={this.props.bodyScrolled} >
+                    <section className={mainContent}>
+                        {this.props.children}
+                    </section>
+                </Panel>
+            </Layout>
+        )
+    }
+}
 
 const mapStateToProps = (state) => state.settings
 
 const mapDispathToProps = dispatch => ({
     toggleSetting: name => dispatch(toggleSetting({ name }))
 })
-
 
 export default connect(mapStateToProps, mapDispathToProps)(AppLayout)
