@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { Table, TableHead, TableRow, TableCell } from 'react-toolbox/lib/table'
 import { IconButton } from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
-import Dialog from 'react-toolbox/lib/dialog';
+import Dialog from 'react-toolbox/lib/dialog'
+import ProgressBar from 'react-toolbox/lib/progress_bar'
 
-import { addItemButtonContainer } from '../App.css'
+import { addItemButtonContainer, progressLinear } from '../App.css'
 
 import {
     requestContacts,
@@ -61,8 +62,10 @@ class ContactList extends React.Component {
     ]
 
     render() {
+        const { isFetching, items } = this.props
         return (
-            <div className="contactList">
+            <div>
+                {isFetching && <ProgressBar type="linear" mode="indeterminate" className={progressLinear} />}
                 <div>{this.props.errorMessage}</div>
                 <Input type="text" label="Filter" value={this.props.filterText} onChange={this.handleFilter} />
                 <Table multiSelectable onRowSelect={this.handleRowSelect}>
@@ -72,7 +75,7 @@ class ContactList extends React.Component {
                         <TableCell>Email</TableCell>
                         <TableCell>Phone Number</TableCell>
                     </TableHead>
-                    {this.props.contacts && this.props.contacts.map((item, idx) => (
+                    {items && items.map((item, idx) => (
                         <TableRow key={idx} selected={this.state.selected.indexOf(idx) !== -1}>
                             <TableCell>{item.firstName}</TableCell>
                             <TableCell>{item.lastName}</TableCell>
@@ -103,12 +106,11 @@ class ContactList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    const { contactsPage: { items, error, filterText, contactToDeleteId } } = state;
+    const { contactsPage } = state
+    const { error } = contactsPage
 
     return {
-        contacts: items,
-        filterText,
-        contactToDeleteId,
+        ...contactsPage,
         errorMessage: error && error.xhr && error.xhr.response && error.xhr.response.message
     }
 }
