@@ -4,9 +4,14 @@ import { connect } from 'react-redux'
 
 import { toggleSetting } from '../actions'
 
-class Settings extends Component {
-    handleToggle = param => {
-        this.props.toggleSetting(param)
+class SideNavSettings extends Component {
+
+    handleToggleSideNavPinned = () => {
+        this.props.toggleSetting('sideNavPinned')
+    }
+
+    handleToggleSideNavClipped = () => {
+        this.props.toggleSetting('sideNavClipped')
     }
 
     render() {
@@ -16,40 +21,67 @@ class Settings extends Component {
                 <Checkbox
                     label='Pinned'
                     checked={this.props.sideNavPinned}
-                    onChange={this.handleToggle.bind(this, 'sideNavPinned')}
+                    onChange={this.handleToggleSideNavPinned}
                 />
 
                 <Checkbox
                     label='Clipped'
                     checked={this.props.sideNavClipped}
-                    onChange={this.handleToggle.bind(this, 'sideNavClipped')}
+                    onChange={this.handleToggleSideNavClipped}
                 />
+            </section>
+        )
+    }
+}
 
-                <h5 style={{ marginBottom: 20 }}>Rignt SideNav State</h5>
-                <Checkbox
-                    label="Active"
-                    checked={this.props.rightSideNavActive}
-                    onChange={this.handleToggle.bind(this, 'rightSideNavActive')}
-                />
+// const RightSideNavSettings = (props) => (
+//     <section>
+//         <h5 style={{ marginBottom: 20 }}>Rignt SideNav State</h5>
+//         <Checkbox
+//             label="Active"
+//             checked={this.props.rightSideNavActive}
+//             onChange={this.handleToggle.bind(this, 'rightSideNavActive')}
+//         />
 
-                <Checkbox
-                    label="Pinned"
-                    checked={this.props.rightSideNavPinned}
-                    onChange={this.handleToggle.bind(this, 'rightSideNavPinned')}
-                />
+//         <Checkbox
+//             label="Pinned"
+//             checked={this.props.rightSideNavPinned}
+//             onChange={this.handleToggle.bind(this, 'rightSideNavPinned')}
+//         />
 
-                <Checkbox
-                    label="Clipped"
-                    checked={this.props.rightSideNavClipped}
-                    onChange={this.handleToggle.bind(this, 'rightSideNavClipped')}
-                />
+//         <Checkbox
+//             label="Clipped"
+//             checked={this.props.rightSideNavClipped}
+//             onChange={this.handleToggle.bind(this, 'rightSideNavClipped')}
+//         />
+//     </section>
+// )
 
+class OtherSettings extends Component {
+    handleToggleBodyScrolled = () => {
+        this.props.toggleSetting('bodyScrolled')
+    }
+
+    render() {
+        return (
+            <section>
                 <h5 style={{ marginBottom: 20 }}>Other</h5>
                 <Checkbox
                     label="Body scrolled"
                     checked={this.props.bodyScrolled}
-                    onChange={this.handleToggle.bind(this, 'bodyScrolled')}
+                    onChange={this.handleToggleBodyScrolled}
                 />
+            </section>
+        )
+    }
+}
+
+class Settings extends Component {
+    render() {
+        return (
+            <section>
+                <SideNavSettings {...this.props} />
+                <OtherSettings {...this.props} />
             </section>
         )
     }
