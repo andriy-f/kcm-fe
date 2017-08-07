@@ -5,6 +5,7 @@ import { AppBar, Layout, NavDrawer, Panel } from 'react-toolbox'
 import MainNav from '../containers/MainNav'
 import { mainContent } from '../App.css'
 import { toggleSetting } from '../actions'
+import AppProgress from '../containers/AppProgress'
 
 class AppLayout extends React.Component {
     toggleSideNav = () => {
@@ -34,6 +35,7 @@ class AppLayout extends React.Component {
 
                 <Panel bodyScroll={this.props.bodyScrolled} >
                     <section className={mainContent}>
+                        <AppProgress />
                         {this.props.children}
                     </section>
                 </Panel>
@@ -42,7 +44,7 @@ class AppLayout extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => state.settings
+const mapStateToProps = state => state.settings
 
 const mapDispathToProps = dispatch => ({
     toggleSetting: name => dispatch(toggleSetting({ name }))

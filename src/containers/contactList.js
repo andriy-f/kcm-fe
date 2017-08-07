@@ -4,9 +4,8 @@ import { Table, TableHead, TableRow, TableCell } from 'react-toolbox/lib/table'
 import { IconButton } from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 import Dialog from 'react-toolbox/lib/dialog'
-import ProgressBar from 'react-toolbox/lib/progress_bar'
 
-import { addItemButtonContainer, progressLinear } from '../App.css'
+import { addItemButtonContainer } from '../App.css'
 
 import {
     requestContacts,
@@ -62,12 +61,11 @@ class ContactList extends React.Component {
     ]
 
     render() {
-        const { isFetching, items } = this.props
+        const { filterText, items } = this.props
         return (
             <div>
-                {isFetching && <ProgressBar type="linear" mode="indeterminate" className={progressLinear} />}
                 <div>{this.props.errorMessage}</div>
-                <Input type="text" label="Filter" value={this.props.filterText} onChange={this.handleFilter} />
+                <Input type="text" label="Filter" value={filterText} onChange={this.handleFilter} />
                 <Table multiSelectable onRowSelect={this.handleRowSelect}>
                     <TableHead>
                         <TableCell>First Name</TableCell>
@@ -107,10 +105,11 @@ class ContactList extends React.Component {
 
 const mapStateToProps = (state) => {
     const { contactsPage } = state
-    const { error } = contactsPage
+    const { error, filterText, items } = contactsPage
 
     return {
-        ...contactsPage,
+        filterText,
+        items,
         errorMessage: error && error.xhr && error.xhr.response && error.xhr.response.message
     }
 }

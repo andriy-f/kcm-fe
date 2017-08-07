@@ -17,3 +17,8 @@ export const isUserLoggedIn = (currentUser) => {
 }
 
 export const json = body => JSON.stringify(body !== undefined ? body : {})
+
+export const getViewState = state => ({
+    ...state,
+    isFetchingAnywhere: state.authenticationPage.isFetching || state.contactsPage.isFetching
+})
