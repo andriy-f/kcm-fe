@@ -7,8 +7,8 @@ import { mainContent } from '../App.css'
 import { toggleSetting } from '../actions'
 
 class AppLayout extends React.Component {
-    toggleSideNavActive = () => {
-        this.props.toggleSetting('sideNavActive')
+    toggleSideNav = () => {
+        this.props.toggleSetting('sideNavPinned')
     }
 
     render() {
@@ -17,7 +17,7 @@ class AppLayout extends React.Component {
                 <NavDrawer
                     active={this.props.sideNavActive}
                     clipped={this.props.sideNavClipped}
-                    onOverlayClick={this.toggleSideNavActive}
+                    onOverlayClick={this.toggleSideNav}
                     pinned={this.props.sideNavPinned}
                 >
                     <MainNav />
@@ -27,7 +27,7 @@ class AppLayout extends React.Component {
                     <AppBar
                         fixed
                         leftIcon='menu'
-                        onLeftIconClick={this.toggleSideNavActive}
+                        onLeftIconClick={this.toggleSideNav}
                         title='K Contact Manager'
                     />
                 </header>
