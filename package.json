@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@andriyf/jaydata": "^1.5.1103",
+    "newrelic": "^2.0.2",
     "postcss": "^6.0.6",
     "postcss-cssnext": "^2.11.0",
     "react": "^15.5.4",
