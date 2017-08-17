@@ -25,14 +25,12 @@ class AppLayout extends React.Component {
                     <MainNav />
                 </NavDrawer>
 
-                <header>
-                    <AppBar
-                        fixed
-                        leftIcon='menu'
-                        onLeftIconClick={this.toggleSideNav}
-                        title='K Contact Manager'
-                    />
-                </header>
+                <AppBar
+                    fixed
+                    leftIcon='menu'
+                    onLeftIconClick={this.toggleSideNav}
+                    title='K Contact Manager'
+                />
                 <AppProgress />
 
                 <Panel bodyScroll={this.props.bodyScrolled} >
