@@ -31,8 +31,6 @@
 
 .progressLinear {
   top: 4rem;
-  left: -1rem;
-  position: fixed!important;
 }
 
 @keyframes AppLogoSpin {
