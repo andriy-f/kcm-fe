@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default () => (
-    <p className="App-intro">
+    <p>
         Welcome to K Contact Manager Sample App
     </p>
 )
