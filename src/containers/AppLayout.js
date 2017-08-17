@@ -6,10 +6,11 @@ import MainNav from '../containers/MainNav'
 import { mainContent } from '../App.css'
 import { toggleSetting } from '../actions'
 import AppProgress from '../containers/AppProgress'
+import { sideNavActiveSetting } from '../consts'
 
 class AppLayout extends React.Component {
     toggleSideNav = () => {
-        this.props.toggleSetting('sideNavPinned')
+        this.props.toggleSetting(sideNavActiveSetting)
     }
 
     render() {
