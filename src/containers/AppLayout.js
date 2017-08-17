@@ -33,10 +33,10 @@ class AppLayout extends React.Component {
                         title='K Contact Manager'
                     />
                 </header>
+                <AppProgress />
 
                 <Panel bodyScroll={this.props.bodyScrolled} >
                     <section className={mainContent}>
-                        <AppProgress />
                         {this.props.children}
                     </section>
                 </Panel>
