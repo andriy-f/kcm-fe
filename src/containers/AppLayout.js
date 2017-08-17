@@ -7,6 +7,7 @@ import { mainContent } from '../App.css'
 import { toggleSetting } from '../actions'
 import AppProgress from '../containers/AppProgress'
 import { sideNavActiveSetting } from '../consts'
+import MainNavPinSwitch from '../containers/MainNavPinSwitch'
 
 class AppLayout extends React.Component {
     toggleSideNav = () => {
@@ -23,6 +24,7 @@ class AppLayout extends React.Component {
                     pinned={this.props.sideNavPinned}
                 >
                     <MainNav />
+                    <MainNavPinSwitch />
                 </NavDrawer>
 
                 <AppBar
