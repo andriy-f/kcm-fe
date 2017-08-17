@@ -13,7 +13,7 @@ import {
     DELETE_CONTACT_DONE, DELETE_CONTACT_ERROR,
     REQUEST_LOGIN, RECEIVE_LOGIN, RECEIVE_LOGIN_ERROR,
     RECEIVE_LOGOFF, RECEIVE_LOGOFF_ERROR,
-    TOGGLE_SETTING,
+    TOGGLE_SETTING, SET_SETTING,
 } from './actions';
 
 const defaultContactsPageState = { items: [], filterText: '', isFetching: false }
@@ -123,6 +123,8 @@ const settings = (state = {
             let name = action.payload.name
             let oldSettingValue = state[name]
             return { ...state, [name]: !oldSettingValue }
+        case SET_SETTING:
+            return { ...state, [action.payload.name]: action.payload.value}
         default:
             return state;
     }

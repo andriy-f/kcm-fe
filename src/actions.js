@@ -44,6 +44,7 @@ export const RECEIVE_LOGOFF = 'RECEIVE_LOGOFF'
 export const RECEIVE_LOGOFF_ERROR = 'RECEIVE_LOGOFF_ERROR'
 
 export const TOGGLE_SETTING = 'TOGGLE_SETTING'
+export const SET_SETTING = 'SET_SETTING'
 
 export const requestContacts = (filterText) => ({
     type: FETCH_CONTACTS,
@@ -192,4 +193,9 @@ export const receiveLogoffError = (payload) => ({
 export const toggleSetting = (payload) => ({
     type: TOGGLE_SETTING,
     payload
+})
+
+export const setSetting = (name, value) => ({
+    type: SET_SETTING,
+    payload: { name, value }
 })

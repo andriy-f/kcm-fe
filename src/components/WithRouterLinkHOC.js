@@ -12,7 +12,8 @@ const WithRouterLinkHOC = Component =>
             to: PropTypes.oneOfType([
                 PropTypes.string,
                 PropTypes.func
-            ])
+            ]),
+            beforeClick: PropTypes.func
         }
 
         static contextTypes = {
@@ -31,16 +32,17 @@ const WithRouterLinkHOC = Component =>
                 !this.props.target && // let browser handle "target=_blank" etc.
                 !isModifiedEvent(event) // ignore clicks with modifier keys
             ) {
-                const { to } = this.props;
+                const { to, beforeClick } = this.props;
                 const { router } = this.context;
                 event.preventDefault();
+                (typeof beforeClick === 'function') && beforeClick();
                 router.history.push(this.resolveToLocation(to));
             }
         }
 
         render() {
             const { router } = this.context;
-            const { activeClassName, className, to, ...rest } = this.props;
+            const { activeClassName, className, to, beforeClick, ...rest } = this.props;
             const toLocation = this.resolveToLocation(to);
             const isActive = router.history.location.pathname === toLocation;
             const _className = isActive ? `${className} ${activeClassName}` : className;

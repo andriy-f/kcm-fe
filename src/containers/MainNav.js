@@ -1,29 +1,32 @@
-import React from 'react';
-import { Navigation } from 'react-toolbox/lib/navigation';
-import { connect } from 'react-redux';
+import React from 'react'
+import { Navigation } from 'react-toolbox/lib/navigation'
+import { connect } from 'react-redux'
 
 import { isUserLoggedIn, isDev } from '../utils'
-import { RTButtonLink }  from '../components/RTButtonLink'
+import RTButtonNavLink from '../components/RTButtonNavLink'
 
-const MainNav = (props) => {
-    const currentUser = props.currentUser
-    const isLoggedIn = isUserLoggedIn(currentUser)
+class MainNav extends React.Component {
 
-    return (
-        <Navigation type='vertical'>
-            <RTButtonLink to='/'>Intro</RTButtonLink>
-            <RTButtonLink to='/contacts' label='Contacts' />
-            <RTButtonLink to='/settings' label='Settings' />
-            {isDev && <RTButtonLink to='/dev'>Dev</RTButtonLink>}
-            {isLoggedIn && <RTButtonLink to='/userProfile' label={'Hi, ' + currentUser.name} />}
-            {isLoggedIn && <RTButtonLink to='/logOut' label='Log out' />}
-            {!isLoggedIn && <RTButtonLink to="/logIn" label='Log in' />}
-        </Navigation>
-    )
+    render() {
+        const currentUser = this.props.currentUser
+        const isLoggedIn = isUserLoggedIn(currentUser)
+
+        return (
+            <Navigation type='vertical'>
+                <RTButtonNavLink to='/' label='Intro' />
+                <RTButtonNavLink to='/contacts' label='Contacts' />
+                <RTButtonNavLink to='/settings' label='Settings' />
+                {isDev && <RTButtonNavLink to='/dev' >Dev</RTButtonNavLink>}
+                {isLoggedIn && <RTButtonNavLink to='/userProfile' label={'Hi, ' + currentUser.name} />}
+                {isLoggedIn && <RTButtonNavLink to='/logOut' label='Log out' />}
+                {!isLoggedIn && <RTButtonNavLink to="/logIn" label='Log in' />}
+            </Navigation>
+        )
+    }
 }
 
 const mapStateToProps = (state) => {
-    const { currentUser } = state;
+    const { currentUser } = state
 
     return {
         currentUser
