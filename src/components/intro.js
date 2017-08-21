@@ -10,7 +10,10 @@ export default () => (
             Main functionality is available through Menu (opened with button in top-left corner) -> Contacts.
         </p>
         <p>
+            You can also "Add to Home screen" via browser menu so this app will behave almost like native on your smartphone.
+        </p>
+        <p>
             Credentials shoul be awailable at place where you got the link to this demo.
         </p>
     </div>
-)
+
