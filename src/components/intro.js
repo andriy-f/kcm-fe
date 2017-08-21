@@ -1,7 +1,16 @@
 import React from 'react';
 
 export default () => (
-    <p>
-        Welcome to K Contact Manager Sample App
-    </p>
+    <div>
+        <h1>Welcome to K Contact Manager Sample App</h1>
+        <p>
+            This is demo Single Page Application (SPA) application with React, Redux and separate universal back-end. Also it features Material Design.
+        </p>
+        <p>
+            Main functionality is available through Menu (opened with button in top-left corner) -> Contacts.
+        </p>
+        <p>
+            Credentials shoul be awailable at place where you got the link to this demo.
+        </p>
+    </div>
 )
