@@ -22,3 +22,20 @@ export const getViewState = state => ({
     ...state,
     isFetchingAnywhere: state.authenticationPage.isFetching || state.contactsPage.isFetching
 })
+
+const switchcase = cases => defaultCase => key =>
+    key in cases ? cases[key] : defaultCase
+
+const executeIfFunction = f =>
+    f instanceof Function ? f() : f
+
+const switchcaseF = cases => defaultCase => key =>
+    executeIfFunction(switchcase(cases)(defaultCase)(key))
+
+// Sample usage as redux reduser
+// const counter = (state = 0, action) =>
+//     switchcaseF({
+//         'RESET': 0,
+//         'INCREMENT': () => state + 1,
+//         'DECREMENT': () => state - 1
+//     })(state)(action.type)
