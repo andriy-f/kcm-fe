@@ -17,8 +17,8 @@ const nodeHerokuSslRedirect = (environments = ['production'], redirectStatus = 3
 }
 
 const app = express()
-app.use(express.static('build'))
 app.use(nodeHerokuSslRedirect())
+app.use(express.static('build'))
 
 app.listen(port, function () {
     console.log('Static server started on port ' + port)
