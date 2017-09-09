@@ -23,14 +23,14 @@ export const getViewState = state => ({
     isFetchingAnywhere: state.authenticationPage.isFetching || state.contactsPage.isFetching
 })
 
-const switchcase = cases => defaultCase => key =>
-    key in cases ? cases[key] : defaultCase
+// const switchcase = cases => defaultCase => key =>
+//     key in cases ? cases[key] : defaultCase
 
-const executeIfFunction = f =>
-    f instanceof Function ? f() : f
+// const executeIfFunction = f =>
+//     f instanceof Function ? f() : f
 
-const switchcaseF = cases => defaultCase => key =>
-    executeIfFunction(switchcase(cases)(defaultCase)(key))
+// const switchcaseF = cases => defaultCase => key =>
+//     executeIfFunction(switchcase(cases)(defaultCase)(key))
 
 // Sample usage as redux reduser
 // const counter = (state = 0, action) =>

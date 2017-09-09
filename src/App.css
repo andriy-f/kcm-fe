@@ -1,12 +1,6 @@
 .app {
   text-align: left;
-  min-height: 100vh;
-  background-color: darkgray;
-}
-
-.logo {
-  animation: AppLogoSpin infinite 20s linear;
-  height: 32px;
+  background-color: #FFFFFF;
 }
 
 .mainContent {
@@ -31,9 +25,4 @@
 
 .progressLinear {
   top: 4rem;
-}
-
-@keyframes AppLogoSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }

@@ -35,7 +35,7 @@ class AppLayout extends React.Component {
                 />
                 <AppProgress />
 
-                <Panel bodyScroll={this.props.bodyScrolled} >
+                <Panel bodyScroll={this.props.bodyScrolled}>
                     <section className={mainContent}>
                         {this.props.children}
                     </section>
