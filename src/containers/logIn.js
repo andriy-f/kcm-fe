@@ -7,7 +7,7 @@ import { Snackbar } from 'react-toolbox/lib/snackbar'
 import { Field, reduxForm } from 'redux-form'
 
 import { kFormContainer, kTextCenter } from '../App.css'
-import { requestAuthenticate } from '../actions'
+import { logIn } from '../actions'
 import { isUserLoggedIn } from '../utils'
 
 const LoginInput = ({ input: { value, onChange } }) => <Input type='text' label='Login' value={value} onChange={onChange} />
@@ -99,7 +99,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    initAuthenticate: (login, password) => dispatch(requestAuthenticate(login, password)),
+    initAuthenticate: (login, password) => dispatch(logIn(login, password)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn)

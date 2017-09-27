@@ -13,8 +13,8 @@ import {
     SAVE_CONTACT_REQUEST, saveContactDone, saveContactError,
     ADD_CONTACT, addContactDone, addContactError,
     DELETE_CONTACT, deleteContactDone, deleteContactError,
-    REQUEST_LOGIN, receiveAuthenticate, receiveAuthenticateError,
-    REQUEST_LOGOFF, receiveLogoff, receiveLogoffError
+    LOGIN, logInDone, logInError,
+    LOGOFF, logOffDone, logOffError
 } from '../actions'
 
 const dataContextPromise = ctxFactory().onReady()
@@ -95,26 +95,26 @@ const deleteContactEpic = (action$, store) =>
         )
 
 const requestAuthenticateEpic = action$ =>
-    action$.ofType(REQUEST_LOGIN)
+    action$.ofType(LOGIN)
         .mergeMap(action => ajax({
             ...commonAjaxRequestSettings,
             url: BACKEND_URL + '/account/logInWithCookie',
             method: 'POST',
             body: { login: action.login, password: action.password }
         })
-            .map(response => receiveAuthenticate(response.response))
-            .catch(error => Observable.of(receiveAuthenticateError(error)))
+            .map(response => logInDone(response.response))
+            .catch(error => Observable.of(logInError(error)))
         );
 
 const requestLogoffEpic = action$ =>
-    action$.ofType(REQUEST_LOGOFF)
+    action$.ofType(LOGOFF)
         .mergeMap(action => ajax({
             ...commonAjaxRequestSettings,
             url: BACKEND_URL + '/account/clearCookie',
             method: 'POST'
         })
-            .map(response => receiveLogoff(response.response))
-            .catch(error => Observable.of(receiveLogoffError(error)))
+            .map(response => logOffDone(response.response))
+            .catch(error => Observable.of(logOffError(error)))
         );
 
 const rootEpic = combineEpics(

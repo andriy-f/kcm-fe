@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { requestLogoff } from '../actions';
+import { logOff } from '../actions';
 import { isUserLoggedIn } from '../utils'
 
 class LogOut extends React.Component {
@@ -27,7 +27,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    initiateLogoff: () => dispatch(requestLogoff())
+    initiateLogoff: () => dispatch(logOff())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogOut)

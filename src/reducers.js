@@ -11,8 +11,8 @@ import {
     ADD_CONTACT_DONE, ADD_CONTACT_ERROR, CLEAR_ADD_CONTACT_PAGE,
     CONFIRM_DELETE_CONTACT, CANCEL_DELETE_CONTACT,
     DELETE_CONTACT_DONE, DELETE_CONTACT_ERROR,
-    REQUEST_LOGIN, RECEIVE_LOGIN, RECEIVE_LOGIN_ERROR,
-    RECEIVE_LOGOFF, RECEIVE_LOGOFF_ERROR,
+    LOGIN, LOGIN_DONE, LOGIN_ERROR,
+    LOGOFF_DONE, LOGOFF_ERROR,
     TOGGLE_SETTING, SET_SETTING,
 } from './actions';
 
@@ -72,13 +72,13 @@ const addContactPage = (state = {}, action) => {
 
 const currentUser = (state = {}, action) => {
     switch (action.type) {
-        case RECEIVE_LOGIN:
+        case LOGIN_DONE:
             let respData = action.payload;
             return {
                 ...respData.userData,
                 tokenExpiresOn: action.payload.tokenExpiresOn
             }
-        case RECEIVE_LOGOFF:
+        case LOGOFF_DONE:
             return {};
         default:
             return state;
@@ -87,11 +87,11 @@ const currentUser = (state = {}, action) => {
 
 const authenticationPage = (state = { isFetching: false }, action) => {
     switch (action.type) {
-        case REQUEST_LOGIN:
+        case LOGIN:
             return { isFetching: true }
-        case RECEIVE_LOGIN:
+        case LOGIN_DONE:
             return { response: { success: true }, isFetching: false };
-        case RECEIVE_LOGIN_ERROR:
+        case LOGIN_ERROR:
             return { error: action.payload, isFetching: false };
         default:
             return state;
@@ -100,9 +100,9 @@ const authenticationPage = (state = { isFetching: false }, action) => {
 
 const logoffPage = (state = {}, action) => {
     switch (action.type) {
-        case RECEIVE_LOGOFF:
+        case LOGOFF_DONE:
             return { response: action.payload };
-        case RECEIVE_LOGOFF_ERROR:
+        case LOGOFF_ERROR:
             return { error: action.payload };
         default:
             return state;

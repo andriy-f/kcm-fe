@@ -35,13 +35,13 @@ export const DELETE_CONTACT_ERROR = 'DELETE_CONTACT_ERROR'
 export const CONFIRM_DELETE_CONTACT = 'CONFIRM_DELETE_CONTACT'
 export const CANCEL_DELETE_CONTACT = 'CANCEL_DELETE_CONTACT'
 
-export const REQUEST_LOGIN = 'REQUEST_LOGIN'
-export const RECEIVE_LOGIN = 'RECEIVE_LOGIN'
-export const RECEIVE_LOGIN_ERROR = 'RECEIVE_LOGIN_ERROR'
+export const LOGIN = 'LOGIN'
+export const LOGIN_DONE = 'LOGIN_DONE'
+export const LOGIN_ERROR = 'LOGIN_ERROR'
 
-export const REQUEST_LOGOFF = 'REQUEST_LOGOFF'
-export const RECEIVE_LOGOFF = 'RECEIVE_LOGOFF'
-export const RECEIVE_LOGOFF_ERROR = 'RECEIVE_LOGOFF_ERROR'
+export const LOGOFF = 'LOGOFF'
+export const LOGOFF_DONE = 'LOGOFF_DONE'
+export const LOGOFF_ERROR = 'LOGOFF_ERROR'
 
 export const TOGGLE_SETTING = 'TOGGLE_SETTING'
 export const SET_SETTING = 'SET_SETTING'
@@ -157,35 +157,35 @@ export const cancelDeleteContact = () => ({
     payload: { contactToDeleteId: null }
 })
 
-export const requestAuthenticate = (login, password) => ({
-    type: REQUEST_LOGIN,
+export const logIn = (login, password) => ({
+    type: LOGIN,
     login,
     password
 });
 
-export const receiveAuthenticate = (payload) => ({
-    type: RECEIVE_LOGIN,
+export const logInDone = (payload) => ({
+    type: LOGIN_DONE,
     payload
 });
 
-export const receiveAuthenticateError = (payload) => ({
-    type: RECEIVE_LOGIN_ERROR,
+export const logInError = (payload) => ({
+    type: LOGIN_ERROR,
     payload,
     error: true
 });
 
 
-export const requestLogoff = () => ({
-    type: REQUEST_LOGOFF
+export const logOff = () => ({
+    type: LOGOFF
 });
 
-export const receiveLogoff = (payload) => ({
-    type: RECEIVE_LOGOFF,
+export const logOffDone = (payload) => ({
+    type: LOGOFF_DONE,
     payload
 });
 
-export const receiveLogoffError = (payload) => ({
-    type: RECEIVE_LOGOFF_ERROR,
+export const logOffError = (payload) => ({
+    type: LOGOFF_ERROR,
     payload,
     error: true
 })
