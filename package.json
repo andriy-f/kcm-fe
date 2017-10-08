@@ -4,8 +4,12 @@
   "private": true,
   "dependencies": {
     "@andriyf/jaydata": "^1.5.1103",
+    "body-parser": "^1.18.2",
     "cross-env": "^5.0.5",
-    "express": "^4.15.4",
+    "express": "^4.16.1",
+    "ignore-styles": "^5.0.1",
+    "md5-file": "^3.2.3",
+    "morgan": "^1.9.0",
     "postcss": "^6.0.6",
     "postcss-cssnext": "^2.11.0",
     "react": "^16.0.0",
@@ -21,6 +25,7 @@
     "rxjs": "^5.4.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "6.24.1",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
@@ -60,8 +65,11 @@
   },
   "scripts": {
     "start:prod": "node index.js",
+    "start:prod2": "node server/index.js",
     "watch": "cross-env NODE_ENV=development node scripts/watch.js",
-    "build": "node scripts/build.js",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "node scripts/build.js",
+    "build:server": "env NODE_ENV=production babel src --out-dir build-server --copy-files --ignore '**/*.test.js'",
     "test": "node scripts/test.js --env=jsdom",
     "genjdcontext": "jaysvcutil -m http://localhost:3000/odata -o JayContext.js -t JayContext.d.ts",
     "heroku-postbuild": "npm run build"
@@ -93,6 +101,7 @@
   },
   "babel": {
     "presets": [
+      "env",
       "react-app"
     ]
   },
