@@ -3,6 +3,13 @@
   background-color: #FFFFFF;
 }
 
+.staticErrorMessage {
+  color: red;
+  position: absolute;
+  bottom: 0;
+  left: 4rem;
+}
+
 .mainContent {
   margin: 0rem 1.8rem;
 }

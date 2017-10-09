@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { app } from '../App.css'
+import { app, staticErrorMessage } from '../App.css'
 import { BACKEND_URL } from '../config'
 import AppLayout from '../containers/AppLayout'
 import Routes from '../Routes'
@@ -10,11 +10,13 @@ class App extends Component {
     const isBEConfigured = !!BACKEND_URL
     return (
       <div className={app}>
-        {!isBEConfigured &&
-          <div style={{ color: 'darkred' }}>Backend URL is not configured!</div>
-        }
         <AppLayout>
-          <Routes />
+          <div>
+            {!isBEConfigured &&
+              <div className={staticErrorMessage}>Backend URL is not configured!</div>
+            }
+            <Routes />
+          </div>
         </AppLayout>
       </div>
     )
