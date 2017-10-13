@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const universalLoader = require('../../buildServer/main.js')
+const universalLoader = require('../universal.js')
 
 router.get('/', universalLoader)
 

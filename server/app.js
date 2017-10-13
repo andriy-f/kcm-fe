@@ -31,7 +31,7 @@ const mimeTypes = {
 // routes
 const index = require('./routes/index')
 const api = require('./routes/api')
-const universalLoader = require('../buildServer/main.js').default
+const universalLoader = require('./universal.js')
 
 // App setup
 const app = express()

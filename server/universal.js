@@ -2,29 +2,28 @@ const path = require('path')
 const fs = require('fs')
 
 const api = require('./api')
-const {render, renderHead} = require('../src/serverRender')
-const {default: configureStore} = require('../src/configureStore.server')
+const { render, renderHead, configureStore } = require('../buildServer/main')
 
 module.exports = function universalLoader(req, res) {
   const filePath = path.resolve(__dirname, '..', 'build', 'index.html')
 
-  fs.readFile(filePath, 'utf8', (err, htmlData)=>{
+  fs.readFile(filePath, 'utf8', (err, htmlData) => {
     if (err) {
       console.error('read err', err)
       return res.status(404).end()
     }
 
     serverRender(req, res, htmlData)
-      .catch(err=>{
+      .catch(err => {
         console.error('Render Error', err)
-        return res.status(500).json({message: 'Render Error'})
+        return res.status(500).json({ message: 'Render Error' })
       })
   })
 }
 
 // this does most of the heavy lifting
-async function serverRender(req, res, htmlData){
-  const context = {data: {}, head: [], req, api}
+async function serverRender(req, res, htmlData) {
+  const context = { data: {}, head: [], req, api }
   const store = configureStore()
   // first
   render(req, store, context)
@@ -36,9 +35,9 @@ async function serverRender(req, res, htmlData){
 
   // handle our data fetching
   const keys = Object.keys(context.data)
-  const promises = keys.map(k=>context.data[k])
+  const promises = keys.map(k => context.data[k])
   const resolved = await Promise.all(promises)
-  resolved.forEach((r,i)=>context.data[keys[i]]=r)
+  resolved.forEach((r, i) => context.data[keys[i]] = r)
 
   //second
   const markup = render(req, store, context)
