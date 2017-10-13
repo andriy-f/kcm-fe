@@ -69,7 +69,8 @@
     "watch": "node scripts/watch.js",
     "build": "npm run build:client && npm run build:server",
     "build:client": "node scripts/build.js",
-    "build:server": "babel src --out-dir build-server --copy-files --ignore '**/*.test.js'",
+    "build:serverOld": "babel src --out-dir buildServer --copy-files --ignore '**/*.test.js'",
+    "build:server": "node scripts/buildServer.js",
     "test": "node scripts/test.js --env=jsdom",
     "genjdcontext": "jaysvcutil -m http://localhost:3000/odata -o JayContext.js -t JayContext.d.ts",
     "heroku-postbuild": "npm run build"

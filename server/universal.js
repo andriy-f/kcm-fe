@@ -2,11 +2,10 @@ const path = require('path')
 const fs = require('fs')
 
 const api = require('./api')
-const {render, renderHead} = require('../build-server/serverRender')
-const {default: configureStore} = require('../build-server/configureStore.server')
+const {render, renderHead} = require('../src/serverRender')
+const {default: configureStore} = require('../src/configureStore.server')
 
 module.exports = function universalLoader(req, res) {
-  console.log('UniLoader')
   const filePath = path.resolve(__dirname, '..', 'build', 'index.html')
 
   fs.readFile(filePath, 'utf8', (err, htmlData)=>{
