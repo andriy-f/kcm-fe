@@ -6,7 +6,7 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable'
 
 import { BACKEND_URL } from '../config'
 import { commonAjaxRequestSettings, commonAjaxODataRequestSettings, json } from '../utils'
-import { factory as ctxFactory } from '../services/JayContext'
+// import { factory as ctxFactory } from '../services/JayContext'
 import {
     FETCH_CONTACTS, FETCH_CONTACTS_ABORT, requestContacts, receiveContacts, receiveContactsError,
     REQUEST_CONTACT, receiveContact, receiveContactError,
@@ -17,25 +17,16 @@ import {
     LOGOFF, logOffDone, logOffError
 } from '../actions'
 
-const dataContextPromise = ctxFactory().onReady()
+// const dataContextPromise = ctxFactory().onReady()
 
 const requestContactsEpic = action$ =>
     action$.ofType(FETCH_CONTACTS)
-        .mergeMap(action => Observable.fromPromise(dataContextPromise
-            .then(ctx => {
-                const filterText = action.payload.filterText
-                const res = filterText ?
-                    ctx.Contacts.filter(function (c) {
-                        return c.firstName.contains(this.filterText) // use this.param to avid prod error
-                            || c.lastName.contains(this.filterText)
-                            || c.email.contains(this.filterText)
-                            || c.phoneNumber.contains(this.filterText)
-                    }, { filterText })
-                    : ctx.Contacts
-
-                return res.toArray()
-            }))
-            .map(response => receiveContacts(response))
+        .mergeMap(action =>
+            ajax({
+                ...commonAjaxODataRequestSettings,
+                url: BACKEND_URL + `/odata/Contacts`
+            })
+            .map(response => receiveContacts(response.response))
             .takeUntil(action$.ofType(FETCH_CONTACTS_ABORT))
             .catch(error => Observable.of(receiveContactsError(error)))
         )
