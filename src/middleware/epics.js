@@ -26,7 +26,7 @@ const requestContactsEpic = action$ =>
                 ...commonAjaxODataRequestSettings,
                 url: BACKEND_URL + `/odata/Contacts`
             })
-            .map(response => receiveContacts(response.response))
+            .map(response => receiveContacts(response.response.value))
             .takeUntil(action$.ofType(FETCH_CONTACTS_ABORT))
             .catch(error => Observable.of(receiveContactsError(error)))
         )
