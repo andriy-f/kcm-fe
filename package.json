@@ -60,7 +60,6 @@
     "webpack-manifest-plugin": "1.2.1"
   },
   "scripts": {
-    "start:prod": "node index.js",
     "start:prod:universal": "node server/index.js",
     "watch": "node scripts/watch.js",
     "build": "npm run build:client && npm run build:server",
