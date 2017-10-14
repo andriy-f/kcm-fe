@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@andriyf/jaydata": "^1.5.1103",
     "body-parser": "^1.18.2",
     "cross-env": "^5.0.5",
     "express": "^4.16.1",
@@ -47,7 +46,6 @@
     "file-loader": "0.11.1",
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.28.0",
-    "jaysvcutil": "^0.1.11",
     "jest": "20.0.3",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.0.0",
@@ -72,7 +70,6 @@
     "build:serverOld": "babel src --out-dir buildServer --copy-files --ignore '**/*.test.js'",
     "build:server": "node scripts/buildServer.js",
     "test": "node scripts/test.js --env=jsdom",
-    "genjdcontext": "jaysvcutil -m http://localhost:3000/odata -o JayContext.js -t JayContext.d.ts",
     "heroku-postbuild": "npm run build"
   },
   "jest": {
