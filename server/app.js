@@ -33,8 +33,25 @@ const index = require('./routes/index')
 const api = require('./routes/api')
 const universalLoader = require('./universal.js')
 
+// redirect to https specifically for Heroku
+const nodeHerokuSslRedirect = (environments = ['production'], redirectStatus = 302) => {
+    return (req, res, next) => {
+        if (environments.indexOf(process.env.NODE_ENV) === -1) {
+            return next()
+        }
+
+        if (req.headers['x-forwarded-proto'] === 'https') {
+            return next();
+        }
+
+        res.redirect(redirectStatus, `https://${req.hostname}${req.originalUrl}`);
+    }
+}
+
 // App setup
 const app = express()
+
+app.use(nodeHerokuSslRedirect())
 
 // Support Gzip
 app.use(compression())
