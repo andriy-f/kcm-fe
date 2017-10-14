@@ -24,7 +24,6 @@
     "rxjs": "^5.4.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "babel-core": "6.24.1",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
@@ -67,7 +66,6 @@
     "watch": "node scripts/watch.js",
     "build": "npm run build:client && npm run build:server",
     "build:client": "node scripts/build.js",
-    "build:serverOld": "babel src --out-dir buildServer --copy-files --ignore '**/*.test.js'",
     "build:server": "node scripts/buildServer.js",
     "test": "node scripts/test.js --env=jsdom",
     "heroku-postbuild": "npm run build"
