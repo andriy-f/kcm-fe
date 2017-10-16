@@ -1,10 +1,10 @@
 const path = require('path')
 const fs = require('fs')
 
-const api = require('./api')
 const { render, renderHead, configureStore } = require('../buildServer/main')
 
 module.exports = function universalLoader(req, res) {
+  // TODO: cache filePath contents
   const filePath = path.resolve(__dirname, '..', 'build', 'index.html')
 
   fs.readFile(filePath, 'utf8', (err, htmlData) => {
@@ -23,7 +23,7 @@ module.exports = function universalLoader(req, res) {
 
 // this does most of the heavy lifting
 async function serverRender(req, res, htmlData) {
-  const context = { data: {}, head: [], req, api }
+  const context = { data: {}, head: [], req }
   const store = configureStore()
   // first
   render(req, store, context)

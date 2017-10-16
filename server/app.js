@@ -1,6 +1,4 @@
 const register = require('ignore-styles').default
-// styles
-const _ = require('lodash')
 const bodyParser = require('body-parser')
 const compression = require('compression')
 const express = require('express')
@@ -9,9 +7,12 @@ const path = require('path')
 const fs = require('fs')
 const md5File = require('md5-file')
 
+const universalLoader = require('./universal.js')
+
+const isDev = process.env.NODE_ENV === 'development'
 const mimeTypes = {
-  '.jpg': 'image/jpeg'
-, '.png': 'image/png'
+    '.jpg': 'image/jpeg'
+    , '.png': 'image/png'
 }
 // register(undefined, (mod, filename) => {
 //   const ext = ['.png', '.jpg'].find(f=>filename.endsWith(f))
@@ -27,11 +28,6 @@ const mimeTypes = {
 //     mod.exports = `/static/media/${bn}`;
 //   }
 // })
-
-// routes
-const index = require('./routes/index')
-const api = require('./routes/api')
-const universalLoader = require('./universal.js')
 
 // redirect to https specifically for Heroku
 const nodeHerokuSslRedirect = (environments = ['production'], redirectStatus = 302) => {
@@ -57,20 +53,21 @@ app.use(nodeHerokuSslRedirect())
 app.use(compression())
 
 // Support post requests with body data (doesn't support multipart, use multer)
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+// app.use(bodyParser.json())
+// app.use(bodyParser.urlencoded({ extended: false }))
 
-// Setup logger
-app.use(morgan('combined'))
+if (isDev) {
+    // Setup logger
+    app.use(morgan('combined'))
+}
 
-app.use('/', index)
+// Server-side rendering of main '/' path (substitute instead index.html form build folder)
+app.get('/', universalLoader)
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')))
 
-app.use('/api', api)
-
-// Always return the main index.html, so react-router render the route in the client
+// Server-side rendering of rest paths
 app.use('/', universalLoader)
 
 module.exports = app
