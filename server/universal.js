@@ -30,7 +30,7 @@ async function serverRender(req, res, htmlData) {
 
   if (context.url) {
     // Somewhere a `<Redirect>` was rendered
-    res.redirect(301, context.url)
+    res.redirect(302, context.url)
   }
 
   // handle our data fetching
