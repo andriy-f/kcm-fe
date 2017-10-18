@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { isUserLoggedIn } from '../utils'
 import NotLoggedIn from '../components/NotLoggedIn'
-import LogIn from '../containers/logIn'
+import LogIn from '../containers/LogIn'
 
 const AuthHOC = (requiredPermissions) => (Component) => {
     class Auth extends React.Component {
