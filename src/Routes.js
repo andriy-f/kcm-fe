@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import intro from './components/intro';
 import logInPage from './containers/LogIn';
-import logoff from './containers/logOut';
+import logoff from './containers/LogOut';
 import contactList from './containers/contactList';
 import ContactEdit from './containers/ContactEdit';
 import ContactAddPage from './containers/ContactAddPage';
