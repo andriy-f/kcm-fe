@@ -113,7 +113,7 @@ const settings = (state = {
     bodyScrolled: false,
     sideNavActive: false,
     sideNavPinned: false,
-    sideNavClipped: true,
+    sideNavClipped: false,
     rightSideNavActive: false,
     rightSideNavPinned: false,
     rightSideNavClipped: true
