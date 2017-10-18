@@ -3,25 +3,49 @@ const fs = require('fs')
 
 const { render, renderHead, configureStore } = require('../buildServer/main')
 
-module.exports = function universalLoader(req, res) {
-  // TODO: cache filePath contents
-  const filePath = path.resolve(__dirname, '..', 'build', 'index.html')
+const indexFilePath = path.resolve(__dirname, '..', 'build', 'index.html')
 
-  fs.readFile(filePath, 'utf8', (err, htmlData) => {
+/**
+ * Promise that resolves to index file contents
+ * @type {Promise<string>}
+ */
+const indexFileContents = new Promise((resolve, reject) => {
+  fs.readFile(indexFilePath, 'utf8', (err, fileContents) => {
     if (err) {
-      console.error('read err', err)
-      return res.status(404).end()
+      reject(err)
+    } else {
+      console.log('index file has been read')
+      resolve(fileContents)
     }
-
-    serverRender(req, res, htmlData)
-      .catch(err => {
-        console.error('Render Error', err)
-        return res.status(500).json({ message: 'Render Error' })
-      })
   })
+})
+
+/**
+ * @param {Express.Request} req
+ * @param {Express.Response} res
+ */
+module.exports = function universalLoader(req, res) {
+  indexFileContents
+    .then(htmlData => {
+      serverRender(req, res, htmlData)
+        .catch(err => {
+          console.error('Server-side render error', err)
+          return res.status(500).json({ message: 'Render Error' })
+        })
+    })
+    .catch(err => {
+      console.error('index file read err', err)
+      return res.status(404).end()
+    })
 }
 
-// this does most of the heavy lifting
+/**
+ * This does most of the heavy lifting
+ * 
+ * @param {Express.Request} req
+ * @param {Express.Response} res
+ * @param {string} htmlData
+ */
 async function serverRender(req, res, htmlData) {
   const context = { data: {}, head: [], req }
   const store = configureStore()
