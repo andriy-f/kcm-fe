@@ -7,7 +7,7 @@ import { Snackbar } from 'react-toolbox/lib/snackbar'
 import { Field, reduxForm } from 'redux-form'
 
 import { kFormContainer, kTextCenter } from '../App.css'
-import { logIn } from '../actions'
+import { logIn, logInCleanup } from '../actions'
 import { isUserLoggedIn } from '../utils'
 
 const LoginInput = ({ input: { value, onChange } }) => <Input type='text' label='Login' value={value} onChange={onChange} />
@@ -65,6 +65,14 @@ class LogIn extends React.Component {
         this.setState({ showMessage: true })
     }
 
+    componentDidMount() {
+        this.props.cleanup()
+    }
+
+    componentWillUnmount() {
+        this.props.cleanup()
+    }
+
     render() {
         const currentUser = this.props.currentUser
         const isLoggedIn = isUserLoggedIn(currentUser)
@@ -100,6 +108,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
     initAuthenticate: (login, password) => dispatch(logIn(login, password)),
+    cleanup: () => dispatch(logInCleanup())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn)

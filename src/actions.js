@@ -38,6 +38,7 @@ export const CANCEL_DELETE_CONTACT = 'CANCEL_DELETE_CONTACT'
 export const LOGIN = 'LOGIN'
 export const LOGIN_DONE = 'LOGIN_DONE'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
+export const LOGIN_CLEANUP = 'LOGIN_CLEANUP'
 
 export const LOGOFF = 'LOGOFF'
 export const LOGOFF_DONE = 'LOGOFF_DONE'
@@ -174,7 +175,11 @@ export const logInError = (payload) => ({
     error: true
 });
 
+export const logInCleanup = () => ({
+    type: LOGIN_CLEANUP
+});
 
+// Log off actions
 export const logOff = () => ({
     type: LOGOFF
 });

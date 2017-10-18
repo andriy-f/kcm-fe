@@ -11,7 +11,7 @@ import {
     ADD_CONTACT_DONE, ADD_CONTACT_ERROR, CLEAR_ADD_CONTACT_PAGE,
     CONFIRM_DELETE_CONTACT, CANCEL_DELETE_CONTACT,
     DELETE_CONTACT_DONE, DELETE_CONTACT_ERROR,
-    LOGIN, LOGIN_DONE, LOGIN_ERROR,
+    LOGIN, LOGIN_DONE, LOGIN_ERROR, LOGIN_CLEANUP,
     LOGOFF_DONE, LOGOFF_ERROR,
     TOGGLE_SETTING, SET_SETTING,
 } from './actions';
@@ -85,7 +85,8 @@ const currentUser = (state = {}, action) => {
     }
 }
 
-const authenticationPage = (state = { isFetching: false }, action) => {
+const logInDefaultState = { isFetching: false }
+const authenticationPage = (state = logInDefaultState, action) => {
     switch (action.type) {
         case LOGIN:
             return { isFetching: true }
@@ -93,6 +94,8 @@ const authenticationPage = (state = { isFetching: false }, action) => {
             return { response: { success: true }, isFetching: false };
         case LOGIN_ERROR:
             return { error: action.payload, isFetching: false };
+        case LOGIN_CLEANUP:
+            return logInDefaultState
         default:
             return state;
     }
