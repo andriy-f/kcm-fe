@@ -1,9 +1,10 @@
 // State sample
 // ...
 
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 
+import { switchcase } from './utils'
 import {
     FETCH_CONTACTS, FETCH_CONTACTS_DONE, FETCH_CONTACTS_ERROR, CLEAR_CONTACT_LIST, SET_CONTACTS_FILTER_TEXT,
     RECEIVE_CONTACT, RECEIVE_CONTACT_ERROR,
@@ -13,8 +14,8 @@ import {
     DELETE_CONTACT_DONE, DELETE_CONTACT_ERROR,
     LOGIN, LOGIN_DONE, LOGIN_ERROR, LOGIN_CLEANUP,
     LOGOFF_DONE, LOGOFF_ERROR,
-    TOGGLE_SETTING, SET_SETTING,
-} from './actions';
+    TOGGLE_SETTING, SET_SETTING
+} from './actions'
 
 const defaultContactsPageState = { items: [], filterText: '', isFetching: false }
 function contactsPage(state = defaultContactsPageState, action) {
@@ -86,20 +87,12 @@ const currentUser = (state = {}, action) => {
 }
 
 const logInDefaultState = { isFetching: false }
-const logIn = (state = logInDefaultState, action) => {
-    switch (action.type) {
-        case LOGIN:
-            return { isFetching: true }
-        case LOGIN_DONE:
-            return { response: { success: true }, isFetching: false };
-        case LOGIN_ERROR:
-            return { error: action.payload, isFetching: false };
-        case LOGIN_CLEANUP:
-            return logInDefaultState
-        default:
-            return state;
-    }
-}
+const logIn = (state = logInDefaultState, action) => switchcase({
+    [LOGIN]: { isFetching: true },
+    [LOGIN_DONE]: { response: { success: true }, isFetching: false },
+    [LOGIN_ERROR]: () => ({ error: action.payload, isFetching: false }),
+    [LOGIN_CLEANUP]: logInDefaultState
+})(state)(action.type)
 
 const logoffPage = (state = {}, action) => {
     switch (action.type) {
@@ -127,7 +120,7 @@ const settings = (state = {
             let oldSettingValue = state[name]
             return { ...state, [name]: !oldSettingValue }
         case SET_SETTING:
-            return { ...state, [action.payload.name]: action.payload.value}
+            return { ...state, [action.payload.name]: action.payload.value }
         default:
             return state;
     }
