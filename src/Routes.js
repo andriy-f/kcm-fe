@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import intro from './components/intro';
 import logInPage from './containers/LogIn';
-import logoff from './containers/LogOut';
+import logOutPage from './containers/LogOut';
 import contactList from './containers/contactList';
 import ContactEdit from './containers/ContactEdit';
 import ContactAddPage from './containers/ContactAddPage';
@@ -18,7 +18,7 @@ export default () => (
         <Route exact path="/" component={intro} />
         <Route exact path="/logIn" component={logInPage} />
         <Route exact path="/userProfile" component={userProfile} />
-        <Route exact path="/logOut" component={logoff} />
+        <Route exact path="/logOut" component={logOutPage} />
         <Route exact path="/contacts" component={AuthHOC(['contact-list-view'])(contactList)} />
         <Route path="/contacts/new" component={AuthHOC(['contact-edit'])(ContactAddPage)} />
         <Route path="/contacts/:id" component={AuthHOC(['contact-edit'])(ContactEdit)} />
