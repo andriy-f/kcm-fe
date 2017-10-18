@@ -86,7 +86,7 @@ const currentUser = (state = {}, action) => {
 }
 
 const logInDefaultState = { isFetching: false }
-const authenticationPage = (state = logInDefaultState, action) => {
+const logIn = (state = logInDefaultState, action) => {
     switch (action.type) {
         case LOGIN:
             return { isFetching: true }
@@ -137,7 +137,7 @@ const rootReducer = combineReducers({
     currentUser,
     contactEdit,
     addContactPage,
-    authenticationPage,
+    logIn,
     logoffPage,
     contactsPage,
     settings,

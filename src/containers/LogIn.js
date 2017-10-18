@@ -39,7 +39,7 @@ class LogIn extends React.Component {
 
     getErrorMessage = () => {
         let errorMessage = undefined
-        const error = this.props.authenticationPage.error
+        const error = this.props.logIn.error
         errorMessage = error && error.message
 
         const errorResp = error && error.xhr.response
@@ -98,11 +98,11 @@ class LogIn extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    const { currentUser, authenticationPage } = state;
+    const { currentUser, logIn } = state;
 
     return {
         currentUser,
-        authenticationPage
+        logIn 
     }
 }
 
