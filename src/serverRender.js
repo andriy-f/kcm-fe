@@ -3,6 +3,7 @@ import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router-dom'
 import App from './components/App'
+import { default as configureStore } from './configureStore'
 
 export function render(req, store, context) {
   return renderToString(
@@ -22,3 +23,5 @@ export function renderHead(context) {
     renderToStaticMarkup(h)
   )).join('')
 }
+
+export { configureStore }
