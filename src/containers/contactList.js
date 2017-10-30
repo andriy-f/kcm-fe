@@ -66,7 +66,7 @@ class ContactList extends React.Component {
             <div>
                 <div>{this.props.errorMessage}</div>
                 <Input type="text" label="Filter" value={filterText} onChange={this.handleFilter} />
-                <Table multiSelectable onRowSelect={this.handleRowSelect}>
+                <Table selectable={false} onRowSelect={this.handleRowSelect}>
                     <TableHead>
                         <TableCell>First Name</TableCell>
                         <TableCell>Last Name</TableCell>
