@@ -82,6 +82,9 @@ class LogIn extends React.Component {
             <Redirect to="/" />
         ) : (
                 <div className={kFormContainer}>
+                    <p>
+                        Credentials should be awailable at place where you got the link to this demo.
+                    </p>
                     <LoginFormReduxed onSubmit={this.handleSubmit} />
                     <Snackbar
                         action='Dismiss'
