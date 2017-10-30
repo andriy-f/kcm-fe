@@ -3,26 +3,34 @@ import PropTypes from 'prop-types'
 
 class Pager extends React.Component {
     state = {
-        current: this.props.initial
-    }
-    
-    onPageChange = (e) => {
-        const newVal = e.target.value
-        this.setState((prevState, props) => {
-            if(newVal > 0 && newVal <= props.total) {
-                props.onChange && props.onChange(newVal)
-                return {current: newVal}
-            }
-        })
+        current: this.props.initial,
+        inputValue: this.props.initial
     }
 
-    onFocus = (e) => {
+    handleFocus = (e) => {
         e.target.select()
+    }
+
+    handleKeyPress = (e) => {
+        if(e.key === 'Enter'){
+            const newVal = e.target.value
+            if(newVal > 0 && newVal <= this.props.total) {
+                this.props.onChange && this.props.onChange(newVal)
+                this.setState({current: newVal})
+            }
+        }
+    }
+    
+    handleChange = (e) => {
+    }
+
+    handleBlur = (e) => {
     }
 
     render() {
         return <span>
-            <input type="text" onChange={this.onPageChange} value={this.state.current} onFocus={this.onFocus} />
+            <input type="text" onKeyPress={this.handleKeyPress} value={this.state.inputValue} 
+            onFocus={this.handleFocus} onBlur={this.handleBlur} onChange={this.handleChangle} />
             /{this.props.total}
         </span>
     }
