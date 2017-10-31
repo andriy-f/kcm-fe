@@ -47,9 +47,9 @@ export const LOGOFF_ERROR = 'LOGOFF_ERROR'
 export const TOGGLE_SETTING = 'TOGGLE_SETTING'
 export const SET_SETTING = 'SET_SETTING'
 
-export const requestContacts = (filterText) => ({
+export const requestContacts = (filterText, skip, take) => ({
     type: FETCH_CONTACTS,
-    payload: { filterText }
+    payload: { filterText, skip, take }
 });
 
 export const clearContactList = () => ({

@@ -23,11 +23,14 @@ const requestContactsEpic = action$ =>
         .mergeMap(action =>
             ajax({
                 ...commonAjaxODataRequestSettings,
-                url: BACKEND_URL + '/odata/Contacts' + getContactsFetchUrl(action.payload.filterText)
+                url: BACKEND_URL + '/odata/Contacts' + getContactsFetchUrl(
+                    action.payload.filterText,
+                    action.payload.skip,
+                    action.payload.take)
             })
-            .map(response => receiveContacts(response.response.value))
-            .takeUntil(action$.ofType(FETCH_CONTACTS_ABORT))
-            .catch(error => Observable.of(receiveContactsError(error)))
+                .map(response => receiveContacts(response.response.value))
+                .takeUntil(action$.ofType(FETCH_CONTACTS_ABORT))
+                .catch(error => Observable.of(receiveContactsError(error)))
         )
 
 const requestContactEpic = action$ =>
