@@ -7,32 +7,40 @@ class Pager extends React.Component {
         inputValue: this.props.initial
     }
 
+    updateCurrent = (newVal) => {
+        if (newVal > 0 && newVal <= this.props.total) {
+            this.setState({ current: newVal })
+            this.props.onChange && this.props.onChange(newVal)
+        }
+        else {
+            this.setState((prevState, props) => ({ inputValue: prevState.current }))
+        }
+    }
+
     handleFocus = (e) => {
         e.target.select()
     }
 
     handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            const newVal = e.target.value
-            if (newVal > 0 && newVal <= this.props.total) {
-                this.props.onChange && this.props.onChange(newVal)
-                this.setState({ current: newVal })
-            }
+        switch (e.key) {
+            case 'Enter':
+                e.target.blur()
+                break
+            default:
         }
     }
-
     handleChange = (e) => {
         this.setState({ inputValue: e.target.value })
     }
 
     handleBlur = (e) => {
-        this.setState((prevState, props) => ({ inputValue: prevState.current }))
+        this.updateCurrent(e.target.value)
     }
 
     render() {
         return <span>
             <input type="text" onKeyPress={this.handleKeyPress} value={this.state.inputValue}
-                onFocus={this.handleFocus} onBlur={this.handleBlur} onChange={this.handleChangle} />
+                onFocus={this.handleFocus} onBlur={this.handleBlur} onChange={this.handleChange} />
             /{this.props.total}
         </span>
     }
