@@ -8,7 +8,7 @@ import { Field, reduxForm } from 'redux-form'
 
 import { kFormContainer, kTextCenter } from '../App.css'
 import { logIn, logInCleanup } from '../actions'
-import { isUserLoggedIn } from '../utils'
+import { isUserLoggedIn, getUserFriendlyErrorMessage } from '../utils'
 
 const LoginInput = ({ input: { value, onChange } }) => <Input type='text' label='Login' value={value} onChange={onChange} />
 const PasswordInput = ({ input: { value, onChange } }) => <Input type='password' label='Password' value={value} onChange={onChange} />
@@ -37,17 +37,6 @@ class LogIn extends React.Component {
         this.state = { showMessage: true };
     }
 
-    getErrorMessage = () => {
-        let errorMessage = undefined
-        const error = this.props.logIn.error
-        errorMessage = error && error.message
-
-        const errorResp = error && error.xhr.response
-        const errorRespMessage = errorResp && errorResp.message
-        errorMessage = errorMessage ? errorMessage + ' ' + errorRespMessage : errorRespMessage
-
-        return errorMessage
-    }
 
     handleSubmit = (values) => {
         this.props.initAuthenticate(values.login, values.password)
@@ -76,7 +65,7 @@ class LogIn extends React.Component {
     render() {
         const currentUser = this.props.currentUser
         const isLoggedIn = isUserLoggedIn(currentUser)
-        const errorMessage = this.getErrorMessage()
+        const errorMessage = getUserFriendlyErrorMessage(this.props.logIn.error)
 
         return isLoggedIn ? (
             <Redirect to="/" />

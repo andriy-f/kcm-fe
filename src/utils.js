@@ -39,3 +39,21 @@ export const switchcase = cases => defaultCase => key =>
 //         'INCREMENT': () => state + 1,
 //         'DECREMENT': () => state - 1
 //     })(state)(action.type)
+
+export const getUserFriendlyErrorMessage = (error) => {
+    let errorMessage = undefined
+
+    switch (error && error.status) {
+        case 0:
+            errorMessage = 'Network error' // may also be timeout or abort
+            return errorMessage
+        default:
+            errorMessage = error && error.message
+    }
+
+    const errorResponse = error && error.xhr.response
+    const errorResponseMessage = errorResponse && errorResponse.message
+    errorMessage = errorMessage ? errorMessage + ' ' + errorResponseMessage : errorResponseMessage
+
+    return errorMessage
+}
