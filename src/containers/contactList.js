@@ -18,8 +18,6 @@ import {
 import { RTButtonLink, RTIconButtonLink } from '../components/RTButtonLink'
 
 class ContactList extends React.Component {
-    state = { selected: [] }
-
     componentDidMount() {
         this.props.clearContactList()
         this.props.reloadContacts(this.props.filterText)
@@ -32,10 +30,6 @@ class ContactList extends React.Component {
 
     handleReloadContacts = () => {
         this.props.reloadContacts(this.props.filterText)
-    }
-
-    handleRowSelect = selected => {
-        this.setState({ selected })
     }
 
     handleFilter = value => {
@@ -66,7 +60,7 @@ class ContactList extends React.Component {
             <div>
                 <div>{this.props.errorMessage}</div>
                 <Input type="text" label="Filter" value={filterText} onChange={this.handleFilter} />
-                <Table selectable={false} onRowSelect={this.handleRowSelect}>
+                <Table selectable={false}>
                     <TableHead>
                         <TableCell>First Name</TableCell>
                         <TableCell>Last Name</TableCell>
@@ -74,7 +68,7 @@ class ContactList extends React.Component {
                         <TableCell>Phone Number</TableCell>
                     </TableHead>
                     {items && items.map((item, idx) => (
-                        <TableRow key={idx} selected={this.state.selected.indexOf(idx) !== -1}>
+                        <TableRow key={idx}>
                             <TableCell>{item.firstName}</TableCell>
                             <TableCell>{item.lastName}</TableCell>
                             <TableCell>{item.email}</TableCell>
