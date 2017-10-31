@@ -83,7 +83,9 @@ class LogIn extends React.Component {
         ) : (
                 <div className={kFormContainer}>
                     <p>
-                        Credentials should be awailable at place where you got the link to this demo.
+                        <strong>Credentials:</strong><br/>
+                        user: demouser01<br/>
+                        pass: aSuperSecret
                     </p>
                     <LoginFormReduxed onSubmit={this.handleSubmit} />
                     <Snackbar
