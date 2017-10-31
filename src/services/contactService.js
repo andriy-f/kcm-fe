@@ -5,9 +5,10 @@ export const getContactsFetchUrl = (filterText, skip, top) => {
         filterText ? '$filter=' + contactSearchFields.map(fieldName => `contains(${fieldName}, '${filterText}')`).join(' or ') : undefined,
         skip ? `$skip=${skip}` : undefined,
         top ? `$top=${top}` : undefined,
-    ].filter(q => q)
+    ] // functional dynamic query string formatting
+        .filter(q => q) // filter those query options which are not undefined
 
     return queryOptions.length > 0
         ? '?' + queryOptions.join('&')
-        : ''
+        : '' // return formatted query
 }
