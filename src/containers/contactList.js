@@ -5,6 +5,7 @@ import { IconButton } from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 import Dialog from 'react-toolbox/lib/dialog'
 
+import { getUserFriendlyErrorMessage } from '../utils'
 import { addItemButtonContainer } from '../App.css'
 
 import {
@@ -99,13 +100,16 @@ class ContactList extends React.Component {
 
 const mapStateToProps = (state) => {
     const { contactsPage } = state
-    const { error, filterText, items, contactToDeleteId } = contactsPage
+    const { error, filterText, currentPage, totalPages, itemsPerPage, items, contactToDeleteId } = contactsPage
 
     return {
         filterText,
+        currentPage,
+        totalPages,
+        itemsPerPage,
         items,
         contactToDeleteId,
-        errorMessage: error && error.xhr && error.xhr.response && error.xhr.response.message
+        errorMessage: getUserFriendlyErrorMessage(error)
     }
 }
 

@@ -17,7 +17,11 @@ import {
     TOGGLE_SETTING, SET_SETTING
 } from './actions'
 
-const defaultContactsPageState = { items: [], filterText: '', isFetching: false }
+const defaultContactsPageState = {
+    items: [], filterText: '',
+    currentPage: undefined, totalPages: undefined, itemsPerPage: 20,
+    isFetching: false
+}
 function contactsPage(state = defaultContactsPageState, action) {
     const payload = action.payload
 
@@ -37,7 +41,7 @@ function contactsPage(state = defaultContactsPageState, action) {
         case CANCEL_DELETE_CONTACT:
             return { ...state, ...payload }
         default:
-            return state;
+            return state
     }
 }
 
