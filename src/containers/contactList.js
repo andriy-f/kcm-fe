@@ -69,10 +69,10 @@ class ContactList extends React.Component {
                     </TableHead>
                     {items && items.map((item, idx) => (
                         <TableRow key={idx}>
-                            <TableCell>{item.firstName}</TableCell>
-                            <TableCell>{item.lastName}</TableCell>
-                            <TableCell>{item.email}</TableCell>
-                            <TableCell>{item.phoneNumber}</TableCell>
+                            <TableCell>{item.firstName || ''}</TableCell>
+                            <TableCell>{item.lastName || ''}</TableCell>
+                            <TableCell>{item.email || ''}</TableCell>
+                            <TableCell>{item.phoneNumber || ''}</TableCell>
                             <TableCell>
                                 <RTIconButtonLink icon="edit" to={"/contacts/" + item._id}></RTIconButtonLink>
                                 <IconButton icon="delete" data-id={item._id} onClick={this.confirmDeleteSingle} />
