@@ -29,12 +29,15 @@ class Pager extends React.Component {
             default:
         }
     }
+
     handleChange = (e) => {
-        this.setState({ inputValue: e.target.value })
+        const intVal = parseInt(e.target.value, 10)
+        this.setState({ inputValue: intVal })
     }
 
     handleBlur = (e) => {
-        this.updateCurrent(e.target.value)
+        const intVal = parseInt(e.target.value, 10)
+        this.updateCurrent(intVal)
     }
 
     render() {
