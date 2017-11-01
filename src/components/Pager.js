@@ -41,7 +41,8 @@ class Pager extends React.Component {
     }
 
     render() {
-        return <span>
+        console.log('total', this.props.total)
+        return <span className={this.props.className} >
             <input type="text" onKeyPress={this.handleKeyPress} value={this.state.inputValue}
                 onFocus={this.handleFocus} onBlur={this.handleBlur} onChange={this.handleChange} />
             /{this.props.total}

@@ -37,3 +37,8 @@
 .contactsFilter {
   display: inline-block;
 }
+
+.contactsPager {
+  padding: 1em;
+  float: right;
+}
