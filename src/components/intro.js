@@ -13,8 +13,5 @@ export default () => (
         <p>
             You can also "Add to Home screen" via browser menu so this app will behave almost like native on your smartphone or tablet.
         </p>
-        <p>
-            Credentials should be awailable at place where you got the link to this demo.
-        </p>
     </div>
 )
