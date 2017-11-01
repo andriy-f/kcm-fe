@@ -7,7 +7,7 @@ import Dialog from 'react-toolbox/lib/dialog'
 
 import Pager from '../components/Pager'
 import { getUserFriendlyErrorMessage } from '../utils'
-import { addItemButtonContainer } from '../App.css'
+import { addItemButtonContainer, contactsFilter } from '../App.css'
 
 import {
     requestContacts,
@@ -69,7 +69,7 @@ class ContactList extends React.Component {
         return (
             <div>
                 <div>{this.props.errorMessage}</div>
-                <Input type="text" label="Filter" value={filterText} onChange={this.handleFilter} />
+                <Input type="text" label="Filter" className={contactsFilter} value={filterText} onChange={this.handleFilter} />
                 {totalPages && <Pager total={totalPages} initial={currentPage} onChange={this.handleCurrentPageChange} />}
                 <Table selectable={false}>
                     <TableHead>

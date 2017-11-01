@@ -33,3 +33,7 @@
 .progressLinear {
   top: 4rem;
 }
+
+.contactsFilter {
+  display: inline-block;
+}
