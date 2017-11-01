@@ -33,11 +33,12 @@ function contactsPage(state = defaultContactsPageState, action) {
         case FETCH_CONTACTS:
             return { ...state, isFetching: true }
         case FETCH_CONTACTS_DONE:
+            const totalPages = payload.count > 0 ? Math.ceil(payload.count / state.itemsPerPage): 1
             return {
                 ...state,
                 items: payload.items,
                 totalItems: payload.count,
-                totalPages: Math.ceil(payload.count / state.itemsPerPage),
+                totalPages,
                 error: null,
                 isFetching: false
             }
