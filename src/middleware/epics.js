@@ -26,9 +26,13 @@ const requestContactsEpic = action$ =>
                 url: BACKEND_URL + '/odata/Contacts' + getContactsFetchUrl(
                     action.payload.filterText,
                     action.payload.skip,
-                    action.payload.take)
+                    action.payload.take,
+                    true)
             })
-                .map(response => receiveContacts(response.response.value))
+                .map(response => {
+                    const resp = response.response
+                    return receiveContacts({ items: resp.value, count: resp['@odata.count'] })
+                })
                 .takeUntil(action$.ofType(FETCH_CONTACTS_ABORT))
                 .catch(error => Observable.of(receiveContactsError(error)))
         )

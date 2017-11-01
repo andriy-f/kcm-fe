@@ -5,6 +5,7 @@ import { IconButton } from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 import Dialog from 'react-toolbox/lib/dialog'
 
+import Pager from '../components/Pager'
 import { getUserFriendlyErrorMessage } from '../utils'
 import { addItemButtonContainer } from '../App.css'
 
@@ -13,6 +14,7 @@ import {
     abortFetchContacts,
     clearContactList as clearContactListAction,
     setContactsFilterText,
+    setContactsCurrentPage,
     deleteContact,
     confirmDeleteContact, cancelDeleteContact
 } from '../actions'
@@ -21,7 +23,7 @@ import { RTButtonLink, RTIconButtonLink } from '../components/RTButtonLink'
 class ContactList extends React.Component {
     componentDidMount() {
         this.props.clearContactList()
-        this.props.reloadContacts(this.props.filterText)
+        this.handleReloadContacts()
     }
 
     componentWillUnmount() {
@@ -29,13 +31,21 @@ class ContactList extends React.Component {
         this.props.clearContactList()
     }
 
-    handleReloadContacts = () => {
-        this.props.reloadContacts(this.props.filterText)
+    handleReloadContacts = (override = {}) => {
+        const { filterText, itemsPerPage, currentPage } = { ...this.props, ...override }
+        const skip = itemsPerPage * (currentPage - 1)
+        const take = this.props.itemsPerPage
+        this.props.reloadContacts(filterText, skip, take)
     }
 
     handleFilter = value => {
         this.props.setContactsFilterText(value)
-        this.props.reloadContacts(value)
+        this.handleReloadContacts({ filterText: value })
+    }
+
+    handleCurrentPageChange = newPage => {
+        this.props.setContactsCurrentPage(newPage)
+        this.handleReloadContacts({ currentPage: newPage })
     }
 
     deleteSingle = () => {
@@ -56,11 +66,12 @@ class ContactList extends React.Component {
     ]
 
     render() {
-        const { filterText, items } = this.props
+        const { filterText, items, currentPage, totalPages } = this.props
         return (
             <div>
                 <div>{this.props.errorMessage}</div>
                 <Input type="text" label="Filter" value={filterText} onChange={this.handleFilter} />
+                {totalPages && <Pager total={totalPages} initial={currentPage} onChange={this.handleCurrentPageChange} />}
                 <Table selectable={false}>
                     <TableHead>
                         <TableCell>First Name</TableCell>
@@ -108,10 +119,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    reloadContacts: (filterText) => dispatch(requestContacts(filterText)),
+    reloadContacts: (filterText, skip, take) => dispatch(requestContacts(filterText, skip, take)),
     clearContactList: () => dispatch(clearContactListAction()),
     abortFetchContacts: () => dispatch(abortFetchContacts()),
     setContactsFilterText: (value) => dispatch(setContactsFilterText(value)),
+    setContactsCurrentPage: page => dispatch(setContactsCurrentPage(page)),
     confirmDelete: (id) => dispatch(confirmDeleteContact(id)),
     cancelDelete: () => dispatch(cancelDeleteContact()),
     deleteSingle: (id) => dispatch(deleteContact(id))

@@ -6,7 +6,8 @@ import { reducer as formReducer } from 'redux-form'
 
 import { switchcase } from './utils'
 import {
-    FETCH_CONTACTS, FETCH_CONTACTS_DONE, FETCH_CONTACTS_ERROR, CLEAR_CONTACT_LIST, SET_CONTACTS_FILTER_TEXT,
+    FETCH_CONTACTS, FETCH_CONTACTS_DONE, FETCH_CONTACTS_ERROR, CLEAR_CONTACT_LIST, 
+    SET_CONTACTS_FILTER_TEXT, SET_CONTACTS_CURRENT_PAGE,
     RECEIVE_CONTACT, RECEIVE_CONTACT_ERROR,
     SAVE_CONTACT_DONE, SAVE_CONTACT_ERROR, CLEAR_CONTACT,
     ADD_CONTACT_DONE, ADD_CONTACT_ERROR, CLEAR_ADD_CONTACT_PAGE,
@@ -18,10 +19,13 @@ import {
 } from './actions'
 
 const defaultContactsPageState = {
-    items: [], filterText: '',
-    currentPage: undefined, totalPages: undefined, itemsPerPage: 20,
+    items: [], // filtered "paged" items. Received from backend
+    totalItems: undefined, // total number of items after filtering, but not taking into account paging, (received from backend)
+    filterText: '', // from page
+    currentPage: undefined, totalPages: undefined, itemsPerPage: 10, // from page
     isFetching: false
 }
+
 function contactsPage(state = defaultContactsPageState, action) {
     const payload = action.payload
 
@@ -29,12 +33,20 @@ function contactsPage(state = defaultContactsPageState, action) {
         case FETCH_CONTACTS:
             return { ...state, isFetching: true }
         case FETCH_CONTACTS_DONE:
-            return { ...state, items: payload, error: null, isFetching: false }
+            return {
+                ...state,
+                items: payload.items,
+                totalItems: payload.count,
+                totalPages: Math.ceil(payload.count / state.itemsPerPage),
+                error: null,
+                isFetching: false
+            }
         case FETCH_CONTACTS_ERROR:
             return { ...state, items: [], error: payload, isFetching: false }
         case CLEAR_CONTACT_LIST:
             return defaultContactsPageState
         case SET_CONTACTS_FILTER_TEXT:
+        case SET_CONTACTS_CURRENT_PAGE:
         case DELETE_CONTACT_DONE:
         case DELETE_CONTACT_ERROR:
         case CONFIRM_DELETE_CONTACT:

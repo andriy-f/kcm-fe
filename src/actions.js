@@ -13,6 +13,7 @@ export const FETCH_CONTACTS_ABORT = 'FETCH_CONTACTS_ABORT'
 export const FETCH_CONTACTS_ERROR = 'FETCH_CONTACTS_ERROR'
 export const CLEAR_CONTACT_LIST = 'CLEAR_CONTACT_LIST'
 export const SET_CONTACTS_FILTER_TEXT = 'SET_CONTACTS_FILTER_TEXT'
+export const SET_CONTACTS_CURRENT_PAGE = 'SET_CONTACTS_CURRENT_PAGE'
 
 export const REQUEST_CONTACT = 'REQUEST_CONTACT'
 export const RECEIVE_CONTACT = 'RECEIVE_CONTACT'
@@ -74,6 +75,11 @@ export const receiveContactsError = (payload) => ({
 export const setContactsFilterText = filterText => ({
     type: SET_CONTACTS_FILTER_TEXT,
     payload: { filterText }
+})
+
+export const setContactsCurrentPage = currentPage => ({
+    type: SET_CONTACTS_CURRENT_PAGE,
+    payload: { currentPage }
 })
 
 export const requestContact = (id) => ({
