@@ -9,6 +9,7 @@ import { commonAjaxRequestSettings, commonAjaxODataRequestSettings, json } from 
 import { getContactsFetchUrl } from '../services/contactService'
 import {
     FETCH_CONTACTS, FETCH_CONTACTS_ABORT, requestContacts, receiveContacts, receiveContactsError,
+    SET_CONTACTS_FILTER_TEXT,
     REQUEST_CONTACT, receiveContact, receiveContactError,
     SAVE_CONTACT_REQUEST, saveContactDone, saveContactError,
     ADD_CONTACT, addContactDone, addContactError,
@@ -16,7 +17,6 @@ import {
     LOGIN, logInDone, logInError,
     LOGOFF, logOffDone, logOffError
 } from '../actions'
-
 
 const requestContactsEpic = action$ =>
     action$.ofType(FETCH_CONTACTS)
@@ -35,6 +35,16 @@ const requestContactsEpic = action$ =>
                 })
                 .takeUntil(action$.ofType(FETCH_CONTACTS_ABORT))
                 .catch(error => Observable.of(receiveContactsError(error)))
+        )
+
+const setContactsFilterEpic = (action$, store) =>
+    action$.ofType(SET_CONTACTS_FILTER_TEXT)
+        .mergeMap(action => {
+            const { filterText, currentPage, itemsPerPage } = store.getState().contactsPage
+            const skip = itemsPerPage * (currentPage - 1)
+            const take = itemsPerPage
+            return Observable.of(requestContacts(filterText, skip, take))
+        }
         )
 
 const requestContactEpic = action$ =>
@@ -116,6 +126,7 @@ const requestLogoffEpic = action$ =>
 
 const rootEpic = combineEpics(
     requestContactsEpic,
+    setContactsFilterEpic,
     requestContactEpic,
     saveContactEpic,
     addContactEpic,

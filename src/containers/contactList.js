@@ -40,7 +40,6 @@ class ContactList extends React.Component {
 
     handleFilter = value => {
         this.props.setContactsFilterText(value)
-        this.handleReloadContacts({ filterText: value })
     }
 
     handleCurrentPageChange = newPage => {
