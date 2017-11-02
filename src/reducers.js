@@ -22,7 +22,7 @@ const defaultContactsPageState = {
     items: [], // filtered "paged" items. Received from backend
     totalItems: undefined, // total number of items after filtering, but not taking into account paging, (received from backend)
     filterText: '', // from page
-    currentPage: undefined, totalPages: undefined, itemsPerPage: 10, // from page
+    currentPage: 1, totalPages: 1, itemsPerPage: 10, // from page
     isFetching: false
 }
 

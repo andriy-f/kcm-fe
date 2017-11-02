@@ -5,96 +5,51 @@ import { IconButton } from 'react-toolbox/lib/button'
 import { input as pagerInputTheme, controlText } from './pager.css'
 
 class Pager extends React.Component {
-    state = {
-        current: this.props.initial,
-        inputValue: this.props.initial
-    }
-
-    updateCurrent = (newVal) => {
-        if (newVal > 0 && newVal <= this.props.total) {
-            this.setState({ current: newVal })
-            this.props.onChange && this.props.onChange(newVal)
-        }
-        else {
-            this.setState((prevState, props) => ({ inputValue: prevState.current }))
-        }
-    }
-
-    handleFocus = (e) => {
-        e.target.select()
-    }
-
-    handleKeyPress = (e) => {
-        switch (e.key) {
-            case 'Enter':
-                e.target.blur()
-                break
-            default:
-        }
-    }
-
-    handleChange = (e) => {
-        const intVal = parseInt(e.target.value, 10)
-        this.setState({ inputValue: intVal })
-    }
-
-    handleBlur = (e) => {
-        const intVal = parseInt(e.target.value, 10)
-        this.updateCurrent(intVal)
-    }
-
-    handleItemsPerPageChange = e => {
+    getIntFromTarget = e => {
         const textValue = e.target.value
-        if(!textValue) {
+        if (!textValue) {
             return
         }
 
-        const intVal = parseInt(textValue, 10)
-        this.props.onChange && this.props.onChange(undefined, intVal)
+        return parseInt(textValue, 10)
     }
 
-    gotoFirstPage = e => {
-        this.setState((prevState, props) => {
-            const nextPageValue = 1
-            const shouldUpdate = nextPageValue !== prevState.current
-            shouldUpdate && props.onChange && props.onChange(nextPageValue)
-            return shouldUpdate
-                ? { current: nextPageValue, inputValue: nextPageValue }
-                : null
-        })
+    tryUpdateCurrentPage = newVal => {
+        newVal >= 1 && newVal <= this.props.total
+            && newVal !== this.props.current
+            && this.props.onChange && this.props.onChange(newVal)
     }
 
-    gotoPrevPage = e => {
-        this.setState((prevState, props) => {
-            const nextPageValue = prevState.current - 1
-            const shouldUpdate = nextPageValue >= 1
-            shouldUpdate && props.onChange && props.onChange(nextPageValue)
-            return shouldUpdate
-                ? { current: nextPageValue, inputValue: prevState.current - 1 }
-                : null
-        })
+    handleFocus = e => {
+        e.target.select()
+    }
+
+    handleCurrentPageChange = e => {
+        const intVal = this.getIntFromTarget(e)
+        intVal && this.tryUpdateCurrentPage(intVal)
+    }
+
+    handleItemsPerPageChange = e => {
+        const intVal = this.getIntFromTarget(e)
+        intVal && intVal > 0
+            && intVal !== this.props.itemsPerPage
+            && this.props.onChange && this.props.onChange(undefined, intVal)
+    }
+
+    gotoFirstPage = () => {
+        this.tryUpdateCurrentPage(1)
+    }
+
+    gotoPrevPage = () => {
+        this.tryUpdateCurrentPage(this.props.current - 1)
     }
 
     gotoNextPage = e => {
-        this.setState((prevState, props) => {
-            const nextPageValue = prevState.current + 1
-            const shouldUpdate = nextPageValue <= props.total
-            shouldUpdate && props.onChange && props.onChange(nextPageValue)
-            return shouldUpdate
-                ? { current: nextPageValue, inputValue: nextPageValue }
-                : null
-        })
+        this.tryUpdateCurrentPage(this.props.current + 1)
     }
 
     gotoLastPage = e => {
-        this.setState((prevState, props) => {
-            const nextPageValue = props.total
-            const shouldUpdate = nextPageValue !== prevState.current
-            shouldUpdate && props.onChange && props.onChange(nextPageValue)
-            return shouldUpdate
-                ? { current: nextPageValue, inputValue: nextPageValue }
-                : null
-        })
+        this.tryUpdateCurrentPage(this.props.total)
     }
 
     render() {
@@ -102,8 +57,9 @@ class Pager extends React.Component {
             <IconButton icon='first_page' onClick={this.gotoFirstPage} />
             <IconButton icon='chevron_left' onClick={this.gotoPrevPage} />
             <span className={controlText}>Page</span>
-            <input type="number" min={1} max={this.props.total} className={pagerInputTheme} onKeyPress={this.handleKeyPress} value={this.state.inputValue}
-                onFocus={this.handleFocus} onBlur={this.handleBlur} onChange={this.handleChange} />
+            <input type="number" min={1} max={this.props.total} className={pagerInputTheme}
+                value={this.props.current}
+                onFocus={this.handleFocus} onChange={this.handleCurrentPageChange} />
             <span className={controlText}>/ {this.props.total}</span>
             <IconButton icon='chevron_right' onClick={this.gotoNextPage} />
             <IconButton icon='last_page' onClick={this.gotoLastPage} />
@@ -117,13 +73,9 @@ class Pager extends React.Component {
 
 Pager.propTypes = {
     total: PropTypes.number.isRequired,
-    initial: PropTypes.number,
+    current: PropTypes.number.isRequired,
     itemsPerPage: PropTypes.number.isRequired,
     onChange: PropTypes.func,
-}
-
-Pager.defaultProps = {
-    initial: 1,
 }
 
 export default Pager
