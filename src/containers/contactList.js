@@ -13,8 +13,7 @@ import {
     requestContacts,
     abortFetchContacts,
     clearContactList as clearContactListAction,
-    setContactsFilterText,
-    setContactsCurrentPage,
+    setContactsProps,
     deleteContact,
     confirmDeleteContact, cancelDeleteContact
 } from '../actions'
@@ -39,12 +38,11 @@ class ContactList extends React.Component {
     }
 
     handleFilter = value => {
-        this.props.setContactsFilterText(value)
+        this.props.setContactsProps(value)
     }
 
     handleCurrentPageChange = newPage => {
-        this.props.setContactsCurrentPage(newPage)
-        this.handleReloadContacts({ currentPage: newPage })
+        this.props.setContactsProps(undefined, newPage)
     }
 
     deleteSingle = () => {
@@ -121,8 +119,8 @@ const mapDispatchToProps = dispatch => ({
     reloadContacts: (filterText, skip, take) => dispatch(requestContacts(filterText, skip, take)),
     clearContactList: () => dispatch(clearContactListAction()),
     abortFetchContacts: () => dispatch(abortFetchContacts()),
-    setContactsFilterText: (value) => dispatch(setContactsFilterText(value)),
-    setContactsCurrentPage: page => dispatch(setContactsCurrentPage(page)),
+    setContactsProps: (filterText, currentPage, totalPages) =>
+        dispatch(setContactsProps(filterText, currentPage, totalPages)),
     confirmDelete: (id) => dispatch(confirmDeleteContact(id)),
     cancelDelete: () => dispatch(cancelDeleteContact()),
     deleteSingle: (id) => dispatch(deleteContact(id))

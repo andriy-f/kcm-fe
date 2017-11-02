@@ -12,8 +12,7 @@ export const FETCH_CONTACTS_DONE = 'FETCH_CONTACTS_DONE'
 export const FETCH_CONTACTS_ABORT = 'FETCH_CONTACTS_ABORT'
 export const FETCH_CONTACTS_ERROR = 'FETCH_CONTACTS_ERROR'
 export const CLEAR_CONTACT_LIST = 'CLEAR_CONTACT_LIST'
-export const SET_CONTACTS_FILTER_TEXT = 'SET_CONTACTS_FILTER_TEXT'
-export const SET_CONTACTS_CURRENT_PAGE = 'SET_CONTACTS_CURRENT_PAGE'
+export const SET_CONTACTS_PROPS = 'SET_CONTACTS_PROPS'
 
 export const REQUEST_CONTACT = 'REQUEST_CONTACT'
 export const RECEIVE_CONTACT = 'RECEIVE_CONTACT'
@@ -72,15 +71,18 @@ export const receiveContactsError = (payload) => ({
     error: true
 })
 
-export const setContactsFilterText = filterText => ({
-    type: SET_CONTACTS_FILTER_TEXT,
-    payload: { filterText }
-})
+export const setContactsProps = (filterText, currentPage, itemsPerPage) => {
+    const payload = {}
+    // TODO make functional
+    typeof filterText !== 'undefined' && (payload.filterText = filterText)
+    typeof currentPage !== 'undefined' && (payload.currentPage = currentPage)
+    typeof itemsPerPage !== 'undefined' && (payload.itemsPerPage = itemsPerPage)
 
-export const setContactsCurrentPage = currentPage => ({
-    type: SET_CONTACTS_CURRENT_PAGE,
-    payload: { currentPage }
-})
+    return {
+        type: SET_CONTACTS_PROPS,
+        payload
+    }
+}
 
 export const requestContact = (id) => ({
     type: REQUEST_CONTACT,

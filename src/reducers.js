@@ -7,7 +7,7 @@ import { reducer as formReducer } from 'redux-form'
 import { switchcase } from './utils'
 import {
     FETCH_CONTACTS, FETCH_CONTACTS_DONE, FETCH_CONTACTS_ERROR, CLEAR_CONTACT_LIST, 
-    SET_CONTACTS_FILTER_TEXT, SET_CONTACTS_CURRENT_PAGE,
+    SET_CONTACTS_PROPS,
     RECEIVE_CONTACT, RECEIVE_CONTACT_ERROR,
     SAVE_CONTACT_DONE, SAVE_CONTACT_ERROR, CLEAR_CONTACT,
     ADD_CONTACT_DONE, ADD_CONTACT_ERROR, CLEAR_ADD_CONTACT_PAGE,
@@ -46,8 +46,7 @@ function contactsPage(state = defaultContactsPageState, action) {
             return { ...state, items: [], error: payload, isFetching: false }
         case CLEAR_CONTACT_LIST:
             return defaultContactsPageState
-        case SET_CONTACTS_FILTER_TEXT:
-        case SET_CONTACTS_CURRENT_PAGE:
+        case SET_CONTACTS_PROPS:
         case DELETE_CONTACT_DONE:
         case DELETE_CONTACT_ERROR:
         case CONFIRM_DELETE_CONTACT:
