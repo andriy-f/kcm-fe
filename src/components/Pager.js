@@ -92,7 +92,7 @@ class Pager extends React.Component {
             <IconButton icon='first_page' onClick={this.gotoFirstPage} />
             <IconButton icon='chevron_left' onClick={this.gotoPrevPage} />
             <span className={controlText}>Page</span>
-            <input type="text" label="Filter" className={pagerInputTheme} onKeyPress={this.handleKeyPress} value={this.state.inputValue}
+            <input type="number" label="Filter" min={1} max={this.props.total} className={pagerInputTheme} onKeyPress={this.handleKeyPress} value={this.state.inputValue}
                 onFocus={this.handleFocus} onBlur={this.handleBlur} onChange={this.handleChange} />
             <span className={controlText}>/ {this.props.total}</span>
             <IconButton icon='chevron_right' onClick={this.gotoNextPage} />
