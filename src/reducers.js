@@ -6,7 +6,8 @@ import { reducer as formReducer } from 'redux-form'
 
 import { switchcase } from './utils'
 import {
-    FETCH_CONTACTS, FETCH_CONTACTS_DONE, FETCH_CONTACTS_ERROR, CLEAR_CONTACT_LIST, SET_CONTACTS_FILTER_TEXT,
+    FETCH_CONTACTS, FETCH_CONTACTS_DONE, FETCH_CONTACTS_ERROR, CLEAR_CONTACT_LIST, 
+    SET_CONTACTS_PROPS,
     RECEIVE_CONTACT, RECEIVE_CONTACT_ERROR,
     SAVE_CONTACT_DONE, SAVE_CONTACT_ERROR, CLEAR_CONTACT,
     ADD_CONTACT_DONE, ADD_CONTACT_ERROR, CLEAR_ADD_CONTACT_PAGE,
@@ -17,7 +18,14 @@ import {
     TOGGLE_SETTING, SET_SETTING
 } from './actions'
 
-const defaultContactsPageState = { items: [], filterText: '', isFetching: false }
+const defaultContactsPageState = {
+    items: [], // filtered "paged" items. Received from backend
+    totalItems: undefined, // total number of items after filtering, but not taking into account paging, (received from backend)
+    filterText: '', // from page
+    currentPage: 1, totalPages: 1, itemsPerPage: 10, // from page
+    isFetching: false
+}
+
 function contactsPage(state = defaultContactsPageState, action) {
     const payload = action.payload
 
@@ -25,19 +33,27 @@ function contactsPage(state = defaultContactsPageState, action) {
         case FETCH_CONTACTS:
             return { ...state, isFetching: true }
         case FETCH_CONTACTS_DONE:
-            return { ...state, items: payload, error: null, isFetching: false }
+            const totalPages = payload.count > 0 ? Math.ceil(payload.count / state.itemsPerPage): 1
+            return {
+                ...state,
+                items: payload.items,
+                totalItems: payload.count,
+                totalPages,
+                error: null,
+                isFetching: false
+            }
         case FETCH_CONTACTS_ERROR:
             return { ...state, items: [], error: payload, isFetching: false }
         case CLEAR_CONTACT_LIST:
             return defaultContactsPageState
-        case SET_CONTACTS_FILTER_TEXT:
+        case SET_CONTACTS_PROPS:
         case DELETE_CONTACT_DONE:
         case DELETE_CONTACT_ERROR:
         case CONFIRM_DELETE_CONTACT:
         case CANCEL_DELETE_CONTACT:
             return { ...state, ...payload }
         default:
-            return state;
+            return state
     }
 }
 

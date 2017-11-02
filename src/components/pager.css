@@ -1,0 +1,9 @@
+.input {
+    margin: 0 1em;
+    padding: 0.1em 1em;
+    width: 6em;
+}
+
+.controlText {
+    vertical-align: middle;
+}

@@ -33,3 +33,13 @@
 .progressLinear {
   top: 4rem;
 }
+
+.contactsFilter {
+  display: inline-block;
+}
+
+.contactsPager {
+  margin: 1em 0;
+  line-height: 1em;
+  float: right;
+}

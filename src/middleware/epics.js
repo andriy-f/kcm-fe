@@ -9,6 +9,7 @@ import { commonAjaxRequestSettings, commonAjaxODataRequestSettings, json } from 
 import { getContactsFetchUrl } from '../services/contactService'
 import {
     FETCH_CONTACTS, FETCH_CONTACTS_ABORT, requestContacts, receiveContacts, receiveContactsError,
+    SET_CONTACTS_PROPS,
     REQUEST_CONTACT, receiveContact, receiveContactError,
     SAVE_CONTACT_REQUEST, saveContactDone, saveContactError,
     ADD_CONTACT, addContactDone, addContactError,
@@ -16,7 +17,6 @@ import {
     LOGIN, logInDone, logInError,
     LOGOFF, logOffDone, logOffError
 } from '../actions'
-
 
 const requestContactsEpic = action$ =>
     action$.ofType(FETCH_CONTACTS)
@@ -26,11 +26,25 @@ const requestContactsEpic = action$ =>
                 url: BACKEND_URL + '/odata/Contacts' + getContactsFetchUrl(
                     action.payload.filterText,
                     action.payload.skip,
-                    action.payload.take)
+                    action.payload.take,
+                    true)
             })
-                .map(response => receiveContacts(response.response.value))
+                .map(response => {
+                    const resp = response.response
+                    return receiveContacts({ items: resp.value, count: resp['@odata.count'] })
+                })
                 .takeUntil(action$.ofType(FETCH_CONTACTS_ABORT))
                 .catch(error => Observable.of(receiveContactsError(error)))
+        )
+
+const setContactsPropsEpic = (action$, store) =>
+    action$.ofType(SET_CONTACTS_PROPS)
+        .mergeMap(action => {
+            const { filterText, currentPage, itemsPerPage } = store.getState().contactsPage
+            const skip = itemsPerPage * (currentPage - 1)
+            const take = itemsPerPage
+            return Observable.of(requestContacts(filterText, skip, take))
+        }
         )
 
 const requestContactEpic = action$ =>
@@ -112,6 +126,7 @@ const requestLogoffEpic = action$ =>
 
 const rootEpic = combineEpics(
     requestContactsEpic,
+    setContactsPropsEpic,
     requestContactEpic,
     saveContactEpic,
     addContactEpic,
