@@ -41,8 +41,8 @@ class ContactList extends React.Component {
         this.props.setContactsProps(value)
     }
 
-    handleCurrentPageChange = newPage => {
-        this.props.setContactsProps(undefined, newPage)
+    handlePagerChange = (newPage, itemsPerPage)  => {
+        this.props.setContactsProps(undefined, newPage, itemsPerPage)
     }
 
     deleteSingle = () => {
@@ -63,12 +63,15 @@ class ContactList extends React.Component {
     ]
 
     render() {
-        const { filterText, items, currentPage, totalPages } = this.props
+        const { filterText, items, currentPage, totalPages, itemsPerPage } = this.props
         return (
             <div>
                 <div>{this.props.errorMessage}</div>
                 <Input type="text" label="Filter" className={contactsFilter} value={filterText} onChange={this.handleFilter} />
-                {!!totalPages && <Pager total={totalPages} className={contactsPager} initial={currentPage} onChange={this.handleCurrentPageChange} />}
+                {!!totalPages
+                    && <Pager className={contactsPager} 
+                    total={totalPages} initial={currentPage} itemsPerPage={itemsPerPage}
+                    onChange={this.handlePagerChange} />}
                 <Table selectable={false}>
                     <TableHead>
                         <TableCell>First Name</TableCell>

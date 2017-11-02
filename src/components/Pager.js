@@ -43,6 +43,16 @@ class Pager extends React.Component {
         this.updateCurrent(intVal)
     }
 
+    handleItemsPerPageChange = e => {
+        const textValue = e.target.value
+        if(!textValue) {
+            return
+        }
+
+        const intVal = parseInt(textValue, 10)
+        this.props.onChange && this.props.onChange(undefined, intVal)
+    }
+
     gotoFirstPage = e => {
         this.setState((prevState, props) => {
             const nextPageValue = 1
@@ -92,11 +102,15 @@ class Pager extends React.Component {
             <IconButton icon='first_page' onClick={this.gotoFirstPage} />
             <IconButton icon='chevron_left' onClick={this.gotoPrevPage} />
             <span className={controlText}>Page</span>
-            <input type="number" label="Filter" min={1} max={this.props.total} className={pagerInputTheme} onKeyPress={this.handleKeyPress} value={this.state.inputValue}
+            <input type="number" min={1} max={this.props.total} className={pagerInputTheme} onKeyPress={this.handleKeyPress} value={this.state.inputValue}
                 onFocus={this.handleFocus} onBlur={this.handleBlur} onChange={this.handleChange} />
             <span className={controlText}>/ {this.props.total}</span>
             <IconButton icon='chevron_right' onClick={this.gotoNextPage} />
             <IconButton icon='last_page' onClick={this.gotoLastPage} />
+
+            <span className={controlText}>Items per page</span>
+            <input type="number" min={1} className={pagerInputTheme} value={this.props.itemsPerPage}
+                onFocus={this.handleFocus} onChange={this.handleItemsPerPageChange} />
         </span>
     }
 }
@@ -104,6 +118,7 @@ class Pager extends React.Component {
 Pager.propTypes = {
     total: PropTypes.number.isRequired,
     initial: PropTypes.number,
+    itemsPerPage: PropTypes.number.isRequired,
     onChange: PropTypes.func,
 }
 
