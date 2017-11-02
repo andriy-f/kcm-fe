@@ -39,6 +39,7 @@
 }
 
 .contactsPager {
-  padding: 1em;
+  margin: 1em 0;
+  line-height: 1em;
   float: right;
 }
