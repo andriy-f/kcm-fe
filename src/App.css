@@ -11,7 +11,8 @@
 }
 
 .mainContent {
-  margin: 0rem 1.8rem;
+  margin: 0rem 1.6rem;
+  min-width: 270px;
 }
 
 .kFormContainer {
@@ -34,12 +35,7 @@
   top: 4rem;
 }
 
-.contactsFilter {
-  display: inline-block;
-}
-
 .contactsPager {
-  margin: 1em 0;
+  margin: 1.2em 0;
   line-height: 1em;
-  float: right;
 }

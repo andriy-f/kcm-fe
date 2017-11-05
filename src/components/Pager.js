@@ -1,11 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Input } from 'react-toolbox/lib/input'
 import { IconButton } from 'react-toolbox/lib/button'
 
-import { input as pagerInputTheme, controlText } from './pager.css'
+import { input, controlText } from './pager.css'
 
 const handlerForSelectAll = e => {
     e.target.select()
+}
+
+const getIntFromRTElement = value => {
+    if (!value) {
+        return
+    }
+
+    return parseInt(value, 10)
 }
 
 const getIntFromElement = e => {
@@ -24,8 +33,8 @@ class Pager extends React.Component {
             && this.props.onChange && this.props.onChange(newVal)
     }
 
-    handleCurrentPageChange = e => {
-        const intVal = getIntFromElement(e)
+    handleCurrentPageChange = value => {
+        const intVal = getIntFromElement(value)
         intVal && this.tryUpdateCurrentPage(intVal)
     }
 
@@ -46,17 +55,17 @@ class Pager extends React.Component {
     }
 
     render() {
-        return <span className={this.props.className} >
+        return <div className={this.props.className} >
             <IconButton icon='first_page' onClick={this.gotoFirstPage} />
             <IconButton icon='chevron_left' onClick={this.gotoPrevPage} />
-            <span className={controlText}>Page</span>
-            <input type="number" min={1} max={this.props.total} className={pagerInputTheme}
+            <input type="number" min={1} max={this.props.total} className={input}
+                /* label={`page of ${this.props.total}`} */
                 value={this.props.current}
                 onFocus={handlerForSelectAll} onChange={this.handleCurrentPageChange} />
-            <span className={controlText}>/ {this.props.total}</span>
+            {<span className={controlText}>/ {this.props.total}</span>}
             <IconButton icon='chevron_right' onClick={this.gotoNextPage} />
             <IconButton icon='last_page' onClick={this.gotoLastPage} />
-        </span>
+        </div>
     }
 }
 
@@ -73,17 +82,16 @@ export default Pager
 
 class ItemsPerPage extends React.Component {
 
-    handleItemsPerPageChange = e => {
-        const intVal = getIntFromElement(e)
-        intVal && intVal > 0
+    handleItemsPerPageChange = value => {
+        const intVal = getIntFromRTElement(value)
+        typeof intVal !== 'undefined' && intVal >= 1
             && intVal !== this.props.itemsPerPage
             && this.props.onChange && this.props.onChange(intVal)
     }
 
     render() {
         return <div>
-            <span className={controlText}>Items per page</span>
-            <input type="number" min={1} className={pagerInputTheme} value={this.props.value}
+            <Input type="number" min={1} label="Items per page" value={this.props.value}
                 onFocus={handlerForSelectAll} onChange={this.handleItemsPerPageChange} />
         </div>
     }
