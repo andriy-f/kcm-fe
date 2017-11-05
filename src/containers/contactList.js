@@ -1,11 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Table, TableHead, TableRow, TableCell } from 'react-toolbox/lib/table'
 import { IconButton } from 'react-toolbox/lib/button'
-import Input from 'react-toolbox/lib/input'
+import { Input } from 'react-toolbox/lib/input'
 import Dialog from 'react-toolbox/lib/dialog'
+import { Grid, Row, Col } from 'react-flexbox-grid'
 
-import Pager from '../components/Pager'
+import Pager, { ItemsPerPage } from '../components/Pager'
 import { getUserFriendlyErrorMessage } from '../utils'
 import { addItemButtonContainer, contactsFilter, contactsPager } from '../App.css'
 
@@ -41,8 +43,12 @@ class ContactList extends React.Component {
         this.props.setContactsProps(value)
     }
 
-    handlePagerChange = (newPage, itemsPerPage) => {
-        this.props.setContactsProps(undefined, newPage, itemsPerPage)
+    handlePageChange = (newPage) => {
+        this.props.setContactsProps(undefined, newPage)
+    }
+
+    handleItemsPerPageChange = (itemsPerPage) => {
+        this.props.setContactsProps(undefined, undefined, itemsPerPage)
     }
 
     deleteSingle = () => {
@@ -67,10 +73,23 @@ class ContactList extends React.Component {
         return (
             <div>
                 <div>{this.props.errorMessage}</div>
-                <Input type="text" label="Filter" className={contactsFilter} value={filterText} onChange={this.handleFilter} />
-                <Pager className={contactsPager}
-                    total={totalPages} current={currentPage} itemsPerPage={itemsPerPage}
-                    onChange={this.handlePagerChange} />
+                <Grid fluid>
+                    <Row>
+                        <Col xs={12} sm={12} md={5} lg={6}>
+                            <Input type="text" label="Filter" className={contactsFilter} value={filterText}
+                                onChange={this.handleFilter} />
+                        </Col>
+                        <Col xs={12} sm={7} md={5} lg={4}>
+                            <Pager className={contactsPager}
+                                total={totalPages} current={currentPage} itemsPerPage={itemsPerPage}
+                                onChange={this.handlePageChange} />
+                        </Col>
+                        <Col xs={12} sm={5} md={2} lg={2}>
+                            <ItemsPerPage value={itemsPerPage} onChange={this.handleItemsPerPageChange} />
+                        </Col>
+                    </Row>
+                </Grid>
+
                 <Table selectable={false}>
                     <TableHead>
                         <TableCell>First Name</TableCell>
@@ -108,6 +127,11 @@ class ContactList extends React.Component {
     }
 }
 
+ContactList.propTypes = {
+    abortFetchContacts: PropTypes.func.isRequired,
+    clearContactList: PropTypes.func.isRequired,
+}
+
 const mapStateToProps = (state) => {
     const { contactsPage } = state
 
@@ -129,4 +153,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
-
