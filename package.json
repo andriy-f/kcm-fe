@@ -64,7 +64,8 @@
   },
   "scripts": {
     "start:prod:universal": "node server/index.js",
-    "watch": "node scripts/watch.js",
+    "dev": "node scripts/watch.js",
+    "watch": "yarn dev",
     "build": "npm run build:client && npm run build:server",
     "build:client": "node scripts/build.js",
     "build:server": "node scripts/buildServer.js",
