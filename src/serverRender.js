@@ -5,7 +5,6 @@ import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router-dom'
 
 import { apolloClient } from '../apollo'
-import { BACKEND_URL } from '../config'
 import App from './components/App'
 import { default as configureStore } from './configureStore'
 
