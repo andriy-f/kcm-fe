@@ -1,19 +1,14 @@
-import ApolloClient from 'apollo-boost'
 import React, { Component } from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { persistStore } from 'redux-persist'
 
-import { BACKEND_URL } from '../config'
+import { apolloClient } from '../apollo'
 import configureStore from '../configureStore'
 import App from '../components/App'
 
 const store = configureStore()
-
-const apolloClient = new ApolloClient({
-  uri: BACKEND_URL + '/graphql'
-})
 
 persistStore(store);
 
