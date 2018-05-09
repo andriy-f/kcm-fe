@@ -11,7 +11,7 @@ import Dialog from 'react-toolbox/lib/dialog'
 
 // import Pager, { ItemsPerPage } from '../components/Pager'
 import { getUserFriendlyErrorMessage } from '../utils'
-import { addItemButtonContainer, contactsFilter, contactsPager } from '../App.css'
+import { addItemButtonContainer } from '../App.css'
 
 import {
   requestContacts,
