@@ -4,13 +4,17 @@ import { createHttpLink } from 'apollo-link-http'
 
 import { BACKEND_URL } from './config'
 
-const link = createHttpLink({
-  uri: BACKEND_URL + '/graphql',
-  credentials: 'include',
-})
+export const createApolloClient = (fetch) => {
+  const link = createHttpLink({
+    uri: BACKEND_URL + '/graphql',
+    credentials: 'include',
+    fetch,
+  })
 
-const cache = new InMemoryCache()
-export const apolloClient = new ApolloClient({
-  cache,
-  link,
-})
+  const cache = new InMemoryCache()
+
+  return new ApolloClient({
+    cache,
+    link,
+  })
+}
