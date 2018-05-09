@@ -5,12 +5,12 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { persistStore } from 'redux-persist'
 
 import { apolloClient } from '../apollo'
-import configureStore from '../configureStore'
 import App from '../components/App'
+import configureStore from '../configureStore'
 
 const store = configureStore()
 
-persistStore(store);
+persistStore(store)
 
 export default class Root extends Component {
   render() {
