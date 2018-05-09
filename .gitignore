@@ -24,3 +24,5 @@ yarn-error.log*
 
 # Vim
 *.swp
+/newrelic.js
+/newrelic_agent.log
