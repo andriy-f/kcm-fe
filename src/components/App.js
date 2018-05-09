@@ -12,6 +12,7 @@ const logger = debug(appName + ':App.js')
 logger('Render type' + JSON.stringify({
   client: process.env.__CRNDR__,
   server: process.env.__SRNDR__,
+  ctest: process.env.C_RNDR,
 }))
 
 class App extends Component {
