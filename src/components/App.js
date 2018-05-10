@@ -3,17 +3,13 @@ import React, { Component } from 'react'
 
 import { app, staticErrorMessage } from '../App.css'
 import { BACKEND_URL } from '../config'
-import { appName } from '../consts'
+import { appName, isSSR } from '../consts'
 import AppLayout from '../containers/AppLayout'
 import Routes from '../Routes'
 
 const logger = debug(appName + ':App.js')
 
-logger('Render type' + JSON.stringify({
-  client: process.env.__CRNDR__,
-  server: process.env.__SRNDR__,
-  ctest: process.env.C_RNDR,
-}))
+logger('isSSR', isSSR)
 
 class App extends Component {
   render() {

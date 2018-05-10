@@ -57,9 +57,3 @@ export const getUserFriendlyErrorMessage = (error) => {
 
     return errorMessage
 }
-
-/** Is Server Side Render */
-export const isSSR = !(
-  (typeof window !== 'undefined' &&
-  window.document && window.document.createElement)
-)
