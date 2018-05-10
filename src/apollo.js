@@ -3,6 +3,7 @@ import ApolloClient from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
 
 import { BACKEND_URL } from './config'
+import { isSSR } from './consts'
 
 export const createApolloClient = (fetch) => {
   const link = createHttpLink({
@@ -18,3 +19,6 @@ export const createApolloClient = (fetch) => {
     link,
   })
 }
+
+/** Use same apolloClient if not SSR */
+export const apolloClient = isSSR ? null : createApolloClient()
