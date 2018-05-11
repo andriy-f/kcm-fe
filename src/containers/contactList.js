@@ -8,6 +8,7 @@ import { IconButton } from 'react-toolbox/lib/button'
 // import { Input } from 'react-toolbox/lib/input'
 import Dialog from 'react-toolbox/lib/dialog'
 // import { Grid, Row, Col } from 'react-flexbox-grid'
+import { Link } from 'react-router-dom'
 
 // import Pager, { ItemsPerPage } from '../components/Pager'
 import { getUserFriendlyErrorMessage } from '../utils'
@@ -47,18 +48,22 @@ const GQLContactList = ({ confirmDeleteSingle }) => (
             <TableCell>Email</TableCell>
             <TableCell>Phone Number</TableCell>
           </TableHead>
-          {data.contacts && data.contacts.map(({ _id, firstName, lastName, email, phoneNumber }) => (
-            <TableRow key={_id}>
-              <TableCell>{firstName || ''}</TableCell>
-              <TableCell>{lastName || ''}</TableCell>
-              <TableCell>{email || ''}</TableCell>
-              <TableCell>{phoneNumber || ''}</TableCell>
-              <TableCell>
-                <RTIconButtonLink icon="edit" to={"/contacts/" + _id}></RTIconButtonLink>
-                <IconButton icon="delete" data-id={_id} onClick={confirmDeleteSingle} />
-              </TableCell>
-            </TableRow>
-          ))}
+          {data.contacts && data.contacts.map(({ _id, firstName, lastName, email, phoneNumber }) => {
+            const itemEditPath = "/contacts/" + _id
+            const ItemLink = ({ children }) => <Link to={itemEditPath}>{children}</Link>
+            return (
+              <TableRow key={_id}>
+                <TableCell><ItemLink>{firstName || ''}</ItemLink></TableCell>
+                <TableCell>{lastName || ''}</TableCell>
+                <TableCell>{email || ''}</TableCell>
+                <TableCell>{phoneNumber || ''}</TableCell>
+                <TableCell>
+                  <RTIconButtonLink icon="edit" to={itemEditPath}></RTIconButtonLink>
+                  <IconButton icon="delete" data-id={_id} onClick={confirmDeleteSingle} />
+                </TableCell>
+              </TableRow>
+            )
+          })}
         </Table>
       )
     }}
