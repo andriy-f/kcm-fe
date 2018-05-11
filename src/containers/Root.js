@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { persistStore } from 'redux-persist'
 
-import { apolloClient } from '../apollo'
+import { clientSideApolloClient } from '../apollo'
 import App from '../components/App'
 import configureStore from '../configureStore'
 
@@ -15,7 +15,7 @@ export default class Root extends Component {
   render() {
     return (
       <Provider store={store}>
-        <ApolloProvider client={apolloClient}>
+        <ApolloProvider client={clientSideApolloClient}>
           <Router>
             <App />
           </Router>

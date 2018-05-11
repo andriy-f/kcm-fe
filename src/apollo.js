@@ -21,4 +21,4 @@ export const createApolloClient = (fetch) => {
 }
 
 /** Use same apolloClient if not SSR */
-export const apolloClient = isSSR ? null : createApolloClient()
+export const clientSideApolloClient = isSSR ? null : createApolloClient()
