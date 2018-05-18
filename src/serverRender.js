@@ -5,7 +5,7 @@ import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router-dom'
 
-import { createApolloClient } from './apollo'
+import { createApolloClient } from './graphql/apollo'
 import App from './components/App'
 import { default as configureStore } from './configureStore'
 

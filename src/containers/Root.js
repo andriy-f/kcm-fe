@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { persistStore } from 'redux-persist'
 
-import { clientSideApolloClient } from '../apollo'
+import { clientSideApolloClient } from '../graphql/apollo'
 import App from '../components/App'
 import configureStore from '../configureStore'
 

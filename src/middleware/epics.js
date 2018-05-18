@@ -21,7 +21,7 @@ import {
   LOGIN, logInDone, logInError,
   LOGOFF, logOffDone, logOffError
 } from '../actions'
-import { clientSideApolloClient, createApolloClient } from '../apollo'
+import { clientSideApolloClient, createApolloClient } from '../graphql/apollo'
 import { findContactQry } from '../graphql/queries'
 
 const logger = debug(appName + ':epics.js')
