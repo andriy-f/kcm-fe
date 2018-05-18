@@ -10,7 +10,6 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable'
 import { BACKEND_URL } from '../config'
 import { appName } from '../consts'
 import { commonAjaxRequestSettings, commonAjaxODataRequestSettings, json } from '../utils'
-import { getContactsFetchUrl } from '../services/contactService'
 import {
   FETCH_CONTACTS, FETCH_CONTACTS_ABORT, requestContacts, receiveContacts, receiveContactsError,
   SET_CONTACTS_PROPS,
@@ -22,28 +21,39 @@ import {
   LOGOFF, logOffDone, logOffError
 } from '../actions'
 import { clientSideApolloClient, createApolloClient } from '../graphql/apollo'
-import { findContactQry } from '../graphql/queries'
+import { findContactsWithCountQry, findContactQry } from '../graphql/queries'
 
 const logger = debug(appName + ':epics.js')
 const apolloClient = clientSideApolloClient || createApolloClient()
 
 const requestContactsEpic = action$ =>
   action$.ofType(FETCH_CONTACTS)
-    .mergeMap(action =>
-      ajax({
-        ...commonAjaxODataRequestSettings,
-        url: BACKEND_URL + '/odata/Contacts' + getContactsFetchUrl(
-          action.payload.filterText,
-          action.payload.skip,
-          action.payload.take,
-          true)
-      })
-        .map(response => {
-          const resp = response.response
-          return receiveContacts({ items: resp.value, count: resp['@odata.count'] })
+    .switchMap((action) => {
+      const { filterText, skip, take } = action.payload
+      return from(apolloClient.query({
+        query: findContactsWithCountQry,
+        variables: {
+          skip, limit: take,
+          // filter: { firstName: filterText }
+        }
+      }))
+        .map((res) => {
+          logger('requestContacts epic res', res)
+          const { data: { contacts, contactCount } } = res
+          return receiveContacts({ items: contacts, count: contactCount })
         })
         .takeUntil(action$.ofType(FETCH_CONTACTS_ABORT))
         .catch(error => Observable.of(receiveContactsError(error)))
+    }
+      // .mergeMap(action =>
+      //   ajax({
+      //     ...commonAjaxODataRequestSettings,
+      //     url: BACKEND_URL + '/odata/Contacts' + getContactsFetchUrl(
+      //       action.payload.filterText,
+      //       action.payload.skip,
+      //       action.payload.take,
+      //       true)
+      //   })
     )
 
 const setContactsPropsEpic = (action$, store) =>
