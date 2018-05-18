@@ -67,7 +67,7 @@ const setContactsPropsEpic = (action$, store) =>
 
 const requestContactEpic = action$ =>
   action$.ofType(REQUEST_CONTACT)
-    .mergeMap(action =>
+    .switchMap(action =>
       from(apolloClient.query({ query: findContactQry, variables: { id: action.id } }))
         .map((res) => {
           logger('requestContactEpic res', res)
