@@ -29,12 +29,12 @@ const apolloClient = clientSideApolloClient || createApolloClient()
 const requestContactsEpic = action$ =>
   action$.ofType(FETCH_CONTACTS)
     .switchMap((action) => {
-      const { filterText, skip, take } = action.payload
+      const { skip, take } = action.payload
       return from(apolloClient.query({
         query: findContactsWithCountQry,
         variables: {
           skip, limit: take,
-          // filter: { firstName: filterText }
+          // filterText, // TODO
         }
       }))
         .map((res) => {
@@ -44,17 +44,7 @@ const requestContactsEpic = action$ =>
         })
         .takeUntil(action$.ofType(FETCH_CONTACTS_ABORT))
         .catch(error => Observable.of(receiveContactsError(error)))
-    }
-      // .mergeMap(action =>
-      //   ajax({
-      //     ...commonAjaxODataRequestSettings,
-      //     url: BACKEND_URL + '/odata/Contacts' + getContactsFetchUrl(
-      //       action.payload.filterText,
-      //       action.payload.skip,
-      //       action.payload.take,
-      //       true)
-      //   })
-    )
+    })
 
 const setContactsPropsEpic = (action$, store) =>
   action$.ofType(SET_CONTACTS_PROPS)
