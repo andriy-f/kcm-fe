@@ -21,23 +21,11 @@ import {
   LOGIN, logInDone, logInError,
   LOGOFF, logOffDone, logOffError
 } from '../actions'
-import gql from 'graphql-tag'
 import { clientSideApolloClient, createApolloClient } from '../apollo'
+import { findContactQry } from '../graphql/queries'
 
 const logger = debug(appName + ':epics.js')
 const apolloClient = clientSideApolloClient || createApolloClient()
-
-const findContactQry = gql`
-  query FindOneContact ($id: String!) {
-    contact (_id: $id) {
-      _id
-      firstName
-      lastName
-      email
-      phoneNumber
-    }
-  }
-`
 
 const requestContactsEpic = action$ =>
   action$.ofType(FETCH_CONTACTS)
