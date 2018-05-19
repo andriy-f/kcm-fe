@@ -66,7 +66,6 @@ const requestContactEpic = action$ =>
     .switchMap(action =>
       from(apolloClient.query({ query: findContactQry, variables: { id: action.id } }))
         .map((res) => {
-          logger('requestContactEpic res', res)
           const { data: { contact } } = res
           return receiveContact(contact)
         })
@@ -91,9 +90,21 @@ const addContactEpic = action$ =>
       const { firstName, lastName, phoneNumber, email } = action.payload
       return from(apolloClient.mutate({
         mutation: createContactQry,
-        variables: { contact: { _id: action.id, firstName, lastName, email, phoneNumber } }
+        variables: { contact: { _id: action.id, firstName, lastName, email, phoneNumber } },
+        update: (cache, { data }) => {
+          // TODO: how to update cache?
+          // const { createContact } = data
+          // const { contacts } = cache.readQuery({
+          //   query: findContactsWithCountQry,
+          //   variables: { filterText: '', skip: 0, limit: 9 }
+          // })
+          // cache.writeQuery({
+          //   query: findContactsWithCountQry,
+          //   data: { contacts: contacts.concat([createContact]) }
+          // })
+        },
       }))
-        .map(response => addContactDone(response.response))
+        .map(response => addContactDone(response))
         .catch(error => Observable.of(addContactError(error)))
     })
 
