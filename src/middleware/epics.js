@@ -23,7 +23,7 @@ import {
 import { clientSideApolloClient, createApolloClient } from '../graphql/apollo'
 import {
   findContactsWithCountQry, findContactQry,
-  createContactQry, updateContactQry
+  createContactQry, updateContactQry, deleteContactQry
 } from '../graphql/queries'
 
 const logger = debug(appName + ':epics.js')
@@ -96,12 +96,12 @@ const addContactEpic = action$ =>
 
 const deleteContactEpic = (action$, store) =>
   action$.ofType(DELETE_CONTACT)
-    .mergeMap(action =>
-      ajax({
-        ...commonAjaxRequestSettings,
-        url: BACKEND_URL + `/odata/Contacts('${action.payload.id}')`,
-        method: 'DELETE',
-      })
+    .mergeMap(action => {
+      const { id } = action.payload
+      return from(apolloClient.mutate({
+        mutation: deleteContactQry,
+        variables: { id }
+      }))
         .mergeMap(response => {
           const filterText = store.getState().contactsPage.filterText
           return Observable.concat(
@@ -109,7 +109,7 @@ const deleteContactEpic = (action$, store) =>
             Observable.of(requestContacts(filterText)))
         })
         .catch(error => Observable.of(deleteContactError(error)))
-    )
+    })
 
 const requestAuthenticateEpic = action$ =>
   action$.ofType(LOGIN)

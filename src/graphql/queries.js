@@ -48,3 +48,11 @@ export const updateContactQry = gql`
     }
   }
 `
+
+export const deleteContactQry = gql`
+  mutation DeleteContact ($id: String!) {
+    deleteContact (_id: $id) {
+      _id
+    }
+  }
+`
