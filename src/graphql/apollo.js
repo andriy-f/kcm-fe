@@ -2,14 +2,15 @@ import * as debug from 'debug'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import ApolloClient from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
+import { ApolloLink } from 'apollo-link'
 import { onError } from 'apollo-link-error'
 
 import { BACKEND_URL } from '../config'
 import { isSSR, appName } from '../consts'
-import { ApolloLink } from 'apollo-link';
+import { urlJoin } from '../utils'
 
 const logger = debug(appName + ':apollo.js')
-const graphqlURL = BACKEND_URL + '/graphql'
+const graphqlURL = urlJoin(BACKEND_URL, '/graphql')
 
 export const createApolloClient = (fetch) => {
   const httpLink = createHttpLink({

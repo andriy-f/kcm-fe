@@ -1,3 +1,5 @@
+import URI from 'urijs'
+
 export const isDev = process.env.NODE_ENV === 'development'
 
 export const commonAjaxRequestSettings = {
@@ -49,4 +51,13 @@ export const getUserFriendlyErrorMessage = (error) => {
   errorMessage = errorMessage ? errorMessage + ' ' + errorResponseMessage : errorResponseMessage
 
   return errorMessage
+}
+
+export const urlJoin = (baseUrl, url) => {
+  var theUrl = new URI(url)
+  if (theUrl.is('relative')) {
+    theUrl = theUrl.absoluteTo(baseUrl);
+  }
+
+  return theUrl.toString()
 }
