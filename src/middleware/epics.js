@@ -92,16 +92,7 @@ const addContactEpic = action$ =>
         mutation: createContactQry,
         variables: { contact: { _id: action.id, firstName, lastName, email, phoneNumber } },
         update: (cache, { data }) => {
-          // TODO: how to update cache?
-          // const { createContact } = data
-          // const { contacts } = cache.readQuery({
-          //   query: findContactsWithCountQry,
-          //   variables: { filterText: '', skip: 0, limit: 9 }
-          // })
-          // cache.writeQuery({
-          //   query: findContactsWithCountQry,
-          //   data: { contacts: contacts.concat([createContact]) }
-          // })
+          apolloClient.resetStore()
         },
       }))
         .map(response => addContactDone(response))
