@@ -24,3 +24,15 @@ export const findContactQry = gql`
     }
   }
 `
+
+export const createContactQry = gql`
+  mutation CreateContact ($contact: ContactInput!) {
+    createContact (contact: $contact) {
+      _id
+      firstName
+      lastName
+      email
+      phoneNumber
+    }
+  }
+`
