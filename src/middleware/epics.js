@@ -27,6 +27,7 @@ import {
 } from '../graphql/queries'
 import { urlJoin } from '../utils'
 
+// eslint-disable-next-line
 const logger = debug(appName + ':epics.js')
 const apolloClient = clientSideApolloClient || createApolloClient()
 const loginUrl = urlJoin(BACKEND_URL, '/account/logInWithCookie')
@@ -44,7 +45,6 @@ const requestContactsEpic = action$ =>
         }
       }))
         .map((res) => {
-          logger('requestContacts epic res', res)
           const { data: { contacts, contactCount } } = res
           return receiveContacts({ items: contacts, count: contactCount })
         })
@@ -105,13 +105,20 @@ const deleteContactEpic = (action$, store) =>
       const { id } = action.payload
       return from(apolloClient.mutate({
         mutation: deleteContactQry,
-        variables: { id }
+        variables: { id },
+        update: (cache, { data }) => {
+          apolloClient.resetStore()
+        },
       }))
         .mergeMap(response => {
-          const filterText = store.getState().contactsPage.filterText
+          const contactsPage = store.getState().contactsPage
+          const { filterText, currentPage, itemsPerPage } = contactsPage
+          const skip = itemsPerPage * (currentPage - 1)
+          const take = itemsPerPage
           return Observable.concat(
             Observable.of(deleteContactDone()),
-            Observable.of(requestContacts(filterText)))
+            Observable.of(requestContacts(filterText, skip, take))
+          )
         })
         .catch(error => Observable.of(deleteContactError(error)))
     })
