@@ -29,12 +29,12 @@ const apolloClient = clientSideApolloClient || createApolloClient()
 const requestContactsEpic = action$ =>
   action$.ofType(FETCH_CONTACTS)
     .switchMap((action) => {
-      const { skip, take } = action.payload
+      const { filterText, skip, take } = action.payload
       return from(apolloClient.query({
         query: findContactsWithCountQry,
         variables: {
           skip, limit: take,
-          // filterText, // TODO
+          filterText,
         }
       }))
         .map((res) => {

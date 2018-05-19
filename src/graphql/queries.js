@@ -1,15 +1,15 @@
 import gql from 'graphql-tag'
 
 export const findContactsWithCountQry = gql`
-  query findContactsWithCount($limit: Int, $skip: Int, $filter: ContactFilterInput) {
-    contacts(limit: $limit, skip: $skip, filter: $filter) {
+  query findContactsWithCount($filter: ContactFilterInput, $filterText: String, $limit: Int, $skip: Int) {
+    contacts(filter: $filter, filterText: $filterText, limit: $limit, skip: $skip) {
       _id
       firstName
       lastName
       email
       phoneNumber
     }
-    contactCount
+    contactCount(filter: $filter, filterText: $filterText)
   }
 `
 
