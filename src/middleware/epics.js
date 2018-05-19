@@ -25,9 +25,12 @@ import {
   findContactsWithCountQry, findContactQry,
   createContactQry, updateContactQry, deleteContactQry
 } from '../graphql/queries'
+import { urlJoin } from '../utils'
 
 const logger = debug(appName + ':epics.js')
 const apolloClient = clientSideApolloClient || createApolloClient()
+const loginUrl = urlJoin(BACKEND_URL, '/account/logInWithCookie')
+const logoutUrl = urlJoin(BACKEND_URL, '/account/clearCookie')
 
 const requestContactsEpic = action$ =>
   action$.ofType(FETCH_CONTACTS)
@@ -115,7 +118,7 @@ const requestAuthenticateEpic = action$ =>
   action$.ofType(LOGIN)
     .mergeMap(action => ajax({
       ...commonAjaxRequestSettings,
-      url: BACKEND_URL + '/account/logInWithCookie',
+      url: loginUrl,
       method: 'POST',
       body: { login: action.login, password: action.password }
     })
@@ -127,7 +130,7 @@ const requestLogoffEpic = action$ =>
   action$.ofType(LOGOFF)
     .mergeMap(action => ajax({
       ...commonAjaxRequestSettings,
-      url: BACKEND_URL + '/account/clearCookie',
+      url: logoutUrl,
       method: 'POST'
     })
       .map(response => logOffDone(response.response))
