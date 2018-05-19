@@ -36,3 +36,15 @@ export const createContactQry = gql`
     }
   }
 `
+
+export const updateContactQry = gql`
+  mutation UpdateContact ($id: String!, $contact: ContactInput!) {
+    updateContact (_id: $id, contact: $contact) {
+      _id
+      firstName
+      lastName
+      email
+      phoneNumber
+    }
+  }
+`
