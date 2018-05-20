@@ -42,7 +42,8 @@ const requestContactsEpic = action$ =>
         variables: {
           skip, limit: take,
           filterText,
-        }
+        },
+        fetchPolicy: 'network-only',
       }))
         .map((res) => {
           const { data: { contacts, contactCount } } = res
@@ -64,7 +65,11 @@ const setContactsPropsEpic = (action$, store) =>
 const requestContactEpic = action$ =>
   action$.ofType(REQUEST_CONTACT)
     .switchMap(action =>
-      from(apolloClient.query({ query: findContactQry, variables: { id: action.id } }))
+      from(apolloClient.query({
+        query: findContactQry,
+        variables: { id: action.id },
+        fetchPolicy: 'network-only',
+      }))
         .map((res) => {
           const { data: { contact } } = res
           return receiveContact(contact)
