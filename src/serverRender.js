@@ -1,4 +1,3 @@
-import fetch from 'node-fetch'
 import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
@@ -7,8 +6,7 @@ import { StaticRouter } from 'react-router-dom'
 
 import { getClient } from './graphql/apollo'
 import App from './components/App'
-import { default as configureStore } from './configureStore'
-
+import configureStore from './configureStore'
 
 export function render(req, store, context) {
   const apolloClient = getClient()

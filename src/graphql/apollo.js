@@ -12,12 +12,11 @@ import { urlJoin } from '../utils'
 const logger = debug(appName + ':apollo.js')
 const graphqlURL = urlJoin(BACKEND_URL, '/graphql')
 
-const createApolloClient = (fetch) => {
+const createApolloClient = () => {
   logger('Creating apollo client')
   const httpLink = createHttpLink({
     uri: graphqlURL,
     credentials: 'include',
-    fetch,
   })
 
   const cache = new InMemoryCache()
