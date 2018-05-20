@@ -5,13 +5,13 @@ import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router-dom'
 
-import { createApolloClient } from './graphql/apollo'
+import { getClient } from './graphql/apollo'
 import App from './components/App'
 import { default as configureStore } from './configureStore'
 
 
 export function render(req, store, context) {
-  const apolloClient = createApolloClient(fetch)
+  const apolloClient = getClient()
   return renderToString(
     <Provider store={store}>
       <ApolloProvider client={apolloClient}>

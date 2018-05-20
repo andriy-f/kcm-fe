@@ -4,12 +4,13 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { persistStore } from 'redux-persist'
 
-import { clientSideApolloClient } from '../graphql/apollo'
+import { getClient } from '../graphql/apollo'
 import App from '../components/App'
 import configureStore from '../configureStore'
 
 const store = configureStore()
 persistStore(store)
+const clientSideApolloClient = getClient()
 
 export default class Root extends Component {
   render() {

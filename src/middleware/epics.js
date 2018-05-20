@@ -20,7 +20,7 @@ import {
   LOGIN, logInDone, logInError,
   LOGOFF, logOffDone, logOffError
 } from '../actions'
-import { clientSideApolloClient, createApolloClient } from '../graphql/apollo'
+import { getClient } from '../graphql/apollo'
 import {
   findContactsWithCountQry, findContactQry,
   createContactQry, updateContactQry, deleteContactQry
@@ -29,7 +29,6 @@ import { urlJoin } from '../utils'
 
 // eslint-disable-next-line
 const logger = debug(appName + ':epics.js')
-const apolloClient = clientSideApolloClient || createApolloClient()
 const loginUrl = urlJoin(BACKEND_URL, '/account/logInWithCookie')
 const logoutUrl = urlJoin(BACKEND_URL, '/account/clearCookie')
 
@@ -37,7 +36,7 @@ const requestContactsEpic = action$ =>
   action$.ofType(FETCH_CONTACTS)
     .switchMap((action) => {
       const { filterText, skip, take } = action.payload
-      return from(apolloClient.query({
+      return from(getClient().query({
         query: findContactsWithCountQry,
         variables: {
           skip, limit: take,
@@ -65,7 +64,7 @@ const setContactsPropsEpic = (action$, store) =>
 const requestContactEpic = action$ =>
   action$.ofType(REQUEST_CONTACT)
     .switchMap(action =>
-      from(apolloClient.query({
+      from(getClient().query({
         query: findContactQry,
         variables: { id: action.id },
         fetchPolicy: 'network-only',
@@ -81,7 +80,7 @@ const saveContactEpic = action$ =>
   action$.ofType(SAVE_CONTACT_REQUEST)
     .mergeMap(action => {
       const { _id, firstName, lastName, phoneNumber, email } = action.payload
-      return from(apolloClient.mutate({
+      return from(getClient().mutate({
         mutation: updateContactQry,
         variables: { id: _id, contact: { firstName, lastName, email, phoneNumber } }
       }))
@@ -93,11 +92,11 @@ const addContactEpic = action$ =>
   action$.ofType(ADD_CONTACT)
     .mergeMap(action => {
       const { firstName, lastName, phoneNumber, email } = action.payload
-      return from(apolloClient.mutate({
+      return from(getClient().mutate({
         mutation: createContactQry,
         variables: { contact: { _id: action.id, firstName, lastName, email, phoneNumber } },
         update: (cache, { data }) => {
-          apolloClient.resetStore()
+          getClient().resetStore()
         },
       }))
         .map(response => addContactDone(response))
@@ -108,11 +107,11 @@ const deleteContactEpic = (action$, store) =>
   action$.ofType(DELETE_CONTACT)
     .mergeMap(action => {
       const { id } = action.payload
-      return from(apolloClient.mutate({
+      return from(getClient().mutate({
         mutation: deleteContactQry,
         variables: { id },
         update: (cache, { data }) => {
-          apolloClient.resetStore()
+          getClient().resetStore()
         },
       }))
         .mergeMap(response => {

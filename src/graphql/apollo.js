@@ -12,7 +12,8 @@ import { urlJoin } from '../utils'
 const logger = debug(appName + ':apollo.js')
 const graphqlURL = urlJoin(BACKEND_URL, '/graphql')
 
-export const createApolloClient = (fetch) => {
+const createApolloClient = (fetch) => {
+  logger('Creating apollo client')
   const httpLink = createHttpLink({
     uri: graphqlURL,
     credentials: 'include',
@@ -39,4 +40,7 @@ export const createApolloClient = (fetch) => {
 }
 
 /** Use same apolloClient if not SSR */
-export const clientSideApolloClient = isSSR ? null : createApolloClient()
+const clientSideApolloClient = isSSR ? null : createApolloClient()
+
+/** Use same apolloClient if not SSR */
+export const getClient = () => !isSSR ? clientSideApolloClient : createApolloClient()
