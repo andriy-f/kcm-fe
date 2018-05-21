@@ -49,7 +49,10 @@ const requestContactsEpic = action$ =>
           return receiveContacts({ items: contacts, count: contactCount })
         })
         .takeUntil(action$.ofType(FETCH_CONTACTS_ABORT))
-        .catch(error => Observable.of(receiveContactsError(error)))
+        .catch((error) => {
+          logger('get contacts error', error)
+          return Observable.of(receiveContactsError(error))
+        })
     })
 
 const setContactsPropsEpic = (action$, store) =>
@@ -133,11 +136,14 @@ const requestAuthenticateEpic = action$ =>
       ...commonAjaxRequestSettings,
       url: loginUrl,
       method: 'POST',
-      body: { login: action.login, password: action.password }
+      body: { login: action.login, password: action.password },
     })
       .map(response => logInDone(response.response))
-      .catch(error => Observable.of(logInError(error)))
-    );
+      .catch((error) => {
+        logger('Login Error', error)
+        return Observable.of(logInError(error))
+      })
+    )
 
 const requestLogoffEpic = action$ =>
   action$.ofType(LOGOFF)
@@ -148,7 +154,7 @@ const requestLogoffEpic = action$ =>
     })
       .map(response => logOffDone(response.response))
       .catch(error => Observable.of(logOffError(error)))
-    );
+    )
 
 const rootEpic = combineEpics(
   requestContactsEpic,
@@ -159,6 +165,6 @@ const rootEpic = combineEpics(
   deleteContactEpic,
   requestAuthenticateEpic,
   requestLogoffEpic
-);
+)
 
-export const epicMiddleware = createEpicMiddleware(rootEpic);
+export const epicMiddleware = createEpicMiddleware(rootEpic)
