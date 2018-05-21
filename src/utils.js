@@ -46,11 +46,10 @@ export const getUserFriendlyErrorMessage = (error) => {
       errorMessage = error && error.message
   }
 
-  const errorResponse = error && error.xhr.response
-  const errorResponseMessage = errorResponse && errorResponse.message
-  errorMessage = errorMessage ? errorMessage + ' ' + errorResponseMessage : errorResponseMessage
+  const errorResponseMessage = error && error.xhr
+    && error.xhr.response && error.xhr.response.message
 
-  return errorMessage
+  return [errorMessage, errorResponseMessage].join(' ')
 }
 
 export const urlJoin = (baseUrl, url) => {
