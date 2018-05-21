@@ -28,7 +28,7 @@ const createApolloClient = () => {
           logger(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`))
       }
       if (networkError) {
-        logger(`[Network error]: ${networkError}`)
+        logger('[Network error]', networkError)
       }
     })
 
