@@ -1,7 +1,9 @@
 import * as debug from 'debug'
 import { ajax } from 'rxjs/observable/dom/ajax';
 import { Observable } from 'rxjs'
+import { concat } from 'rxjs/observable/concat'
 import { from } from 'rxjs/observable/from'
+import { of } from 'rxjs/observable/of'
 import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/switchMap'
 import 'rxjs/add/operator/map'
@@ -50,8 +52,10 @@ const requestContactsEpic = action$ =>
         })
         .takeUntil(action$.ofType(FETCH_CONTACTS_ABORT))
         .catch((error) => {
-          logger('get contacts error', error)
-          return Observable.of(receiveContactsError(error))
+          const reactContactError = receiveContactsError(error)
+          return (error.networkError && error.networkError.statusCode === 401)
+            ? concat(of(reactContactError), of(logOffDone()))
+            : of(reactContactError)
         })
     })
 
