@@ -86,6 +86,7 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "node scripts/build.js",
     "build:server": "node scripts/buildServer.js",
+    "relay": "relay-compiler --src ./src --schema ./schema.graphql",
     "test": "node scripts/test.js --env=jsdom",
     "heroku-postbuild": "npm run build"
   },
