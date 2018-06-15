@@ -41,6 +41,7 @@
     "@types/debug": "^0.0.30",
     "@types/enzyme": "^3.1.10",
     "@types/jest": "^22.2.3",
+    "babel-cli": "^6.26.0",
     "babel-core": "6.25.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
@@ -87,6 +88,7 @@
     "build:client": "node scripts/build.js",
     "build:server": "node scripts/buildServer.js",
     "relay": "relay-compiler --src ./src --schema ./schema.graphql",
+    "update-schema": "babel-node ./scripts/updateSchema.js",
     "test": "node scripts/test.js --env=jsdom",
     "heroku-postbuild": "npm run build"
   },
@@ -129,7 +131,8 @@
       "relay"
     ],
     "presets": [
-      "react-app"
+      "react-app",
+      "env"
     ]
   },
   "eslintConfig": {
