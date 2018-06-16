@@ -1,7 +1,8 @@
 #!/usr/bin/env babel-node
 
-var fetch = require('isomorphic-fetch');
-var fs = require('fs');
+const fetch = require('isomorphic-fetch');
+const fs = require('fs');
+const path = require('path')
 
 const {
   buildClientSchema,
