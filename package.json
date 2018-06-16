@@ -131,8 +131,7 @@
       "relay"
     ],
     "presets": [
-      "react-app",
-      "env"
+      "react-app"
     ]
   },
   "eslintConfig": {
