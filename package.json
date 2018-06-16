@@ -89,7 +89,7 @@
     "build:client": "node scripts/build.js",
     "build:server": "node scripts/buildServer.js",
     "relay": "relay-compiler --src ./src --schema ./schema.graphql",
-    "update-schema": "babel-node ./scripts/updateSchema.js",
+    "get-schema": "babel-node ./scripts/getSchema.js",
     "test": "node scripts/test.js --env=jsdom",
     "heroku-postbuild": "npm run build"
   },
