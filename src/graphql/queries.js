@@ -14,7 +14,7 @@ export const findContactsWithCountQry = gql`
 `
 
 export const findContactQry = gql`
-  query FindOneContact($id: String!) {
+  query FindOneContact($id: ID!) {
     contact(_id: $id) {
       _id
       firstName
@@ -38,7 +38,7 @@ export const createContactQry = gql`
 `
 
 export const updateContactQry = gql`
-  mutation UpdateContact ($id: String!, $contact: ContactInput!) {
+  mutation UpdateContact ($id: ID!, $contact: ContactInput!) {
     updateContact (_id: $id, contact: $contact) {
       _id
       firstName
@@ -50,7 +50,7 @@ export const updateContactQry = gql`
 `
 
 export const deleteContactQry = gql`
-  mutation DeleteContact ($id: String!) {
+  mutation DeleteContact ($id: ID!) {
     deleteContact (_id: $id) {
       _id
     }

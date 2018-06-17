@@ -1,5 +1,5 @@
 type Contact {
-  _id: String
+  _id: ID
   firstName: String
   lastName: String
   email: String
@@ -25,12 +25,12 @@ input ContactSortingInput {
 
 type Mutation {
   createContact(contact: ContactInput!): Contact
-  updateContact(_id: String!, contact: ContactInput!): Contact
-  deleteContact(_id: String!): Contact
+  updateContact(_id: ID!, contact: ContactInput!): Contact
+  deleteContact(_id: ID!): Contact
 }
 
 type Query {
-  contact(_id: String!): Contact
+  contact(_id: ID!): Contact
   contactCount(filter: ContactFilterInput, filterText: String): Int
   contacts(filter: ContactFilterInput, filterText: String, sorting: ContactSortingInput, limit: Int, skip: Int): [Contact]
 }
