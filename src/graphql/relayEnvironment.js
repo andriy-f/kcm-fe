@@ -5,11 +5,17 @@ import {
   Store,
 } from 'relay-runtime'
 
-function fetchQuery(
+import { BACKEND_URL } from '../config'
+import { urlJoin } from '../utils'
+const graphqlURL = urlJoin(BACKEND_URL, '/graphql')
+
+const fetchQuery = (
   operation,
   variables,
-) {
-  return fetch('/graphql', {
+) =>
+  fetch(graphqlURL, {
+    crossDomain: true,
+    withCredentials: true,
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -18,10 +24,10 @@ function fetchQuery(
       query: operation.text,
       variables,
     }),
-  }).then(response => {
-    return response.json()
+  }).then(response => response.json()).then((json) => {
+    console.log('relay test', json)
+    return json
   })
-}
 
 const environment = new Environment({
   network: Network.create(fetchQuery),
