@@ -4,9 +4,10 @@ import {
   RecordSource,
   Store,
 } from 'relay-runtime'
-
+import fetch from 'isomorphic-fetch'
 import { BACKEND_URL } from '../config'
 import { urlJoin } from '../utils'
+
 const graphqlURL = urlJoin(BACKEND_URL, '/graphql')
 
 const fetchQuery = (
@@ -14,8 +15,7 @@ const fetchQuery = (
   variables,
 ) =>
   fetch(graphqlURL, {
-    crossDomain: true,
-    withCredentials: true,
+    credentials: 'include',
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

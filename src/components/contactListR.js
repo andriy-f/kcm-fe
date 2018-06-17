@@ -25,7 +25,7 @@ export default class App extends React.Component {
           if (!props) {
             return <div>Loading...</div>
           }
-          return <div>Contacts: {props.contacts}</div>
+          return <div>Contacts: {props.contacts ? props.contacts.length : 0}</div>
         }}
       />
     )
