@@ -96,7 +96,7 @@ const mapStateToProps = (state) => {
 
     return {
         currentUser,
-        logIn 
+        logIn
     }
 }
 
