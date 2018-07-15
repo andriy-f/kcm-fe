@@ -9,10 +9,14 @@ export default class App extends React.Component {
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query contactListRQuery {
-            contacts {
-              _id
-              firstName
+          query ContactListRQuery {
+            allContacts {
+              contacts {
+                firstName
+                lastName
+                email
+                phoneNumber
+              }
             }
           }
         `}
@@ -25,7 +29,9 @@ export default class App extends React.Component {
           if (!props) {
             return <div>Loading...</div>
           }
-          return <div>Contacts: {props.contacts ? props.contacts.length : 0}</div>
+
+          const { contacts } = props.allContacts || {}
+          return <div>Contacts: {contacts ? contacts.length : 0}</div>
         }}
       />
     )
