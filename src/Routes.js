@@ -4,8 +4,8 @@ import { Route, Switch } from 'react-router-dom'
 import intro from './components/intro'
 import logInPage from './containers/LogIn'
 import logOutPage from './containers/LogOut'
-import contactList from './containers/contactList'
-import contactListR from './components/contactListR'
+import ContactList from './containers/ContactList'
+import ContactListR from './components/ContactListR'
 import ContactEdit from './containers/ContactEdit'
 import ContactAddPage from './containers/ContactAddPage'
 import userProfile from './containers/userProfile'
@@ -20,8 +20,8 @@ export default () => (
         <Route exact path="/logIn" component={logInPage} />
         <Route exact path="/userProfile" component={userProfile} />
         <Route exact path="/logOut" component={logOutPage} />
-        <Route exact path="/contacts" component={AuthHOC(['contact-list-view'])(contactList)} />
-        <Route exact path="/contacts-r" component={AuthHOC(['contact-list-view'])(contactListR)} />
+        <Route exact path="/contacts" component={AuthHOC(['contact-list-view'])(ContactList)} />
+        <Route exact path="/contacts-r" component={AuthHOC(['contact-list-view'])(ContactListR)} />
         <Route path="/contacts/new" component={AuthHOC(['contact-edit'])(ContactAddPage)} />
         <Route path="/contacts/:id" component={AuthHOC(['contact-edit'])(ContactEdit)} />
         <Route path="/settings" component={SettingsPage} />
