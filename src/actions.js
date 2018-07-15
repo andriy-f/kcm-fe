@@ -50,7 +50,7 @@ export const SET_SETTING = 'SET_SETTING'
 export const requestContacts = (filterText, skip, take) => ({
     type: FETCH_CONTACTS,
     payload: { filterText, skip, take }
-});
+})
 
 export const clearContactList = () => ({
     type: CLEAR_CONTACT_LIST
@@ -170,32 +170,32 @@ export const logIn = (login, password) => ({
     type: LOGIN,
     login,
     password
-});
+})
 
 export const logInDone = (payload) => ({
     type: LOGIN_DONE,
     payload
-});
+})
 
 export const logInError = (payload) => ({
     type: LOGIN_ERROR,
     payload,
     error: true
-});
+})
 
 export const logInCleanup = () => ({
     type: LOGIN_CLEANUP
-});
+})
 
 // Log off actions
 export const logOff = () => ({
     type: LOGOFF
-});
+})
 
 export const logOffDone = (payload) => ({
     type: LOGOFF_DONE,
     payload
-});
+})
 
 export const logOffError = (payload) => ({
     type: LOGOFF_ERROR,

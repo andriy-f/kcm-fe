@@ -152,4 +152,4 @@ const mapDispatchToProps = dispatch => ({
     deleteSingle: (id) => dispatch(deleteContact(id))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList)

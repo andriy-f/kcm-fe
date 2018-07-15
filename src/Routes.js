@@ -1,13 +1,13 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
 
-import intro from './components/intro';
-import logInPage from './containers/LogIn';
-import logOutPage from './containers/LogOut';
-import contactList from './containers/contactList';
-import contactListR from './components/contactListR';
-import ContactEdit from './containers/ContactEdit';
-import ContactAddPage from './containers/ContactAddPage';
+import intro from './components/intro'
+import logInPage from './containers/LogIn'
+import logOutPage from './containers/LogOut'
+import contactList from './containers/contactList'
+import contactListR from './components/contactListR'
+import ContactEdit from './containers/ContactEdit'
+import ContactAddPage from './containers/ContactAddPage'
 import userProfile from './containers/userProfile'
 import NotFound from './components/NotFound'
 import DevPage from './containers/DevPage'

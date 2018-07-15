@@ -10,7 +10,7 @@ export const commonAjaxRequestSettings = {
 
 export const isUserLoggedIn = (currentUser) => {
   return currentUser && Object.keys(currentUser).length !== 0
-    && currentUser.tokenExpiresOn >= Date.now();
+    && currentUser.tokenExpiresOn >= Date.now()
 }
 
 export const getViewState = state => ({
@@ -55,7 +55,7 @@ export const getUserFriendlyErrorMessage = (error) => {
 export const urlJoin = (baseUrl, url) => {
   var theUrl = new URI(url)
   if (theUrl.is('relative')) {
-    theUrl = theUrl.absoluteTo(baseUrl);
+    theUrl = theUrl.absoluteTo(baseUrl)
   }
 
   return theUrl.toString()

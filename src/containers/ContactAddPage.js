@@ -1,5 +1,5 @@
 import * as debug from 'debug'
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Input } from 'react-toolbox/lib/input'
 import { Button } from 'react-toolbox/lib/button'

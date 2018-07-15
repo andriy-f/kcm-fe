@@ -12,7 +12,7 @@ let configureStore
 if (isDev) {
   const composeEnhancers = 
     (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
-    || compose;
+    || compose
 
   configureStore = (preloadedState) => {
     return createStore(

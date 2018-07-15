@@ -1,5 +1,5 @@
 import * as debug from 'debug'
-import { ajax } from 'rxjs/observable/dom/ajax';
+import { ajax } from 'rxjs/observable/dom/ajax'
 import { Observable } from 'rxjs'
 import { concat } from 'rxjs/observable/concat'
 import { from } from 'rxjs/observable/from'
