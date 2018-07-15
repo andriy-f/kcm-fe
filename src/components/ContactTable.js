@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table, TableHead, TableRow, TableCell } from 'react-toolbox/lib/table'
 
-export default () => (
+export default ({ items }) => (
   <Table selectable={false}>
     <TableHead>
       <TableCell>First Name</TableCell>
@@ -16,8 +16,8 @@ export default () => (
         <TableCell>{item.email || ''}</TableCell>
         <TableCell>{item.phoneNumber || ''}</TableCell>
         <TableCell>
-          <RTIconButtonLink icon="edit" to={"/contacts/" + item._id}></RTIconButtonLink>
-          <IconButton icon="delete" data-id={item._id} onClick={this.confirmDeleteSingle} />
+          {/* <RTIconButtonLink icon="edit" to={"/contacts/" + item._id}></RTIconButtonLink> */}
+          {/* <IconButton icon="delete" data-id={item._id} onClick={this.confirmDeleteSingle} /> */}
         </TableCell>
       </TableRow>
     ))}
