@@ -25,7 +25,6 @@ const fetchQuery = (
       variables,
     }),
   }).then(response => response.json()).then((json) => {
-    console.log('relay test', json)
     return json
   })
 

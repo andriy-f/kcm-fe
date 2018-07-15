@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql, QueryRenderer } from 'react-relay'
 
 import environment from '../graphql/relayEnvironment'
+import ContactTable from '../components/ContactTable'
 
 export default class App extends React.Component {
   render() {
@@ -12,6 +13,7 @@ export default class App extends React.Component {
           query ContactListRQuery {
             allContacts {
               contacts {
+                id
                 firstName
                 lastName
                 email
@@ -22,7 +24,6 @@ export default class App extends React.Component {
         `}
         variables={{}}
         render={({ error, props }) => {
-          console.log(error, props)
           if (error) {
             return <div>Error!</div>
           }
@@ -31,7 +32,10 @@ export default class App extends React.Component {
           }
 
           const { contacts } = props.allContacts || {}
-          return <div>Contacts: {contacts ? contacts.length : 0}</div>
+          return (<div>
+            {/* Contacts: {contacts ? contacts.length : 0} */}
+            <ContactTable items={contacts} />
+          </div>)
         }}
       />
     )

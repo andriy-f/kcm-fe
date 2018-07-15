@@ -9,13 +9,14 @@ export default ({ items }) => (
       <TableCell>Email</TableCell>
       <TableCell>Phone Number</TableCell>
     </TableHead>
-    {items && items.map((item, idx) => (
-      <TableRow key={idx}>
+    {items && items.map((item) => (
+      <TableRow key={item.id}>
         <TableCell>{item.firstName || ''}</TableCell>
         <TableCell>{item.lastName || ''}</TableCell>
         <TableCell>{item.email || ''}</TableCell>
         <TableCell>{item.phoneNumber || ''}</TableCell>
         <TableCell>
+          Buttons
           {/* <RTIconButtonLink icon="edit" to={"/contacts/" + item._id}></RTIconButtonLink> */}
           {/* <IconButton icon="delete" data-id={item._id} onClick={this.confirmDeleteSingle} /> */}
         </TableCell>
