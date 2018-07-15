@@ -1,10 +1,10 @@
-import * as debug from 'debug'
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Input } from 'react-toolbox/lib/input'
 import { Button } from 'react-toolbox/lib/button'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
+import debug from 'debug'
 
 import { appName } from '../consts'
 import { RTButtonLink } from '../components/RTButtonLink'

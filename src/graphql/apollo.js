@@ -1,9 +1,9 @@
-import * as debug from 'debug'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import ApolloClient from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
 import { ApolloLink } from 'apollo-link'
 import { onError } from 'apollo-link-error'
+import debug from 'debug'
 
 import { BACKEND_URL } from '../config'
 import { isSSR, appName } from '../consts'

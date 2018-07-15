@@ -1,4 +1,3 @@
-import * as debug from 'debug'
 import { ajax } from 'rxjs/observable/dom/ajax'
 import { Observable } from 'rxjs'
 import { concat } from 'rxjs/observable/concat'
@@ -8,6 +7,7 @@ import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/switchMap'
 import 'rxjs/add/operator/map'
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
+import debug from 'debug'
 
 import { BACKEND_URL } from '../config'
 import { appName } from '../consts'
