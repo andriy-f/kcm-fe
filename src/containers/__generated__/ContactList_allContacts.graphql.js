@@ -9,8 +9,8 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type ContactList_query$ref: FragmentReference;
-export type ContactList_query = {|
+declare export opaque type ContactList_allContacts$ref: FragmentReference;
+export type ContactList_allContacts = {|
   +allContacts: ?{|
     +edges: ?$ReadOnlyArray<?{|
       +node: ?{|
@@ -22,14 +22,14 @@ export type ContactList_query = {|
       |}
     |}>
   |},
-  +$refType: ContactList_query$ref,
+  +$refType: ContactList_allContacts$ref,
 |};
 */
 
 
 const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
-  "name": "ContactList_query",
+  "name": "ContactList_allContacts",
   "type": "Query",
   "metadata": {
     "connection": [
@@ -181,5 +181,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '0b51197e30ce42d4eb6e1c71ea7e781e';
+(node/*: any*/).hash = 'df3812e758746eda3ba962efbf7776b3';
 module.exports = node;

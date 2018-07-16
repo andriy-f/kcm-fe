@@ -12,7 +12,7 @@ export default class extends React.Component {
         environment={environment}
         query={graphql`
           query ContactsPageQuery {
-            ...ContactList_query
+            ...ContactList_allContacts
           }
         `}
         variables={{}}

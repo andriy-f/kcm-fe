@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 962aedf773f4525018cf21a220e88043
+ * @relayHash 066983ccf7fd89f3511aeccf4d1fb0ca
  */
 
 /* eslint-disable */
@@ -9,20 +9,20 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type ContactList_query$ref = any;
+type ContactList_allContacts$ref = any;
 export type ContactsPageQueryVariables = {||};
 export type ContactsPageQueryResponse = {|
-  +$fragmentRefs: ContactList_query$ref
+  +$fragmentRefs: ContactList_allContacts$ref
 |};
 */
 
 
 /*
 query ContactsPageQuery {
-  ...ContactList_query
+  ...ContactList_allContacts
 }
 
-fragment ContactList_query on Query {
+fragment ContactList_allContacts on Query {
   allContacts(first: 10) {
     edges {
       node {
@@ -48,7 +48,7 @@ const node/*: ConcreteRequest*/ = {
   "operationKind": "query",
   "name": "ContactsPageQuery",
   "id": null,
-  "text": "query ContactsPageQuery {\n  ...ContactList_query\n}\n\nfragment ContactList_query on Query {\n  allContacts(first: 10) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+  "text": "query ContactsPageQuery {\n  ...ContactList_allContacts\n}\n\nfragment ContactList_allContacts on Query {\n  allContacts(first: 10) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -59,7 +59,7 @@ const node/*: ConcreteRequest*/ = {
     "selections": [
       {
         "kind": "FragmentSpread",
-        "name": "ContactList_query",
+        "name": "ContactList_allContacts",
         "args": null
       }
     ]
@@ -205,5 +205,5 @@ const node/*: ConcreteRequest*/ = {
   }
 };
 // prettier-ignore
-(node/*: any*/).hash = 'e0cbf428bc481bf5c49b404d30115c48';
+(node/*: any*/).hash = '995daf471949a059062f9cdadd8bb0c3';
 module.exports = node;

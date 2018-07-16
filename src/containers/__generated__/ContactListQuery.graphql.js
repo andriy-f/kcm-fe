@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 1972101caff720fafac3cf081aa2ad0b
+ * @relayHash 19fa81e83768296fd8a5c60bbe32e569
  */
 
 /* eslint-disable */
@@ -9,14 +9,14 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type ContactList_query$ref = any;
+type ContactList_allContacts$ref = any;
 export type ContactListQueryVariables = {|
   count: number,
   cursor: string,
   filterText?: ?string,
 |};
 export type ContactListQueryResponse = {|
-  +$fragmentRefs: ContactList_query$ref
+  +$fragmentRefs: ContactList_allContacts$ref
 |};
 */
 
@@ -27,10 +27,10 @@ query ContactListQuery(
   $cursor: String!
   $filterText: String
 ) {
-  ...ContactList_query_UImuz
+  ...ContactList_allContacts_UImuz
 }
 
-fragment ContactList_query_UImuz on Query {
+fragment ContactList_allContacts_UImuz on Query {
   allContacts(first: $count, after: $cursor, filterText: $filterText) {
     edges {
       node {
@@ -77,7 +77,7 @@ return {
   "operationKind": "query",
   "name": "ContactListQuery",
   "id": null,
-  "text": "query ContactListQuery(\n  $count: Int!\n  $cursor: String!\n  $filterText: String\n) {\n  ...ContactList_query_UImuz\n}\n\nfragment ContactList_query_UImuz on Query {\n  allContacts(first: $count, after: $cursor, filterText: $filterText) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+  "text": "query ContactListQuery(\n  $count: Int!\n  $cursor: String!\n  $filterText: String\n) {\n  ...ContactList_allContacts_UImuz\n}\n\nfragment ContactList_allContacts_UImuz on Query {\n  allContacts(first: $count, after: $cursor, filterText: $filterText) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -88,7 +88,7 @@ return {
     "selections": [
       {
         "kind": "FragmentSpread",
-        "name": "ContactList_query",
+        "name": "ContactList_allContacts",
         "args": [
           {
             "kind": "Variable",
@@ -278,5 +278,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'e35e3e9e858c518db473e5d732b5e026';
+(node/*: any*/).hash = 'b3023a7945735126a1fe51d4ec79a12e';
 module.exports = node;

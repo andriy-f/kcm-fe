@@ -34,8 +34,8 @@ class ContactListBare extends React.Component {
 export default createPaginationContainer(
   ContactListBare,
   {
-    query: graphql`
-      fragment ContactList_query on Query
+    allContacts: graphql`
+      fragment ContactList_allContacts on Query
       @argumentDefinitions(
         count: {type: "Int", defaultValue: 10}
         cursor: {type: "String"}
@@ -87,7 +87,7 @@ export default createPaginationContainer(
         $cursor: String!
         $filterText: String
       ) {
-        ...ContactList_query @arguments(count: $count, cursor: $cursor, filterText: $filterText)
+        ...ContactList_allContacts @arguments(count: $count, cursor: $cursor, filterText: $filterText)
       }
     `
   }
