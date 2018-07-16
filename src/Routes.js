@@ -1,11 +1,10 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import intro from './components/intro'
-import logInPage from './containers/LogIn'
-import logOutPage from './containers/LogOut'
-import ContactList from './containers/ContactList'
-import ContactListR from './components/ContactListR'
+import Intro from './components/intro'
+import LogInPage from './containers/LogIn'
+import LogOutPage from './containers/LogOut'
+import ContactsPage from './components/ContactsPage'
 import ContactEdit from './containers/ContactEdit'
 import ContactAddPage from './containers/ContactAddPage'
 import userProfile from './containers/userProfile'
@@ -16,12 +15,11 @@ import AuthHOC from './containers/AuthHOC'
 
 export default () => (
     <Switch>
-        <Route exact path="/" component={intro} />
-        <Route exact path="/logIn" component={logInPage} />
+        <Route exact path="/" component={Intro} />
+        <Route exact path="/logIn" component={LogInPage} />
         <Route exact path="/userProfile" component={userProfile} />
-        <Route exact path="/logOut" component={logOutPage} />
-        <Route exact path="/contacts" component={AuthHOC(['contact-list-view'])(ContactList)} />
-        <Route exact path="/contacts-r" component={AuthHOC(['contact-list-view'])(ContactListR)} />
+        <Route exact path="/logOut" component={LogOutPage} />
+        <Route exact path="/contacts" component={AuthHOC(['contact-list-view'])(ContactsPage)} />
         <Route path="/contacts/new" component={AuthHOC(['contact-edit'])(ContactAddPage)} />
         <Route path="/contacts/:id" component={AuthHOC(['contact-edit'])(ContactEdit)} />
         <Route path="/settings" component={SettingsPage} />

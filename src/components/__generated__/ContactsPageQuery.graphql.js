@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7af114af69b1d5a85f5176ef8548797f
+ * @relayHash 24230f93c5c7ee510000513388b30734
  */
 
 /* eslint-disable */
@@ -9,8 +9,8 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type ContactListRQueryVariables = {||};
-export type ContactListRQueryResponse = {|
+export type ContactsPageQueryVariables = {||};
+export type ContactsPageQueryResponse = {|
   +allContacts: ?{|
     +contacts: ?$ReadOnlyArray<?{|
       +id: string,
@@ -25,7 +25,7 @@ export type ContactListRQueryResponse = {|
 
 
 /*
-query ContactListRQuery {
+query ContactsPageQuery {
   allContacts {
     contacts {
       id
@@ -101,13 +101,13 @@ var v0 = [
 return {
   "kind": "Request",
   "operationKind": "query",
-  "name": "ContactListRQuery",
+  "name": "ContactsPageQuery",
   "id": null,
-  "text": "query ContactListRQuery {\n  allContacts {\n    contacts {\n      id\n      firstName\n      lastName\n      email\n      phoneNumber\n    }\n  }\n}\n",
+  "text": "query ContactsPageQuery {\n  allContacts {\n    contacts {\n      id\n      firstName\n      lastName\n      email\n      phoneNumber\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "ContactListRQuery",
+    "name": "ContactsPageQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -115,12 +115,12 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "ContactListRQuery",
+    "name": "ContactsPageQuery",
     "argumentDefinitions": [],
     "selections": v0
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '62bed361a809849de2511f4c8cb64534';
+(node/*: any*/).hash = 'aa198ab6858cf74edc01b94ca6f2bca0';
 module.exports = node;

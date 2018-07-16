@@ -2,15 +2,15 @@ import React from 'react'
 import { graphql, QueryRenderer } from 'react-relay'
 
 import environment from '../graphql/relayEnvironment'
-import ContactTable from '../components/ContactTable'
+import ContactTable from './ContactTable'
 
-export default class App extends React.Component {
+export default class extends React.Component {
   render() {
     return (
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query ContactListRQuery {
+          query ContactsPageQuery {
             allContacts {
               contacts {
                 id
