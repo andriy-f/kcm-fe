@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 962aedf773f4525018cf21a220e88043
+ * @relayHash 1972101caff720fafac3cf081aa2ad0b
  */
 
 /* eslint-disable */
@@ -10,20 +10,28 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type ContactList_query$ref = any;
-export type ContactsPageQueryVariables = {||};
-export type ContactsPageQueryResponse = {|
+export type ContactListQueryVariables = {|
+  count: number,
+  cursor: string,
+  filterText?: ?string,
+|};
+export type ContactListQueryResponse = {|
   +$fragmentRefs: ContactList_query$ref
 |};
 */
 
 
 /*
-query ContactsPageQuery {
-  ...ContactList_query
+query ContactListQuery(
+  $count: Int!
+  $cursor: String!
+  $filterText: String
+) {
+  ...ContactList_query_UImuz
 }
 
-fragment ContactList_query on Query {
-  allContacts(first: 10) {
+fragment ContactList_query_UImuz on Query {
+  allContacts(first: $count, after: $cursor, filterText: $filterText) {
     edges {
       node {
         id
@@ -43,42 +51,94 @@ fragment ContactList_query on Query {
 }
 */
 
-const node/*: ConcreteRequest*/ = {
+const node/*: ConcreteRequest*/ = (function(){
+var v0 = [
+  {
+    "kind": "LocalArgument",
+    "name": "count",
+    "type": "Int!",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "cursor",
+    "type": "String!",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "filterText",
+    "type": "String",
+    "defaultValue": null
+  }
+];
+return {
   "kind": "Request",
   "operationKind": "query",
-  "name": "ContactsPageQuery",
+  "name": "ContactListQuery",
   "id": null,
-  "text": "query ContactsPageQuery {\n  ...ContactList_query\n}\n\nfragment ContactList_query on Query {\n  allContacts(first: 10) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+  "text": "query ContactListQuery(\n  $count: Int!\n  $cursor: String!\n  $filterText: String\n) {\n  ...ContactList_query_UImuz\n}\n\nfragment ContactList_query_UImuz on Query {\n  allContacts(first: $count, after: $cursor, filterText: $filterText) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "ContactsPageQuery",
+    "name": "ContactListQuery",
     "type": "Query",
     "metadata": null,
-    "argumentDefinitions": [],
+    "argumentDefinitions": v0,
     "selections": [
       {
         "kind": "FragmentSpread",
         "name": "ContactList_query",
-        "args": null
+        "args": [
+          {
+            "kind": "Variable",
+            "name": "count",
+            "variableName": "count",
+            "type": null
+          },
+          {
+            "kind": "Variable",
+            "name": "cursor",
+            "variableName": "cursor",
+            "type": null
+          },
+          {
+            "kind": "Variable",
+            "name": "filterText",
+            "variableName": "filterText",
+            "type": null
+          }
+        ]
       }
     ]
   },
   "operation": {
     "kind": "Operation",
-    "name": "ContactsPageQuery",
-    "argumentDefinitions": [],
+    "name": "ContactListQuery",
+    "argumentDefinitions": v0,
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
         "name": "allContacts",
-        "storageKey": "allContacts(first:10)",
+        "storageKey": null,
         "args": [
           {
-            "kind": "Literal",
+            "kind": "Variable",
+            "name": "after",
+            "variableName": "cursor",
+            "type": "String"
+          },
+          {
+            "kind": "Variable",
+            "name": "filterText",
+            "variableName": "filterText",
+            "type": "String"
+          },
+          {
+            "kind": "Variable",
             "name": "first",
-            "value": 10,
+            "variableName": "count",
             "type": "Int"
           }
         ],
@@ -189,9 +249,21 @@ const node/*: ConcreteRequest*/ = {
         "name": "allContacts",
         "args": [
           {
-            "kind": "Literal",
+            "kind": "Variable",
+            "name": "after",
+            "variableName": "cursor",
+            "type": "String"
+          },
+          {
+            "kind": "Variable",
+            "name": "filterText",
+            "variableName": "filterText",
+            "type": "String"
+          },
+          {
+            "kind": "Variable",
             "name": "first",
-            "value": 10,
+            "variableName": "count",
             "type": "Int"
           }
         ],
@@ -204,6 +276,7 @@ const node/*: ConcreteRequest*/ = {
     ]
   }
 };
+})();
 // prettier-ignore
-(node/*: any*/).hash = 'e0cbf428bc481bf5c49b404d30115c48';
+(node/*: any*/).hash = 'e35e3e9e858c518db473e5d732b5e026';
 module.exports = node;
