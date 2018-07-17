@@ -1,4 +1,7 @@
 [ignore]
+<PROJECT_ROOT>/build/.*
+<PROJECT_ROOT>/buildServer/.*
+<PROJECT_ROOT>/coverage/.*
 
 [include]
 
