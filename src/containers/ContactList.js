@@ -68,7 +68,6 @@ export default createPaginationContainer(
   {
     direction: 'forward',
     getConnectionFromProps(props) {
-      log('getConnFromProps', props)
       return props.contactsData && props.contactsData.allContacts
     },
     // This is also the default implementation of `getFragmentVariables` if it isn't provided.
