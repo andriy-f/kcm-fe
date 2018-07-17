@@ -1,79 +1,77 @@
+import debug from 'debug'
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+import { graphql, createFragmentContainer } from 'react-relay'
 import { Input } from 'react-toolbox/lib/input'
 import { Button } from 'react-toolbox/lib/button'
-import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
 
+import { appName } from '../consts'
 import { RTButtonLink } from '../components/RTButtonLink'
 import { kFormContainer, kTextCenter } from '../App.css'
-import { requestContact, saveContactRequest, clearContact } from '../actions'
+import UpdateContactMutation from '../graphql/UpdateContactMutation'
 
-const TextInput = ({ input: { value, onChange }, label }) => <Input type='text' label={label} value={value} onChange={onChange} />
+// eslint-disable-next-line no-unused-vars
+const log = debug(appName + ':ContactEdit.js')
 
 class ContactEditForm extends Component {
-    reload = () => {
-        const { load, id } = this.props
-        load(id)
+  constructor(props) {
+    super(props)
+
+    const { firstName, lastName, email, phoneNumber } = props.contact
+    this.state = {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
     }
+  }
 
-    componentDidMount() {
-        this.reload()
-    }
+  render() {
 
-    render() {
-        const { handleSubmit, pristine, submitting } = this.props
-        return (
-            <section className={kFormContainer} >
-                <form onSubmit={handleSubmit}>
+    const { firstName, lastName, email, phoneNumber } = this.state
+    return (
+      <section className={kFormContainer}>
+        <form onSubmit={this._handleSubmit} method="post">
 
-                    <h3 className={kTextCenter}>Edit Contact</h3>
+          <h3 className={kTextCenter}>Edit Contact</h3>
 
-                    <Field name="firstName" component={TextInput} label="First Name" />
-                    <Field name="lastName" component={TextInput} label="Last Name" />
-                    <Field name="email" component={TextInput} label="Email" />
-                    <Field name="phoneNumber" component={TextInput} label="Phone number" />
+          <Input autoFocus={true} name="firstName" label="First Name" value={firstName} onChange={this._handleInputChange} />
+          <Input name="lastName" label="Last Name" value={lastName} onChange={this._handleInputChange} />
+          <Input name="email" label="Email" value={email} onChange={this._handleInputChange} />
+          <Input name="phoneNumber" label="Phone number" value={phoneNumber} onChange={this._handleInputChange} />
 
-                    <div className={kTextCenter}>
-                        <Button label="Save" type="submit" disabled={pristine || submitting} flat />
-                        <RTButtonLink label="Cancel" to="/contacts" />
-                    </div>
-                </form>
-            </section>
-        )
-    }
+          <div className={kTextCenter}>
+            <Button label="Save" type="submit" flat />
+            <RTButtonLink label="Cancel" to="/contacts" />
+          </div>
+        </form>
+      </section>
+    )
+  }
+
+  _handleInputChange = (value, event) => {
+    const target = event.target
+    const name = target.name
+
+    this.setState({
+      [name]: value
+    })
+  }
+
+  _handleSubmit = (e) => {
+    e.preventDefault()
+    UpdateContactMutation.commit(this.props.relay.environment, this.state, this.props.contact)
+    this.props.onSave && this.props.onSave()
+  }
 }
 
-ContactEditForm = reduxForm({ form: 'contactEdit', enableReinitialize: true })(ContactEditForm)
-
-class ContactEditPage extends Component {
-
-    submit = (data) => {
-        this.props.save({ _id: data._id, firstName: data.firstName, lastName: data.lastName, email: data.email, phoneNumber: data.phoneNumber })
+export default createFragmentContainer(
+  ContactEditForm,
+  graphql`
+    fragment ContactEdit_contact on Contact {
+      id
+      firstName
+      lastName
+      email
+      phoneNumber
     }
-
-    componentWillUnmount() {
-        this.props.clear()
-    }
-
-    render() {
-        const { match: { params: { id } }, page: { data, justSaved }, load } = this.props
-        return justSaved ? (
-            <Redirect to="/contacts" />
-        ) : (
-                <section className={kFormContainer} >
-                    <ContactEditForm onSubmit={this.submit} id={id} load={load} initialValues={data} />
-                </section>
-            )
-    }
-}
-
-const mapStateToProps = (state) => ({ page: state.contactEdit })
-
-const mapDispatchToProps = (dispatch) => ({
-    load: id => dispatch(requestContact(id)),
-    save: data => dispatch(saveContactRequest(data)),
-    clear: () => dispatch(clearContact())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactEditPage)
+`)

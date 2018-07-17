@@ -1,6 +1,8 @@
 import React from 'react'
 import { Table, TableHead, TableRow, TableCell } from 'react-toolbox/lib/table'
 
+import { RTIconButtonLink } from './RTButtonLink'
+
 export default ({ items }) => (
   <Table selectable={false}>
     <TableHead>
@@ -16,8 +18,7 @@ export default ({ items }) => (
         <TableCell>{item.email || ''}</TableCell>
         <TableCell>{item.phoneNumber || ''}</TableCell>
         <TableCell>
-          {' '}
-          {/* <RTIconButtonLink icon="edit" to={"/contacts/" + item._id}></RTIconButtonLink> */}
+          <RTIconButtonLink icon="edit" to={'/contacts/' + item.id}></RTIconButtonLink>
           {/* <IconButton icon="delete" data-id={item._id} onClick={this.confirmDeleteSingle} /> */}
         </TableCell>
       </TableRow>
