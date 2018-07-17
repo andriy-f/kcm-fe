@@ -1,13 +1,19 @@
+import debug from 'debug'
 import React from 'react'
 import { createPaginationContainer, graphql } from 'react-relay'
+// import ContactView from '../containers/ContactView'
+
+import { appName } from '../consts'
+
+// eslint-disable-next-line no-unused-vars
+const log = debug(appName + ':ContactList.js')
 
 class ContactListBare extends React.Component {
   render() {
-    console.log('render cl', this.props)
     return (
       <article>
-        {this.props.query && this.props.query.allContacts.edges.map(
-          edge => <div>{edge.node} {edge.node.id}></div>
+        {this.props.contactsData.allContacts && this.props.contactsData.allContacts.edges.map(
+          edge => <div key={edge.node.id}>{edge.node.firstName} {edge.node.lastName}</div>
         )}
         <button
           onClick={() => this._loadMore()}
@@ -24,7 +30,7 @@ class ContactListBare extends React.Component {
     this.props.relay.loadMore(
       10,  // Fetch the next 10 feed items
       error => {
-        console.log(error)
+        log('loadMore error', error)
       },
     )
   }
@@ -33,8 +39,8 @@ class ContactListBare extends React.Component {
 export default createPaginationContainer(
   ContactListBare,
   {
-    allContacts: graphql`
-      fragment ContactList_allContacts on Query
+    contactsData: graphql`
+      fragment ContactList_contactsData on Query
       @argumentDefinitions(
         count: {type: "Int", defaultValue: 10}
         cursor: {type: "String"}
@@ -61,8 +67,8 @@ export default createPaginationContainer(
   {
     direction: 'forward',
     getConnectionFromProps(props) {
-      console.log('getConnFromProps', props)
-      return props.user && props.user.feed
+      log('getConnFromProps', props)
+      return props.contactsData && props.contactsData.allContacts
     },
     // This is also the default implementation of `getFragmentVariables` if it isn't provided.
     getFragmentVariables(prevVars, totalCount) {
@@ -86,7 +92,7 @@ export default createPaginationContainer(
         $cursor: String!
         $filterText: String
       ) {
-        ...ContactList_allContacts @arguments(count: $count, cursor: $cursor, filterText: $filterText)
+        ...ContactList_contactsData @arguments(count: $count, cursor: $cursor, filterText: $filterText)
       }
     `
   }

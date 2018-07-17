@@ -2,13 +2,12 @@ import debug from 'debug'
 import React from 'react'
 import { graphql, QueryRenderer } from 'react-relay'
 
-import { appName } from '../consts'
-import ContactView from '../containers/ContactView'
 import ContactList from '../containers/ContactList'
 import environment from '../graphql/relayEnvironment'
-// import ContactTable from './ContactTable'
+import { appName } from '../consts'
 
-const log = debug(appName + ':relayEnvironment.js')
+// eslint-disable-next-line no-unused-vars
+const log = debug(appName + ':ContactsPage.js')
 
 export default class extends React.Component {
   render() {
@@ -17,15 +16,7 @@ export default class extends React.Component {
         environment={environment}
         query={graphql`
           query ContactsPageQuery {
-            alfaContact: contact(id: "Y29udGFjdDo1NzhmMmJhYTEyZWFlYmFiZWM0YWYyOGI=") {
-              id
-              contactId
-              firstName
-            }
-            betaContact: contact(id: "Y29udGFjdDo1NzhmMmJhYTEyZWFlYmFiZWM0YWYyOGI=") {
-              ...ContactView_contact
-            }
-            ...ContactList_allContacts
+            ...ContactList_contactsData
           }
         `}
         variables={{}}
@@ -37,24 +28,8 @@ export default class extends React.Component {
             return <div>Loading...</div>
           }
 
-          // const { contacts } = props.allContacts || {}
-          log('render CP', props)
-          const alfaContact = props.alfaContact
           return (<article>
-            {/* Contacts: {contacts ? contacts.length : 0} */}
-            {/* <ContactTable items={contacts} /> */}
-            <section>
-              alfaContact:
-              {JSON.stringify(alfaContact)}
-            </section>
-            <section>
-              betaContact:
-              <ContactView contact={props.betaContact} />
-            </section>
-            <section>
-              List:
-              <ContactList allContacts={props} />
-            </section>
+            <ContactList contactsData={props} />
           </article>)
         }}
       />

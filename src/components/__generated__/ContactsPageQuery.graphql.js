@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 90af860f6b3ca83d4ce5050f8ea40c97
+ * @relayHash 427cd4588fb253c6aa75bfb00188d325
  */
 
 /* eslint-disable */
@@ -9,47 +9,20 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type ContactList_allContacts$ref = any;
-type ContactView_contact$ref = any;
+type ContactList_contactsData$ref = any;
 export type ContactsPageQueryVariables = {||};
 export type ContactsPageQueryResponse = {|
-  +alfaContact: ?{|
-    +id: string,
-    +contactId: ?string,
-    +firstName: ?string,
-  |},
-  +betaContact: ?{|
-    +$fragmentRefs: ContactView_contact$ref
-  |},
-  +$fragmentRefs: ContactList_allContacts$ref,
+  +$fragmentRefs: ContactList_contactsData$ref
 |};
 */
 
 
 /*
 query ContactsPageQuery {
-  alfaContact: contact(id: "Y29udGFjdDo1NzhmMmJhYTEyZWFlYmFiZWM0YWYyOGI=") {
-    id
-    contactId
-    firstName
-  }
-  betaContact: contact(id: "Y29udGFjdDo1NzhmMmJhYTEyZWFlYmFiZWM0YWYyOGI=") {
-    ...ContactView_contact
-    id
-  }
-  ...ContactList_allContacts
+  ...ContactList_contactsData
 }
 
-fragment ContactView_contact on Contact {
-  id
-  contactId
-  firstName
-  lastName
-  email
-  phoneNumber
-}
-
-fragment ContactList_allContacts on Query {
+fragment ContactList_contactsData on Query {
   allContacts(first: 10) {
     edges {
       node {
@@ -70,77 +43,12 @@ fragment ContactList_allContacts on Query {
 }
 */
 
-const node/*: ConcreteRequest*/ = (function(){
-var v0 = [
-  {
-    "kind": "Literal",
-    "name": "id",
-    "value": "Y29udGFjdDo1NzhmMmJhYTEyZWFlYmFiZWM0YWYyOGI=",
-    "type": "ID"
-  }
-],
-v1 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "id",
-  "args": null,
-  "storageKey": null
-},
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "contactId",
-  "args": null,
-  "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "firstName",
-  "args": null,
-  "storageKey": null
-},
-v4 = {
-  "kind": "LinkedField",
-  "alias": "alfaContact",
-  "name": "contact",
-  "storageKey": "contact(id:\"Y29udGFjdDo1NzhmMmJhYTEyZWFlYmFiZWM0YWYyOGI=\")",
-  "args": v0,
-  "concreteType": "Contact",
-  "plural": false,
-  "selections": [
-    v1,
-    v2,
-    v3
-  ]
-},
-v5 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "lastName",
-  "args": null,
-  "storageKey": null
-},
-v6 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "email",
-  "args": null,
-  "storageKey": null
-},
-v7 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "phoneNumber",
-  "args": null,
-  "storageKey": null
-};
-return {
+const node/*: ConcreteRequest*/ = {
   "kind": "Request",
   "operationKind": "query",
   "name": "ContactsPageQuery",
   "id": null,
-  "text": "query ContactsPageQuery {\n  alfaContact: contact(id: \"Y29udGFjdDo1NzhmMmJhYTEyZWFlYmFiZWM0YWYyOGI=\") {\n    id\n    contactId\n    firstName\n  }\n  betaContact: contact(id: \"Y29udGFjdDo1NzhmMmJhYTEyZWFlYmFiZWM0YWYyOGI=\") {\n    ...ContactView_contact\n    id\n  }\n  ...ContactList_allContacts\n}\n\nfragment ContactView_contact on Contact {\n  id\n  contactId\n  firstName\n  lastName\n  email\n  phoneNumber\n}\n\nfragment ContactList_allContacts on Query {\n  allContacts(first: 10) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+  "text": "query ContactsPageQuery {\n  ...ContactList_contactsData\n}\n\nfragment ContactList_contactsData on Query {\n  allContacts(first: 10) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -149,26 +57,9 @@ return {
     "metadata": null,
     "argumentDefinitions": [],
     "selections": [
-      v4,
-      {
-        "kind": "LinkedField",
-        "alias": "betaContact",
-        "name": "contact",
-        "storageKey": "contact(id:\"Y29udGFjdDo1NzhmMmJhYTEyZWFlYmFiZWM0YWYyOGI=\")",
-        "args": v0,
-        "concreteType": "Contact",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "FragmentSpread",
-            "name": "ContactView_contact",
-            "args": null
-          }
-        ]
-      },
       {
         "kind": "FragmentSpread",
-        "name": "ContactList_allContacts",
+        "name": "ContactList_contactsData",
         "args": null
       }
     ]
@@ -178,24 +69,6 @@ return {
     "name": "ContactsPageQuery",
     "argumentDefinitions": [],
     "selections": [
-      v4,
-      {
-        "kind": "LinkedField",
-        "alias": "betaContact",
-        "name": "contact",
-        "storageKey": "contact(id:\"Y29udGFjdDo1NzhmMmJhYTEyZWFlYmFiZWM0YWYyOGI=\")",
-        "args": v0,
-        "concreteType": "Contact",
-        "plural": false,
-        "selections": [
-          v1,
-          v2,
-          v3,
-          v5,
-          v6,
-          v7
-        ]
-      },
       {
         "kind": "LinkedField",
         "alias": null,
@@ -230,11 +103,41 @@ return {
                 "concreteType": "Contact",
                 "plural": false,
                 "selections": [
-                  v1,
-                  v3,
-                  v5,
-                  v6,
-                  v7,
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "id",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "firstName",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "lastName",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "email",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "phoneNumber",
+                    "args": null,
+                    "storageKey": null
+                  },
                   {
                     "kind": "ScalarField",
                     "alias": null,
@@ -301,7 +204,6 @@ return {
     ]
   }
 };
-})();
 // prettier-ignore
-(node/*: any*/).hash = '0a5187371717d2f1eaf00e0ba297ad73';
+(node/*: any*/).hash = '6c5f022eb4630d2849ce69fb13af6028';
 module.exports = node;
