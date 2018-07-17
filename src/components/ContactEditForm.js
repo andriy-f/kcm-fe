@@ -33,8 +33,8 @@ export default class extends React.Component {
 
           <h3 className={kTextCenter}>Edit Contact</h3>
 
-          <Input autoFocus={true} name="firstName" label="First Name" value={firstName} onChange={this._handleInputChange} />
-          <Input name="lastName" label="Last Name" value={lastName} onChange={this._handleInputChange} />
+          <Input autoFocus={true} required name="firstName" label="First Name" value={firstName} onChange={this._handleInputChange} />
+          <Input name="lastName" required label="Last Name" value={lastName} onChange={this._handleInputChange} />
           <Input name="email" label="Email" value={email} onChange={this._handleInputChange} />
           <Input name="phoneNumber" label="Phone number" value={phoneNumber} onChange={this._handleInputChange} />
 
