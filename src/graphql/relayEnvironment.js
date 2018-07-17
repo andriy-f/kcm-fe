@@ -5,16 +5,22 @@ import {
   Store,
 } from 'relay-runtime'
 import fetch from 'isomorphic-fetch'
+import debug from 'debug'
+
+import { appName } from '../consts'
 import { BACKEND_URL } from '../config'
 import { urlJoin } from '../utils'
+
+const log = debug(appName + ':relayEnvironment.js')
 
 const graphqlURL = urlJoin(BACKEND_URL, '/graphql')
 
 const fetchQuery = (
   operation,
   variables,
-) =>
-  fetch(graphqlURL, {
+) => {
+  log('relay operation', operation.text)
+  return fetch(graphqlURL, {
     credentials: 'include',
     method: 'POST',
     headers: {
@@ -25,8 +31,10 @@ const fetchQuery = (
       variables,
     }),
   }).then(response => response.json()).then((json) => {
+    log('relay result', json)
     return json
   })
+}
 
 const environment = new Environment({
   network: Network.create(fetchQuery),
