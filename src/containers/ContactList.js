@@ -5,15 +5,14 @@ class ContactListBare extends React.Component {
   render() {
     console.log('render cl', this.props)
     return (
-      <div>
+      <article>
         {this.props.query && this.props.query.allContacts.edges.map(
           edge => <div>{edge.node} {edge.node.id}></div>
         )}
         <button
           onClick={() => this._loadMore()}
-          title="Load More"
-        />
-      </div>
+          title="Load More">Load more</button>
+      </article>
     )
   }
 

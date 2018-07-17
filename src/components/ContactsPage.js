@@ -53,7 +53,7 @@ export default class extends React.Component {
             </section>
             <section>
               List:
-              <ContactList allContacts={null} />
+              <ContactList allContacts={props} />
             </section>
           </article>)
         }}
