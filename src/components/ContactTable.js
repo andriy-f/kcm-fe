@@ -16,7 +16,7 @@ export default ({ items }) => (
         <TableCell>{item.email || ''}</TableCell>
         <TableCell>{item.phoneNumber || ''}</TableCell>
         <TableCell>
-          Buttons
+          {' '}
           {/* <RTIconButtonLink icon="edit" to={"/contacts/" + item._id}></RTIconButtonLink> */}
           {/* <IconButton icon="delete" data-id={item._id} onClick={this.confirmDeleteSingle} /> */}
         </TableCell>

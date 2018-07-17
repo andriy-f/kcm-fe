@@ -1,9 +1,10 @@
 import debug from 'debug'
 import React from 'react'
 import { createPaginationContainer, graphql } from 'react-relay'
-// import ContactView from '../containers/ContactView'
 
+// import ContactView from '../containers/ContactView'
 import { appName } from '../consts'
+import ContactTable from '../components/ContactTable'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactList.js')
@@ -12,9 +13,7 @@ class ContactListBare extends React.Component {
   render() {
     return (
       <article>
-        {this.props.contactsData.allContacts && this.props.contactsData.allContacts.edges.map(
-          edge => <div key={edge.node.id}>{edge.node.firstName} {edge.node.lastName}</div>
-        )}
+        {this.props.contactsData && <ContactTable items={this.props.contactsData.allContacts.edges.map(e => e.node)} />}
         <button
           onClick={() => this._loadMore()}
           title="Load More">Load more</button>
