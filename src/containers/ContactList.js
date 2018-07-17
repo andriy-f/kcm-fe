@@ -28,8 +28,10 @@ class ContactListBare extends React.Component {
 
     this.props.relay.loadMore(
       10,  // Fetch the next 10 feed items
-      error => {
-        log('loadMore error', error)
+      (error) => {
+        if (error) {
+          log('loadMore error', error)
+        }
       },
     )
   }
