@@ -10,7 +10,7 @@ class ContactListBare extends React.Component {
           edge => <div>{edge.node} {edge.node.id}></div>
         )}
         <button
-          onPress={() => this._loadMore()}
+          onClick={() => this._loadMore()}
           title="Load More"
         />
       </div>
