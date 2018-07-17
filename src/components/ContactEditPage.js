@@ -11,7 +11,11 @@ import { appName } from '../consts'
 const log = debug(appName + ':ContactEditPage.js')
 
 export default class extends React.Component {
-  _onSave = () => {
+  _handleSave = () => {
+    this.props.history.push('/contacts')
+  }
+
+  _handleCancel = () => {
     this.props.history.push('/contacts')
   }
 
@@ -39,7 +43,7 @@ export default class extends React.Component {
           }
 
           return (<article>
-            <ContactEdit contact={props.contact} onSave={this._onSave}/>
+            <ContactEdit contact={props.contact} onSave={this._handleSave} onCancel={this._handleCancel} />
           </article>)
         }}
       />

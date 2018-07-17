@@ -1,18 +1,30 @@
+// @flow
 import debug from 'debug'
 import React from 'react'
 import { Input } from 'react-toolbox/lib/input'
 import { Button } from 'react-toolbox/lib/button'
 
-import UpdateContactMutation from '../graphql/UpdateContactMutation'
-import { RTButtonLink } from '../components/RTButtonLink'
 import { kFormContainer, kTextCenter } from '../App.css'
 import { appName } from '../consts'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactEditForm.js')
 
-export default class extends React.Component {
-  constructor(props) {
+type Props = {
+  onSave: (data: any) => void,
+  onCancel: () => void,
+  contact: Object,
+}
+
+type State = {
+  firstName: string,
+  lastName: string,
+  email: string,
+  phoneNumber: string,
+}
+
+export default class extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props)
 
     const { firstName, lastName, email, phoneNumber } = props.contact
@@ -40,14 +52,14 @@ export default class extends React.Component {
 
           <div className={kTextCenter}>
             <Button label="Save" type="submit" flat />
-            <RTButtonLink label="Cancel" to="/contacts" />
+            <Button label="Cancel" onClick={this.props.onCancel} />
           </div>
         </form>
       </section>
     )
   }
 
-  _handleInputChange = (value, event) => {
+  _handleInputChange = (value: string, event: any) => {
     const target = event.target
     const name = target.name
 
@@ -56,9 +68,8 @@ export default class extends React.Component {
     })
   }
 
-  _handleSubmit = (e) => {
+  _handleSubmit = (e: any) => {
     e.preventDefault()
-    UpdateContactMutation.commit(this.props.relay.environment, this.state, this.props.contact)
-    this.props.onSave && this.props.onSave()
+    this.props.onSave(this.state)
   }
 }
