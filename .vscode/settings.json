@@ -4,4 +4,5 @@
         "buildServer": true
     },
     "javascript.validate.enable": false,
+    "flow.pathToFlow": "${workspaceRoot}/node_modules/.bin/flow",
 }
