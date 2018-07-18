@@ -6,7 +6,7 @@ import logInPage from './containers/LogIn'
 import logOutPage from './containers/LogOut'
 import ContactsPage from './components/ContactsPage'
 import ContactEditPage from './components/ContactEditPage'
-import ContactAddPage from './containers/ContactAddPage'
+import ContactCreatePage from './components/ContactCreatePage'
 import userProfile from './containers/userProfile'
 import NotFound from './components/NotFound'
 import DevPage from './containers/DevPage'
@@ -20,7 +20,7 @@ export default () => (
         <Route exact path="/userProfile" component={userProfile} />
         <Route exact path="/logOut" component={logOutPage} />
         <Route exact path="/contacts" component={AuthHOC(['contact-list-view'])(ContactsPage)} />
-        <Route path="/contacts/new" component={AuthHOC(['contact-edit'])(ContactAddPage)} />
+        <Route path="/contacts/new" component={AuthHOC(['contact-edit'])(ContactCreatePage)} />
         <Route path="/contacts/:id" component={AuthHOC(['contact-edit'])(ContactEditPage)} />
         <Route path="/settings" component={SettingsPage} />
         <Route path="/dev" component={DevPage} />
