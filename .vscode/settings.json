@@ -1,7 +1,8 @@
 {
     "search.exclude": {
         "build": true,
-        "buildServer": true
+        "buildServer": true,
+        "flow-typed": true,
     },
     "javascript.validate.enable": false,
     "flow.pathToFlow": "${workspaceRoot}/node_modules/.bin/flow",
