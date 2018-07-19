@@ -11,8 +11,8 @@ import { appName } from '../consts'
 const log = debug(appName + ':ContactEditForm.js')
 
 type Props = {
-  onSave: (data: any) => void,
-  onCancel: () => void,
+  onSave(data: any): void,
+  onCancel(): void,
   contact?: Object,
 }
 

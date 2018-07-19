@@ -1,4 +1,5 @@
-import { graphql, commitMutation } from 'react-relay'
+// @flow
+import { graphql, commitMutation, Environment } from 'react-relay'
 
 const mutation = graphql`
   mutation CreateContactMutation ($input: CreateContactInput!) {
@@ -28,8 +29,8 @@ const getOptimisticResponse = (data) => {
 }
 
 const commit = (
-  environment,
-  data
+  environment: Environment,
+  data: Object,
 ) => {
   // Now we just call commitMutation with the appropriate parameters
   return commitMutation(

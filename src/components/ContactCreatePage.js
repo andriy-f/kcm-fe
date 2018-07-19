@@ -1,3 +1,4 @@
+// @flow
 import debug from 'debug'
 import React from 'react'
 
@@ -9,8 +10,14 @@ import { appName } from '../consts'
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactCreatePage.js')
 
-export default class extends React.Component {
-  _handleSave = (data) => {
+type Props = {
+  history: {
+    push(route: string): void
+  }
+}
+
+export default class extends React.Component<Props> {
+  _handleSave = (data: Object) => {
     CreateContactMutation.commit(environment, data)
     this.props.history.push('/contacts')
   }
