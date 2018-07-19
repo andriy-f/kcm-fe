@@ -20,7 +20,7 @@ const fetchQuery = (
   operation,
   variables,
 ) => {
-  log('relay operation', operation.text)
+  log('relay operation', operation.text, variables)
   return fetch(graphqlURL, {
     credentials: 'include',
     method: 'POST',

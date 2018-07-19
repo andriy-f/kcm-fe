@@ -48,7 +48,7 @@ const node/*: ConcreteFragment*/ = {
       "kind": "LocalArgument",
       "name": "count",
       "type": "Int",
-      "defaultValue": 10
+      "defaultValue": 5
     },
     {
       "kind": "LocalArgument",
@@ -181,5 +181,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'f676e073e8f4c87385d79b3c2e05471e';
+(node/*: any*/).hash = 'c1651149921e4bf4d0aa93df66b64307';
 module.exports = node;

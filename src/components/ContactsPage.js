@@ -5,7 +5,7 @@ import { graphql, QueryRenderer } from 'react-relay'
 import ContactList from '../containers/ContactList'
 import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
-import { RTButtonLink }from '../components/RTButtonLink'
+import { RTButtonLink } from '../components/RTButtonLink'
 import { addItemButtonContainer } from '../App.css'
 
 // eslint-disable-next-line no-unused-vars
@@ -31,7 +31,7 @@ export default class extends React.Component {
           }
 
           return (<article>
-            <ContactList contactsData={props} />
+            <ContactList contactsData={props} test="1" />
             <div className={addItemButtonContainer}>
               <RTButtonLink icon='add' floating accent to="/contacts/new" />
             </div>

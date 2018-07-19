@@ -3,11 +3,13 @@ import debug from 'debug'
 import React from 'react'
 import { createPaginationContainer, graphql } from 'react-relay'
 import Dialog from 'react-toolbox/lib/dialog'
+import { Input } from 'react-toolbox/lib/input'
 
 import type { ContactList_contactsData } from './__generated__/ContactList_contactsData.graphql'
 import { appName } from '../consts'
 import ContactTable from '../components/ContactTable'
 import DeleteContactMutation from '../graphql/DeleteContactMutation'
+import { contactsFilter } from '../App.css'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactList.js')
@@ -19,26 +21,30 @@ type Props = {
 }
 
 type State = {
-  contactToDelete: Object | null
+  contactToDelete: Object | null,
+  filterText: string,
 }
 
 class ContactListBare extends React.Component<Props, State> {
   state = {
     contactToDelete: null,
+    filterText: '',
   }
 
   render() {
     const { contactsData } = this.props
-    const { contactToDelete } = this.state
+    const { contactToDelete, filterText } = this.state
     const items = (contactsData
       && contactsData.allContacts
       && contactsData.allContacts.edges
       && contactsData.allContacts.edges
         .filter(e => e && e.node)
         .map(e => (e && e.node) || {})) || undefined // Relay generated type defs are wrong
-    log('items', items)
+
     return (
       <article>
+        <Input type="text" label="Filter" className={contactsFilter} value={filterText}
+          onChange={this._handleFilterChange} />
         <ContactTable items={items} onDeleteClick={this._onDeleteClickHandler} />
         <button
           onClick={() => this._loadMore()}
@@ -56,8 +62,20 @@ class ContactListBare extends React.Component<Props, State> {
     )
   }
 
+  _handleFilterChange = (val) => {
+    this.setState({ filterText: val })
+    this.props.relay.refetchConnection(
+      5,
+      (error) => {
+        if (error) {
+          log('refetch error', error)
+        }
+      },
+      { filterText: val },
+    )
+  }
+
   _onDeleteClickHandler = (contact) => {
-    log('cdh', contact)
     this.setState({ contactToDelete: contact })
   }
 
@@ -78,7 +96,7 @@ class ContactListBare extends React.Component<Props, State> {
     }
 
     this.props.relay.loadMore(
-      10,  // Fetch the next 10 feed items
+      5,  // Fetch the next 10 feed items
       (error) => {
         if (error) {
           log('loadMore error', error)
@@ -97,43 +115,51 @@ export default createPaginationContainer(
   ContactListBare,
   {
     contactsData: graphql`
-          fragment ContactList_contactsData on Query
-          @argumentDefinitions(
-        count: {type: "Int", defaultValue: 10}
-        cursor: {type: "String"}
-        filterText: {type: "String"}
-      ) {
+      fragment ContactList_contactsData on Query
+        @argumentDefinitions(
+          count: { type: "Int", defaultValue: 5 }
+          cursor: { type: "String" }
+          filterText: { type: "String" }
+        ) {
           allContacts(
             first: $count
-        after: $cursor
-        filterText: $filterText # Non-pagination variables
-        ) @connection(key: "ContactList_allContacts") {
-          edges {
-        node {
-          id
-              firstName
-        lastName
-        email
-        phoneNumber
-      }
-    }
-  }
-}
+            after: $cursor
+            filterText: $filterText # Non-pagination variables
+          ) @connection(key: "ContactList_allContacts") {
+            edges {
+              node {
+                id
+                firstName
+                lastName
+                email
+                phoneNumber
+              }
+            }
+          }
+        }
 `,
   },
   {
     direction: 'forward',
-    getConnectionFromProps(props) {
-      return props.contactsData && props.contactsData.allContacts
-    },
+    // getConnectionFromProps(props) {
+    //   log('getConnectionFromProps props', props)
+    //   return props.contactsData && props.contactsData.allContacts
+    // },
     // This is also the default implementation of `getFragmentVariables` if it isn't provided.
-    getFragmentVariables(prevVars, totalCount) {
-      return {
-        ...prevVars,
-        count: totalCount,
-      }
-    },
+    // getFragmentVariables(prevVars, totalCount) {
+    //   log('getFragmentVariables prevVars', prevVars)
+    //   log('getFragmentVariables totalCount', totalCount)
+    //   return {
+    //     ...prevVars,
+    //     count: totalCount,
+    //   }
+    // },
     getVariables(props, { count, cursor }, fragmentVariables) {
+      log('getVars props', props)
+      log('getVars count', count)
+      log('getVars cursor', cursor)
+      log('getVars fragVars', fragmentVariables)
+
       return {
         count,
         cursor,
@@ -145,10 +171,10 @@ export default createPaginationContainer(
     query: graphql`
       query ContactListQuery (
         $count: Int!
-        $cursor: String!
+        $cursor: String
         $filterText: String
       ) {
-          ...ContactList_contactsData @arguments(count: $count, cursor: $cursor, filterText: $filterText)
+        ...ContactList_contactsData @arguments(count: $count, cursor: $cursor, filterText: $filterText)
       }
     `
   }

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 427cd4588fb253c6aa75bfb00188d325
+ * @relayHash 250e420df3b66198c159faf2b4f51c93
  */
 
 /* eslint-disable */
@@ -23,7 +23,7 @@ query ContactsPageQuery {
 }
 
 fragment ContactList_contactsData on Query {
-  allContacts(first: 10) {
+  allContacts(first: 5) {
     edges {
       node {
         id
@@ -48,7 +48,7 @@ const node/*: ConcreteRequest*/ = {
   "operationKind": "query",
   "name": "ContactsPageQuery",
   "id": null,
-  "text": "query ContactsPageQuery {\n  ...ContactList_contactsData\n}\n\nfragment ContactList_contactsData on Query {\n  allContacts(first: 10) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+  "text": "query ContactsPageQuery {\n  ...ContactList_contactsData\n}\n\nfragment ContactList_contactsData on Query {\n  allContacts(first: 5) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -73,12 +73,12 @@ const node/*: ConcreteRequest*/ = {
         "kind": "LinkedField",
         "alias": null,
         "name": "allContacts",
-        "storageKey": "allContacts(first:10)",
+        "storageKey": "allContacts(first:5)",
         "args": [
           {
             "kind": "Literal",
             "name": "first",
-            "value": 10,
+            "value": 5,
             "type": "Int"
           }
         ],
@@ -191,7 +191,7 @@ const node/*: ConcreteRequest*/ = {
           {
             "kind": "Literal",
             "name": "first",
-            "value": 10,
+            "value": 5,
             "type": "Int"
           }
         ],
