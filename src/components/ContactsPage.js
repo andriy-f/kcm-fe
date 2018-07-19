@@ -2,7 +2,7 @@ import debug from 'debug'
 import React from 'react'
 import { graphql, QueryRenderer } from 'react-relay'
 
-import ContactList from '../containers/ContactList'
+import ContactListWithFilter from '../containers/ContactListWithFilter'
 import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
 import { RTButtonLink } from '../components/RTButtonLink'
@@ -12,13 +12,14 @@ import { addItemButtonContainer } from '../App.css'
 const log = debug(appName + ':ContactsPage.js')
 
 export default class extends React.Component {
+
   render() {
     return (
       <QueryRenderer
         environment={environment}
         query={graphql`
           query ContactsPageQuery {
-            ...ContactList_contactsData
+            ...ContactListWithFilter_contactsData
           }
         `}
         variables={{}}
@@ -31,7 +32,7 @@ export default class extends React.Component {
           }
 
           return (<article>
-            <ContactList contactsData={props} test="1" />
+            <ContactListWithFilter contactsData={props} />
             <div className={addItemButtonContainer}>
               <RTButtonLink icon='add' floating accent to="/contacts/new" />
             </div>
