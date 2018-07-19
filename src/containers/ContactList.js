@@ -1,24 +1,75 @@
+// @flow
 import debug from 'debug'
 import React from 'react'
 import { createPaginationContainer, graphql } from 'react-relay'
+import Dialog from 'react-toolbox/lib/dialog'
 
-// import ContactView from '../containers/ContactView'
+import type { ContactList_contactsData } from './__generated__/ContactList_contactsData.graphql'
 import { appName } from '../consts'
 import ContactTable from '../components/ContactTable'
+import DeleteContactMutation from '../graphql/DeleteContactMutation'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactList.js')
 
-class ContactListBare extends React.Component {
+type Props = {
+  contactsData: ContactList_contactsData,
+  relay: Object,
+  contactToDeleteId: string,
+}
+
+type State = {
+  contactToDelete: Object | null
+}
+
+class ContactListBare extends React.Component<Props, State> {
+  state = {
+    contactToDelete: null,
+  }
+
   render() {
+    const { contactsData } = this.props
+    const { contactToDelete } = this.state
+    const items = (contactsData
+      && contactsData.allContacts
+      && contactsData.allContacts.edges
+      && contactsData.allContacts.edges
+        .filter(e => e && e.node)
+        .map(e => (e && e.node) || {})) || undefined // Relay generated type defs are wrong
+    log('items', items)
     return (
       <article>
-        {this.props.contactsData && <ContactTable items={this.props.contactsData.allContacts.edges.map(e => e.node)} />}
+        <ContactTable items={items} onDeleteClick={this._onDeleteClickHandler} />
         <button
           onClick={() => this._loadMore()}
           title="Load More">Load more</button>
+        <Dialog
+          actions={this.dialogConfirmDeleteActions}
+          active={!!this.state.contactToDelete}
+          onEscKeyDown={this._cancelDelete}
+          onOverlayClick={this._cancelDelete}
+          title='Confirm delete'
+        >
+          {contactToDelete && <p>Do you realy want to delete {contactToDelete.firstName} {contactToDelete.lastName}?</p>}
+        </Dialog>
       </article>
     )
+  }
+
+  _onDeleteClickHandler = (contact) => {
+    log('cdh', contact)
+    this.setState({ contactToDelete: contact })
+  }
+
+  _deleteHandler = () => {
+    if (this.state.contactToDelete) {
+      DeleteContactMutation.commit(this.props.relay.environment, this.state.contactToDelete)
+      this.setState({ contactToDelete: null })
+    }
+  }
+
+  _cancelDelete = () => {
+    this.setState({ contactToDelete: null })
   }
 
   _loadMore() {
@@ -35,35 +86,40 @@ class ContactListBare extends React.Component {
       },
     )
   }
+
+  dialogConfirmDeleteActions = [
+    { label: 'Cancel', onClick: this._cancelDelete },
+    { label: 'Delete', onClick: this._deleteHandler, primary: true }
+  ]
 }
 
 export default createPaginationContainer(
   ContactListBare,
   {
     contactsData: graphql`
-      fragment ContactList_contactsData on Query
-      @argumentDefinitions(
+          fragment ContactList_contactsData on Query
+          @argumentDefinitions(
         count: {type: "Int", defaultValue: 10}
         cursor: {type: "String"}
         filterText: {type: "String"}
       ) {
-        allContacts (
-          first: $count
-          after: $cursor
-          filterText: $filterText # Non-pagination variables
+          allContacts(
+            first: $count
+        after: $cursor
+        filterText: $filterText # Non-pagination variables
         ) @connection(key: "ContactList_allContacts") {
           edges {
-            node {
-              id
+        node {
+          id
               firstName
-              lastName
-              email
-              phoneNumber
-            }
-          }
-        }
+        lastName
+        email
+        phoneNumber
       }
-    `,
+    }
+  }
+}
+`,
   },
   {
     direction: 'forward',
@@ -81,7 +137,7 @@ export default createPaginationContainer(
       return {
         count,
         cursor,
-        filterText: fragmentVariables.filterText,
+        filterText: fragmentVariables && fragmentVariables.filterText,
       }
     },
     // Pagination query to be fetched upon calling `loadMore`.
@@ -92,7 +148,7 @@ export default createPaginationContainer(
         $cursor: String!
         $filterText: String
       ) {
-        ...ContactList_contactsData @arguments(count: $count, cursor: $cursor, filterText: $filterText)
+          ...ContactList_contactsData @arguments(count: $count, cursor: $cursor, filterText: $filterText)
       }
     `
   }

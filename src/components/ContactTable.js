@@ -1,9 +1,16 @@
+// @flow
 import React from 'react'
 import { Table, TableHead, TableRow, TableCell } from 'react-toolbox/lib/table'
+import { IconButton } from 'react-toolbox/lib/button'
 
 import { RTIconButtonLink } from './RTButtonLink'
 
-export default ({ items }) => (
+type Props = {
+  items?: Array<Object>,
+  onDeleteClick(item: Object): void
+}
+
+export default ({ items, onDeleteClick }: Props) => (
   <Table selectable={false}>
     <TableHead>
       <TableCell>First Name</TableCell>
@@ -19,7 +26,7 @@ export default ({ items }) => (
         <TableCell>{item.phoneNumber || ''}</TableCell>
         <TableCell>
           <RTIconButtonLink icon="edit" to={'/contacts/' + item.id}></RTIconButtonLink>
-          {/* <IconButton icon="delete" data-id={item._id} onClick={this.confirmDeleteSingle} /> */}
+          <IconButton icon="delete" onClick={onDeleteClick.bind(this, item)} />
         </TableCell>
       </TableRow>
     ))}
