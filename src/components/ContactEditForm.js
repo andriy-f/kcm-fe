@@ -42,9 +42,6 @@ export default class extends React.Component<Props, State> {
     return (
       <section className={kFormContainer}>
         <form onSubmit={this._handleSubmit} method="post">
-
-          <h3 className={kTextCenter}>Edit Contact</h3>
-
           <Input autoFocus={true} required name="firstName" label="First Name" value={firstName} onChange={this._handleInputChange} />
           <Input name="lastName" required label="Last Name" value={lastName} onChange={this._handleInputChange} />
           <Input name="email" label="Email" value={email} onChange={this._handleInputChange} />

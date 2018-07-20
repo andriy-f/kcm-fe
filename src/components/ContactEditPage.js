@@ -6,6 +6,7 @@ import { graphql, QueryRenderer } from 'react-relay'
 import ContactEdit from '../containers/ContactEdit'
 import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
+import { kTextCenter } from '../App.css'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactEditPage.js')
@@ -42,9 +43,11 @@ export default class extends React.Component {
             return <div>Loading...</div>
           }
 
-          return (<article>
-            <ContactEdit contact={props.contact} onSave={this._handleSave} onCancel={this._handleCancel} />
-          </article>)
+          return (
+            <article>
+              <h3 className={kTextCenter}>Edit Contact</h3>
+              <ContactEdit contact={props.contact} onSave={this._handleSave} onCancel={this._handleCancel} />
+            </article>)
         }}
       />
     )
