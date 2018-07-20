@@ -83,7 +83,7 @@ class ContactListBare extends React.Component<Props, State> {
     }
 
     this.props.relay.loadMore(
-      5,  // Fetch the next n items
+      10,  // Fetch the next n items
       (error) => {
         if (error) {
           log('loadMore error', error)
@@ -104,7 +104,7 @@ export default createPaginationContainer(
     contactsData: graphql`
       fragment ContactList_contactsData on Query
         @argumentDefinitions(
-          count: { type: "Int", defaultValue: 5 }
+          count: { type: "Int", defaultValue: 10 }
           cursor: { type: "String" }
           filterText: { type: "String" }
         ) {

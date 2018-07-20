@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash c1fde142de50eb1bf08d1bbc9d4775ec
+ * @relayHash 695bd7227de3260f276f69c7fb0da3db
  */
 
 /* eslint-disable */
@@ -27,7 +27,7 @@ fragment ContactListWithFilter_contactsData on Query {
 }
 
 fragment ContactList_contactsData_nJp8j on Query {
-  allContacts(first: 5) {
+  allContacts(first: 10) {
     edges {
       node {
         id
@@ -52,7 +52,7 @@ const node/*: ConcreteRequest*/ = {
   "operationKind": "query",
   "name": "ContactsPageQuery",
   "id": null,
-  "text": "query ContactsPageQuery {\n  ...ContactListWithFilter_contactsData\n}\n\nfragment ContactListWithFilter_contactsData on Query {\n  ...ContactList_contactsData_nJp8j\n}\n\nfragment ContactList_contactsData_nJp8j on Query {\n  allContacts(first: 5) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+  "text": "query ContactsPageQuery {\n  ...ContactListWithFilter_contactsData\n}\n\nfragment ContactListWithFilter_contactsData on Query {\n  ...ContactList_contactsData_nJp8j\n}\n\nfragment ContactList_contactsData_nJp8j on Query {\n  allContacts(first: 10) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -77,12 +77,12 @@ const node/*: ConcreteRequest*/ = {
         "kind": "LinkedField",
         "alias": null,
         "name": "allContacts",
-        "storageKey": "allContacts(first:5)",
+        "storageKey": "allContacts(first:10)",
         "args": [
           {
             "kind": "Literal",
             "name": "first",
-            "value": 5,
+            "value": 10,
             "type": "Int"
           }
         ],
@@ -195,7 +195,7 @@ const node/*: ConcreteRequest*/ = {
           {
             "kind": "Literal",
             "name": "first",
-            "value": 5,
+            "value": 10,
             "type": "Int"
           }
         ],

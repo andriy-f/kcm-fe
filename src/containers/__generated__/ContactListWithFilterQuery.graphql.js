@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 4e9ed2680c343754e7884ccac5331054
+ * @relayHash 2e64242b6213f940ce0c87fab74d96e1
  */
 
 /* eslint-disable */
@@ -31,7 +31,7 @@ fragment ContactListWithFilter_contactsData_4vJyjG on Query {
 }
 
 fragment ContactList_contactsData_4vJyjG on Query {
-  allContacts(first: 5, filterText: $filterText) {
+  allContacts(first: 10, filterText: $filterText) {
     edges {
       node {
         id
@@ -65,7 +65,7 @@ return {
   "operationKind": "query",
   "name": "ContactListWithFilterQuery",
   "id": null,
-  "text": "query ContactListWithFilterQuery(\n  $filterText: String\n) {\n  ...ContactListWithFilter_contactsData_4vJyjG\n}\n\nfragment ContactListWithFilter_contactsData_4vJyjG on Query {\n  ...ContactList_contactsData_4vJyjG\n}\n\nfragment ContactList_contactsData_4vJyjG on Query {\n  allContacts(first: 5, filterText: $filterText) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+  "text": "query ContactListWithFilterQuery(\n  $filterText: String\n) {\n  ...ContactListWithFilter_contactsData_4vJyjG\n}\n\nfragment ContactListWithFilter_contactsData_4vJyjG on Query {\n  ...ContactList_contactsData_4vJyjG\n}\n\nfragment ContactList_contactsData_4vJyjG on Query {\n  allContacts(first: 10, filterText: $filterText) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -108,7 +108,7 @@ return {
           {
             "kind": "Literal",
             "name": "first",
-            "value": 5,
+            "value": 10,
             "type": "Int"
           }
         ],
@@ -227,7 +227,7 @@ return {
           {
             "kind": "Literal",
             "name": "first",
-            "value": 5,
+            "value": 10,
             "type": "Int"
           }
         ],
