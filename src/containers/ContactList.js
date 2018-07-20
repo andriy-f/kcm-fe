@@ -6,6 +6,7 @@ import Dialog from 'react-toolbox/lib/dialog'
 import { Button } from 'react-toolbox/lib/button'
 
 import { appName } from '../consts'
+import AutoLoadMore from '../components/AutoLoadMore'
 import ContactTable from '../components/ContactTable'
 import DeleteContactMutation from '../graphql/DeleteContactMutation'
 import { loadMoreButton } from '../App.css'
@@ -42,11 +43,13 @@ class ContactListBare extends React.Component<Props, State> {
     return (
       <article>
         <ContactTable items={items} onDeleteClick={this._onDeleteClickHandler} />
-        <Button
-          primary
-          className={loadMoreButton}
-          onClick={this._loadMore}
-          title="Load More">Load more</Button>
+        <AutoLoadMore hasMore={hasMore()} onLoadMore={this._loadMore}>
+          <Button
+            primary
+            className={loadMoreButton}
+            onClick={this._loadMore}
+            title="Load More">Load more</Button>
+        </AutoLoadMore>
         <Dialog
           actions={this.dialogConfirmDeleteActions}
           active={!!this.state.contactToDelete}
