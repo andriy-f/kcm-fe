@@ -23,14 +23,20 @@ export default class extends React.Component<Props> {
     this.wrapperRef = React.createRef()
     if (window.IntersectionObserver) {
       this.observer = new IntersectionObserver(this._handleIntersection, {
-        rootMargin: '200px'
+        rootMargin: '300px'
       })
     }
   }
 
   componentDidMount() {
-    if (window.IntersectionObserver) {
-      this.wrapperRef.current && this.observer.observe(this.wrapperRef.current)
+    if (window.IntersectionObserver && this.wrapperRef.current) {
+      this.observer.observe(this.wrapperRef.current)
+    }
+  }
+
+  componentWillUnmount() {
+    if (window.IntersectionObserver && this.wrapperRef.current) {
+      this.observer.unobserve(this.wrapperRef.current)
     }
   }
 
@@ -42,10 +48,10 @@ export default class extends React.Component<Props> {
 
   render() {
     const { hasMore, children } = this.props
-    return hasMore ? (
+    return (
       <div ref={this.wrapperRef}>
-        {children}
+        {hasMore && children}
       </div>
-    ) : null
+    )
   }
 }
