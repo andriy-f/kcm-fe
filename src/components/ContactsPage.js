@@ -6,7 +6,7 @@ import ContactListWithFilter from '../containers/ContactListWithFilter'
 import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
 import { RTButtonLink } from '../components/RTButtonLink'
-import { addItemButtonContainer } from '../App.css'
+import { addItemButtonContainer, contactsPage } from '../App.css'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactsPage.js')
@@ -31,12 +31,13 @@ export default class extends React.Component {
             return <div>Loading...</div>
           }
 
-          return (<article>
-            <ContactListWithFilter contactsData={props} />
-            <div className={addItemButtonContainer}>
-              <RTButtonLink icon='add' floating accent to="/contacts/new" />
-            </div>
-          </article>)
+          return (
+            <article className={contactsPage}>
+              <ContactListWithFilter contactsData={props} />
+              <div className={addItemButtonContainer}>
+                <RTButtonLink icon='add' floating accent to="/contacts/new" />
+              </div>
+            </article>)
         }}
       />
     )

@@ -1,19 +1,26 @@
 // @flow
 import debug from 'debug'
 import React from 'react'
-import { createPaginationContainer, graphql } from 'react-relay'
+import { createPaginationContainer, graphql, Environment } from 'react-relay'
 import Dialog from 'react-toolbox/lib/dialog'
+import { Button } from 'react-toolbox/lib/button'
 
 import { appName } from '../consts'
 import ContactTable from '../components/ContactTable'
 import DeleteContactMutation from '../graphql/DeleteContactMutation'
+import { loadMoreButton } from '../App.css'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactList.js')
 
 type Props = {
   contactsData: any,
-  relay: Object,
+  relay: {
+    environment: Environment,
+    loadMore(pageSize: number, callback: ?(error: ?Error) => void): any,
+    hasMore(): boolean,
+    isLoading(): boolean,
+  }
 }
 
 type State = {
@@ -26,7 +33,7 @@ class ContactListBare extends React.Component<Props, State> {
   }
 
   render() {
-    const { contactsData } = this.props
+    const { contactsData, relay: { hasMore } } = this.props
     const { contactToDelete } = this.state
     const items = contactsData.allContacts.edges
       .filter(e => e && e.node)
@@ -35,9 +42,11 @@ class ContactListBare extends React.Component<Props, State> {
     return (
       <article>
         <ContactTable items={items} onDeleteClick={this._onDeleteClickHandler} />
-        <button
-          onClick={() => this._loadMore()}
-          title="Load More">Load more</button>
+        <Button
+          primary
+          className={loadMoreButton}
+          onClick={this._loadMore}
+          title="Load More">Load more</Button>
         <Dialog
           actions={this.dialogConfirmDeleteActions}
           active={!!this.state.contactToDelete}
@@ -65,7 +74,7 @@ class ContactListBare extends React.Component<Props, State> {
     this.setState({ contactToDelete: null })
   }
 
-  _loadMore() {
+  _loadMore = () => {
     if (!this.props.relay.hasMore() || this.props.relay.isLoading()) {
       return
     }

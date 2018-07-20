@@ -4,6 +4,7 @@ import { Table, TableHead, TableRow, TableCell } from 'react-toolbox/lib/table'
 import { IconButton } from 'react-toolbox/lib/button'
 
 import { RTIconButtonLink } from './RTButtonLink'
+import { contactsTable__btnCol} from '../App.css'
 
 type Props = {
   items?: Array<Object>,
@@ -24,7 +25,7 @@ export default ({ items, onDeleteClick }: Props) => (
         <TableCell>{item.lastName || ''}</TableCell>
         <TableCell>{item.email || ''}</TableCell>
         <TableCell>{item.phoneNumber || ''}</TableCell>
-        <TableCell>
+        <TableCell className={contactsTable__btnCol}>
           <RTIconButtonLink icon="edit" to={'/contacts/' + item.id}></RTIconButtonLink>
           <IconButton icon="delete" onClick={onDeleteClick.bind(this, item)} />
         </TableCell>
