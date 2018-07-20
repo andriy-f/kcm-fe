@@ -3,6 +3,7 @@ import debug from 'debug'
 import React from 'react'
 import { createRefetchContainer, graphql } from 'react-relay'
 import { Input } from 'react-toolbox/lib/input'
+import { debounce } from 'throttle-debounce'
 
 import type { ContactListWithFilter_contactsData } from './__generated__/ContactListWithFilter_contactsData.graphql'
 import { appName } from '../consts'
@@ -22,6 +23,12 @@ type State = {
 }
 
 class ContactListWithFilterBare extends React.Component<Props, State> {
+  filterDebounced: any
+
+  constructor(props: Props) {
+    super(props)
+    this.filterDebounced = debounce(200, this._refetchFun)
+  }
 
   state = {
     filterText: '',
@@ -46,9 +53,12 @@ class ContactListWithFilterBare extends React.Component<Props, State> {
   }
 
   _handleFilterChange = (val) => {
-    this.setState({ filterText: val })
+    this.setState({ filterText: val }, this.filterDebounced)
+  }
+
+  _refetchFun = () => {
     this.props.relay.refetch(
-      { filterText: val },
+      { filterText: this.state.filterText },
       null,
       (error) => {
         if (error) {
