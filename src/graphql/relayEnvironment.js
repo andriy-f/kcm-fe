@@ -33,6 +33,14 @@ const fetchQuery = (
     }),
   }).then(response => response.json()).then((json) => {
     log('relay result', json)
+    if (json.errors) {
+      if (json.errors.some && json.errors.some((e) => e.message === 'Not authenticated')) {
+        return Promise.reject(new Error('Not authenticated. You need to log in or log out and log in.'))
+      }
+
+      return Promise.reject(json.errors)
+    }
+
     return json
   })
 }

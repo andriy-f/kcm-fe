@@ -7,6 +7,7 @@ import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
 import { RTButtonLink } from '../components/RTButtonLink'
 import { addItemButtonContainer, contactsPage } from '../App.css'
+import { renderRelayQueryError } from '../relayUtils'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactsPage.js')
@@ -25,7 +26,7 @@ export default class extends React.Component {
         variables={{}}
         render={({ error, props }) => {
           if (error) {
-            return <div>Error!</div>
+            return renderRelayQueryError(error)
           }
           if (!props) {
             return <div>Loading...</div>
