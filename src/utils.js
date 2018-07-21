@@ -15,7 +15,7 @@ export const isUserLoggedIn = (currentUser) => {
 
 export const getViewState = state => ({
   ...state,
-  isFetchingAnywhere: state.logIn.isFetching || state.contactsPage.isFetching
+  isFetchingAnywhere: state.logIn.isFetching
 })
 
 const switchcaseSimple = cases => defaultCase => key =>
