@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 1fb683c48cd5ec215d9350536332df50
+ * @relayHash 26bc4bd6e169bcbf2e0e119f6241e06b
  */
 
 /* eslint-disable */
@@ -19,7 +19,7 @@ export type DeleteContactMutationVariables = {|
 |};
 export type DeleteContactMutationResponse = {|
   +deleteContact: ?{|
-    +id: ?string,
+    +deletedId: ?string,
     +clientMutationId: ?string,
   |}
 |};
@@ -31,7 +31,7 @@ mutation DeleteContactMutation(
   $input: DeleteContactInput!
 ) {
   deleteContact(input: $input) {
-    id
+    deletedId
     clientMutationId
   }
 }
@@ -66,7 +66,7 @@ v1 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "id",
+        "name": "deletedId",
         "args": null,
         "storageKey": null
       },
@@ -85,7 +85,7 @@ return {
   "operationKind": "mutation",
   "name": "DeleteContactMutation",
   "id": null,
-  "text": "mutation DeleteContactMutation(\n  $input: DeleteContactInput!\n) {\n  deleteContact(input: $input) {\n    id\n    clientMutationId\n  }\n}\n",
+  "text": "mutation DeleteContactMutation(\n  $input: DeleteContactInput!\n) {\n  deleteContact(input: $input) {\n    deletedId\n    clientMutationId\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -104,5 +104,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'acdac4ecf15fcb746cf00a3c21e38db1';
+(node/*: any*/).hash = '7b321fde339dc71a32be64f442a0f8b9';
 module.exports = node;

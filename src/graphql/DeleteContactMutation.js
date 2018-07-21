@@ -4,7 +4,7 @@ import { graphql, commitMutation, Environment } from 'react-relay'
 const mutation = graphql`
   mutation DeleteContactMutation ($input: DeleteContactInput!) {
     deleteContact (input: $input) {
-      id
+      deletedId
       clientMutationId
     }
   }
@@ -13,7 +13,7 @@ const mutation = graphql`
 const getOptimisticResponse = (contact) => {
   return {
     deleteContact: {
-      id: contact.id,
+      deletedId: contact.id,
       clientMutationId: null,
     },
   }
@@ -34,7 +34,7 @@ const commit = (
       optimisticResponse: getOptimisticResponse(contact),
       configs: [{
         type: 'NODE_DELETE',
-        deletedIDFieldName: 'id',
+        deletedIDFieldName: 'deletedId',
       }]
     }
   )

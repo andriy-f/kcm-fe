@@ -75,8 +75,8 @@ input DeleteContactInput {
 }
 
 type DeleteContactPayload {
-  contactId: ID
-  id: ID
+  deletedContactId: ID
+  deletedId: ID
   clientMutationId: String
 }
 
