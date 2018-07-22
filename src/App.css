@@ -3,6 +3,10 @@
   background-color: #FFFFFF;
 }
 
+.intro__h {
+  font-size: 2em;
+}
+
 .staticErrorMessage {
   color: red;
   position: absolute;
