@@ -2,13 +2,14 @@
 import React from 'react'
 import { Table, TableHead, TableRow, TableCell } from 'react-toolbox/lib/table'
 import { IconButton } from 'react-toolbox/lib/button'
+import { Link } from 'react-router-dom'
 
 import { RTIconButtonLink } from './RTButtonLink'
-import { contactsTable__btnCol} from '../App.css'
+import { contactsTable__btnCol, contactsTable__link } from '../App.css'
 
 type Props = {
-  items?: Array<Object>,
-  onDeleteClick(item: Object): void
+  items?: Object[],
+  onDeleteClick(item: Object): void,
 }
 
 export default ({ items, onDeleteClick }: Props) => (
@@ -19,17 +20,33 @@ export default ({ items, onDeleteClick }: Props) => (
       <TableCell>Email</TableCell>
       <TableCell>Phone Number</TableCell>
     </TableHead>
-    {items && items.map((item) => (
-      <TableRow key={item.id}>
-        <TableCell>{item.firstName || ''}</TableCell>
-        <TableCell>{item.lastName || ''}</TableCell>
-        <TableCell>{item.email || ''}</TableCell>
-        <TableCell>{item.phoneNumber || ''}</TableCell>
-        <TableCell className={contactsTable__btnCol}>
-          <RTIconButtonLink icon="edit" to={'/contacts/' + item.id}></RTIconButtonLink>
-          <IconButton icon="delete" onClick={onDeleteClick.bind(this, item)} />
-        </TableCell>
-      </TableRow>
-    ))}
+    {items && items.map((item) => {
+      const TableCellWithLink = ({ children }) => <TableCell>
+        <Link className={contactsTable__link} to={'/contacts/' + item.id}>
+          {children}
+        </Link>
+      </TableCell>
+      const { firstName = '', lastName = '', email, phoneNumber } = item
+      return (
+        <TableRow key={item.id}>
+          <TableCellWithLink>{firstName}</TableCellWithLink>
+          <TableCellWithLink>{lastName}</TableCellWithLink>
+          <TableCell>
+            {email
+              ? <a href={'mailto: ' + email}>{email}</a>
+              : ''}
+          </TableCell>
+          <TableCell>
+            {phoneNumber
+              ? <a href={'tel: ' + phoneNumber}>{phoneNumber}</a>
+              : ''}
+          </TableCell>
+          <TableCell className={contactsTable__btnCol}>
+            <RTIconButtonLink icon="edit" to={'/contacts/' + item.id}></RTIconButtonLink>
+            <IconButton icon="delete" onClick={onDeleteClick.bind(this, item)} />
+          </TableCell>
+        </TableRow>
+      )
+    })}
   </Table>
 )

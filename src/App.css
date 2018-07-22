@@ -54,3 +54,17 @@
 .contactsTable__btnCol {
   white-space: nowrap;
 }
+
+.contactsTable__link {
+  position: relative;
+  color: initial;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
+.contactsTable__link:hover,
+.contactsTable__link:hover {
+  color: initial;
+}
