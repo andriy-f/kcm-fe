@@ -33,8 +33,8 @@ const LoginFormReduxed = reduxForm({
 
 class LogIn extends React.Component {
     constructor(props) {
-        super(props);
-        this.state = { showMessage: true };
+        super(props)
+        this.state = { showMessage: true }
     }
 
 
@@ -92,7 +92,7 @@ class LogIn extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    const { currentUser, logIn } = state;
+    const { currentUser, logIn } = state
 
     return {
         currentUser,

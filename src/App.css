@@ -3,6 +3,10 @@
   background-color: #FFFFFF;
 }
 
+.intro__h {
+  font-size: 2em;
+}
+
 .staticErrorMessage {
   color: red;
   position: absolute;
@@ -38,4 +42,33 @@
 .contactsPager {
   margin: 1.2em 0;
   line-height: 1em;
+}
+
+.loadMoreButton {
+  display: block;
+  width: 100%;
+  margin-top: 1em;
+}
+
+.contactsPage {
+  padding-bottom: 40px;
+}
+
+/* Contacts table button column */
+.contactsTable__btnCol {
+  white-space: nowrap;
+}
+
+.contactsTable__link {
+  position: relative;
+  color: initial;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
+.contactsTable__link:hover,
+.contactsTable__link:hover {
+  color: initial;
 }

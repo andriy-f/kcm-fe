@@ -1,5 +1,5 @@
-import * as debug from 'debug'
 import React, { Component } from 'react'
+import debug from 'debug'
 
 import { app, staticErrorMessage } from '../App.css'
 import { BACKEND_URL } from '../config'
