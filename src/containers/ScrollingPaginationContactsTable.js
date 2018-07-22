@@ -29,7 +29,7 @@ type State = {
   contactToDelete: Object | null,
 }
 
-class ContactListBare extends React.Component<Props, State> {
+class ScrollingPaginationContactsTableBare extends React.Component<Props, State> {
   state = {
     contactToDelete: null,
   }
@@ -100,10 +100,10 @@ class ContactListBare extends React.Component<Props, State> {
 }
 
 export default createPaginationContainer(
-  ContactListBare,
+  ScrollingPaginationContactsTableBare,
   {
     contactsData: graphql`
-      fragment ContactList_contactsData on Query
+      fragment ScrollingPaginationContactsTable_contactsData on Query
         @argumentDefinitions(
           count: { type: "Int", defaultValue: 10 }
           cursor: { type: "String" }
@@ -113,7 +113,7 @@ export default createPaginationContainer(
             first: $count
             after: $cursor
             filterText: $filterText # Non-pagination variables
-          ) @connection(key: "ContactList_allContacts") {
+          ) @connection(key: "ScrollingPaginationContactsTable_allContacts") {
             edges {
               node {
                 id
@@ -139,12 +139,12 @@ export default createPaginationContainer(
     // Pagination query to be fetched upon calling `loadMore`.
     // Notice that we re-use our fragment, and the shape of this query matches our fragment spec.
     query: graphql`
-      query ContactListQuery (
+      query ScrollingPaginationContactsTableQuery (
         $count: Int!
         $cursor: String
         $filterText: String
       ) {
-        ...ContactList_contactsData @arguments(count: $count, cursor: $cursor, filterText: $filterText)
+        ...ScrollingPaginationContactsTable_contactsData @arguments(count: $count, cursor: $cursor, filterText: $filterText)
       }
     `
   }

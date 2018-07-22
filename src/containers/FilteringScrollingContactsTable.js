@@ -5,7 +5,7 @@ import { createRefetchContainer, graphql } from 'react-relay'
 import { Input } from 'react-toolbox/lib/input'
 import { debounce } from 'throttle-debounce'
 
-import type { ContactListWithFilter_contactsData } from './__generated__/ContactListWithFilter_contactsData.graphql'
+import type { FilteringScrollingContactsTable_contactsData } from './__generated__/FilteringScrollingContactsTable_contactsData.graphql'
 import { appName } from '../consts'
 import ScrollingPaginationContactsTable from '../containers/ScrollingPaginationContactsTable'
 import { contactsFilter } from '../App.css'
@@ -14,7 +14,7 @@ import { contactsFilter } from '../App.css'
 const log = debug(appName + ':FilteringScrollingContactsTable.js')
 
 type Props = {
-  contactsData: ContactListWithFilter_contactsData,
+  contactsData: FilteringScrollingContactsTable_contactsData,
   relay: any,
 }
 
@@ -73,19 +73,19 @@ export default createRefetchContainer(
   PlainFilteringContactsTable,
   {
     contactsData: graphql`
-      fragment ContactListWithFilter_contactsData on Query
+      fragment FilteringScrollingContactsTable_contactsData on Query
         @argumentDefinitions(
           filterText: { type: "String" }
         ) {
-          ...ContactList_contactsData @arguments(filterText: $filterText)
+          ...ScrollingPaginationContactsTable_contactsData @arguments(filterText: $filterText)
         }
 `,
   },
   graphql`
-      query ContactListWithFilterQuery (
+      query FilteringScrollingContactsTableQuery (
         $filterText: String
       ) {
-        ...ContactListWithFilter_contactsData @arguments(filterText: $filterText)
+        ...FilteringScrollingContactsTable_contactsData @arguments(filterText: $filterText)
       }
     `
 )

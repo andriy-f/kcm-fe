@@ -21,7 +21,7 @@ export default class extends React.Component<{}> {
         environment={environment}
         query={graphql`
           query ContactsPageQuery {
-            ...ContactListWithFilter_contactsData
+            ...FilteringScrollingContactsTable_contactsData
           }
         `}
         variables={{}}

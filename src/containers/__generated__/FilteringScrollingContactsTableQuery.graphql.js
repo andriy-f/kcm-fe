@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5d5c12a36b72663ad2f42cdaa40fa894
+ * @relayHash 63473d6988c7a6a9fd5410a3784275b1
  */
 
 /* eslint-disable */
@@ -9,29 +9,29 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type ContactList_contactsData$ref = any;
-export type ContactListQueryVariables = {|
-  count: number,
-  cursor?: ?string,
-  filterText?: ?string,
+type FilteringScrollingContactsTable_contactsData$ref = any;
+export type FilteringScrollingContactsTableQueryVariables = {|
+  filterText?: ?string
 |};
-export type ContactListQueryResponse = {|
-  +$fragmentRefs: ContactList_contactsData$ref
+export type FilteringScrollingContactsTableQueryResponse = {|
+  +$fragmentRefs: FilteringScrollingContactsTable_contactsData$ref
 |};
 */
 
 
 /*
-query ContactListQuery(
-  $count: Int!
-  $cursor: String
+query FilteringScrollingContactsTableQuery(
   $filterText: String
 ) {
-  ...ContactList_contactsData_UImuz
+  ...FilteringScrollingContactsTable_contactsData_4vJyjG
 }
 
-fragment ContactList_contactsData_UImuz on Query {
-  allContacts(first: $count, after: $cursor, filterText: $filterText) {
+fragment FilteringScrollingContactsTable_contactsData_4vJyjG on Query {
+  ...ScrollingPaginationContactsTable_contactsData_4vJyjG
+}
+
+fragment ScrollingPaginationContactsTable_contactsData_4vJyjG on Query {
+  allContacts(first: 10, filterText: $filterText) {
     edges {
       node {
         id
@@ -55,18 +55,6 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
-    "name": "count",
-    "type": "Int!",
-    "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
-    "name": "cursor",
-    "type": "String",
-    "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
     "name": "filterText",
     "type": "String",
     "defaultValue": null
@@ -75,33 +63,21 @@ var v0 = [
 return {
   "kind": "Request",
   "operationKind": "query",
-  "name": "ContactListQuery",
+  "name": "FilteringScrollingContactsTableQuery",
   "id": null,
-  "text": "query ContactListQuery(\n  $count: Int!\n  $cursor: String\n  $filterText: String\n) {\n  ...ContactList_contactsData_UImuz\n}\n\nfragment ContactList_contactsData_UImuz on Query {\n  allContacts(first: $count, after: $cursor, filterText: $filterText) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+  "text": "query FilteringScrollingContactsTableQuery(\n  $filterText: String\n) {\n  ...FilteringScrollingContactsTable_contactsData_4vJyjG\n}\n\nfragment FilteringScrollingContactsTable_contactsData_4vJyjG on Query {\n  ...ScrollingPaginationContactsTable_contactsData_4vJyjG\n}\n\nfragment ScrollingPaginationContactsTable_contactsData_4vJyjG on Query {\n  allContacts(first: 10, filterText: $filterText) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "ContactListQuery",
+    "name": "FilteringScrollingContactsTableQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": v0,
     "selections": [
       {
         "kind": "FragmentSpread",
-        "name": "ContactList_contactsData",
+        "name": "FilteringScrollingContactsTable_contactsData",
         "args": [
-          {
-            "kind": "Variable",
-            "name": "count",
-            "variableName": "count",
-            "type": null
-          },
-          {
-            "kind": "Variable",
-            "name": "cursor",
-            "variableName": "cursor",
-            "type": null
-          },
           {
             "kind": "Variable",
             "name": "filterText",
@@ -114,7 +90,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "ContactListQuery",
+    "name": "FilteringScrollingContactsTableQuery",
     "argumentDefinitions": v0,
     "selections": [
       {
@@ -125,20 +101,14 @@ return {
         "args": [
           {
             "kind": "Variable",
-            "name": "after",
-            "variableName": "cursor",
-            "type": "String"
-          },
-          {
-            "kind": "Variable",
             "name": "filterText",
             "variableName": "filterText",
             "type": "String"
           },
           {
-            "kind": "Variable",
+            "kind": "Literal",
             "name": "first",
-            "variableName": "count",
+            "value": 10,
             "type": "Int"
           }
         ],
@@ -250,25 +220,19 @@ return {
         "args": [
           {
             "kind": "Variable",
-            "name": "after",
-            "variableName": "cursor",
-            "type": "String"
-          },
-          {
-            "kind": "Variable",
             "name": "filterText",
             "variableName": "filterText",
             "type": "String"
           },
           {
-            "kind": "Variable",
+            "kind": "Literal",
             "name": "first",
-            "variableName": "count",
+            "value": 10,
             "type": "Int"
           }
         ],
         "handle": "connection",
-        "key": "ContactList_allContacts",
+        "key": "ScrollingPaginationContactsTable_allContacts",
         "filters": [
           "filterText"
         ]
@@ -278,5 +242,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '728cd92fb3d52a3aa3c8c553e1245d5f';
+(node/*: any*/).hash = '21c84a911ef989b714e7af54d4bd272c';
 module.exports = node;

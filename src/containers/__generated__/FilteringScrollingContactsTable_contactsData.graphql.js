@@ -8,19 +8,19 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
-type ContactList_contactsData$ref = any;
+type ScrollingPaginationContactsTable_contactsData$ref = any;
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type ContactListWithFilter_contactsData$ref: FragmentReference;
-export type ContactListWithFilter_contactsData = {|
-  +$fragmentRefs: ContactList_contactsData$ref,
-  +$refType: ContactListWithFilter_contactsData$ref,
+declare export opaque type FilteringScrollingContactsTable_contactsData$ref: FragmentReference;
+export type FilteringScrollingContactsTable_contactsData = {|
+  +$fragmentRefs: ScrollingPaginationContactsTable_contactsData$ref,
+  +$refType: FilteringScrollingContactsTable_contactsData$ref,
 |};
 */
 
 
 const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
-  "name": "ContactListWithFilter_contactsData",
+  "name": "FilteringScrollingContactsTable_contactsData",
   "type": "Query",
   "metadata": null,
   "argumentDefinitions": [
@@ -34,7 +34,7 @@ const node/*: ConcreteFragment*/ = {
   "selections": [
     {
       "kind": "FragmentSpread",
-      "name": "ContactList_contactsData",
+      "name": "ScrollingPaginationContactsTable_contactsData",
       "args": [
         {
           "kind": "Variable",
@@ -47,5 +47,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '96cf885ba061e4f13759476f8d071471';
+(node/*: any*/).hash = '3f6652362bd6c8d668a0d708a2b076b6';
 module.exports = node;
