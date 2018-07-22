@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 695bd7227de3260f276f69c7fb0da3db
+ * @relayHash 3a8d444203713986275b63ee59b76c65
  */
 
 /* eslint-disable */
@@ -9,24 +9,24 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type ContactListWithFilter_contactsData$ref = any;
+type FilteringScrollingContactsTable_contactsData$ref = any;
 export type ContactsPageQueryVariables = {||};
 export type ContactsPageQueryResponse = {|
-  +$fragmentRefs: ContactListWithFilter_contactsData$ref
+  +$fragmentRefs: FilteringScrollingContactsTable_contactsData$ref
 |};
 */
 
 
 /*
 query ContactsPageQuery {
-  ...ContactListWithFilter_contactsData
+  ...FilteringScrollingContactsTable_contactsData
 }
 
-fragment ContactListWithFilter_contactsData on Query {
-  ...ContactList_contactsData_nJp8j
+fragment FilteringScrollingContactsTable_contactsData on Query {
+  ...ScrollingPaginationContactsTable_contactsData_nJp8j
 }
 
-fragment ContactList_contactsData_nJp8j on Query {
+fragment ScrollingPaginationContactsTable_contactsData_nJp8j on Query {
   allContacts(first: 10) {
     edges {
       node {
@@ -52,7 +52,7 @@ const node/*: ConcreteRequest*/ = {
   "operationKind": "query",
   "name": "ContactsPageQuery",
   "id": null,
-  "text": "query ContactsPageQuery {\n  ...ContactListWithFilter_contactsData\n}\n\nfragment ContactListWithFilter_contactsData on Query {\n  ...ContactList_contactsData_nJp8j\n}\n\nfragment ContactList_contactsData_nJp8j on Query {\n  allContacts(first: 10) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+  "text": "query ContactsPageQuery {\n  ...FilteringScrollingContactsTable_contactsData\n}\n\nfragment FilteringScrollingContactsTable_contactsData on Query {\n  ...ScrollingPaginationContactsTable_contactsData_nJp8j\n}\n\nfragment ScrollingPaginationContactsTable_contactsData_nJp8j on Query {\n  allContacts(first: 10) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -63,7 +63,7 @@ const node/*: ConcreteRequest*/ = {
     "selections": [
       {
         "kind": "FragmentSpread",
-        "name": "ContactListWithFilter_contactsData",
+        "name": "FilteringScrollingContactsTable_contactsData",
         "args": null
       }
     ]
@@ -200,7 +200,7 @@ const node/*: ConcreteRequest*/ = {
           }
         ],
         "handle": "connection",
-        "key": "ContactList_allContacts",
+        "key": "ScrollingPaginationContactsTable_allContacts",
         "filters": [
           "filterText"
         ]
@@ -209,5 +209,5 @@ const node/*: ConcreteRequest*/ = {
   }
 };
 // prettier-ignore
-(node/*: any*/).hash = '964d7e315e6e2c59722a161a35b66987';
+(node/*: any*/).hash = '84d1aea9e39c92b6ea9ff4a346be1b3a';
 module.exports = node;

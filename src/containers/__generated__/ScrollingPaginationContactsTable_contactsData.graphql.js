@@ -9,8 +9,8 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type ContactList_contactsData$ref: FragmentReference;
-export type ContactList_contactsData = {|
+declare export opaque type ScrollingPaginationContactsTable_contactsData$ref: FragmentReference;
+export type ScrollingPaginationContactsTable_contactsData = {|
   +allContacts: ?{|
     +edges: ?$ReadOnlyArray<?{|
       +node: ?{|
@@ -22,14 +22,14 @@ export type ContactList_contactsData = {|
       |}
     |}>
   |},
-  +$refType: ContactList_contactsData$ref,
+  +$refType: ScrollingPaginationContactsTable_contactsData$ref,
 |};
 */
 
 
 const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
-  "name": "ContactList_contactsData",
+  "name": "ScrollingPaginationContactsTable_contactsData",
   "type": "Query",
   "metadata": {
     "connection": [
@@ -67,7 +67,7 @@ const node/*: ConcreteFragment*/ = {
     {
       "kind": "LinkedField",
       "alias": "allContacts",
-      "name": "__ContactList_allContacts_connection",
+      "name": "__ScrollingPaginationContactsTable_allContacts_connection",
       "storageKey": null,
       "args": [
         {
@@ -181,5 +181,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'f676e073e8f4c87385d79b3c2e05471e';
+(node/*: any*/).hash = '01056b63dfb84061056b4dcaa486e02a';
 module.exports = node;
