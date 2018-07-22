@@ -1,8 +1,9 @@
+// @flow
 import debug from 'debug'
 import React from 'react'
 import { graphql, QueryRenderer } from 'react-relay'
 
-import ContactListWithFilter from '../containers/ContactListWithFilter'
+import FilteringScrollingContactsTable from '../containers/FilteringScrollingContactsTable'
 import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
 import { RTButtonLink } from '../components/RTButtonLink'
@@ -12,7 +13,7 @@ import { renderRelayQueryError } from '../relayUtils'
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactsPage.js')
 
-export default class extends React.Component {
+export default class extends React.Component<{}> {
 
   render() {
     return (
@@ -34,7 +35,7 @@ export default class extends React.Component {
 
           return (
             <article className={contactsPage}>
-              <ContactListWithFilter contactsData={props} />
+              <FilteringScrollingContactsTable contactsData={props} relay={null}/>
               <div className={addItemButtonContainer}>
                 <RTButtonLink icon='add' floating accent to="/contacts/new" />
               </div>

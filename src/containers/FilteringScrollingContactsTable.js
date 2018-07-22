@@ -7,7 +7,7 @@ import { debounce } from 'throttle-debounce'
 
 import type { ContactListWithFilter_contactsData } from './__generated__/ContactListWithFilter_contactsData.graphql'
 import { appName } from '../consts'
-import ContactList from '../containers/ContactList'
+import ScrollingPaginationContactsTable from '../containers/ScrollingPaginationContactsTable'
 import { contactsFilter } from '../App.css'
 
 // eslint-disable-next-line no-unused-vars
@@ -15,14 +15,14 @@ const log = debug(appName + ':ContactListWithFilter.js')
 
 type Props = {
   contactsData: ContactListWithFilter_contactsData,
-  relay: Object,
+  relay: any,
 }
 
 type State = {
   filterText: string
 }
 
-class ContactListWithFilterBare extends React.Component<Props, State> {
+class PlainFilteringContactsTable extends React.Component<Props, State> {
   filterDebounced: any
 
   constructor(props: Props) {
@@ -39,7 +39,7 @@ class ContactListWithFilterBare extends React.Component<Props, State> {
   }
 
   render() {
-    const { contactsData, relay } = this.props
+    const { contactsData } = this.props
     const { filterText } = this.state
 
     return (
@@ -47,7 +47,7 @@ class ContactListWithFilterBare extends React.Component<Props, State> {
         <Input type="text" label="Filter" className={contactsFilter}
           value={filterText}
           onChange={this._handleFilterChange} />
-        <ContactList contactsData={contactsData} relay={relay} />
+        <ScrollingPaginationContactsTable contactsData={contactsData} relay={null} />
       </article>
     )
   }
@@ -70,7 +70,7 @@ class ContactListWithFilterBare extends React.Component<Props, State> {
 }
 
 export default createRefetchContainer(
-  ContactListWithFilterBare,
+  PlainFilteringContactsTable,
   {
     contactsData: graphql`
       fragment ContactListWithFilter_contactsData on Query

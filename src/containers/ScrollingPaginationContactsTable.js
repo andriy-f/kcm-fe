@@ -1,13 +1,13 @@
 // @flow
 import debug from 'debug'
 import React from 'react'
-import { createPaginationContainer, graphql, Environment } from 'react-relay'
+import { createPaginationContainer, graphql } from 'react-relay'
 import Dialog from 'react-toolbox/lib/dialog'
 import { Button } from 'react-toolbox/lib/button'
 
 import { appName } from '../consts'
 import AutoLoadMore from '../components/AutoLoadMore'
-import ContactTable from '../components/ContactTable'
+import PlainContactsTable from '../components/PlainContactsTable'
 import DeleteContactMutation from '../graphql/DeleteContactMutation'
 import { loadMoreButton } from '../App.css'
 
@@ -16,12 +16,13 @@ const log = debug(appName + ':ContactList.js')
 
 type Props = {
   contactsData: any,
-  relay: {
-    environment: Environment,
-    loadMore(pageSize: number, callback: ?(error: ?Error) => void): any,
-    hasMore(): boolean,
-    isLoading(): boolean,
-  }
+  relay: any,
+  // relay: {
+  //   environment: Environment,
+  //   loadMore(pageSize: number, callback: ?(error: ?Error) => void): any,
+  //   hasMore(): boolean,
+  //   isLoading(): boolean,
+  // }
 }
 
 type State = {
@@ -42,7 +43,7 @@ class ContactListBare extends React.Component<Props, State> {
 
     return (
       <article>
-        <ContactTable items={items} onDeleteClick={this._onDeleteClickHandler} />
+        <PlainContactsTable items={items} onDeleteClick={this._handleDeleteClick} />
         <AutoLoadMore hasMore={hasMore()} onLoadMore={this._loadMore}>
           <Button
             primary
@@ -62,11 +63,11 @@ class ContactListBare extends React.Component<Props, State> {
     )
   }
 
-  _onDeleteClickHandler = (contact) => {
+  _handleDeleteClick = (contact) => {
     this.setState({ contactToDelete: contact })
   }
 
-  _deleteHandler = () => {
+  _handleDeleteConfirmation = () => {
     if (this.state.contactToDelete) {
       DeleteContactMutation.commit(this.props.relay.environment, this.state.contactToDelete)
       this.setState({ contactToDelete: null })
@@ -94,7 +95,7 @@ class ContactListBare extends React.Component<Props, State> {
 
   dialogConfirmDeleteActions = [
     { label: 'Cancel', onClick: this._cancelDelete },
-    { label: 'Delete', onClick: this._deleteHandler, primary: true }
+    { label: 'Delete', onClick: this._handleDeleteConfirmation, primary: true }
   ]
 }
 
