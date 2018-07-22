@@ -12,7 +12,7 @@ import DeleteContactMutation from '../graphql/DeleteContactMutation'
 import { loadMoreButton } from '../App.css'
 
 // eslint-disable-next-line no-unused-vars
-const log = debug(appName + ':ContactList.js')
+const log = debug(appName + ':ScrollingPaginationContactsTable.js')
 
 type Props = {
   contactsData: any,

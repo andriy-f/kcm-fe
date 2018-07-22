@@ -11,7 +11,7 @@ import ScrollingPaginationContactsTable from '../containers/ScrollingPaginationC
 import { contactsFilter } from '../App.css'
 
 // eslint-disable-next-line no-unused-vars
-const log = debug(appName + ':ContactListWithFilter.js')
+const log = debug(appName + ':FilteringScrollingContactsTable.js')
 
 type Props = {
   contactsData: ContactListWithFilter_contactsData,
