@@ -10,8 +10,8 @@ import { kFormContainer, kTextCenter } from '../App.css'
 import { logIn, logInCleanup } from '../actions'
 import { isUserLoggedIn, getUserFriendlyErrorMessage } from '../utils'
 
-const LoginInput = ({ input: { value, onChange } }) => <Input type='text' label='Login' value={value} onChange={onChange} />
-const PasswordInput = ({ input: { value, onChange } }) => <Input type='password' label='Password' value={value} onChange={onChange} />
+const LoginInput = ({ input: { value, onChange } }) => <Input required type='text' label='Login' value={value} onChange={onChange} />
+const PasswordInput = ({ input: { value, onChange } }) => <Input required type='password' label='Password' value={value} onChange={onChange} />
 
 const LoginForm = props => {
     const { handleSubmit } = props
