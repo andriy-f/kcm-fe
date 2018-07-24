@@ -34,7 +34,7 @@ export default () => (
           Filtering
         </li>
         <li>
-          Pagination
+          Pagination (via infinite scrolling)
         </li>
       </ul>
     </section>
