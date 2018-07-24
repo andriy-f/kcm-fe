@@ -14,95 +14,96 @@ const LoginInput = ({ input: { value, onChange } }) => <Input required type='tex
 const PasswordInput = ({ input: { value, onChange } }) => <Input required type='password' label='Password' value={value} onChange={onChange} />
 
 const LoginForm = props => {
-    const { handleSubmit } = props
-    return (
-        <form onSubmit={handleSubmit}>
-            <h3 className={kTextCenter}>Log into site</h3>
-            <Field name='login' component={LoginInput} />
-            <Field name='password' component={PasswordInput} />
-            <div className={kTextCenter}>
-                <Button label="Log in" type="submit" flat />
-            </div>
-        </form>
-    )
+  const { handleSubmit } = props
+  return (
+    <form onSubmit={handleSubmit}>
+      <h3 className={kTextCenter}>Log into site</h3>
+      <Field name='login' component={LoginInput} />
+      <Field name='password' component={PasswordInput} />
+      <div className={kTextCenter}>
+        <Button label="Log in" type="submit" flat />
+      </div>
+    </form>
+  )
 }
 
 const LoginFormReduxed = reduxForm({
-    form: 'logIn'
+  form: 'logIn'
 })(LoginForm)
 
 class LogIn extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = { showMessage: true }
-    }
+  constructor(props) {
+    super(props)
+    this.state = { showMessage: true }
+  }
 
+  handleSubmit = (values) => {
+    this.props.initAuthenticate(values.login, values.password)
+  }
 
-    handleSubmit = (values) => {
-        this.props.initAuthenticate(values.login, values.password)
-    }
+  handleSnackbarClick = () => {
+    this.setState({ showMessage: false })
+  }
 
-    handleSnackbarClick = () => {
-        this.setState({ showMessage: false })
-    }
+  handleSnackbarTimeout = () => {
+    this.setState({ showMessage: false })
+  }
 
-    handleSnackbarTimeout = () => {
-        this.setState({ showMessage: false })
-    }
+  componentWillReceiveProps(nextProps) {
+    this.setState({ showMessage: true })
+  }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({ showMessage: true })
-    }
+  componentDidMount() {
+    this.props.cleanup()
+  }
 
-    componentDidMount() {
-        this.props.cleanup()
-    }
+  componentWillUnmount() {
+    this.props.cleanup()
+  }
 
-    componentWillUnmount() {
-        this.props.cleanup()
-    }
+  handleLogInEditor = () => {
+    this.props.initAuthenticate('demo-editor', 'aSuperSecret')
+  }
 
-    render() {
-        const currentUser = this.props.currentUser
-        const isLoggedIn = isUserLoggedIn(currentUser)
-        const errorMessage = getUserFriendlyErrorMessage(this.props.logIn.error)
+  render() {
+    const currentUser = this.props.currentUser
+    const isLoggedIn = isUserLoggedIn(currentUser)
+    const errorMessage = getUserFriendlyErrorMessage(this.props.logIn.error)
 
-        return isLoggedIn ? (
-            <Redirect to="/" />
-        ) : (
-                <div className={kFormContainer}>
-                    <p>
-                        <strong>Credentials:</strong><br/>
-                        user: demouser01<br/>
-                        pass: aSuperSecret
-                    </p>
-                    <LoginFormReduxed onSubmit={this.handleSubmit} />
-                    <Snackbar
-                        action='Dismiss'
-                        active={this.state.showMessage && !!errorMessage}
-                        label={errorMessage}
-                        timeout={2000}
-                        onClick={this.handleSnackbarClick}
-                        onTimeout={this.handleSnackbarTimeout}
-                        type='cancel'
-                    />
-                </div >
-            )
-    }
+    return isLoggedIn ? (
+      <Redirect to="/" />
+    ) : (
+        <div className={kFormContainer}>
+          <LoginFormReduxed onSubmit={this.handleSubmit} />
+          <p>
+            <Button label="Editor demo" onClick={this.handleLogInEditor} raised accent />
+          </p>
+          <Snackbar
+            action='Dismiss'
+            active={this.state.showMessage && !!errorMessage}
+            label={errorMessage}
+            timeout={2000}
+            onClick={this.handleSnackbarClick}
+            onTimeout={this.handleSnackbarTimeout}
+            type='cancel'
+          />
+        </div >
+      )
+  }
 }
 
 const mapStateToProps = (state) => {
-    const { currentUser, logIn } = state
+  const { currentUser, logIn } = state
 
-    return {
-        currentUser,
-        logIn
-    }
+  return {
+    currentUser,
+    logIn
+  }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    initAuthenticate: (login, password) => dispatch(logIn(login, password)),
-    cleanup: () => dispatch(logInCleanup())
+  initAuthenticate: (login, password) => dispatch(logIn(login, password)),
+  cleanup: () => dispatch(logInCleanup())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn)
