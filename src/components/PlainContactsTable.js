@@ -30,7 +30,7 @@ export default class extends React.Component<Props> {
         </TableHead>
         {items && items.map((item) => {
           const TableCellWithLink = ({ children }) => <TableCell>
-            <Link className={contactsTable__link} to={'/contacts/' + item.id}>
+            <Link className={contactsTable__link} to={`/contacts/view/${item.id}`}>
               {children}
             </Link>
           </TableCell>
@@ -50,7 +50,7 @@ export default class extends React.Component<Props> {
                   : ''}
               </TableCell>
               <TableCell className={contactsTable__btnCol}>
-                <RTIconButtonLink icon="edit" to={'/contacts/' + item.id}></RTIconButtonLink>
+                <RTIconButtonLink icon="edit" to={`/contacts/edit/${item.id}`}></RTIconButtonLink>
                 <IconButton icon="delete" onClick={onDeleteClick.bind(this, item)} />
               </TableCell>
             </TableRow>
