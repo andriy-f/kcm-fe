@@ -1,4 +1,4 @@
-
+// @flow
 import debug from 'debug'
 import React from 'react'
 import { graphql, QueryRenderer } from 'react-relay'
@@ -7,12 +7,12 @@ import ContactEdit from '../containers/ContactEdit'
 import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
 import { kTextCenter } from '../App.css'
-import { renderRelayQueryError } from '../relayUtils'
+import RelayQueryError from './RelayQueryError'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactEditPage.js')
 
-export default class extends React.Component {
+export default class extends React.Component<any> {
   _handleSave = () => {
     this.props.history.push('/contacts')
   }
@@ -38,7 +38,7 @@ export default class extends React.Component {
         }}
         render={({ error, props }) => {
           if (error) {
-            return renderRelayQueryError(error)
+            return <RelayQueryError error={error} />
           }
 
           if (!props) {

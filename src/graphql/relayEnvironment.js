@@ -8,6 +8,7 @@ import {
 import fetch from 'isomorphic-fetch'
 import debug from 'debug'
 
+import RelayError from './RelayError'
 import { appName } from '../consts'
 import { BACKEND_URL } from '../config'
 import { urlJoin } from '../utils'
@@ -34,11 +35,7 @@ const fetchQuery = (
   }).then(response => response.json()).then((json) => {
     log('relay result', json)
     if (json.errors) {
-      if (json.errors.some && json.errors.some((e) => e.message === 'Not authenticated')) {
-        return Promise.reject(new Error('Not authenticated. You need to log in or log out and log in.'))
-      }
-
-      return Promise.reject(json.errors)
+      return Promise.reject(new RelayError('GraphQL error', json.errors))
     }
 
     return json

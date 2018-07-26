@@ -8,7 +8,7 @@ import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
 import { RTButtonLink } from '../components/RTButtonLink'
 import { addItemButtonContainer, contactsPage } from '../App.css'
-import { renderRelayQueryError } from '../relayUtils'
+import RelayQueryError from './RelayQueryError'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactsPage.js')
@@ -27,7 +27,7 @@ export default class extends React.Component<{}> {
         variables={{}}
         render={({ error, props }) => {
           if (error) {
-            return renderRelayQueryError(error)
+            return <RelayQueryError error={error} />
           }
           if (!props) {
             return <div>Loading...</div>
@@ -35,7 +35,7 @@ export default class extends React.Component<{}> {
 
           return (
             <article className={contactsPage}>
-              <FilteringScrollingContactsTable contactsData={props} relay={null}/>
+              <FilteringScrollingContactsTable contactsData={props} relay={null} />
               <div className={addItemButtonContainer}>
                 <RTButtonLink icon='add' floating accent to="/contacts/new" />
               </div>
