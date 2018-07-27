@@ -1,7 +1,10 @@
 import React from 'react'
 
-const NotLoggedIn = (props) => (
-    <div>You are not logged in. Please Log in to continue.</div>
-)
+import LogIn from '../containers/LogIn'
+
+const NotLoggedIn = (props) => <React.Fragment>
+  <div>You are not logged in. Please Log in to continue.</div>
+  <LogIn />
+</React.Fragment>
 
 export default NotLoggedIn
