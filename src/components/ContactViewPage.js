@@ -3,6 +3,7 @@ import debug from 'debug'
 import React from 'react'
 import { graphql, QueryRenderer } from 'react-relay'
 
+import NarrowLayout from '../components/NarrowLayout'
 import ContactView from '../containers/ContactView'
 import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
@@ -43,10 +44,10 @@ export default class extends React.Component<any> {
           }
 
           return (
-            <article>
-              <h3 className={kTextCenter}>Edit Contact</h3>
+            <NarrowLayout>
+              <h2 className={kTextCenter}>Contact</h2>
               <ContactView contact={props.contact} onGoBack={this._handleGoBack} />
-            </article>)
+            </NarrowLayout>)
         }}
       />
     )

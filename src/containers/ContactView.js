@@ -17,13 +17,12 @@ class ContactViewWrapper extends React.Component<any> {
 
     return (
       <article>
-        <h2>Contact</h2>
         <Input readOnly name="firstName" label="First Name" value={firstName} />
         <Input name="lastName" readOnly label="Last Name" value={lastName} />
         <Input name="email" readOnly label="Email" value={email} />
         <Input name="phoneNumber" readOnly label="Phone number" value={phoneNumber} />
         <p>
-          <RTButtonLink to="/contacts" >Back to contact list</RTButtonLink>
+          <RTButtonLink to="/contacts">Back to contact list</RTButtonLink>
         </p>
       </article>
     )
