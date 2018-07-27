@@ -34,7 +34,6 @@ export default class extends React.Component<{ readonly?: boolean }> {
 
           return (
             <article className={contactsPage}>
-              Readonly: {this.props.readonly}
               <FilteringScrollingContactsTable contactsData={props} relay={null} readonly={this.props.readonly} />
               <div className={addItemButtonContainer}>
                 <RTButtonLink icon='add' floating accent to="/contacts/new" />
