@@ -71,3 +71,11 @@
 .contactsTable__link:hover {
   color: initial;
 }
+
+.buttonPanel {
+  text-align: center;
+}
+
+.buttonPanel > * + * {
+  margin-left: 1em;
+}

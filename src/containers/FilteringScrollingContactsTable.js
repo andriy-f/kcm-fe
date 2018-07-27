@@ -16,6 +16,7 @@ const log = debug(appName + ':FilteringScrollingContactsTable.js')
 type Props = {
   contactsData: FilteringScrollingContactsTable_contactsData,
   relay: any,
+  readonly?: boolean,
 }
 
 type State = {
@@ -39,7 +40,7 @@ class PlainFilteringContactsTable extends React.Component<Props, State> {
   }
 
   render() {
-    const { contactsData } = this.props
+    const { contactsData, readonly } = this.props
     const { filterText } = this.state
 
     return (
@@ -47,7 +48,7 @@ class PlainFilteringContactsTable extends React.Component<Props, State> {
         <Input type="text" label="Filter" className={contactsFilter}
           value={filterText}
           onChange={this._handleFilterChange} />
-        <ScrollingPaginationContactsTable contactsData={contactsData} relay={null} />
+        <ScrollingPaginationContactsTable contactsData={contactsData} relay={null} readonly={readonly} />
       </article>
     )
   }

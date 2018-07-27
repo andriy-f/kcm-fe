@@ -8,6 +8,7 @@ import { Field, reduxForm } from 'redux-form'
 
 import { kFormContainer, kTextCenter } from '../App.css'
 import { logIn, logInCleanup } from '../actions'
+import ButtonPanel from '../components/ButtonPanel'
 import { isUserLoggedIn, getUserFriendlyErrorMessage } from '../utils'
 
 const LoginInput = ({ input: { value, onChange } }) => <Input required type='text' label='Login' value={value} onChange={onChange} />
@@ -20,9 +21,9 @@ const LoginForm = props => {
       <h3 className={kTextCenter}>Log into site</h3>
       <Field name='login' component={LoginInput} />
       <Field name='password' component={PasswordInput} />
-      <div className={kTextCenter}>
+      <ButtonPanel>
         <Button label="Log in" type="submit" flat />
-      </div>
+      </ButtonPanel>
     </form>
   )
 }
@@ -65,6 +66,10 @@ class LogIn extends React.Component {
     this.props.initAuthenticate('demo-editor', 'aSuperSecret')
   }
 
+  handleLogInViewer = () => {
+    this.props.initAuthenticate('demo-viewer', 'aSuperSecret')
+  }
+
   render() {
     const currentUser = this.props.currentUser
     const isLoggedIn = isUserLoggedIn(currentUser)
@@ -75,9 +80,10 @@ class LogIn extends React.Component {
     ) : (
         <div className={kFormContainer}>
           <LoginFormReduxed onSubmit={this.handleSubmit} />
-          <p>
+          <ButtonPanel>
             <Button label="Editor demo" onClick={this.handleLogInEditor} raised accent />
-          </p>
+            <Button label="Viewer demo" onClick={this.handleLogInViewer} raised accent />
+          </ButtonPanel>
           <Snackbar
             action='Dismiss'
             active={this.state.showMessage && !!errorMessage}
@@ -97,7 +103,7 @@ const mapStateToProps = (state) => {
 
   return {
     currentUser,
-    logIn
+    logIn,
   }
 }
 

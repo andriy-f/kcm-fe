@@ -17,6 +17,7 @@ const log = debug(appName + ':ScrollingPaginationContactsTable.js')
 type Props = {
   contactsData: any,
   relay: any,
+  readonly?: boolean,
   // relay: {
   //   environment: Environment,
   //   loadMore(pageSize: number, callback: ?(error: ?Error) => void): any,
@@ -35,7 +36,7 @@ class ScrollingPaginationContactsTableBare extends React.Component<Props, State>
   }
 
   render() {
-    const { contactsData, relay: { hasMore } } = this.props
+    const { contactsData, relay: { hasMore }, readonly } = this.props
     const { contactToDelete } = this.state
     const items = contactsData.allContacts.edges
       .filter(e => e && e.node)
@@ -43,7 +44,7 @@ class ScrollingPaginationContactsTableBare extends React.Component<Props, State>
 
     return (
       <article>
-        <PlainContactsTable items={items} onDeleteClick={this._handleDeleteClick} />
+        <PlainContactsTable items={items} onDeleteClick={this._handleDeleteClick} readonly={readonly} />
         <AutoLoadMore hasMore={hasMore()} onLoadMore={this._loadMore}>
           <Button
             primary

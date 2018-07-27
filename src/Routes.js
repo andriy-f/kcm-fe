@@ -5,7 +5,8 @@ import { Route, Switch } from 'react-router-dom'
 import Intro from './components/Intro'
 import LogInPage from './containers/LogIn'
 import LogOutPage from './containers/LogOut'
-import ContactsPage from './components/ContactsPage'
+import EditableContactsPage from './components/EditableContactsPage'
+import ReadonlyContactsPage from './components/ReadonlyContactsPage'
 import ContactEditPage from './components/ContactEditPage'
 import ContactViewPage from './components/ContactViewPage'
 import ContactCreatePage from './components/ContactCreatePage'
@@ -25,12 +26,19 @@ export default () => (
     <Route exact path="/logIn" component={LogInPage} />
     <Route exact path="/userProfile" component={userProfile} />
     <Route exact path="/logOut" component={LogOutPage} />
-    <Route exact path="/contacts" component={DefaultConditionalAuthHOC([[['contact-list-view'], ContactsPage]])} />
-    <Route path="/contacts/new" component={DefaultConditionalAuthHOC([[['contact-edit'], ContactCreatePage]])} />
-    <Route exact path="/contacts/edit/:id" component={DefaultConditionalAuthHOC([[['contact-edit'], ContactEditPage]])} />
-    <Route exact path="/contacts/view/:id" component={DefaultConditionalAuthHOC([[['contact-view'], ContactViewPage]])} />
+    <Route exact path="/contacts"
+      component={DefaultConditionalAuthHOC([
+        [['contact-list-view', 'contact-edit'], EditableContactsPage],
+        [['contact-list-view'], ReadonlyContactsPage],
+      ])} />
+    <Route path="/contacts/new"
+      component={DefaultConditionalAuthHOC([[['contact-edit'], ContactCreatePage]])} />
+    <Route exact path="/contacts/edit/:id"
+      component={DefaultConditionalAuthHOC([[['contact-view', 'contact-edit'], ContactEditPage]])} />
+    <Route exact path="/contacts/view/:id"
+      component={DefaultConditionalAuthHOC([[['contact-view'], ContactViewPage]])} />
     <Route path="/settings" component={SettingsPage} />
     <Route path="/dev" component={DevPage} />
     <Route component={NotFound} />>
-    </Switch>
+  </Switch>
 )

@@ -15,11 +15,16 @@ const log = debug(appName + ':PlainContactsTable.js')
 type Props = {
   items?: Object[],
   onDeleteClick(item: Object): void,
+  readonly: boolean,
 }
 
 export default class extends React.Component<Props> {
+  static defaultProps = {
+    readonly: false,
+  }
+
   render() {
-    const { items, onDeleteClick } = this.props
+    const { items, onDeleteClick, readonly } = this.props
     return (
       <Table selectable={false}>
         <TableHead>
@@ -50,8 +55,14 @@ export default class extends React.Component<Props> {
                   : ''}
               </TableCell>
               <TableCell className={contactsTable__btnCol}>
-                <RTIconButtonLink icon="edit" to={`/contacts/edit/${item.id}`}></RTIconButtonLink>
-                <IconButton icon="delete" onClick={onDeleteClick.bind(this, item)} />
+                {readonly ?
+                  ''
+                  : (
+                    <React.Fragment>
+                      <RTIconButtonLink icon="edit" to={`/contacts/edit/${item.id}`}></RTIconButtonLink>
+                      <IconButton icon="delete" onClick={onDeleteClick.bind(this, item)} />
+                    </React.Fragment>)
+                }
               </TableCell>
             </TableRow>
           )
