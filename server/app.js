@@ -1,5 +1,4 @@
-const register = require('ignore-styles').default
-const compression = require('compression')
+// const register = require('ignore-styles').default
 const express = require('express')
 const morgan = require('morgan')
 const path = require('path')
@@ -50,9 +49,6 @@ const nodeHerokuSslRedirect = (environments = ['production'], redirectStatus = 3
 const app = express()
 
 app.use(nodeHerokuSslRedirect())
-
-// Support Gzip
-app.use(compression())
 
 if (isDev) {
     // Setup logger
