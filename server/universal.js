@@ -41,7 +41,7 @@ module.exports = function universalLoader(req, res) {
 
 /**
  * This does most of the heavy lifting
- * 
+ *
  * @param {Express.Request} req
  * @param {Express.Response} res
  * @param {string} htmlData
@@ -75,8 +75,10 @@ async function serverRender(req, res, htmlData) {
     const RenderedApp = htmlData.replace('<div id="root"></div>', '<div id="root">' + markup + '</div>')
       .replace('<meta-head/>', headMarkup)
       .replace('{{data}}', new Buffer(JSON.stringify(context.data)).toString('base64'))
-    if (context.code)
+    if (context.code) {
       res.status(context.code)
+    }
+
     res.send(RenderedApp)
   }
 }
