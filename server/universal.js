@@ -72,9 +72,13 @@ async function serverRender(req, res, htmlData) {
     res.redirect(301, context.url)
   } else {
     // we're good, add in markup, send the response
+    const contextData = new Buffer(JSON.stringify(context.data)).toString('base64')
+
     const RenderedApp = htmlData.replace('<div id="root"></div>', '<div id="root">' + markup + '</div>')
       .replace('<meta-head/>', headMarkup)
-      .replace('{{data}}', new Buffer(JSON.stringify(context.data)).toString('base64'))
+      .replace('window.DATA=null', `window.DATA='${contextData}'`)
+      .replace('window.kcm.apiUrl=null', `window.kcm.apiUrl=${process.env.REACT_APP_KCM_BACKEND_URL}`)
+
     if (context.code) {
       res.status(context.code)
     }
