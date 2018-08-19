@@ -81,7 +81,7 @@
     "webpack-manifest-plugin": "1.2.1"
   },
   "scripts": {
-    "start:prod:universal": "node server/index.js",
+    "start": "node server/index.js",
     "el-dev": "concurrently \"cross-env BROWSER=none yarn dev\" \"wait-on http://tower-pc:9001 && electron electron-main.js\"",
     "dev": "node scripts/watch.js",
     "watch": "yarn dev",
@@ -92,7 +92,7 @@
     "relay": "relay-compiler --src ./src --schema ./schema.graphql",
     "get-schema": "babel-node ./scripts/getSchema.js",
     "test": "node scripts/test.js --env=jsdom --config=jest.config.json",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "yarn build"
   },
   "babel": {
     "plugins": [
