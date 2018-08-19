@@ -57,6 +57,7 @@ if (isDev) {
 
 // Server-side rendering of main '/' path (substitute instead index.html from 'build' folder)
 app.get('/', universalLoader)
+app.get('/index.html', universalLoader)
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')))
