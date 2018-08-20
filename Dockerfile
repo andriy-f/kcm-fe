@@ -9,4 +9,4 @@ COPY --from=builder /app /app
 EXPOSE 80
 WORKDIR /app
 ENV PORT 80
-CMD ["yarn", "start:prod:universal"]
+CMD ["yarn", "start"]
