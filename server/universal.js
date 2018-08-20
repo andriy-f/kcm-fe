@@ -76,8 +76,12 @@ async function serverRender(req, res, htmlData) {
 
     const RenderedApp = htmlData.replace('<div id="root"></div>', '<div id="root">' + markup + '</div>')
       .replace('<meta-head/>', headMarkup)
-      .replace('window.DATA=null', `window.DATA='${contextData}'`)
-      .replace('window.kcm.apiUrl=null', `window.kcm.apiUrl='${process.env.REACT_APP_KCM_BACKEND_URL}'`)
+      .replace('window.kcm={}', `
+window.kcm={
+  Data: '${contextData}',
+  apiUrl: '${process.env.REACT_APP_KCM_BACKEND_URL}',
+}
+`)
 
     if (context.code) {
       res.status(context.code)
