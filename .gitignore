@@ -22,6 +22,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Tern
+.tern-port
+
 # Custom
 /newrelic.js
 /newrelic_agent.log

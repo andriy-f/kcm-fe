@@ -1,3 +1,5 @@
+# From .gitignore
+
 # dependencies
 /node_modules
 
@@ -23,3 +25,13 @@ yarn-error.log*
 # Custom
 /newrelic.js
 /newrelic_agent.log
+
+# Tern
+.tern-port
+
+# ====================
+
+# Not needed in Docker
+/.git
+/Dockerfile
+/README.md
