@@ -4,6 +4,12 @@ FROM node:8 as build
 # Restore packages
 WORKDIR /app
 COPY package.json yarn.lock ./
+RUN env NODE_ENV=production \
+  yarn install --frozen-lockfile --audit \
+  && yarn cache clean
+
+RUN cp -r ./node_modules ./node_modules_prod
+
 RUN env NODE_ENV=development \
   yarn install --frozen-lockfile --audit \
   && yarn cache clean
@@ -29,6 +35,9 @@ RUN yarn global add pm2 && yarn cache clean
 # App
 ARG wd=/app
 WORKDIR $wd
+
+COPY --from=build $wd/node_modules_prod ./node_modules
+
 COPY config ./config
 COPY public ./public
 COPY server ./server
