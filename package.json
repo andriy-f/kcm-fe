@@ -83,7 +83,7 @@
     "dev": "node scripts/watch.js",
     "watch": "yarn dev",
     "lint": "eslint .",
-    "build": "concurrently yarn:build:client yarn:build:server",
+    "build": "concurrently -c cyan,magenta yarn:build:client yarn:build:server",
     "build:client": "node scripts/build.js",
     "build:server": "node scripts/buildServer.js",
     "relay": "relay-compiler --src ./src --schema ./schema.graphql",
