@@ -1,5 +1,5 @@
 # Dev image
-FROM node:8 as build
+FROM node:10 as build
 
 # Restore packages
 WORKDIR /app
@@ -27,7 +27,7 @@ RUN env NODE_ENV=production yarn build
 # ==========
 # Prod image
 # ==========
-FROM node:8
+FROM node:10
 
 # Install pm2
 RUN yarn global add pm2 && yarn cache clean
