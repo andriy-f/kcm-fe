@@ -23,7 +23,7 @@
     "react-redux": "^5.0.5",
     "react-relay": "^1.6.0",
     "react-router-dom": "^4.3.1",
-    "react-toolbox": "^2.0.0-beta.12",
+    "react-toolbox": "2.0.0-beta.12",
     "recompose": "^0.27.1",
     "redux": "^3.6.0",
     "redux-form": "^6.8.0",
@@ -81,15 +81,15 @@
   "scripts": {
     "start": "node server/index.js",
     "dev": "node scripts/watch.js",
-    "watch": "yarn dev",
+    "watch": "npm run dev",
     "lint": "eslint .",
-    "build": "concurrently -c cyan,magenta yarn:build:client yarn:build:server",
+    "build": "concurrently -c cyan,magenta npm:build:client npm:build:server",
     "build:client": "node scripts/build.js",
     "build:server": "node scripts/buildServer.js",
     "relay": "relay-compiler --src ./src --schema ./schema.graphql",
     "get-schema": "babel-node ./scripts/getSchema.js",
     "test": "node scripts/test.js --env=jsdom --config=jest.config.json",
-    "heroku-postbuild": "yarn build"
+    "heroku-postbuild": "npm run build"
   },
   "babel": {
     "plugins": [
@@ -100,7 +100,6 @@
     ]
   },
   "engines": {
-    "node": "^10.16.2",
-    "yarn": "^1.1.0"
+    "node": "^10.16.2"
   }
 }

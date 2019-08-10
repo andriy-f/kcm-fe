@@ -3,26 +3,26 @@ FROM node:10 as build
 
 # Restore packages
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN env NODE_ENV=production \
-  yarn install --frozen-lockfile --audit \
-  && yarn cache clean
-
-RUN cp -r ./node_modules ./node_modules_prod
-
-RUN env NODE_ENV=development \
-  yarn install --frozen-lockfile --audit \
-  && yarn cache clean
+COPY package.json package-lock.json ./
+ENV NODE_ENV development
+RUN set -ex; \
+  npm ci; \
+  npm cache clean --force;
 
 # Build app
-COPY .eslintrc.json .
+COPY .eslintrc.json ./
 COPY flow-typed ./flow-typed
 COPY config ./config
 COPY public ./public
 COPY server ./server
 COPY scripts ./scripts
 COPY src ./src
-RUN env NODE_ENV=production yarn build
+RUN env NODE_ENV=production npm run build
+
+# Dev cmd
+EXPOSE 80
+ENV PORT 80
+CMD ["node", "scripts/watch.js"]
 
 # ==========
 # Prod image
@@ -30,13 +30,20 @@ RUN env NODE_ENV=production yarn build
 FROM node:10
 
 # Install pm2
-RUN yarn global add pm2 && yarn cache clean
+RUN set -ex; \
+  npm install pm2 -g; \
+  npm cache clean --force;
 
 # App
 ARG wd=/app
 WORKDIR $wd
 
-COPY --from=build $wd/node_modules_prod ./node_modules
+# Restore packages
+COPY package.json package-lock.json ./
+ENV NODE_ENV production
+RUN set -ex; \
+  npm ci; \
+  npm cache clean --force;
 
 COPY config ./config
 COPY public ./public
@@ -46,7 +53,6 @@ COPY --from=build $wd/build ./build
 COPY --from=build $wd/buildServer ./buildServer
 
 # Final config
-ENV NODE_ENV production
 EXPOSE 80
 ENV PORT 80
 CMD ["pm2-runtime", "server/index.js"]
