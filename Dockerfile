@@ -1,13 +1,15 @@
 # Dev image
-FROM node:10 as build
+FROM node:10-alpine as build
 
 # Restore packages
 WORKDIR /app
 COPY package.json package-lock.json ./
 ENV NODE_ENV development
 RUN set -ex; \
+  apk add --no-cache --virtual .gyp python make g++; \
   npm ci; \
-  npm cache clean --force;
+  npm cache clean --force; \
+  apk del .gyp;
 
 # Build app
 COPY .eslintrc.json ./
@@ -27,7 +29,7 @@ CMD ["node", "scripts/watch.js"]
 # ==========
 # Prod image
 # ==========
-FROM node:10
+FROM node:10-alpine
 
 # Install pm2
 RUN set -ex; \
@@ -42,8 +44,10 @@ WORKDIR $wd
 COPY package.json package-lock.json ./
 ENV NODE_ENV production
 RUN set -ex; \
+  apk add --no-cache --virtual .gyp python make g++; \
   npm ci; \
-  npm cache clean --force;
+  npm cache clean --force; \
+  apk del .gyp;
 
 COPY config ./config
 COPY public ./public
