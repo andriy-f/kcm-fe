@@ -1,29 +1,40 @@
 # Dev image
 FROM node:10-alpine as build
 
-# Restore packages
+RUN apk add --no-cache su-exec tini
+
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+ENV PATH=$PATH:/home/node/.npm-global/bin
+
+# Prepare app dir
 WORKDIR /app
-COPY package.json package-lock.json ./
+RUN chown node:node .
+
+# Restore packages
+COPY --chown=node:node package.json package-lock.json ./
+
 ENV NODE_ENV development
 RUN set -ex; \
   apk add --no-cache --virtual .gyp python make g++; \
-  npm ci; \
-  npm cache clean --force; \
+  su-exec node npm ci; \
+  su-exec node npm cache clean --force; \
   apk del .gyp;
 
 # Build app
-COPY .eslintrc.json ./
-COPY flow-typed ./flow-typed
-COPY config ./config
-COPY public ./public
-COPY server ./server
-COPY scripts ./scripts
-COPY src ./src
-RUN env NODE_ENV=production npm run build
+COPY --chown=node:node .eslintrc.json ./
+COPY --chown=node:node flow-typed ./flow-typed
+COPY --chown=node:node config ./config
+COPY --chown=node:node public ./public
+COPY --chown=node:node server ./server
+COPY --chown=node:node scripts ./scripts
+COPY --chown=node:node src ./src
+RUN su-exec node env NODE_ENV=production npm run build
 
-# Dev cmd
-EXPOSE 80
-ENV PORT 80
+# Dev runtime config
+USER node
+EXPOSE 8080
+ENV PORT 8080
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["node", "scripts/watch.js"]
 
 # ==========
@@ -31,32 +42,40 @@ CMD ["node", "scripts/watch.js"]
 # ==========
 FROM node:10-alpine
 
+RUN apk add --no-cache su-exec
+
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+ENV PATH=$PATH:/home/node/.npm-global/bin
+
 # Install pm2
 RUN set -ex; \
-  npm install pm2 -g; \
-  npm cache clean --force;
+  su-exec node npm install pm2 -g; \
+  su-exec node npm cache clean --force;
 
-# App
+# Prepare app dir
 ARG wd=/app
 WORKDIR $wd
+RUN chown node:node .
 
 # Restore packages
-COPY package.json package-lock.json ./
+COPY --chown=node:node package.json package-lock.json ./
 ENV NODE_ENV production
 RUN set -ex; \
   apk add --no-cache --virtual .gyp python make g++; \
-  npm ci; \
-  npm cache clean --force; \
+  su-exec node npm ci; \
+  su-exec node npm cache clean --force; \
   apk del .gyp;
 
-COPY config ./config
-COPY public ./public
-COPY server ./server
-COPY scripts ./scripts
-COPY --from=build $wd/build ./build
-COPY --from=build $wd/buildServer ./buildServer
+# Copy runtime data
+COPY --chown=node:node config ./config
+COPY --chown=node:node public ./public
+COPY --chown=node:node server ./server
+COPY --chown=node:node scripts ./scripts
+COPY --chown=node:node --from=build $wd/build ./build
+COPY --chown=node:node --from=build $wd/buildServer ./buildServer
 
-# Final config
-EXPOSE 80
-ENV PORT 80
+# Runtime config
+USER node
+EXPOSE 8080
+ENV PORT 8080
 CMD ["pm2-runtime", "server/index.js"]
