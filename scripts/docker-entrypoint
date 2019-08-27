@@ -1,5 +1,0 @@
-#!/bin/sh
-
-envsubst '${REACT_APP_KCM_BACKEND_URL},${REACT_APP_KCM_GOOGLE_TRACKING_ID}' < /app/build/index.html > /app/build/index.html
-
-exec "$@"
