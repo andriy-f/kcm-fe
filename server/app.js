@@ -7,16 +7,16 @@ const isDev = process.env.NODE_ENV === 'development'
 
 // redirect to https
 const nodeSslRedirect = (redirectStatus = 302) => (req, res, next) => {
-    if (process.env.KCM_FE_HTTPS_REDIRECT !== 'true') {
-      return next()
-    }
+  if (process.env.KCM_FE_HTTPS_REDIRECT !== 'true') {
+    return next()
+  }
 
-    if (req.headers['x-forwarded-proto'] === 'https') {
-      // Heroku, for example
-      return next();
-    }
+  if (req.headers['x-forwarded-proto'] === 'https') {
+    // Heroku, for example
+    return next();
+  }
 
-    res.redirect(redirectStatus, `https://${req.hostname}${req.originalUrl}`);
+  res.redirect(redirectStatus, `https://${req.hostname}${req.originalUrl}`);
 }
 
 
@@ -26,11 +26,14 @@ const app = express()
 app.use(nodeSslRedirect())
 
 if (isDev) {
-    // Setup logger
-    app.use(morgan('combined'))
+  // Setup logger
+  app.use(morgan('combined'))
 }
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')))
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'build/index.html'));
+})
 
 module.exports = app

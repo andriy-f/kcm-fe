@@ -42,7 +42,7 @@ CMD ["node", "scripts/watch.js"]
 # ==========
 FROM node:10-alpine
 
-RUN apk add --no-cache su-exec
+RUN apk add --no-cache su-exec gettext
 
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 ENV PATH=$PATH:/home/node/.npm-global/bin
@@ -77,4 +77,5 @@ COPY --chown=node:node --from=build $wd/build ./build
 USER node
 EXPOSE 8080
 ENV PORT 8080
+ENTRYPOINT ["/app/scripts/docker-entrypoint"]
 CMD ["pm2-runtime", "server/index.js"]

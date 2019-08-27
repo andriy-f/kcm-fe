@@ -1,0 +1,5 @@
+#!/bin/sh
+
+envsubst '${REACT_APP_KCM_BACKEND_URL}' < /app/build/index.html > /app/build/index.html
+
+exec "$@"
