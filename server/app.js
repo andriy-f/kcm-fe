@@ -5,25 +5,25 @@ const path = require('path')
 
 const isDev = process.env.NODE_ENV === 'development'
 
-// redirect to https specifically for Heroku
-const nodeHerokuSslRedirect = (environments = ['production'], redirectStatus = 302) => {
-    return (req, res, next) => {
-        if (environments.indexOf(process.env.NODE_ENV) === -1) {
-            return next()
-        }
-
-        if (req.headers['x-forwarded-proto'] === 'https') {
-            return next();
-        }
-
-        res.redirect(redirectStatus, `https://${req.hostname}${req.originalUrl}`);
+// redirect to https
+const nodeSslRedirect = (redirectStatus = 302) => (req, res, next) => {
+    if (process.env.KCM_FE_HTTPS_REDIRECT !== 'true') {
+      return next()
     }
+
+    if (req.headers['x-forwarded-proto'] === 'https') {
+      // Heroku, for example
+      return next();
+    }
+
+    res.redirect(redirectStatus, `https://${req.hostname}${req.originalUrl}`);
 }
+
 
 // App setup
 const app = express()
 
-app.use(nodeHerokuSslRedirect())
+app.use(nodeSslRedirect())
 
 if (isDev) {
     // Setup logger
