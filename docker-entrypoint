@@ -1,0 +1,5 @@
+#!/bin/sh
+FILE_TO_PATCH=/usr/share/nginx/html/index.html
+envsubst '${REACT_APP_KCM_BACKEND_URL},${REACT_APP_KCM_GOOGLE_TRACKING_ID}' <${FILE_TO_PATCH} >${FILE_TO_PATCH}
+
+exec "$@"

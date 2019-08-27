@@ -40,42 +40,16 @@ CMD ["node", "scripts/watch.js"]
 # ==========
 # Prod image
 # ==========
-FROM node:10-alpine
-
-RUN apk add --no-cache su-exec
-
-ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
-ENV PATH=$PATH:/home/node/.npm-global/bin
-
-# Install pm2
-RUN set -ex; \
-  su-exec node npm install pm2 -g; \
-  su-exec node npm cache clean --force;
+FROM nginx:alpine
 
 # Prepare app dir
-ARG wd=/app
-WORKDIR $wd
-RUN chown node:node .
-
-# Restore packages
-COPY --chown=node:node package.json package-lock.json ./
-ENV NODE_ENV production
-RUN set -ex; \
-  apk add --no-cache --virtual .gyp python make g++; \
-  su-exec node npm ci; \
-  su-exec node npm cache clean --force; \
-  apk del .gyp;
+WORKDIR /usr/share/nginx/html
 
 # Copy runtime data
-COPY --chown=node:node config ./config
-COPY --chown=node:node public ./public
-COPY --chown=node:node server ./server
-COPY --chown=node:node scripts ./scripts
-COPY --chown=node:node --from=build $wd/build ./build
-COPY --chown=node:node --from=build $wd/buildServer ./buildServer
+COPY docker-entrypoint /docker-entrypoint
+COPY default.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/build ./
 
 # Runtime config
-USER node
-EXPOSE 8080
-ENV PORT 8080
-CMD ["pm2-runtime", "server/index.js"]
+ENTRYPOINT ["/docker-entrypoint"]
+CMD ["nginx", "-g", "daemon off;"]
