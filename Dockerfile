@@ -70,7 +70,7 @@ RUN set -ex; \
 COPY --chown=node:node config ./config
 COPY --chown=node:node public ./public
 COPY --chown=node:node server ./server
-COPY --chown=node:node scripts ./scripts
+COPY --chown=node:node scripts/docker-entrypoint ./scripts/docker-entrypoint
 COPY --chown=node:node --from=build $wd/build ./build
 
 # Runtime config
