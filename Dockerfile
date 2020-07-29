@@ -49,6 +49,7 @@ WORKDIR /usr/share/nginx/html
 COPY docker-entrypoint /docker-entrypoint
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/build ./
+RUN mv ./index.html ./index.html.template
 
 # Runtime config
 ENTRYPOINT ["/docker-entrypoint"]
