@@ -1,5 +1,5 @@
 # Dev image
-FROM node:10-alpine as build
+FROM node:16-alpine as build
 
 RUN apk add --no-cache su-exec tini
 
@@ -15,7 +15,7 @@ COPY --chown=node:node package.json package-lock.json ./
 
 ENV NODE_ENV development
 RUN set -ex; \
-  apk add --no-cache --virtual .gyp python make g++; \
+  apk add --no-cache --virtual .gyp python3 make g++; \
   su-exec node npm ci; \
   su-exec node npm cache clean --force; \
   apk del .gyp;
