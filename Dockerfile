@@ -11,11 +11,10 @@ WORKDIR /app
 RUN chown node:node .
 
 # Restore packages
+RUN apk add --no-cache --virtual .gyp python3 make g++
 COPY --chown=node:node package.json package-lock.json ./
-
 ENV NODE_ENV development
 RUN set -ex; \
-  apk add --no-cache --virtual .gyp python3 make g++; \
   su-exec node npm ci; \
   su-exec node npm cache clean --force; \
   apk del .gyp;
