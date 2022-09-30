@@ -9,8 +9,10 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "final-form": "^4.20.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-final-form": "^6.5.9",
     "react-redux": "^8.0.2",
     "react-relay": "^14.1.0",
     "react-router-dom": "^4.3.1",
@@ -47,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "relay-compiler": "^14.1.0"
   }
 }

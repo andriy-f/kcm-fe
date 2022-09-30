@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { Button } from 'react-toolbox/lib/button'
 import { Input } from 'react-toolbox/lib/input'
 import { Snackbar } from 'react-toolbox/lib/snackbar'
-import { Field, reduxForm } from 'redux-form'
+import { Form, Field } from 'react-final-form'
 
 import { kFormContainer, kTextCenter } from '../App.css'
 import { logIn, logInCleanup } from '../actions'
@@ -15,22 +15,21 @@ const LoginInput = ({ input: { value, onChange } }) => <Input required type='tex
 const PasswordInput = ({ input: { value, onChange } }) => <Input required type='password' label='Password' value={value} onChange={onChange} />
 
 const LoginForm = props => {
-  const { handleSubmit } = props
   return (
-    <form onSubmit={handleSubmit}>
-      <h3 className={kTextCenter}>Log into site</h3>
-      <Field name='login' component={LoginInput} />
-      <Field name='password' component={PasswordInput} />
-      <ButtonPanel>
-        <Button label="Log in" type="submit" flat />
-      </ButtonPanel>
-    </form>
+    <Form>
+       {({handleSubmit}) => (
+      <form onSubmit={handleSubmit}>
+        <h3 className={kTextCenter}>Log into site</h3>
+        <Field name='login' component={LoginInput} />
+        <Field name='password' component={PasswordInput} />
+        <ButtonPanel>
+          <Button label="Log in" type="submit" flat />
+        </ButtonPanel>
+      </form>
+       )}
+    </Form>
   )
 }
-
-const LoginFormReduxed = reduxForm({
-  form: 'logIn'
-})(LoginForm)
 
 class LogIn extends React.Component {
   constructor(props) {
@@ -79,7 +78,7 @@ class LogIn extends React.Component {
       <Redirect to="/" />
     ) : (
         <div className={kFormContainer}>
-          <LoginFormReduxed onSubmit={this.handleSubmit} />
+          <LoginForm onSubmit={this.handleSubmit} />
           <ButtonPanel>
             <Button label="Editor demo" onClick={this.handleLogInEditor} raised accent />
             <Button label="Viewer demo" onClick={this.handleLogInViewer} raised accent />
