@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { AppBar, Layout, NavDrawer, Panel } from 'react-toolbox'
+import { AppBar, Layout, Drawer, Panel } from '@mui/material'
 
 import MainNav from '../containers/MainNav'
 import { mainContent } from '../App.css'
