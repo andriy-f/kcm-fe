@@ -2,7 +2,7 @@
 // ...
 
 import { combineReducers } from 'redux'
-import { reducer as formReducer } from 'redux-form'
+// import { reducer as formReducer } from 'final-form'
 
 import { switchcase } from './utils'
 import {
@@ -71,7 +71,7 @@ const rootReducer = combineReducers({
   logIn,
   logoffPage,
   settings,
-  form: formReducer
+  // form: formReducer
 })
 
 export default rootReducer
