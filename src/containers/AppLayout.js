@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { AppBar, Layout, Drawer, Panel } from '@mui/material'
+// import { AppBar, Layout, Panel } from <removed>
+import Drawer from '@mui/material/Drawer'
 
 import MainNav from '../containers/MainNav'
 import { mainContent } from '../App.css'
@@ -17,7 +18,7 @@ class AppLayout extends React.Component {
     render() {
         return (
             <Layout>
-                <NavDrawer
+                <Drawer
                     active={this.props.sideNavActive}
                     clipped={this.props.sideNavClipped}
                     onOverlayClick={this.toggleSideNav}
@@ -25,7 +26,7 @@ class AppLayout extends React.Component {
                 >
                     <MainNav />
                     <MainNavPinSwitch />
-                </NavDrawer>
+                </Drawer>
 
                 <AppBar
                     fixed
