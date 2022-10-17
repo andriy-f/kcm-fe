@@ -2,8 +2,8 @@
 import debug from 'debug'
 import React from 'react'
 import { createPaginationContainer, graphql } from 'react-relay'
-import Dialog from 'react-toolbox/lib/dialog'
-import { Button } from 'react-toolbox/lib/button'
+import Dialog from '@mui/material/Dialog'
+import Button from '@mui/material/Button'
 
 import { appName } from '../consts'
 import AutoLoadMore from '../components/AutoLoadMore'
@@ -54,7 +54,7 @@ class ScrollingPaginationContactsTableBare extends React.Component<Props, State>
         </AutoLoadMore>
         <Dialog
           actions={this.dialogConfirmDeleteActions}
-          active={!!this.state.contactToDelete}
+          open={!!this.state.contactToDelete}
           onEscKeyDown={this._cancelDelete}
           onOverlayClick={this._cancelDelete}
           title='Confirm delete'>

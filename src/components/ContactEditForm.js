@@ -1,8 +1,8 @@
 // @flow
 import debug from 'debug'
 import React from 'react'
-import { Input } from 'react-toolbox/lib/input'
-import { Button } from 'react-toolbox/lib/button'
+import Input from '@mui/material/Input'
+import Button from '@mui/material/Button'
 
 import { kFormContainer, kTextCenter } from '../App.css'
 import { appName } from '../consts'

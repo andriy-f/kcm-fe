@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { Button } from 'react-toolbox/lib/button'
-import { Input } from 'react-toolbox/lib/input'
-import { Snackbar } from 'react-toolbox/lib/snackbar'
+import Button from '@mui/material/Button'
+import Input from '@mui/material/Input'
+import Snackbar from '@mui/material/Snackbar'
 import { Form, Field } from 'react-final-form'
 
 import { kFormContainer, kTextCenter } from '../App.css'

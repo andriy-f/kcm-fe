@@ -2,7 +2,7 @@
 import debug from 'debug'
 import React from 'react'
 import { createRefetchContainer, graphql } from 'react-relay'
-import { Input } from 'react-toolbox/lib/input'
+import Input from '@mui/material/Input'
 import { debounce } from 'throttle-debounce'
 
 import type { FilteringScrollingContactsTable_contactsData } from './__generated__/FilteringScrollingContactsTable_contactsData.graphql'

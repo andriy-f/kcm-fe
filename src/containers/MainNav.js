@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigation } from 'react-toolbox/lib/navigation'
+import { Navigation } from '@mui/material/Navi'
 import { connect } from 'react-redux'
 
 import { isUserLoggedIn, isDev } from '../utils'

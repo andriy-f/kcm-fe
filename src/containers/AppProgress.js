@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import ProgressBar from 'react-toolbox/lib/progress_bar'
+import ProgressBar from '@mui/material/ProgressBar'
 
 import { progressLinear } from '../App.css'
 import { getViewState } from '../utils'

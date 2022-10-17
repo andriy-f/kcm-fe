@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Switch from 'react-toolbox/lib/switch'
+import Switch from '@mui/material/Switch'
 
 import { toggleSetting } from '../actions'
 
