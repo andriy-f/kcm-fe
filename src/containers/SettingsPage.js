@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Checkbox } from 'react-toolbox'
+import Checkbox from '@mui/material/Checkbox'
 import { connect } from 'react-redux'
 
 import { toggleSetting } from '../actions'
