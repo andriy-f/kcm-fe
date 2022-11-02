@@ -6,7 +6,7 @@ import { graphql, QueryRenderer } from 'react-relay'
 import ContactEdit from '../containers/ContactEdit'
 import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
-import { kTextCenter } from '../App.module.css'
+import styles from '../App.module.css'
 import RelayQueryError from './RelayQueryError'
 
 // eslint-disable-next-line no-unused-vars
@@ -47,7 +47,7 @@ export default class extends React.Component<any> {
 
           return (
             <article>
-              <h3 className={kTextCenter}>Edit Contact</h3>
+              <h3 className={styles.kTextCenter}>Edit Contact</h3>
               <ContactEdit contact={props.contact} onSave={this._handleSave} onCancel={this._handleCancel} />
             </article>)
         }}

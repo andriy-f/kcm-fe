@@ -6,7 +6,7 @@ import environment from '../graphql/relayEnvironment'
 import CreateContactMutation from '../graphql/CreateContactMutation'
 import ContactEditForm from '../components/ContactEditForm'
 import { appName } from '../consts'
-import { kTextCenter } from '../App.module.css'
+import styles from '../App.module.css'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactCreatePage.js')
@@ -30,7 +30,7 @@ export default class extends React.Component<Props> {
   render() {
     return (
       <article>
-        <h3 className={kTextCenter}>Create Contact</h3>
+        <h3 className={styles.kTextCenter}>Create Contact</h3>
         <ContactEditForm onSave={this._handleSave} onCancel={this._handleCancel} />
       </article>
     )

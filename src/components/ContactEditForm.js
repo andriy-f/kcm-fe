@@ -4,7 +4,7 @@ import React from 'react'
 import Input from '@mui/material/Input'
 import Button from '@mui/material/Button'
 
-import { kFormContainer, kTextCenter } from '../App.module.css'
+import styles from '../App.module.css'
 import { appName } from '../consts'
 
 // eslint-disable-next-line no-unused-vars
@@ -40,14 +40,14 @@ export default class extends React.Component<Props, State> {
 
     const { firstName, lastName, email, phoneNumber } = this.state
     return (
-      <section className={kFormContainer}>
+      <section className={styles.kFormContainer}>
         <form onSubmit={this._handleSubmit} method="post">
           <Input autoFocus={true} required name="firstName" label="First Name" value={firstName} onChange={this._handleInputChange} />
           <Input name="lastName" required label="Last Name" value={lastName} onChange={this._handleInputChange} />
           <Input name="email" label="Email" value={email} onChange={this._handleInputChange} />
           <Input name="phoneNumber" label="Phone number" value={phoneNumber} onChange={this._handleInputChange} />
 
-          <div className={kTextCenter}>
+          <div className={styles.kTextCenter}>
             <Button label="Save" type="submit" flat />
             <Button label="Cancel" onClick={this.props.onCancel} />
           </div>

@@ -1,8 +1,9 @@
 import React from 'react'
 
-import { buttonPanel } from '../App.module.css'
+import styles from '../App.module.css'
+
 export default ({ children }) => (
-  <p className={buttonPanel}>
+  <p className={styles.buttonPanel}>
     {children}
   </p>
 )
