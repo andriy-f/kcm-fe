@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Drawer from '@mui/material/Drawer'
 
 import MainNav from '../containers/MainNav'
-import { mainContent } from '../App.css'
+import { mainContent } from '../App.module.css'
 import { toggleSetting } from '../actions'
 import AppProgress from '../containers/AppProgress'
 import { sideNavActiveSetting } from '../consts'

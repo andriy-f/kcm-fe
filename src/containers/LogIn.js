@@ -6,7 +6,7 @@ import Input from '@mui/material/Input'
 import Snackbar from '@mui/material/Snackbar'
 import { Form, Field } from 'react-final-form'
 
-import { kFormContainer, kTextCenter } from '../App.css'
+import { kFormContainer, kTextCenter } from '../App.module.css'
 import { logIn, logInCleanup } from '../actions'
 import ButtonPanel from '../components/ButtonPanel'
 import { isUserLoggedIn, getUserFriendlyErrorMessage } from '../utils'

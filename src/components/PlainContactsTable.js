@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 
 import { appName } from '../consts'
 import { RTIconButtonLink } from './RTButtonLink'
-import { contactsTable__btnCol, contactsTable__link } from '../App.css'
+import { contactsTable__btnCol, contactsTable__link } from '../App.module.css'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':PlainContactsTable.js')

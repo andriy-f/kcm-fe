@@ -6,7 +6,7 @@ import environment from '../graphql/relayEnvironment'
 import CreateContactMutation from '../graphql/CreateContactMutation'
 import ContactEditForm from '../components/ContactEditForm'
 import { appName } from '../consts'
-import { kTextCenter } from '../App.css'
+import { kTextCenter } from '../App.module.css'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactCreatePage.js')

@@ -7,7 +7,7 @@ import NarrowLayout from '../components/NarrowLayout'
 import ContactView from '../containers/ContactView'
 import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
-import { kTextCenter } from '../App.css'
+import { kTextCenter } from '../App.module.css'
 import RelayQueryError from './RelayQueryError'
 
 // eslint-disable-next-line no-unused-vars
@@ -53,4 +53,3 @@ export default class extends React.Component<any> {
     )
   }
 }
-

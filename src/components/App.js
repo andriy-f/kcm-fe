@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import debug from 'debug'
 
-import { app, staticErrorMessage } from '../App.css'
+import { app, staticErrorMessage } from '../App.module.css'
 import { BACKEND_URL } from '../config'
 import { appName, isSSR } from '../consts'
 import AppLayout from '../containers/AppLayout'

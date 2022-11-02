@@ -4,7 +4,7 @@ import React from 'react'
 import Input from '@mui/material/Input'
 import Button from '@mui/material/Button'
 
-import { kFormContainer, kTextCenter } from '../App.css'
+import { kFormContainer, kTextCenter } from '../App.module.css'
 import { appName } from '../consts'
 
 // eslint-disable-next-line no-unused-vars

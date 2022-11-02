@@ -9,7 +9,7 @@ import { appName } from '../consts'
 import AutoLoadMore from '../components/AutoLoadMore'
 import PlainContactsTable from '../components/PlainContactsTable'
 import DeleteContactMutation from '../graphql/DeleteContactMutation'
-import { loadMoreButton } from '../App.css'
+import { loadMoreButton } from '../App.module.css'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ScrollingPaginationContactsTable.js')

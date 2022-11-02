@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { intro__h } from '../App.css'
+import { intro__h } from '../App.module.css'
 
 export default () => (
   <article>

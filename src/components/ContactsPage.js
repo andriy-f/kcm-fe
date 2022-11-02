@@ -7,7 +7,7 @@ import FilteringScrollingContactsTable from '../containers/FilteringScrollingCon
 import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
 import { RTButtonLink } from '../components/RTButtonLink'
-import { addItemButtonContainer, contactsPage } from '../App.css'
+import { addItemButtonContainer, contactsPage } from '../App.module.css'
 import RelayQueryError from './RelayQueryError'
 
 // eslint-disable-next-line no-unused-vars
