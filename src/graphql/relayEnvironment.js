@@ -5,13 +5,15 @@ import {
   RecordSource,
   Store,
 } from 'relay-runtime'
-import fetch from 'isomorphic-fetch'
+import fetchPonyfill from 'fetch-ponyfill'
 import debug from 'debug'
 
 import RelayError from './RelayError'
 import { appName } from '../consts'
 import { BACKEND_URL } from '../config'
 import { urlJoin } from '../utils'
+
+const {fetch} = fetchPonyfill()
 
 const log = debug(appName + ':relayEnvironment.js')
 
