@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 
 import { appName } from '../consts'
 import { RTIconButtonLink } from './RTButtonLink'
-import { contactsTable__btnCol, contactsTable__link } from '../App.module.css'
+import styles from '../App.module.css'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':PlainContactsTable.js')
@@ -40,7 +40,7 @@ export default class extends React.Component<Props> {
         </TableHead>
         {items && items.map((item) => {
           const TableCellWithLink = ({ children }) => <TableCell>
-            <Link className={contactsTable__link} to={`/contacts/view/${item.id}`}>
+            <Link className={styles.contactsTable__link} to={`/contacts/view/${item.id}`}>
               {children}
             </Link>
           </TableCell>
@@ -59,7 +59,7 @@ export default class extends React.Component<Props> {
                   ? <a href={'tel: ' + phoneNumber}>{phoneNumber}</a>
                   : ''}
               </TableCell>
-              <TableCell className={contactsTable__btnCol}>
+              <TableCell className={styles.contactsTable__btnCol}>
                 {readonly ?
                   ''
                   : (

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Drawer from '@mui/material/Drawer'
 
 import MainNav from '../containers/MainNav'
-import { mainContent } from '../App.module.css'
+import styles from '../App.module.css'
 import { toggleSetting } from '../actions'
 import AppProgress from '../containers/AppProgress'
 import { sideNavActiveSetting } from '../consts'
@@ -37,7 +37,7 @@ class AppLayout extends React.Component {
                 <AppProgress />
 
                 <Panel bodyScroll={this.props.bodyScrolled}>
-                    <section className={mainContent}>
+                    <section className={styles.mainContent}>
                         {this.props.children}
                     </section>
                 </Panel>

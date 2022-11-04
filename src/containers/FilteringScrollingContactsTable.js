@@ -8,7 +8,7 @@ import { debounce } from 'throttle-debounce'
 import type { FilteringScrollingContactsTable_contactsData } from './__generated__/FilteringScrollingContactsTable_contactsData.graphql'
 import { appName } from '../consts'
 import ScrollingPaginationContactsTable from '../containers/ScrollingPaginationContactsTable'
-import { contactsFilter } from '../App.module.css'
+import styles from '../App.module.css'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':FilteringScrollingContactsTable.js')
@@ -45,7 +45,7 @@ class PlainFilteringContactsTable extends React.Component<Props, State> {
 
     return (
       <article>
-        <Input type="text" label="Filter" className={contactsFilter}
+        <Input type="text" label="Filter" className={styles.contactsFilter}
           value={filterText}
           onChange={this._handleFilterChange} />
         <ScrollingPaginationContactsTable contactsData={contactsData} relay={null} readonly={readonly} />

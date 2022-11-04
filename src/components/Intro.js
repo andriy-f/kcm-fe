@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { intro__h } from '../App.module.css'
+import styles from '../App.module.css'
 
 export default () => (
   <article>
-    <h1 className={intro__h}>Welcome to K Contact Manager Sample App</h1>
+    <h1 className={styles.intro__h}>Welcome to K Contact Manager Sample App</h1>
     <section>
       <h2>Description</h2>
       <p>

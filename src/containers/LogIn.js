@@ -6,7 +6,7 @@ import Input from '@mui/material/Input'
 import Snackbar from '@mui/material/Snackbar'
 import { Form, Field } from 'react-final-form'
 
-import { kFormContainer, kTextCenter } from '../App.module.css'
+import styles from '../App.module.css'
 import { logIn, logInCleanup } from '../actions'
 import ButtonPanel from '../components/ButtonPanel'
 import { isUserLoggedIn, getUserFriendlyErrorMessage } from '../utils'
@@ -19,7 +19,7 @@ const LoginForm = props => {
     <Form>
        {({handleSubmit}) => (
       <form onSubmit={handleSubmit}>
-        <h3 className={kTextCenter}>Log into site</h3>
+        <h3 className={styles.kTextCenter}>Log into site</h3>
         <Field name='login' component={LoginInput} />
         <Field name='password' component={PasswordInput} />
         <ButtonPanel>
@@ -77,7 +77,7 @@ class LogIn extends React.Component {
     return isLoggedIn ? (
       <Redirect to="/" />
     ) : (
-        <div className={kFormContainer}>
+        <div className={styles.kFormContainer}>
           <LoginForm onSubmit={this.handleSubmit} />
           <ButtonPanel>
             <Button label="Editor demo" onClick={this.handleLogInEditor} raised accent />

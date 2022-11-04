@@ -7,7 +7,7 @@ import NarrowLayout from '../components/NarrowLayout'
 import ContactView from '../containers/ContactView'
 import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
-import { kTextCenter } from '../App.module.css'
+import styles from '../App.module.css'
 import RelayQueryError from './RelayQueryError'
 
 // eslint-disable-next-line no-unused-vars
@@ -45,7 +45,7 @@ export default class extends React.Component<any> {
 
           return (
             <NarrowLayout>
-              <h2 className={kTextCenter}>Contact</h2>
+              <h2 className={styles.kTextCenter}>Contact</h2>
               <ContactView contact={props.contact} onGoBack={this._handleGoBack} />
             </NarrowLayout>)
         }}

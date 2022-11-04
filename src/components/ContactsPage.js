@@ -7,7 +7,7 @@ import FilteringScrollingContactsTable from '../containers/FilteringScrollingCon
 import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
 import { RTButtonLink } from '../components/RTButtonLink'
-import { addItemButtonContainer, contactsPage } from '../App.module.css'
+import styles from '../App.module.css'
 import RelayQueryError from './RelayQueryError'
 
 // eslint-disable-next-line no-unused-vars
@@ -33,9 +33,9 @@ export default class extends React.Component<{ readonly?: boolean }> {
           }
 
           return (
-            <article className={contactsPage}>
+            <article className={styles.contactsPage}>
               <FilteringScrollingContactsTable contactsData={props} relay={null} readonly={this.props.readonly} />
-              <div className={addItemButtonContainer}>
+              <div className={styles.addItemButtonContainer}>
                 <RTButtonLink icon='add' floating accent to="/contacts/new" />
               </div>
             </article>)
