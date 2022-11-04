@@ -9,18 +9,19 @@ const MainDrawer = function () {
   const [drawerOpen, setDrawerOpen] = React.useState(false)
 
   const toggleDrawer =
-  (open: boolean) =>
-  (event: React.KeyboardEvent | React.MouseEvent) => {
-    if (
-      event.type === 'keydown' &&
-      ((event as React.KeyboardEvent).key === 'Tab' ||
+    (open: boolean) =>
+    (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === 'keydown' &&
+        ((event as React.KeyboardEvent).key === 'Tab' ||
         (event as React.KeyboardEvent).key === 'Shift')
-    ) {
-      return;
+      ) {
+        return
+      }
+
+      setState({ 'drawerOpen': open })
     }
 
-    setState({ ...state, 'drawerOpen': open });
-  }
     render() {
         const currentUser = this.props.currentUser
         const isLoggedIn = isUserLoggedIn(currentUser)

@@ -20,7 +20,7 @@ import ConditionalAuthHOC from './containers/ConditionalAuthHOC'
 
 const DefaultConditionalAuthHOC = ConditionalAuthHOC({ NotLoggedIn, NotAuthorized })
 
-export default () => (
+const Routes = () => (
   <Switch>
     <Route exact path="/" component={Intro} />
     <Route exact path="/logIn" component={LogInPage} />
@@ -42,3 +42,5 @@ export default () => (
     <Route component={NotFound} />>
   </Switch>
 )
+
+export default Routes

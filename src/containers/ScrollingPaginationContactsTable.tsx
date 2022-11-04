@@ -9,7 +9,7 @@ import { appName } from '../consts'
 import AutoLoadMore from '../components/AutoLoadMore'
 import PlainContactsTable from '../components/PlainContactsTable'
 import DeleteContactMutation from '../graphql/DeleteContactMutation'
-import { loadMoreButton } from '../App.module.css'
+import styles from '../App.module.css'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ScrollingPaginationContactsTable.js')
@@ -48,7 +48,7 @@ class ScrollingPaginationContactsTableBare extends React.Component<Props, State>
         <AutoLoadMore hasMore={hasMore()} onLoadMore={this._loadMore}>
           <Button
             primary
-            className={loadMoreButton}
+            className={styles.loadMoreButton}
             onClick={this._loadMore}
             title="Load More">Load more</Button>
         </AutoLoadMore>
