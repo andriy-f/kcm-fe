@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { persistStore } from 'redux-persist'
@@ -9,14 +9,14 @@ import configureStore from '../configureStore'
 const store = configureStore()
 persistStore(store)
 
-export default class Root extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <App />
-        </Router>
-      </Provider>
-    )
-  }
+function Root() {
+  return (
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
+  )
 }
+
+export default Root
