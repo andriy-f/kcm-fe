@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { isUserLoggedIn } from '../utils'
 
-type Defaults = {
+interface Defaults {
   NotLoggedIn: React.ComponentType<Object>,
   NotAuthorized: React.ComponentType<Object>,
 }

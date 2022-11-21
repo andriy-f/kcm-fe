@@ -8,23 +8,23 @@ export const commonAjaxRequestSettings = {
   responseType: 'json',
 }
 
-export const isUserLoggedIn = (currentUser) => {
+export const isUserLoggedIn = (currentUser: any) => {
   return currentUser && Object.keys(currentUser).length !== 0
     && currentUser.tokenExpiresOn >= Date.now()
 }
 
-export const getViewState = state => ({
+export const getViewState = (state: any) => ({
   ...state,
   isFetchingAnywhere: state.logIn.isFetching
 })
 
-const switchcaseSimple = cases => defaultCase => key =>
+const switchcaseSimple = (cases: { [prop: string]: string })  => (defaultCase: string) => (key: string) =>
   key in cases ? cases[key] : defaultCase
 
-const executeIfFunction = f =>
+const executeIfFunction = (f: any) =>
   f instanceof Function ? f() : f
 
-export const switchcase = cases => defaultCase => key =>
+export const switchcase = (cases: { [prop: string]: string })  => (defaultCase: string) => (key: string) =>
   executeIfFunction(switchcaseSimple(cases)(defaultCase)(key))
 
 // Sample usage in redux reducer
@@ -35,7 +35,7 @@ export const switchcase = cases => defaultCase => key =>
 //         'DECREMENT': () => state - 1
 //     })(state)(action.type)
 
-export const getUserFriendlyErrorMessage = (error) => {
+export const getUserFriendlyErrorMessage = (error: any) => {
   let errorMessage = undefined
 
   switch (error && error.status) {
@@ -54,7 +54,7 @@ export const getUserFriendlyErrorMessage = (error) => {
     .join(' ')
 }
 
-export const urlJoin = (baseUrl, url) => {
+export const urlJoin = (baseUrl: string, url: string) => {
   var theUrl = new URI(url)
   if (theUrl.is('relative')) {
     theUrl = theUrl.absoluteTo(baseUrl)

@@ -1,8 +1,8 @@
-import { createFactory } from 'react'
+import { ComponentClass, createFactory } from 'react'
 
-const defaultProps = props => BaseComponent => {
+const defaultProps = (props: object) => (BaseComponent: ComponentClass) => {
   const factory = createFactory(BaseComponent)
-  const DefaultProps = ownerProps => factory(ownerProps)
+  const DefaultProps = (ownerProps: object) => factory(ownerProps)
   DefaultProps.defaultProps = props
   // if (process.env.NODE_ENV !== 'production') {
   //   return setDisplayName(wrapDisplayName(BaseComponent, 'defaultProps'))(

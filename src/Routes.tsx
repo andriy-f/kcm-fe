@@ -39,7 +39,7 @@ const Routes = () => (
       component={DefaultConditionalAuthHOC([[['contact-view'], ContactViewPage]])} />
     <Route path="/settings" component={SettingsPage} />
     <Route path="/dev" component={DevPage} />
-    <Route component={NotFound} />>
+    <Route component={NotFound} />
   </Switch>
 )
 
