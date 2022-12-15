@@ -27,7 +27,7 @@ const currentUser = (state = {}, action) => {
 }
 
 const logInDefaultState = { isFetching: false }
-const logIn = (state = logInDefaultState, action) => switchcase({
+const logIn = (state = logInDefaultState, action: any) => switchcase({
   [LOGIN]: { isFetching: true },
   [LOGIN_DONE]: { response: { success: true }, isFetching: false },
   [LOGIN_ERROR]: () => ({ error: action.payload, isFetching: false }),

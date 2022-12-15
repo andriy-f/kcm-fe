@@ -17,7 +17,7 @@ interface Props {
   }
 }
 
-export default class extends React.Component<Props> {
+class ContactCreatePage extends React.Component<any> {
   _handleSave = (data: Object) => {
     CreateContactMutation.commit(environment, data)
     this.props.history.push('/contacts')
@@ -36,3 +36,4 @@ export default class extends React.Component<Props> {
     )
   }
 }
+export default ContactCreatePage
