@@ -18,13 +18,13 @@ export const getViewState = (state: any) => ({
   isFetchingAnywhere: state.logIn.isFetching
 })
 
-const switchcaseSimple = (cases: { [prop: string]: string })  => (defaultCase: string) => (key: string) =>
+const switchcaseSimple = (cases: { [prop: string]: unknown})  => (defaultCase: unknown) => (key: string) =>
   key in cases ? cases[key] : defaultCase
 
 const executeIfFunction = (f: any) =>
   f instanceof Function ? f() : f
 
-export const switchcase = (cases: { [prop: string]: string })  => (defaultCase: string) => (key: string) =>
+export const switchcase = (cases: { [prop: string]: unknown})  => (defaultCase: unknown) => (key: string) =>
   executeIfFunction(switchcaseSimple(cases)(defaultCase)(key))
 
 // Sample usage in redux reducer
