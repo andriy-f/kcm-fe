@@ -11,7 +11,17 @@ import {
   TOGGLE_SETTING, SET_SETTING
 } from './actions'
 
-const currentUser = (state = {}, action) => {
+interface Action {
+  type: string
+  payload: any
+}
+
+interface ActionWithPayload<T> {
+  type: string
+  payload: T
+}
+
+const currentUser = (state = {}, action: Action) => {
   switch (action.type) {
     case LOGIN_DONE:
       let respData = action.payload
@@ -27,14 +37,14 @@ const currentUser = (state = {}, action) => {
 }
 
 const logInDefaultState = { isFetching: false }
-const logIn = (state = logInDefaultState, action: any) => switchcase({
+const logIn = (state = logInDefaultState, action: Action) => switchcase({
   [LOGIN]: { isFetching: true },
   [LOGIN_DONE]: { response: { success: true }, isFetching: false },
   [LOGIN_ERROR]: () => ({ error: action.payload, isFetching: false }),
   [LOGIN_CLEANUP]: logInDefaultState
 })(state)(action.type)
 
-const logoffPage = (state = {}, action) => {
+const logoffPage = (state = {}, action: Action) => {
   switch (action.type) {
     case LOGOFF_DONE:
       return { response: action.payload }
@@ -45,7 +55,24 @@ const logoffPage = (state = {}, action) => {
   }
 }
 
-const settings = (state = {
+interface SettingsState {
+  bodyScrolled: boolean,
+  sideNavActive: boolean,
+  sideNavPinned: boolean,
+  sideNavClipped: boolean,
+  rightSideNavActive: boolean,
+  rightSideNavPinned: boolean,
+  rightSideNavClipped: boolean
+}
+
+type SettingName = keyof SettingsState
+
+interface SettingsPayload {
+  name: string
+  value?: any
+}
+
+const settings = (state: SettingsState = {
   bodyScrolled: false,
   sideNavActive: false,
   sideNavPinned: false,
@@ -53,12 +80,18 @@ const settings = (state = {
   rightSideNavActive: false,
   rightSideNavPinned: false,
   rightSideNavClipped: true
-}, action) => {
+}, action: ActionWithPayload<SettingsPayload>) => {
   switch (action.type) {
     case TOGGLE_SETTING:
       let name = action.payload.name
-      let oldSettingValue = state[name]
-      return { ...state, [name]: !oldSettingValue }
+      if (name in state) {
+        const settingName = name as SettingName
+        const oldSettingValue = state[settingName]
+        return { ...state, [name]: !oldSettingValue }
+      } else {
+        return { ...state, error: '"' + name + '" is not valid setting name' }
+      }
+
     case SET_SETTING:
       return { ...state, [action.payload.name]: action.payload.value }
     default:
