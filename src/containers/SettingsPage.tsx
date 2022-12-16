@@ -3,8 +3,15 @@ import Checkbox from '@mui/material/Checkbox'
 import { connect } from 'react-redux'
 
 import { toggleSetting } from '../actions'
+// import interface { SettingsState } from '../reducers'
+import type { SettingsState } from '../reducers'
 
-class SideNavSettings extends Component {
+interface SettingsProps extends SettingsState {
+  toggleSetting: (name: string) => void
+}
+
+
+class SideNavSettings extends Component<SettingsProps> {
 
     handleToggleSideNavPinned = () => {
         this.props.toggleSetting('sideNavPinned')
@@ -57,7 +64,7 @@ class SideNavSettings extends Component {
 //     </section>
 // )
 
-class OtherSettings extends Component {
+class OtherSettings extends Component<SettingsProps> {
     handleToggleBodyScrolled = () => {
         this.props.toggleSetting('bodyScrolled')
     }
@@ -76,7 +83,7 @@ class OtherSettings extends Component {
     }
 }
 
-class Settings extends Component {
+class Settings extends Component<SettingsProps> {
     render() {
         return (
             <section>
@@ -87,10 +94,10 @@ class Settings extends Component {
     }
 }
 
-const mapStateToProps = state => state.settings
+const mapStateToProps = (state: any) => state.settings
 
-const mapDispathToProps = dispatch => ({
-    toggleSetting: name => dispatch(toggleSetting({ name }))
+const mapDispathToProps = (dispatch: Function) => ({
+    toggleSetting: (name: string) => dispatch(toggleSetting({ name }))
 })
 
 export default connect(mapStateToProps, mapDispathToProps)(Settings)

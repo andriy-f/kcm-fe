@@ -55,7 +55,7 @@ const logoffPage = (state = {}, action: Action) => {
   }
 }
 
-interface SettingsState {
+export interface SettingsState {
   bodyScrolled: boolean,
   sideNavActive: boolean,
   sideNavPinned: boolean,

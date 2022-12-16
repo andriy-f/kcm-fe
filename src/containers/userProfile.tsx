@@ -5,7 +5,14 @@ import { Link } from 'react-router-dom'
 
 import { isUserLoggedIn } from '../utils'
 
-class UserProfile extends React.Component {
+interface CurrentUser {
+  tokenExpiresOn: number
+}
+interface UserProfileProps {
+    currentUser: CurrentUser
+}
+
+class UserProfile extends React.Component<UserProfileProps> {
     render() {
         const currentUser = this.props.currentUser
         const isLoggedIn = isUserLoggedIn(currentUser)
@@ -22,7 +29,11 @@ class UserProfile extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+interface userProfileState {
+  currentUser: CurrentUser
+}
+
+const mapStateToProps = (state: userProfileState) => ({
     currentUser: state.currentUser
 })
 
