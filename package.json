@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "debug": "^4.3.4",
     "fetch-ponyfill": "^7.1.0",
     "final-form": "^4.20.7",
     "react": "^18.2.0",
@@ -22,6 +23,7 @@
     "redux-logger": "^3.0.6",
     "redux-observable": "^2.0.0",
     "redux-persist": "^4.8.1",
+    "relay-runtime": "^14.1.0",
     "rxjs": "^5.5.2",
     "throttle-debounce": "^2.0.0",
     "urijs": "^1.19.11",
@@ -52,8 +54,11 @@
     ]
   },
   "devDependencies": {
+    "@types/debug": "^4.1.7",
+    "@types/react-relay": "^14.1.2",
     "@types/react-router-dom": "^5.3.3",
     "@types/urijs": "^1.19.19",
+    "babel-plugin-relay": "^14.1.0",
     "relay-compiler": "^14.1.0"
   }
 }

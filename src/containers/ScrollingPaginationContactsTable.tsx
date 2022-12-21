@@ -1,4 +1,3 @@
-// @flow
 import debug from 'debug'
 import React from 'react'
 import { createPaginationContainer, graphql } from 'react-relay'
