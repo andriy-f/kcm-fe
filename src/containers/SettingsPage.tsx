@@ -26,13 +26,11 @@ class SideNavSettings extends Component<SettingsProps> {
             <section>
                 <h5 style={{ marginBottom: 20 }}>SideNav State</h5>
                 <Checkbox
-                    label='Pinned'
                     checked={this.props.sideNavPinned}
                     onChange={this.handleToggleSideNavPinned}
                 />
 
                 <Checkbox
-                    label='Clipped'
                     checked={this.props.sideNavClipped}
                     onChange={this.handleToggleSideNavClipped}
                 />
@@ -74,7 +72,6 @@ class OtherSettings extends Component<SettingsProps> {
             <section>
                 <h5 style={{ marginBottom: 20 }}>Other</h5>
                 <Checkbox
-                    label="Body scrolled"
                     checked={this.props.bodyScrolled}
                     onChange={this.handleToggleBodyScrolled}
                 />
