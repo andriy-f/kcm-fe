@@ -5,6 +5,7 @@ import { persistStore } from 'redux-persist'
 
 import App from '../components/App'
 import configureStore from '../configureStore'
+// import store from '../app/store'
 
 const store = configureStore()
 persistStore(store)

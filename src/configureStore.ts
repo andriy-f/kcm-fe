@@ -1,4 +1,5 @@
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware, compose, Store } from 'redux'
+
 import { createLogger } from 'redux-logger'
 import { autoRehydrate } from 'redux-persist'
 
@@ -7,14 +8,14 @@ import { epicMiddleware } from './middleware/epics'
 import { isDev } from './utils'
 
 const loggerMiddleware = createLogger()
-let configureStore
+let myConfigureStore: (preloadedState?: any) => Store
 
 if (isDev) {
-  const composeEnhancers = 
+  const composeEnhancers =
     (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
     || compose
 
-  configureStore = (preloadedState) => {
+  myConfigureStore = (preloadedState) => {
     return createStore(
       rootReducer,
       preloadedState,
@@ -28,7 +29,7 @@ if (isDev) {
     )
   }
 } else {
-  configureStore = (preloadedState) => {
+  myConfigureStore = (preloadedState) => {
     return createStore(
       rootReducer,
       preloadedState,
@@ -42,4 +43,4 @@ if (isDev) {
   }
 }
 
-export default configureStore
+export default myConfigureStore
