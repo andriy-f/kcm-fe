@@ -13,7 +13,7 @@ import styles from '../App.module.css'
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ScrollingPaginationContactsTable.js')
 
-type Props = {
+interface Props {
   contactsData: any,
   relay: any,
   readonly?: boolean,
