@@ -1,7 +1,8 @@
 import debug from 'debug'
 import React from 'react'
-import { createPaginationContainer, graphql } from 'react-relay'
+import { createPaginationContainer, graphql, RelayPaginationProp } from 'react-relay'
 import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
 import Button from '@mui/material/Button'
 
 import { appName } from '../consts'
@@ -9,28 +10,23 @@ import AutoLoadMore from '../components/AutoLoadMore'
 import PlainContactsTable from '../components/PlainContactsTable'
 import DeleteContactMutation from '../graphql/DeleteContactMutation'
 import styles from '../App.module.css'
+import Contact from '../types/Contact'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ScrollingPaginationContactsTable.js')
 
 interface Props {
   contactsData: any,
-  relay: any,
   readonly?: boolean,
-  // relay: {
-  //   environment: Environment,
-  //   loadMore(pageSize: number, callback: ?(error: ?Error) => void): any,
-  //   hasMore(): boolean,
-  //   isLoading(): boolean,
-  // }
+  relay: RelayPaginationProp,
 }
 
-type State = {
-  contactToDelete: Object | null,
+interface State {
+  contactToDelete: Contact | null,
 }
 
 class ScrollingPaginationContactsTableBare extends React.Component<Props, State> {
-  state = {
+  state: State = {
     contactToDelete: null,
   }
 
@@ -38,32 +34,40 @@ class ScrollingPaginationContactsTableBare extends React.Component<Props, State>
     const { contactsData, relay: { hasMore }, readonly } = this.props
     const { contactToDelete } = this.state
     const items = contactsData.allContacts.edges
-      .filter(e => e && e.node)
-      .map(e => e.node)
+      .filter((e: any) => e && e.node)
+      .map((e: any) => e.node)
 
     return (
       <article>
         <PlainContactsTable items={items} onDeleteClick={this._handleDeleteClick} readonly={readonly} />
         <AutoLoadMore hasMore={hasMore()} onLoadMore={this._loadMore}>
           <Button
-            primary
+            color="primary"
             className={styles.loadMoreButton}
             onClick={this._loadMore}
             title="Load More">Load more</Button>
         </AutoLoadMore>
         <Dialog
-          actions={this.dialogConfirmDeleteActions}
           open={!!this.state.contactToDelete}
-          onEscKeyDown={this._cancelDelete}
-          onOverlayClick={this._cancelDelete}
+          onClose={this._cancelDelete}
           title='Confirm delete'>
           {contactToDelete && <p>Do you realy want to delete {contactToDelete.firstName} {contactToDelete.lastName}?</p>}
+          <DialogActions>
+            <Button onClick={this._cancelDelete}>Cancel</Button>
+            <Button
+              onClick={this._handleDeleteConfirmation}
+              variant="contained"
+              autoFocus
+            >
+               Delete
+            </Button>
+          </DialogActions>
         </Dialog>
       </article>
     )
   }
 
-  _handleDeleteClick = (contact) => {
+  _handleDeleteClick = (contact: Contact) => {
     this.setState({ contactToDelete: contact })
   }
 
@@ -93,10 +97,10 @@ class ScrollingPaginationContactsTableBare extends React.Component<Props, State>
     )
   }
 
-  dialogConfirmDeleteActions = [
-    { label: 'Cancel', onClick: this._cancelDelete },
-    { label: 'Delete', onClick: this._handleDeleteConfirmation, primary: true }
-  ]
+  // dialogConfirmDeleteActions = [
+  //   { label: 'Cancel', onClick: this._cancelDelete },
+  //   { label: 'Delete', onClick: this._handleDeleteConfirmation, primary: true }
+  // ]
 }
 
 export default createPaginationContainer(
