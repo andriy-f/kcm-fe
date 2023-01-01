@@ -1,11 +1,12 @@
+// Older, TODO refactor
 import { createStore, applyMiddleware, compose, Store } from 'redux'
 
 import { createLogger } from 'redux-logger'
 import { autoRehydrate } from 'redux-persist'
 
 import rootReducer from './reducers'
-import { epicMiddleware } from './middleware/epics'
-import { isDev } from './utils'
+import { epicMiddleware } from '../middleware/epics'
+import { isDev } from '../utils'
 
 const loggerMiddleware = createLogger()
 let myConfigureStore: (preloadedState?: any) => Store

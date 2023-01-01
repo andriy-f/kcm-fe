@@ -1,15 +1,16 @@
+// TODO refactor into ReduxToolkit slices
 // State sample
 // ...
 
 import { combineReducers } from 'redux'
 // import { reducer as formReducer } from 'final-form'
 
-import { switchcase } from './utils'
+import { switchcase } from '../utils'
 import {
   LOGIN, LOGIN_DONE, LOGIN_ERROR, LOGIN_CLEANUP,
   LOGOFF_DONE, LOGOFF_ERROR,
   TOGGLE_SETTING, SET_SETTING
-} from './actions'
+} from '../actions'
 
 interface Action {
   type: string

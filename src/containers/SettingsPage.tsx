@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { toggleSetting } from '../actions'
 // import interface { SettingsState } from '../reducers'
-import type { SettingsState } from '../reducers'
+import type { SettingsState } from '../app/reducers'
 
 interface SettingsProps extends SettingsState {
   toggleSetting: (name: string) => void

@@ -4,11 +4,9 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { persistStore } from 'redux-persist'
 
 import App from '../components/App'
-import configureStore from '../configureStore'
-// import store from '../app/store'
+import { store } from '../app/store'
 
-const store = configureStore()
-persistStore(store)
+persistStore(store) //TODO needed?
 
 function Root() {
   return (

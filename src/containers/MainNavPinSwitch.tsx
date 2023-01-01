@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import Switch from '@mui/material/Switch'
 
 import { toggleSetting } from '../actions'
+import { Dispatch } from 'redux'
+import { RootState } from '../app/store'
 
 class MainNavPinSwitch extends React.Component {
     handleToggleSideNavPinned = () => {
@@ -16,10 +18,10 @@ class MainNavPinSwitch extends React.Component {
     }
 }
 
-const mapStateToProps = state => state.settings
+const mapStateToProps = (state: RootState) => state.settings
 
-const mapDispathToProps = dispatch => ({
-    toggleSetting: name => dispatch(toggleSetting({ name }))
+const mapDispathToProps = (dispatch: Dispatch) => ({
+    toggleSetting: (name: string) => dispatch(toggleSetting({ name }))
 })
 
 export default connect(mapStateToProps, mapDispathToProps)(MainNavPinSwitch)
