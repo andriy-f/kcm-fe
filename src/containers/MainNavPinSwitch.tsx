@@ -1,27 +1,23 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch'
 
-import { toggleSetting } from '../actions'
-import { Dispatch } from 'redux'
-import { RootState } from '../app/store'
+import { useAppSelector, useAppDispatch } from '../app/hooks';
+import { selectSideNavPinned, toggleSideNavPinned } from '../features/settings/settingsSlice';
 
-class MainNavPinSwitch extends React.Component {
-    handleToggleSideNavPinned = () => {
-        this.props.toggleSetting('sideNavPinned')
-    }
+function MainNavPinSwitch () {
+  const sideNavPinned = useAppSelector(selectSideNavPinned)
+  const dispatch = useAppDispatch
+        return (
+          <FormGroup>
+            <FormControlLabel control={
+              <Switch
+                checked={sideNavPinned}
+                onChange={() => dispatch(toggleSideNavPinned)} />
+            } label="Pin" />
+          </FormGroup>
+        )
+      }
 
-    render() {
-        const { sideNavPinned } = this.props
-        return <Switch checked={sideNavPinned} label='Pin' onChange={this.handleToggleSideNavPinned} />
-
-    }
-}
-
-const mapStateToProps = (state: RootState) => state.settings
-
-const mapDispathToProps = (dispatch: Dispatch) => ({
-    toggleSetting: (name: string) => dispatch(toggleSetting({ name }))
-})
-
-export default connect(mapStateToProps, mapDispathToProps)(MainNavPinSwitch)
+export default MainNavPinSwitch

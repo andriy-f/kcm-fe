@@ -16,8 +16,8 @@ export const LOGOFF = 'LOGOFF'
 export const LOGOFF_DONE = 'LOGOFF_DONE'
 export const LOGOFF_ERROR = 'LOGOFF_ERROR'
 
-export const TOGGLE_SETTING = 'TOGGLE_SETTING'
-export const SET_SETTING = 'SET_SETTING'
+export const TOGGLE_SETTING = 'settings/toggle'
+export const SET_SETTING = 'settings/set'
 
 export const logIn = (login: string, password: string) => ({
     type: LOGIN,
@@ -56,10 +56,10 @@ export const logOffError = (payload: any) => ({
     error: true
 })
 
-export const toggleSetting = (payload: any) => ({
-    type: TOGGLE_SETTING,
-    payload
-})
+// export const toggleSetting = (payload: any) => ({
+//     type: TOGGLE_SETTING,
+//     payload
+// })
 
 export const setSetting = (name: string, value: any) => ({
     type: SET_SETTING,
