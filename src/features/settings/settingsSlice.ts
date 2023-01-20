@@ -19,7 +19,7 @@ export interface SettingsState {
 type SettingName = keyof SettingsState
 
 interface SettingsPayload {
-  name: string
+  name: SettingName
   value?: any
 }
 
@@ -51,6 +51,8 @@ export const settingsReducer = (state: SettingsState = {
 }
 
 export const selectSideNavPinned = (state: RootState) => state.settings.sideNavPinned
+export const selectSideNavClipped = (state: RootState) => state.settings.sideNavClipped
+export const selectBodyScrolled = (state: RootState) => state.settings.bodyScrolled
 
 export const toggleSetting = createAction<SettingsPayload>(TOGGLE_SETTING)
 export const toggleSideNavPinned = () => toggleSetting({ name: 'sideNavPinned'})

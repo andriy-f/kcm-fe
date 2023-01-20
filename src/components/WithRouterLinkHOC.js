@@ -18,7 +18,7 @@ const WithRouterLinkHOC = Component =>
 
         static contextTypes = {
             router: PropTypes.object
-        };
+        }
 
         resolveToLocation = to => {
             const { router } = this.context

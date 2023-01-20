@@ -7,9 +7,12 @@ import { autoRehydrate } from 'redux-persist'
 import rootReducer from './reducers'
 import { epicMiddleware } from '../middleware/epics'
 import { isDev } from '../utils'
+import { SettingsState } from '../features/settings/settingsSlice'
 
 const loggerMiddleware = createLogger()
-let myConfigureStore: (preloadedState?: any) => Store
+let myConfigureStore: (preloadedState?: any) => Store<{
+  settings: SettingsState
+}>
 
 if (isDev) {
   const composeEnhancers =

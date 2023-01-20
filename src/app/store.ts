@@ -2,11 +2,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import myConfigureStore from './configureStore'
 // import todosReducer from '../features/todos/todosSlice'
-// import filtersReducer from '../features/filters/filtersSlice'
+import { settingsReducer } from '../features/settings/settingsSlice'
 
 // TODO implement
-// export const store = configureStore({
+// export const storeNew = configureStore({
 //   reducer: {
+//     settings: settingsReducer
 //     // todos: todosReducer,
 //     // filters: filtersReducer
 //   }

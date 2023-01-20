@@ -15,7 +15,7 @@ import NotFound from './components/NotFound'
 import NotLoggedIn from './components/NotLoggedIn'
 import NotAuthorized from './components/NotAuthorized'
 import DevPage from './containers/DevPage'
-import SettingsPage from './containers/SettingsPage'
+import SettingsPage from './features/settings/SettingsPage'
 import ConditionalAuthHOC from './containers/ConditionalAuthHOC'
 
 const DefaultConditionalAuthHOC = ConditionalAuthHOC({ NotLoggedIn, NotAuthorized })
