@@ -18,26 +18,6 @@ interface Action {
   payload: any
 }
 
-// interface ActionWithPayload<T> {
-//   type: string
-//   payload: T
-// }
-
-const currentUser = (state = {}, action: Action) => {
-  switch (action.type) {
-    case LOGIN_DONE:
-      let respData = action.payload
-      return {
-        ...respData.userData,
-        tokenExpiresOn: action.payload.tokenExpiresOn
-      }
-    case LOGOFF_DONE:
-      return {}
-    default:
-      return state
-  }
-}
-
 const logInDefaultState = { isFetching: false }
 const logIn = (state = logInDefaultState, action: Action) => switchcase({
   [LOGIN]: { isFetching: true },

@@ -1,9 +1,9 @@
-import React from 'react'
-import { Drawer } from '@mui/material/Drawer'
-import { connect } from 'react-redux'
+import React, { useState } from 'react'
+import Drawer from '@mui/material/Drawer'
 
 import { isUserLoggedIn, isDev } from '../utils'
 import RTButtonNavLink from '../components/RTButtonNavLink'
+import { useAppSelector } from '../app/hooks'
 
 const MainDrawer = function () {
   const [drawerOpen, setDrawerOpen] = React.useState(false)
@@ -19,12 +19,13 @@ const MainDrawer = function () {
         return
       }
 
-      setState({ 'drawerOpen': open })
+      setDrawerOpen(open)
     }
 
-    render() {
-        const currentUser = this.props.currentUser
-        const isLoggedIn = isUserLoggedIn(currentUser)
+    const currentUser = useAppSelector()
+
+    const currentUser = this.props.currentUser
+    const isLoggedIn = isUserLoggedIn(currentUser)
 
         return (
             <Drawer
@@ -41,15 +42,6 @@ const MainDrawer = function () {
                 {!isLoggedIn && <RTButtonNavLink to="/logIn" label='Log in' />}
             </Drawer>
         )
-    }
 }
 
-const mapStateToProps = (state) => {
-    const { currentUser } = state
-
-    return {
-        currentUser
-    }
-}
-
-export default connect(mapStateToProps)(MainNav)
+export default MainDrawer
