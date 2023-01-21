@@ -1,10 +1,9 @@
 import { createAction, PayloadAction } from '@reduxjs/toolkit'
 
 import { RootState } from '../../app/store'
-import {
-  TOGGLE_SETTING, SET_SETTING,
-} from '../../actions'
 
+export const TOGGLE_SETTING = 'settings/toggle'
+export const SET_SETTING = 'settings/set'
 
 export interface SettingsState {
   bodyScrolled: boolean,
@@ -16,14 +15,7 @@ export interface SettingsState {
   rightSideNavClipped: boolean
 }
 
-type SettingName = keyof SettingsState
-
-interface SettingsPayload {
-  name: SettingName
-  value?: any
-}
-
-export const settingsReducer = (state: SettingsState = {
+const initialSettings: SettingsState = {
   bodyScrolled: false,
   sideNavActive: false,
   sideNavPinned: false,
@@ -31,7 +23,16 @@ export const settingsReducer = (state: SettingsState = {
   rightSideNavActive: false,
   rightSideNavPinned: false,
   rightSideNavClipped: true
-}, action: PayloadAction<SettingsPayload>) => {
+}
+
+type SettingName = keyof SettingsState
+
+interface SettingsPayload {
+  name: SettingName
+  value?: any
+}
+
+export const settingsReducer = (state = initialSettings, action: PayloadAction<SettingsPayload>) => {
   switch (action.type) {
     case TOGGLE_SETTING:
       let name = action.payload.name
@@ -56,3 +57,10 @@ export const selectBodyScrolled = (state: RootState) => state.settings.bodyScrol
 
 export const toggleSetting = createAction<SettingsPayload>(TOGGLE_SETTING)
 export const toggleSideNavPinned = () => toggleSetting({ name: 'sideNavPinned'})
+export const setSetting = createAction<SettingsPayload>(SET_SETTING)
+
+
+// export const setSetting = (name: string, value: any) => ({
+//     type: SET_SETTING,
+//     payload: { name, value }
+// })

@@ -1,23 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { useAppDispatch } from '../app/hooks'
 
 import { sideNavActiveSetting } from '../consts'
-import { setSetting } from '../actions'
+import { setSetting } from '../features/settings/settingsSlice'
 import { RTButtonLink } from './RTButtonLink'
 
-class RTButtonNavLink extends React.Component {
-    beforeNavLinkClick = () => {
-        this.props.setSetting(sideNavActiveSetting, false)
-    }
+function RTButtonNavLink(props: any) {
 
-    render() {
-        const { setSetting, ...otherProps} = this.props
-        return <RTButtonLink {...otherProps} beforeClick={this.beforeNavLinkClick} />
-    }
+    const dispatch = useAppDispatch()
+    const beforeNavLinkClick = () => dispatch(setSetting({ name: 'sideNavActive', value: false}))
+    return (
+      <RTButtonLink {...props} beforeClick={beforeNavLinkClick} />
+    )
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    setSetting: (name, value) => dispatch(setSetting(name, value))
-})
-
-export default connect(null, mapDispatchToProps)(RTButtonNavLink)
+export default RTButtonNavLink

@@ -8,9 +8,11 @@ import rootReducer from './reducers'
 import { epicMiddleware } from '../middleware/epics'
 import { isDev } from '../utils'
 import { SettingsState } from '../features/settings/settingsSlice'
+import { UserState } from '../features/currentUser/userSlice'
 
 const loggerMiddleware = createLogger()
 let myConfigureStore: (preloadedState?: any) => Store<{
+  currentUser: UserState,
   settings: SettingsState
 }>
 

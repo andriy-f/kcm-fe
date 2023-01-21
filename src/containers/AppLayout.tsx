@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 // import { AppBar, Layout, Panel } from <removed>
 import Drawer from '@mui/material/Drawer'
 
-import MainNav from '../containers/MainNav'
+import MainNav from './MainDrawer'
 import styles from '../App.module.css'
 import { toggleSetting } from '../actions'
 import AppProgress from '../containers/AppProgress'

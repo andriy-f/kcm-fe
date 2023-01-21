@@ -12,6 +12,7 @@ import {
 } from '../actions'
 
 import { settingsReducer } from '../features/settings/settingsSlice'
+import { currentUserReducer } from '../features/currentUser/userSlice'
 
 interface Action {
   type: string
@@ -38,7 +39,7 @@ const logoffPage = (state = {}, action: Action) => {
 }
 
 const rootReducer = combineReducers({
-  currentUser,
+  currentUser: currentUserReducer,
   logIn,
   logoffPage,
   settings: settingsReducer,

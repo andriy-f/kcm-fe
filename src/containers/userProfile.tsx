@@ -1,23 +1,17 @@
 
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { useAppSelector } from '../app/hooks'
+import { selectUser } from '../features/currentUser/userSlice'
 
 import { isUserLoggedIn } from '../utils'
 
-interface CurrentUser {
-  tokenExpiresOn: number
-}
-interface UserProfileProps {
-    currentUser: CurrentUser
-}
+function UserProfilePage() {
 
-class UserProfile extends React.Component<UserProfileProps> {
-    render() {
-        const currentUser = this.props.currentUser
+        const currentUser = useAppSelector(selectUser)
         const isLoggedIn = isUserLoggedIn(currentUser)
         const isLoggedInStr = isLoggedIn ? 'yes' : 'no'
-        const expStr = new Date(currentUser.tokenExpiresOn).toString()
+        const expStr = currentUser.tokenExpiresOn ? new Date(currentUser.tokenExpiresOn).toString() : 'n/a'
 
         return (
             <div>
@@ -27,14 +21,5 @@ class UserProfile extends React.Component<UserProfileProps> {
             </div>
         )
     }
-}
 
-interface userProfileState {
-  currentUser: CurrentUser
-}
-
-const mapStateToProps = (state: userProfileState) => ({
-    currentUser: state.currentUser
-})
-
-export default connect(mapStateToProps)(UserProfile)
+export default UserProfilePage
