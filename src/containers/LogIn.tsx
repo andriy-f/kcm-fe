@@ -1,5 +1,4 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useState} from 'react'
 import { Redirect } from 'react-router-dom'
 import FormControl from '@mui/material/FormControl'
 import FormHelperText from '@mui/material/FormHelperText'
@@ -12,21 +11,40 @@ import Snackbar from '@mui/material/Snackbar'
 import styles from '../App.module.css'
 import ButtonPanel from '../components/ButtonPanel'
 import { getUserFriendlyErrorMessage } from '../utils'
-import { isCurrentUserLoggedIn, logIn } from '../features/currentUser/userSlice'
+import { isCurrentUserLoggedIn, logIn as logInAction } from '../features/currentUser/userSlice'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 
-function LoginForm(props: React.FormHTMLAttributes<HTMLFormElement>) {
+interface LoginData {
+  login: string
+  password: string
+}
+
+interface LogInFormProps {
+  onSubmit: (data: LoginData) => void
+}
+
+function LoginForm(props: LogInFormProps ) {
+  const [login, setLogin] = useState('')
+  const [password, setPassword] = useState('')
+  const handleSubmit = () => { props.onSubmit({login, password}) }
+
   return (
-      <form {...props}>
+      <form onSubmit={handleSubmit}>
         <h3 className={styles.kTextCenter}>Log into site</h3>
         <FormControl>
           <InputLabel htmlFor="kcm-login">Login</InputLabel>
-          <Input id="kcm-login" aria-describedby="kcm-login-helper-text" />
+          <Input id="kcm-login" aria-describedby="kcm-login-helper-text"
+            value={login}
+            onChange={e => setLogin(e.target.value)}
+            />
           <FormHelperText id="kcm-login-helper-text">Your private login</FormHelperText>
         </FormControl>
         <FormControl>
           <InputLabel htmlFor="kcm-password">Password</InputLabel>
-          <Input id="kcm-password" aria-describedby="kcm-password-helper-text" />
+          <Input id="kcm-password" aria-describedby="kcm-password-helper-text"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            />
           <FormHelperText id="kcm-password-helper-text">Your secret password</FormHelperText>
         </FormControl>
         <ButtonPanel>
@@ -34,11 +52,6 @@ function LoginForm(props: React.FormHTMLAttributes<HTMLFormElement>) {
         </ButtonPanel>
       </form>
        )
-}
-
-interface LoginProps {
-  login: string
-  password: string
 }
 
 // class LogInOld extends React.Component {
@@ -81,33 +94,39 @@ interface LoginProps {
 
 //   render() {
 function LogIn() {
-    const isLoggedIn = useAppSelector(isCurrentUserLoggedIn())
-    const errorMessage = getUserFriendlyErrorMessage(this.props.logIn.error)
+    const [showMessage, setShowMessage] = useState(false)
+    const [errorInfo, setErrorInfo] = useState(null)
+    const isLoggedIn = useAppSelector(isCurrentUserLoggedIn)
+    const errorMessage = getUserFriendlyErrorMessage(errorInfo)
     const dispatch = useAppDispatch()
-    const handleSubmit = () => dispatch(logIn({}))
+    const logIn = (data: LoginData) => dispatch(logInAction(data))
+    const handleLoginAsEditor = () => logIn({ login: 'demo-editor', 'password': 'aSuperSecret'})
+    const handleLoginAsViewer = () => logIn({ login: 'demo-viewer', 'password': 'aSuperSecret'})
 
     return isLoggedIn ? (
       <Redirect to="/" />
     ) : (
         <div className={styles.kFormContainer}>
-          <LoginForm onSubmit={this.handleSubmit} />
+          <LoginForm onSubmit={logIn} />
           <ButtonPanel>
-            <Button label="Editor demo" onClick={this.handleLogInEditor} raised accent />
-            <Button label="Viewer demo" onClick={this.handleLogInViewer} raised accent />
+            <Button onClick={handleLoginAsEditor}>
+              Editor demo
+            </Button>
+            <Button onClick={handleLoginAsViewer}>
+               Viewer demo
+            </Button>
           </ButtonPanel>
           <Snackbar
-            action='Dismiss'
-            active={this.state.showMessage && !!errorMessage}
-            label={errorMessage}
-            timeout={2000}
-            onClick={this.handleSnackbarClick}
-            onTimeout={this.handleSnackbarTimeout}
-            type='cancel'
+            open={showMessage && !!errorMessage}
+            message={errorMessage}
+            autoHideDuration={2000}
+            onClick={() => setShowMessage(false)}
+            onClose={() => setShowMessage(false)}
           />
         </div >
       )
   }
-}
+
 
 // const mapStateToProps = (state) => {
 //   const { currentUser, logIn } = state
