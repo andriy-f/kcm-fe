@@ -1,20 +1,19 @@
-// New file, TODO implement
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import myConfigureStore from './configureStore'
-// import todosReducer from '../features/todos/todosSlice'
+import { createLogger } from 'redux-logger'
+
 import { settingsReducer } from '../features/settings/settingsSlice'
+import { currentUserReducer } from '../features/currentUser/userSlice'
 
 // TODO implement
-// export const storeNew = configureStore({
-//   reducer: {
-//     settings: settingsReducer
-//     // todos: todosReducer,
-//     // filters: filtersReducer
-//   }
-// })
+export const store = configureStore({
+  reducer: {
+    settings: settingsReducer,
+    currentUser: currentUserReducer
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(createLogger()),
+})
 
-// TODO remove
-export const store = myConfigureStore()
+// export const store = myConfigureStore()
 
 export type AppDispatch = typeof store.dispatch
 export type RootState = ReturnType<typeof store.getState>

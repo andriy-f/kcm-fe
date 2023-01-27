@@ -1,4 +1,4 @@
-import { createAction, PayloadAction } from '@reduxjs/toolkit'
+import { createAction, createReducer, PayloadAction } from '@reduxjs/toolkit'
 
 import { RootState } from '../../app/store'
 
@@ -32,9 +32,21 @@ interface SettingsPayload {
   value?: any
 }
 
-export const settingsReducer = (state = initialSettings, action: PayloadAction<SettingsPayload>) => {
-  switch (action.type) {
-    case TOGGLE_SETTING:
+// Actions
+export const toggleSetting = createAction<SettingsPayload>(TOGGLE_SETTING)
+export const setSetting = createAction<SettingsPayload>(SET_SETTING)
+
+// Special actions
+export const toggleSideNavPinned = () => toggleSetting({ name: 'sideNavPinned'})
+
+// Selectors
+export const selectSideNavPinned = (state: RootState) => state.settings.sideNavPinned
+export const selectSideNavClipped = (state: RootState) => state.settings.sideNavClipped
+export const selectBodyScrolled = (state: RootState) => state.settings.bodyScrolled
+
+// Reducer
+export const settingsReducer = createReducer(initialSettings, (builder) => {
+  builder.addCase(toggleSetting, (state, action) => {
       let name = action.payload.name
       if (name in state) {
         const settingName = name as SettingName
@@ -43,24 +55,6 @@ export const settingsReducer = (state = initialSettings, action: PayloadAction<S
       } else {
         return { ...state, error: '"' + name + '" is not valid setting name' }
       }
-
-    case SET_SETTING:
-      return { ...state, [action.payload.name]: action.payload.value }
-    default:
-      return state
-  }
-}
-
-export const selectSideNavPinned = (state: RootState) => state.settings.sideNavPinned
-export const selectSideNavClipped = (state: RootState) => state.settings.sideNavClipped
-export const selectBodyScrolled = (state: RootState) => state.settings.bodyScrolled
-
-export const toggleSetting = createAction<SettingsPayload>(TOGGLE_SETTING)
-export const toggleSideNavPinned = () => toggleSetting({ name: 'sideNavPinned'})
-export const setSetting = createAction<SettingsPayload>(SET_SETTING)
-
-
-// export const setSetting = (name: string, value: any) => ({
-//     type: SET_SETTING,
-//     payload: { name, value }
-// })
+  })
+  builder.addCase(setSetting, (state, action) => ({ ...state, [action.payload.name]: action.payload.value}))
+})

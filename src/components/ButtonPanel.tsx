@@ -2,8 +2,12 @@ import React from 'react'
 
 import styles from '../App.module.css'
 
-export default ({ children }) => (
-  <p className={styles.buttonPanel}>
-    {children}
-  </p>
-)
+function ButtonPanel(props: { children: any }) {
+  return (
+    <p className={styles.buttonPanel}>
+      {props.children}
+    </p>
+  )
+}
+
+export default ButtonPanel

@@ -1,31 +1,18 @@
 import { RootState } from '../../app/store'
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
-export const LOGIN = 'LOGIN'
-export const LOGIN_DONE = 'LOGIN_DONE'
-export const LOGIN_ERROR = 'LOGIN_ERROR'
-export const LOGIN_CLEANUP = 'LOGIN_CLEANUP'
+export const LOGIN = 'user/login'
+export const LOGIN_DONE = 'user/login_done'
+export const LOGIN_ERROR = 'user/LOGIN_ERROR'
+export const LOGIN_CLEANUP = 'user/LOGIN_CLEANUP'
 
-export const logIn = (login: string, password: string) => ({
-    type: LOGIN,
-    login,
-    password
-})
+export const logIn = createAction<{login: string, password: string}>(LOGIN)
+export const logInError = createAction(LOGIN_ERROR)
+export const logInCleanup = createAction(LOGIN_CLEANUP)
 
-
-export const logInError = (payload: any) => ({
-    type: LOGIN_ERROR,
-    payload,
-    error: true
-})
-
-export const logInCleanup = () => ({
-    type: LOGIN_CLEANUP
-})
-
-export const LOGOFF = 'LOGOFF'
-export const LOGOFF_DONE = 'LOGOFF_DONE'
-export const LOGOFF_ERROR = 'LOGOFF_ERROR'
+export const LOGOFF = 'user/LOGOFF'
+export const LOGOFF_DONE = 'user/LOGOFF_DONE'
+export const LOGOFF_ERROR = 'user/LOGOFF_ERROR'
 
 export interface UserState {
   name?: string
@@ -58,3 +45,22 @@ export const isCurrentUserLoggedIn = (state: RootState) => {
   return currentUser && Object.keys(currentUser).length !== 0
     && currentUser.tokenExpiresOn && currentUser.tokenExpiresOn >= Date.now()
 }
+
+// const logInDefaultState = { isFetching: false }
+// const logIn = (state = logInDefaultState, action: Action) => switchcase({
+//   [LOGIN]: { isFetching: true },
+//   [LOGIN_DONE]: { response: { success: true }, isFetching: false },
+//   [LOGIN_ERROR]: () => ({ error: action.payload, isFetching: false }),
+//   [LOGIN_CLEANUP]: logInDefaultState
+// })(state)(action.type)
+
+// const logoffPage = (state = {}, action: Action) => {
+//   switch (action.type) {
+//     case LOGOFF_DONE:
+//       return { response: action.payload }
+//     case LOGOFF_ERROR:
+//       return { error: action.payload }
+//     default:
+//       return state
+//   }
+// }

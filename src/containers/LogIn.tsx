@@ -1,78 +1,90 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import FormControl from '@mui/material/FormControl'
+import FormHelperText from '@mui/material/FormHelperText'
 import Button from '@mui/material/Button'
 import Input from '@mui/material/Input'
+import InputLabel from '@mui/material/InputLabel'
 import Snackbar from '@mui/material/Snackbar'
-import { Form, Field } from 'react-final-form'
+// import { Form, Field } from 'react-final-form'
 
 import styles from '../App.module.css'
-import { logIn, logInCleanup } from '../actions'
 import ButtonPanel from '../components/ButtonPanel'
-import { isUserLoggedIn, getUserFriendlyErrorMessage } from '../utils'
+import { getUserFriendlyErrorMessage } from '../utils'
+import { isCurrentUserLoggedIn, logIn } from '../features/currentUser/userSlice'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
 
-const LoginInput = ({ input: { value, onChange } }) => <Input required type='text' label='Login' value={value} onChange={onChange} />
-const PasswordInput = ({ input: { value, onChange } }) => <Input required type='password' label='Password' value={value} onChange={onChange} />
-
-const LoginForm = props => {
+function LoginForm(props: React.FormHTMLAttributes<HTMLFormElement>) {
   return (
-    <Form>
-       {({handleSubmit}) => (
-      <form onSubmit={handleSubmit}>
+      <form {...props}>
         <h3 className={styles.kTextCenter}>Log into site</h3>
-        <Field name='login' component={LoginInput} />
-        <Field name='password' component={PasswordInput} />
+        <FormControl>
+          <InputLabel htmlFor="kcm-login">Login</InputLabel>
+          <Input id="kcm-login" aria-describedby="kcm-login-helper-text" />
+          <FormHelperText id="kcm-login-helper-text">Your private login</FormHelperText>
+        </FormControl>
+        <FormControl>
+          <InputLabel htmlFor="kcm-password">Password</InputLabel>
+          <Input id="kcm-password" aria-describedby="kcm-password-helper-text" />
+          <FormHelperText id="kcm-password-helper-text">Your secret password</FormHelperText>
+        </FormControl>
         <ButtonPanel>
-          <Button label="Log in" type="submit" flat />
+          <Button type="submit">Log in</Button>
         </ButtonPanel>
       </form>
-       )}
-    </Form>
-  )
+       )
 }
 
-class LogIn extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { showMessage: true }
-  }
+interface LoginProps {
+  login: string
+  password: string
+}
 
-  handleSubmit = (values) => {
-    this.props.initAuthenticate(values.login, values.password)
-  }
+// class LogInOld extends React.Component {
+//   constructor(props: any) {
+//     super(props)
+//     this.state = { showMessage: true }
+//   }
 
-  handleSnackbarClick = () => {
-    this.setState({ showMessage: false })
-  }
+//   handleSubmit = (values: LoginProps) => {
+//     this.props.initAuthenticate(values.login, values.password)
+//   }
 
-  handleSnackbarTimeout = () => {
-    this.setState({ showMessage: false })
-  }
+//   handleSnackbarClick = () => {
+//     this.setState({ showMessage: false })
+//   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({ showMessage: true })
-  }
+//   handleSnackbarTimeout = () => {
+//     this.setState({ showMessage: false })
+//   }
 
-  componentDidMount() {
-    this.props.cleanup()
-  }
+//   componentWillReceiveProps(nextProps) {
+//     this.setState({ showMessage: true })
+//   }
 
-  componentWillUnmount() {
-    this.props.cleanup()
-  }
+//   componentDidMount() {
+//     this.props.cleanup()
+//   }
 
-  handleLogInEditor = () => {
-    this.props.initAuthenticate('demo-editor', 'aSuperSecret')
-  }
+//   componentWillUnmount() {
+//     this.props.cleanup()
+//   }
 
-  handleLogInViewer = () => {
-    this.props.initAuthenticate('demo-viewer', 'aSuperSecret')
-  }
+//   handleLogInEditor = () => {
+//     this.props.initAuthenticate('demo-editor', 'aSuperSecret')
+//   }
 
-  render() {
-    const currentUser = this.props.currentUser
-    const isLoggedIn = isUserLoggedIn(currentUser)
+//   handleLogInViewer = () => {
+//     this.props.initAuthenticate('demo-viewer', 'aSuperSecret')
+//   }
+
+//   render() {
+function LogIn() {
+    const isLoggedIn = useAppSelector(isCurrentUserLoggedIn())
     const errorMessage = getUserFriendlyErrorMessage(this.props.logIn.error)
+    const dispatch = useAppDispatch()
+    const handleSubmit = () => dispatch(logIn({}))
 
     return isLoggedIn ? (
       <Redirect to="/" />
@@ -97,18 +109,20 @@ class LogIn extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { currentUser, logIn } = state
+// const mapStateToProps = (state) => {
+//   const { currentUser, logIn } = state
 
-  return {
-    currentUser,
-    logIn,
-  }
-}
+//   return {
+//     currentUser,
+//     logIn,
+//   }
+// }
 
-const mapDispatchToProps = (dispatch) => ({
-  initAuthenticate: (login, password) => dispatch(logIn(login, password)),
-  cleanup: () => dispatch(logInCleanup())
-})
+// const mapDispatchToProps = (dispatch) => ({
+//   initAuthenticate: (login, password) => dispatch(logIn(login, password)),
+//   cleanup: () => dispatch(logInCleanup())
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogIn)
+// export default connect(mapStateToProps, mapDispatchToProps)(LogIn)
+
+export default LogIn

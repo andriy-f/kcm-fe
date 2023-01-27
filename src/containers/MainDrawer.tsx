@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Drawer from '@mui/material/Drawer'
 
-import { isUserLoggedIn, isDev } from '../utils'
+import { isDev } from '../utils'
 import RTButtonNavLink from '../components/RTButtonNavLink'
 import { useAppSelector } from '../app/hooks'
-import { selectCurrentUser } from '../features/currentUser/userSlice'
+import { isCurrentUserLoggedIn, selectCurrentUser } from '../features/currentUser/userSlice'
 
 const MainDrawer = function () {
   const [drawerOpen, setDrawerOpen] = React.useState(false)
@@ -24,8 +24,7 @@ const MainDrawer = function () {
     }
 
     const currentUser = useAppSelector(selectCurrentUser)
-
-    const isLoggedIn = isUserLoggedIn(currentUser)
+    const isLoggedIn = useAppSelector(isCurrentUserLoggedIn)
 
         return (
             <Drawer
