@@ -8,11 +8,6 @@ export const commonAjaxRequestSettings = {
   responseType: 'json',
 }
 
-export const isUserLoggedIn = (currentUser: any) => {
-  return currentUser && Object.keys(currentUser).length !== 0
-    && currentUser.tokenExpiresOn >= Date.now()
-}
-
 export const getViewState = (state: any) => ({
   ...state,
   isFetchingAnywhere: state.logIn.isFetching

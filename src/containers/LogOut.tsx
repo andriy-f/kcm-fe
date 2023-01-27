@@ -1,33 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { logOff } from '../actions'
-import { isUserLoggedIn } from '../utils'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
+import { isUserLoggedIn, logOff } from '../features/currentUser/userSlice'
 
-class LogOut extends React.Component {
-    componentDidMount() {
-        this.props.initiateLogoff()
-    }
+function LogOut() {
 
-    render() {
-        const currentUser = this.props.currentUser
-        const isLoggedIn = isUserLoggedIn(currentUser)
+  const dispatch = useAppDispatch()
+  const beginLogOff = () => dispatch(logOff())
 
-        return isLoggedIn ? (
-            <span>Logging out...</span>
-        ) : (
-                <Redirect to="/" />
-            )
-    }
+  useEffect(() => {
+      beginLogOff()
+  })
+
+  const isLoggedIn = useAppSelector(isUserLoggedIn)
+
+  return isLoggedIn ? (
+      <span>Logging out...</span>
+  ) : (
+          <Redirect to="/" />
+      )
 }
-
-const mapStateToProps = (state) => ({
-    currentUser: state.currentUser
-})
-
-const mapDispatchToProps = dispatch => ({
-    initiateLogoff: () => dispatch(logOff())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(LogOut)
+export default LogOut
