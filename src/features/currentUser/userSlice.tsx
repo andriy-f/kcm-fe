@@ -50,9 +50,9 @@ export const currentUserReducer = createReducer(initialUserState, (builder) => {
   builder.addCase(logOffDone, (_state, _action) => ({}))
 })
 
-export const selectUser = (state: RootState) => state.currentUser
+export const selectCurrentUser = (state: RootState) => state.currentUser
 
-export const isUserLoggedIn = (state: RootState) => {
+export const isCurrentUserLoggedIn = (state: RootState) => {
   const currentUser = state.currentUser
 
   return currentUser && Object.keys(currentUser).length !== 0

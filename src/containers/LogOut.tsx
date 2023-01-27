@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { isUserLoggedIn, logOff } from '../features/currentUser/userSlice'
+import { isCurrentUserLoggedIn, logOff } from '../features/currentUser/userSlice'
 
 function LogOut() {
 
@@ -14,7 +14,7 @@ function LogOut() {
       beginLogOff()
   })
 
-  const isLoggedIn = useAppSelector(isUserLoggedIn)
+  const isLoggedIn = useAppSelector(isCurrentUserLoggedIn)
 
   return isLoggedIn ? (
       <span>Logging out...</span>
