@@ -54,6 +54,7 @@
     "@types/react-relay": "^14.1.2",
     "@types/react-router-dom": "^5.3.3",
     "@types/redux-logger": "^3.0.9",
+    "@types/throttle-debounce": "^5.0.0",
     "@types/urijs": "^1.19.19",
     "babel-plugin-relay": "^14.1.0",
     "eslint": "^8.32.0",

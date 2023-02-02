@@ -1,21 +1,18 @@
 import React from 'react'
-import { connect } from 'react-redux'
 // import { AppBar, Layout, Panel } from <removed>
 import Drawer from '@mui/material/Drawer'
 
 import MainNav from './MainDrawer'
 import styles from '../App.module.css'
-import { toggleSetting } from '../actions'
 import AppProgress from '../containers/AppProgress'
 import { sideNavActiveSetting } from '../consts'
 import MainNavPinSwitch from '../containers/MainNavPinSwitch'
 
-class AppLayout extends React.Component {
+function AppLayout()  {
     toggleSideNav = () => {
         this.props.toggleSetting(sideNavActiveSetting)
     }
 
-    render() {
         return (
             <Layout>
                 <Drawer
@@ -44,12 +41,5 @@ class AppLayout extends React.Component {
             </Layout>
         )
     }
-}
 
-const mapStateToProps = state => state.settings
-
-const mapDispathToProps = dispatch => ({
-    toggleSetting: name => dispatch(toggleSetting({ name }))
-})
-
-export default connect(mapStateToProps, mapDispathToProps)(AppLayout)
+export default AppLayout

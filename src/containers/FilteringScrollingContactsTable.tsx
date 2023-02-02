@@ -1,8 +1,7 @@
-// @flow
 import debug from 'debug'
-import React from 'react'
-import { createRefetchContainer, graphql } from 'react-relay'
-import Input from '@mui/material/Input'
+import React, { ChangeEvent } from 'react'
+import { createRefetchContainer, graphql, RelayRefetchProp } from 'react-relay'
+import TextField from '@mui/material/TextField'
 import { debounce } from 'throttle-debounce'
 
 import type { FilteringScrollingContactsTable_contactsData } from './__generated__/FilteringScrollingContactsTable_contactsData.graphql'
@@ -15,7 +14,7 @@ const log = debug(appName + ':FilteringScrollingContactsTable.js')
 
 type Props = {
   contactsData: FilteringScrollingContactsTable_contactsData,
-  relay: any,
+  relay: RelayRefetchProp,
   readonly?: boolean,
 }
 
@@ -35,8 +34,8 @@ class PlainFilteringContactsTable extends React.Component<Props, State> {
     filterText: '',
   }
 
-  handleFilterChange = (filterText) => {
-    this.setState({ filterText })
+  handleFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
+    this.setState({ filterText: event.target.value })
   }
 
   render() {
@@ -45,15 +44,15 @@ class PlainFilteringContactsTable extends React.Component<Props, State> {
 
     return (
       <article>
-        <Input type="text" label="Filter" className={styles.contactsFilter}
+        <TextField type="text" label="Filter" className={styles.contactsFilter}
           value={filterText}
-          onChange={this._handleFilterChange} />
-        <ScrollingPaginationContactsTable contactsData={contactsData} relay={null} readonly={readonly} />
+          onChange={this.handleFilterChange} />
+        <ScrollingPaginationContactsTable contactsData={contactsData} readonly={readonly} />
       </article>
     )
   }
 
-  _handleFilterChange = (val) => {
+  _handleFilterChange = (val: string) => {
     this.setState({ filterText: val }, this.filterDebounced)
   }
 
@@ -61,7 +60,7 @@ class PlainFilteringContactsTable extends React.Component<Props, State> {
     this.props.relay.refetch(
       { filterText: this.state.filterText },
       null,
-      (error) => {
+      (error: any) => {
         if (error) {
           log('refetch error', error)
         }
