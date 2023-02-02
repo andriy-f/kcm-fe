@@ -13,7 +13,7 @@ const log = debug(appName + ':ContactEditForm.js')
 type Props = {
   onSave(data: any): void,
   onCancel(): void,
-  contact?: Object,
+  contact?: object,
 }
 
 type State = {
@@ -23,7 +23,7 @@ type State = {
   phoneNumber: string,
 }
 
-export default class extends React.Component<Props, State> {
+class ContactEditForm extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
 
@@ -70,3 +70,5 @@ export default class extends React.Component<Props, State> {
     this.props.onSave(this.state)
   }
 }
+
+export default ContactEditForm

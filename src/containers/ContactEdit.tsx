@@ -1,29 +1,40 @@
 import debug from 'debug'
 import React from 'react'
-import { graphql, createFragmentContainer } from 'react-relay'
+import { graphql, createFragmentContainer, RelayProp } from 'react-relay'
 
 import { appName } from '../consts'
 import UpdateContactMutation from '../graphql/UpdateContactMutation'
 import ContactEditForm from '../components/ContactEditForm'
+import Contact from '../types/Contact'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactEdit.js')
 
-class ContactEditFormWrapper extends React.Component {
-  _handleSave = (data) => {
+type Props = {
+  relay: RelayProp,
+  onSave(): void
+  onCancel(): void
+  contact: Contact
+}
+class ContactEditFormWrapper extends React.Component<Props> {
+  _handleSave = (data: any) => {
     UpdateContactMutation.commit(this.props.relay.environment, data, this.props.contact)
     this.props.onSave()
   }
 
   render() {
-    const { onSave, ...rest } = this.props
-    return (<ContactEditForm {...rest} onSave={this._handleSave} />)
+    const { onSave, onCancel, contact, ...rest } = this.props
+    return (<ContactEditForm
+        {...rest}
+        onSave={this._handleSave}
+        onCancel={this.props.onCancel}
+        contact={this.props.contact} />)
   }
 }
 
 export default createFragmentContainer(
   ContactEditFormWrapper,
-  graphql`
+  { contact: graphql`
     fragment ContactEdit_contact on Contact {
       id
       firstName
@@ -31,4 +42,4 @@ export default createFragmentContainer(
       email
       phoneNumber
     }
-`)
+`})

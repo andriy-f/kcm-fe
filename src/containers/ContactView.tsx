@@ -2,7 +2,7 @@
 import debug from 'debug'
 import React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
-import Input from '@mui/material/Input'
+import TextField from '@mui/material/TextField'
 
 import { appName } from '../consts'
 import { RTButtonLink } from '../components/RTButtonLink'
@@ -17,12 +17,30 @@ class ContactViewWrapper extends React.Component<any> {
 
     return (
       <article>
-        <Input readOnly name="firstName" label="First Name" value={firstName} />
-        <Input name="lastName" readOnly label="Last Name" value={lastName} />
-        <Input name="email" readOnly label="Email" value={email} />
-        <Input name="phoneNumber" readOnly label="Phone number" value={phoneNumber} />
+        <TextField
+          InputProps={{
+            readOnly: true,
+          }}
+          name="firstName"
+          label="First Name"
+          value={firstName} />
+        <TextField name="lastName"
+          InputProps={{
+            readOnly: true,
+          }}
+          label="Last Name"
+          value={lastName} />
+        <TextField
+          name="email"
+          InputProps={{
+            readOnly: true,
+          }}label="Email" value={email} />
+        <TextField name="phoneNumber" InputProps={{
+            readOnly: true,
+          }} label="Phone number" value={phoneNumber} />
         <p>
-          <RTButtonLink to="/contacts">Back to contact list</RTButtonLink>
+          <RTButtonLink to="/contacts" />
+          {/* Back to contact list</RTButtonLink> */}
         </p>
       </article>
     )
@@ -30,12 +48,13 @@ class ContactViewWrapper extends React.Component<any> {
 }
 
 export default createFragmentContainer(
-  ContactViewWrapper,
-  graphql`
+  ContactViewWrapper,{
+    contact: graphql`
     fragment ContactView_contact on Contact {
       firstName
       lastName
       email
       phoneNumber
     }
-`)
+`
+  })
