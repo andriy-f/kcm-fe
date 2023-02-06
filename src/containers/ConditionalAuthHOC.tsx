@@ -1,27 +1,25 @@
 // @flow
 import * as React from 'react'
-import { connect } from 'react-redux'
+import { UserState } from '../features/currentUser/userSlice'
 
 import { isUserLoggedIn } from '../utils'
 
 interface Defaults {
-  NotLoggedIn: React.ComponentType<Object>,
-  NotAuthorized: React.ComponentType<Object>,
+  NotLoggedIn: React.ComponentType<object>,
+  NotAuthorized: React.ComponentType<object>,
 }
 
 type MappingItem = [
   string[], // array of required permissions
-  React.ComponentType<Object>,
+  React.ComponentType<object>,
 ]
 
-const mapStateToProps = ({ currentUser }) => {
-  return {
-    currentUser
-  }
+type Props = {
+  currentUser: UserState
 }
 
-export default ({ NotLoggedIn, NotAuthorized }: Defaults) => (mappings: MappingItem[]) => {
-  class ConditionalAuth extends React.Component<Object> {
+const ConditionalAuthHOC = ({ NotLoggedIn, NotAuthorized }: Defaults) => (mappings: MappingItem[]) => {
+  return class extends React.Component<Props> {
     render() {
       const { currentUser } = this.props
       if (!isUserLoggedIn(currentUser)) {
@@ -37,6 +35,6 @@ export default ({ NotLoggedIn, NotAuthorized }: Defaults) => (mappings: MappingI
       }
     }
   }
-
-  return connect(mapStateToProps)(ConditionalAuth)
 }
+
+export default ConditionalAuthHOC
