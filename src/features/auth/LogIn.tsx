@@ -9,10 +9,10 @@ import Snackbar from '@mui/material/Snackbar'
 // import { Form, Field } from 'react-final-form'
 
 import styles from '../App.module.css'
-import ButtonPanel from '../components/ButtonPanel'
-import { getUserFriendlyErrorMessage } from '../utils'
-import { isCurrentUserLoggedIn, logIn as logInAction } from '../features/currentUser/userSlice'
-import { useAppDispatch, useAppSelector } from '../app/hooks'
+import ButtonPanel from '../../components/ButtonPanel'
+import { getUserFriendlyErrorMessage } from '../../utils'
+import { isCurrentUserLoggedIn, logIn as logInAction } from '../currentUser/userSlice'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 
 interface LoginData {
   login: string

@@ -14,13 +14,18 @@ export const LOGOFF = 'user/LOGOFF'
 export const LOGOFF_DONE = 'user/LOGOFF_DONE'
 export const LOGOFF_ERROR = 'user/LOGOFF_ERROR'
 
+interface CurrentUserData {
+  name: string,
+  permissions: string[]
+}
+
 export interface UserState {
-  name?: string
+  userData?: CurrentUserData
   tokenExpiresOn?: number
 }
 
 interface UserActionPayload {
-  userData: any
+  userData: CurrentUserData
   tokenExpiresOn: number
 }
 
@@ -33,18 +38,19 @@ export const logOffDone = createAction(LOGOFF_DONE)
 // export const logOffError = createAction(LOGOFF_ERROR)
 
 export const currentUserReducer = createReducer(initialUserState, (builder) => {
-  builder.addCase(logInDone, (_state, action) => ({...action.payload.userData, tokenExpiresOn: action.payload.tokenExpiresOn}))
+  builder.addCase(logInDone, (_state, action) => ({ userData: action.payload.userData, tokenExpiresOn: action.payload.tokenExpiresOn}))
   builder.addCase(logOffDone, (_state, _action) => ({}))
 })
 
 export const selectCurrentUser = (state: RootState) => state.currentUser
 
-export const isCurrentUserLoggedIn = (state: RootState) => {
-  const currentUser = state.currentUser
+export const isUserLoggedIn = (user: UserState) => {
 
-  return currentUser && Object.keys(currentUser).length !== 0
-    && currentUser.tokenExpiresOn && currentUser.tokenExpiresOn >= Date.now()
+  return user && Object.keys(user).length !== 0
+    && user.tokenExpiresOn && user.tokenExpiresOn >= Date.now()
 }
+
+export const isCurrentUserLoggedIn = (state: RootState) => isUserLoggedIn(state.currentUser)
 
 // const logInDefaultState = { isFetching: false }
 // const logIn = (state = logInDefaultState, action: Action) => switchcase({

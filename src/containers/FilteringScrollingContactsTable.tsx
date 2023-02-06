@@ -4,7 +4,7 @@ import { createRefetchContainer, graphql, RelayRefetchProp } from 'react-relay'
 import TextField from '@mui/material/TextField'
 import { debounce } from 'throttle-debounce'
 
-import type { FilteringScrollingContactsTable_contactsData } from './__generated__/FilteringScrollingContactsTable_contactsData.graphql'
+import type { FilteringScrollingContactsTable_contactsData$data } from './__generated__/FilteringScrollingContactsTable_contactsData.graphql'
 import { appName } from '../consts'
 import ScrollingPaginationContactsTable from '../containers/ScrollingPaginationContactsTable'
 import styles from '../App.module.css'
@@ -13,7 +13,7 @@ import styles from '../App.module.css'
 const log = debug(appName + ':FilteringScrollingContactsTable.js')
 
 type Props = {
-  contactsData: FilteringScrollingContactsTable_contactsData,
+  contactsData: FilteringScrollingContactsTable_contactsData$data,
   relay: RelayRefetchProp,
   readonly?: boolean,
 }

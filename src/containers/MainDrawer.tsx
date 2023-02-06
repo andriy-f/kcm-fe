@@ -25,6 +25,7 @@ const MainDrawer = function () {
 
     const currentUser = useAppSelector(selectCurrentUser)
     const isLoggedIn = useAppSelector(isCurrentUserLoggedIn)
+    const currentUserName = currentUser.userData?.name
 
         return (
             <Drawer
@@ -36,7 +37,7 @@ const MainDrawer = function () {
                 <RTButtonNavLink to='/contacts' label='Contacts' />
                 <RTButtonNavLink to='/settings' label='Settings' />
                 {isDev && <RTButtonNavLink to='/dev' >Dev</RTButtonNavLink>}
-                {isLoggedIn && <RTButtonNavLink to='/userProfile' label={'Hi, ' + currentUser.name} />}
+                {isLoggedIn && <RTButtonNavLink to='/userProfile' label={'Hi, ' + currentUserName} />}
                 {isLoggedIn && <RTButtonNavLink to='/logOut' label='Log out' />}
                 {!isLoggedIn && <RTButtonNavLink to="/logIn" label='Log in' />}
             </Drawer>

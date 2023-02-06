@@ -1,6 +1,7 @@
-// @flow
 import React from 'react'
 
-export default () => (
+const NotAuthorized = () => (
   <div>You are not authorized for this page</div>
 )
+
+export default NotAuthorized
