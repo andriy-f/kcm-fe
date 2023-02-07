@@ -6,7 +6,7 @@ export const LOGIN_DONE = 'user/login_done'
 export const LOGIN_ERROR = 'user/LOGIN_ERROR'
 export const LOGIN_CLEANUP = 'user/LOGIN_CLEANUP'
 
-export const logIn = createAction<{login: string, password: string}>(LOGIN)
+export const logIn = createAction<{ login: string, password: string }>(LOGIN)
 export const logInError = createAction(LOGIN_ERROR)
 export const logInCleanup = createAction(LOGIN_CLEANUP)
 
@@ -15,14 +15,14 @@ export const LOGOFF_DONE = 'user/LOGOFF_DONE'
 export const LOGOFF_ERROR = 'user/LOGOFF_ERROR'
 
 interface CurrentUserData {
-  name: string,
+  name: string
   permissions: string[]
 }
 
 export interface UserState {
-  userData?: CurrentUserData
-  tokenExpiresOn?: number
-  inProgress?: boolean
+  userData: CurrentUserData | null
+  tokenExpiresOn: number | null
+  inProgress: boolean
 }
 
 interface UserActionPayload {
@@ -31,18 +31,28 @@ interface UserActionPayload {
 }
 
 const initialUserState: UserState = {
+  userData: null,
+  tokenExpiresOn: null,
   inProgress: false
 }
 
 export const logInDone = createAction<UserActionPayload>(LOGIN_DONE)
 
 export const logOff = createAction(LOGOFF)
-export const logOffDone = createAction<null>(LOGOFF_DONE)
+export const logOffDone = createAction(LOGOFF_DONE)
 // export const logOffError = createAction(LOGOFF_ERROR)
 
 export const currentUserReducer = createReducer(initialUserState, (builder) => {
-  builder.addCase(logInDone, (state, action) => ({ ...state, userData: action.payload.userData, tokenExpiresOn: action.payload.tokenExpiresOn}))
-  builder.addCase(logOffDone, (_state, _action) => ({ inProgress: null, userData: null, tokenExpiresOn: null}))
+  builder.addCase(logInDone, (state, action) => ({
+    ...state,
+    userData: action.payload.userData,
+    tokenExpiresOn: action.payload.tokenExpiresOn
+  }))
+  builder.addCase(logOffDone, (state, _action) => ({
+    ...state,
+    userData: null,
+    tokenExpiresOn: null
+  }))
 })
 
 export const selectCurrentUser = (state: RootState) => state.currentUser
