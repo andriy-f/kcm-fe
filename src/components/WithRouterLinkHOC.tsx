@@ -1,10 +1,10 @@
-import React from 'react'
+import React, from 'react'
 import PropTypes from 'prop-types'
 
-const isModifiedEvent = (event) =>
+const isModifiedEvent = (event: MouseEvent) =>
     !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey)
 
-const WithRouterLinkHOC = Component =>
+const WithRouterLinkHOC = (Component: React.ComponentType) =>
     class Decorated extends React.Component {
         static propTypes = {
             activeClassName: PropTypes.string,
@@ -20,12 +20,12 @@ const WithRouterLinkHOC = Component =>
             router: PropTypes.object
         }
 
-        resolveToLocation = to => {
+        resolveToLocation = (to: string) => {
             const { router } = this.context
             return typeof to === 'function' ? to(router.location) : to
         }
 
-        handleClick = event => {
+        handleClick = (event: MouseEvent) => {
             if (
                 !event.defaultPrevented && // onClick prevented default
                 event.button === 0 && // ignore right clicks
@@ -50,9 +50,9 @@ const WithRouterLinkHOC = Component =>
             return (
                 <Component
                     {...rest}
-                    className={_className}
-                    href={toLocation}
-                    onClick={this.handleClick}
+                    // className={_className}
+                    // href={toLocation}
+                    // onClick={this.handleClick}
                 />
             )
         }
