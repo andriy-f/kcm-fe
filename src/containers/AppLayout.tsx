@@ -1,45 +1,44 @@
-import React from 'react'
-// import { AppBar, Layout, Panel } from <removed>
+import React, { PropsWithChildren } from 'react'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
+import Toolbar from '@mui/material/Toolbar'
 
 import MainNav from './MainDrawer'
-import styles from '../App.module.css'
+// import styles from '../App.module.css'
 import AppProgress from '../containers/AppProgress'
-import { sideNavActiveSetting } from '../consts'
+// import { sideNavActiveSetting } from '../consts'
 import MainNavPinSwitch from '../containers/MainNavPinSwitch'
+const mdTheme = createTheme()
 
-function AppLayout()  {
-    toggleSideNav = () => {
-        this.props.toggleSetting(sideNavActiveSetting)
-    }
+function AppLayout(props: PropsWithChildren) {
+  // const toggleSideNav = () => { // TODO
+  // }
 
-        return (
-            <Layout>
-                <Drawer
-                    active={this.props.sideNavActive}
-                    clipped={this.props.sideNavClipped}
-                    onOverlayClick={this.toggleSideNav}
-                    pinned={this.props.sideNavPinned}
-                >
-                    <MainNav />
-                    <MainNavPinSwitch />
-                </Drawer>
+  return (
+    <ThemeProvider theme={mdTheme}>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <MuiAppBar>
+          <Toolbar
+            sx={{
+              pr: '24px', // keep right padding when drawer closed
+            }}
+          >
+            <Drawer>
+              <MainNav />
+              <MainNavPinSwitch />
+            </Drawer>
+            <AppProgress />
+            {props.children}
+          </Toolbar>
+        </MuiAppBar>
+      </Box>
+    </ThemeProvider>
+  )
 
-                <AppBar
-                    fixed
-                    leftIcon='menu'
-                    onLeftIconClick={this.toggleSideNav}
-                    title='K Contact Manager'
-                />
-                <AppProgress />
-
-                <Panel bodyScroll={this.props.bodyScrolled}>
-                    <section className={styles.mainContent}>
-                        {this.props.children}
-                    </section>
-                </Panel>
-            </Layout>
-        )
-    }
+}
 
 export default AppLayout

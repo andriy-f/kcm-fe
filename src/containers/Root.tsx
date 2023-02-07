@@ -6,17 +6,18 @@ import {
 } from 'react-router-dom'
 import { persistStore } from 'redux-persist'
 
-import App from '../components/App'
 import { store } from '../app/store'
 import ErrorPage from '../app/ErrorPage'
 import LogOut from '../features/auth/LogOut'
+import AppLayout from '../containers/AppLayout'
+import Intro from '../components/Intro'
 
 persistStore(store) //TODO needed?
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <Intro />,
     errorElement: <ErrorPage />
   },
   {
@@ -28,7 +29,9 @@ const router = createBrowserRouter([
 function Root() {
   return (
     <StoreProvider store={store}>
-      <RouterProvider router={router} />
+      <AppLayout>
+        <RouterProvider router={router} />
+      </AppLayout>
     </StoreProvider>
   )
 }
