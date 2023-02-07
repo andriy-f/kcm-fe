@@ -1,5 +1,5 @@
 import React, { useState} from 'react'
-import { Redirect } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import FormControl from '@mui/material/FormControl'
 import FormHelperText from '@mui/material/FormHelperText'
 import Button from '@mui/material/Button'
@@ -99,13 +99,16 @@ function LogIn() {
     const isLoggedIn = useAppSelector(isCurrentUserLoggedIn)
     const errorMessage = getUserFriendlyErrorMessage(errorInfo)
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const logIn = (data: LoginData) => dispatch(logInAction(data))
     const handleLoginAsEditor = () => logIn({ login: 'demo-editor', 'password': 'aSuperSecret'})
     const handleLoginAsViewer = () => logIn({ login: 'demo-viewer', 'password': 'aSuperSecret'})
 
-    return isLoggedIn ? (
-      <Redirect to="/" />
-    ) : (
+    if(isLoggedIn) {
+      navigate('/')
+      return null
+    } else {
+    return (
         <div className={styles.kFormContainer}>
           <LoginForm onSubmit={logIn} />
           <ButtonPanel>
@@ -126,6 +129,7 @@ function LogIn() {
         </div >
       )
   }
+}
 
 
 // const mapStateToProps = (state) => {

@@ -1,21 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import LinearProgress from '@mui/material/LinearProgress'
 
-import { progressLinear } from '../App.module.css'
-import { getViewState } from '../utils'
+import styles from '../App.module.css'
 
-const AppProgress = props => {
+const AppProgress = (props: any) => {
     const { isFetchingAnywhere } = props
     return (
         isFetchingAnywhere
-        && <LinearProgress className={progressLinear} />
+        && <LinearProgress className={styles.progressLinear} />
     )
 }
 
-const mapStateToProps = state => {
-    const { isFetchingAnywhere } = getViewState(state)
-    return { isFetchingAnywhere }
-}
-
-export default connect(mapStateToProps)(AppProgress)
+export default AppProgress

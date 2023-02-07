@@ -1,25 +1,26 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { isCurrentUserLoggedIn, logOff } from '../features/currentUser/userSlice'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { isCurrentUserLoggedIn, logOff } from '../../features/currentUser/userSlice'
 
 function LogOut() {
 
   const dispatch = useAppDispatch()
   const beginLogOff = () => dispatch(logOff())
+  const navigate = useNavigate()
 
   useEffect(() => {
       beginLogOff()
   })
 
   const isLoggedIn = useAppSelector(isCurrentUserLoggedIn)
-
-  return isLoggedIn ? (
-      <span>Logging out...</span>
-  ) : (
-          <Redirect to="/" />
-      )
+  if(isLoggedIn) {
+    return <span>Logging out...</span>
+  } else {
+    navigate('/')
+    return null
+  }
 }
+
 export default LogOut

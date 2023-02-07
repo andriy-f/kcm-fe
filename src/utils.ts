@@ -8,11 +8,6 @@ export const commonAjaxRequestSettings = {
   responseType: 'json',
 }
 
-export const getViewState = (state: any) => ({
-  ...state,
-  isFetchingAnywhere: state.logIn.isFetching
-})
-
 const switchcaseSimple = (cases: { [prop: string]: unknown})  => (defaultCase: unknown) => (key: string) =>
   key in cases ? cases[key] : defaultCase
 
