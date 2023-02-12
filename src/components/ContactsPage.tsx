@@ -1,46 +1,36 @@
 // @flow
 import debug from 'debug'
 import React from 'react'
-import { graphql, QueryRenderer } from 'react-relay'
+import { graphql, QueryRenderer, usePreloadedQuery } from 'react-relay'
+import { Link, useLoaderData } from 'react-router-dom'
+import AddIcon from '@mui/icons-material/Add'
 
 import FilteringScrollingContactsTable from '../containers/FilteringScrollingContactsTable'
 import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
-import { RTButtonLink } from '../components/RTButtonLink'
 import styles from '../App.module.css'
 import RelayQueryError from './RelayQueryError'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactsPage.js')
 
-export default class extends React.Component<{ readonly?: boolean }> {
-  render() {
-    return (
-      <QueryRenderer
-        environment={environment}
-        query={graphql`
+type Props = {
+  readonly?: boolean
+}
+function ContactsPage(props: Props) {
+  const preloaded = useLoaderData()
+  const data = usePreloadedQuery(graphql`
           query ContactsPageQuery {
             ...FilteringScrollingContactsTable_contactsData
           }
-        `}
-        variables={{}}
-        render={({ error, props }) => {
-          if (error) {
-            return <RelayQueryError error={error} />
-          }
-          if (!props) {
-            return <div>Loading...</div>
-          }
-
-          return (
+        `, preloaded as any) // todo
+    return (
             <article className={styles.contactsPage}>
-              <FilteringScrollingContactsTable contactsData={props} relay={null} readonly={this.props.readonly} />
+              <FilteringScrollingContactsTable contactsData={data} relay={null} readonly={!!props.readonly} />
               <div className={styles.addItemButtonContainer}>
-                <RTButtonLink icon='add' floating accent to="/contacts/new" />
+                <Link to="/contacts/new"><AddIcon /></Link>
               </div>
             </article>)
-        }}
-      />
-    )
   }
-}
+
+export default ContactsPage

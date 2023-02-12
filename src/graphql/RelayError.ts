@@ -1,3 +1,4 @@
+// TODO: delete?
 export default class RelayError extends Error {
   errors: any[]
 

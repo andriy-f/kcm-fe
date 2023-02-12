@@ -2,4 +2,8 @@ import React from 'react'
 
 import styles from '../App.module.css'
 
-export default ({ children }) => <div className={styles.kFormContainer}>{children}</div>
+const NarrowLayout = (props: React.PropsWithChildren) => (
+  <div className={styles.kFormContainer}>{props.children}</div>
+)
+
+export default NarrowLayout

@@ -1,55 +1,41 @@
 // @flow
 import debug from 'debug'
 import React from 'react'
-import { graphql, QueryRenderer } from 'react-relay'
+import { graphql } from 'react-relay'
 
 import NarrowLayout from '../components/NarrowLayout'
 import ContactView from '../containers/ContactView'
-import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
 import styles from '../App.module.css'
-import RelayQueryError from './RelayQueryError'
+import Contact from '../types/Contact'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactViewPage.js')
 
-export default class extends React.Component<any> {
+type Props = {
+  contact: Contact
+}
 
-  _handleGoBack = () => {
-    this.props.history.push('/contacts')
+function ContactViewPage(props: Props) {
+
+  const _handleGoBack = () => {
   }
 
-  render() {
-    const { match } = this.props
-    return (
-      <QueryRenderer
-        environment={environment}
-        query={graphql`
+  const data = graphql`
           query ContactViewPageQuery ($id: ID!) {
             contact(id: $id) {
             ...ContactView_contact
             }
           }
-        `}
-        variables={{
-          id: match.params.id
-        }}
-        render={({ error, props }) => {
-          if (error) {
-            return <RelayQueryError error={error} />
-          }
+        `
 
-          if (!props) {
-            return <div>Loading...</div>
-          }
+  return (
+    <NarrowLayout>
+      <h2 className={styles.kTextCenter}>Contact</h2>
+      <ContactView contact={(data as any).contact} onGoBack={_handleGoBack} />
+    </NarrowLayout>)
 
-          return (
-            <NarrowLayout>
-              <h2 className={styles.kTextCenter}>Contact</h2>
-              <ContactView contact={props.contact} onGoBack={this._handleGoBack} />
-            </NarrowLayout>)
-        }}
-      />
-    )
-  }
+
 }
+
+export default ContactViewPage

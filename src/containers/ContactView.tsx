@@ -3,9 +3,9 @@ import debug from 'debug'
 import React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
 import TextField from '@mui/material/TextField'
+import { Link } from 'react-router-dom'
 
 import { appName } from '../consts'
-import { RTButtonLink } from '../components/RTButtonLink'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactView.js')
@@ -39,7 +39,7 @@ class ContactViewWrapper extends React.Component<any> {
             readOnly: true,
           }} label="Phone number" value={phoneNumber} />
         <p>
-          <RTButtonLink to="/contacts" />
+          <Link to="/contacts"></Link>
           {/* Back to contact list</RTButtonLink> */}
         </p>
       </article>
