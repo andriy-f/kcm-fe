@@ -1,11 +1,12 @@
 // @flow
 import debug from 'debug'
-import React from 'react'
-import Input from '@mui/material/Input'
+import React, { ChangeEvent } from 'react'
+import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 
 import styles from '../App.module.css'
 import { appName } from '../consts'
+import Contact from '../types/Contact'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactEditForm.js')
@@ -13,7 +14,7 @@ const log = debug(appName + ':ContactEditForm.js')
 type Props = {
   onSave(data: any): void,
   onCancel(): void,
-  contact?: object,
+  contact?: Contact,
 }
 
 type State = {
@@ -42,27 +43,28 @@ class ContactEditForm extends React.Component<Props, State> {
     return (
       <section className={styles.kFormContainer}>
         <form onSubmit={this._handleSubmit} method="post">
-          <Input autoFocus={true} required name="firstName" label="First Name" value={firstName} onChange={this._handleInputChange} />
-          <Input name="lastName" required label="Last Name" value={lastName} onChange={this._handleInputChange} />
-          <Input name="email" label="Email" value={email} onChange={this._handleInputChange} />
-          <Input name="phoneNumber" label="Phone number" value={phoneNumber} onChange={this._handleInputChange} />
+          <TextField autoFocus={true} required name="firstName" label="First Name" value={firstName} onChange={this._handleInputChange} />
+          <TextField name="lastName" required label="Last Name" value={lastName} onChange={this._handleInputChange} />
+          <TextField name="email" label="Email" value={email} onChange={this._handleInputChange} />
+          <TextField name="phoneNumber" label="Phone number" value={phoneNumber} onChange={this._handleInputChange} />
 
           <div className={styles.kTextCenter}>
-            <Button label="Save" type="submit" flat />
-            <Button label="Cancel" onClick={this.props.onCancel} />
+            <Button variant="contained">Save</Button>
+            <Button variant="outlined" onClick={this.props.onCancel} >Cancel</Button>
           </div>
         </form>
       </section>
     )
   }
 
-  _handleInputChange = (value: string, event: any) => {
-    const target = event.target
-    const name = target.name
+  _handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const name = event.target.name
+    const value = event.target.value
 
-    this.setState({
-      [name]: value
-    })
+    if(name in this.state) {
+      // @ts-ignore
+      this.setState({ [name]: value })
+    }
   }
 
   _handleSubmit = (e: any) => {
