@@ -8,7 +8,7 @@ import { useAppSelector } from '../app/hooks'
 import { isCurrentUserLoggedIn, selectCurrentUser } from '../features/currentUser/userSlice'
 
 const MainDrawer = function () {
-  const [drawerOpen, setDrawerOpen] = React.useState(false)
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
   const toggleDrawer =
     (open: boolean) =>

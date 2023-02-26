@@ -1,4 +1,4 @@
-import { createAction, createReducer, PayloadAction } from '@reduxjs/toolkit'
+import { createAction, createReducer } from '@reduxjs/toolkit'
 
 import { RootState } from '../../app/store'
 

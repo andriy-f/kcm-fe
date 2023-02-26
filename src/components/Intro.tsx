@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import styles from '../App.module.css'
 
-export default () => (
+const Intro = () => (
   <article>
     <h1 className={styles.intro__h}>Welcome to K Contact Manager Sample App</h1>
     <section>
@@ -53,3 +53,5 @@ export default () => (
     </section>
   </article>
 )
+
+export default Intro
