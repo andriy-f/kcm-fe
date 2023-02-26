@@ -20,11 +20,12 @@ RUN set -ex; \
   apk del .gyp;
 
 # Build app
+COPY --chown=node:node tsconfig.json ./
 COPY --chown=node:node .eslintrc.json ./
-COPY --chown=node:node flow-typed ./flow-typed
-COPY --chown=node:node config ./config
+COPY --chown=node:node nodemon-relay.json ./
+COPY --chown=node:node relay.config.js ./
+COPY --chown=node:node assets ./assets
 COPY --chown=node:node public ./public
-COPY --chown=node:node server ./server
 COPY --chown=node:node scripts ./scripts
 COPY --chown=node:node src ./src
 RUN su-exec node env NODE_ENV=production npm run build
@@ -34,7 +35,7 @@ USER node
 EXPOSE 8080
 ENV PORT 8080
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["node", "scripts/watch.js"]
+CMD ["npm", "run", "dev"]
 
 # ==========
 # Prod image
