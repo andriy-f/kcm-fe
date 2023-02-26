@@ -1,7 +1,7 @@
 // @flow
 import debug from 'debug'
 import React from 'react'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 import { graphql, QueryRenderer } from 'react-relay'
 
 import ContactEdit from '../containers/ContactEdit'

@@ -1,14 +1,13 @@
-// @flow
-import debug from 'debug'
+// import debug from 'debug'
 import React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
 import TextField from '@mui/material/TextField'
 import { Link } from 'react-router-dom'
 
-import { appName } from '../consts'
+// import { appName } from '../consts'
 
 // eslint-disable-next-line no-unused-vars
-const log = debug(appName + ':ContactView.js')
+// const log = debug(appName + ':ContactView.js')
 
 class ContactViewWrapper extends React.Component<any> {
 
