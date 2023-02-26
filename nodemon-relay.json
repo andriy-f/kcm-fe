@@ -1,0 +1,10 @@
+{
+  "watch": [
+      "src/**/*.*"
+  ],
+  "ignore": [
+      "src/components/__generated__",
+      "src/containers/__generated__"
+  ],
+  "exec": "npm run relay"
+}

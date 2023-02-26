@@ -31,10 +31,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "dev": "concurrently \"npm:watch-*\"",
+    "watch-react": "react-scripts start",
+    "build": "relay-compiler && react-scripts build",
     "test": "react-scripts test",
     "relay": "relay-compiler",
+    "watch-relay": "nodemon --config nodemon-relay.json",
     "eject": "react-scripts eject",
     "lint": "eslint src/",
     "lint-fix": "eslint --fix src/"
@@ -59,7 +61,9 @@
     "@types/throttle-debounce": "^5.0.0",
     "@types/urijs": "^1.19.19",
     "babel-plugin-relay": "^14.1.0",
+    "concurrently": "^7.6.0",
     "eslint": "^8.32.0",
+    "nodemon": "^2.0.20",
     "relay-compiler": "^14.1.0"
   }
 }
