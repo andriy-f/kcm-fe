@@ -5,7 +5,7 @@ import { graphql, useLazyLoadQuery } from 'react-relay'
 import { Link, useLoaderData } from 'react-router-dom'
 import AddIcon from '@mui/icons-material/Add'
 
-import FilteringScrollingContactsTable from '../containers/FilteringScrollingContactsTable'
+import FilteringScrollingContactsTable from '../components/FilteringScrollingContactsTable'
 import type { ContactsPageQuery as ContactsPageQueryType } from './__generated__/ContactsPageQuery.graphql'
 import { appName } from '../consts'
 import styles from '../App.module.css'

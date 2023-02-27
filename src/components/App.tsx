@@ -6,7 +6,7 @@ import debug from 'debug'
 import styles from '../App.module.css'
 import { BACKEND_URL } from '../config'
 import { appName, isSSR } from '../consts'
-// import AppLayout from '../containers/AppLayout'
+// import AppLayout from '../components/AppLayout'
 // import Routes from '../Routes'
 
 const logger = debug(appName + ':App.js')

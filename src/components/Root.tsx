@@ -9,7 +9,7 @@ import { persistStore } from 'redux-persist'
 import { store } from '../app/store'
 import ErrorPage from '../app/ErrorPage'
 import LogOut from '../features/auth/LogOut'
-import AppLayout from '../containers/AppLayout'
+import AppLayout from './AppLayout'
 import Intro from '../components/Intro'
 
 persistStore(store) //TODO needed?

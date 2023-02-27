@@ -6,7 +6,7 @@ import { debounce } from 'throttle-debounce'
 
 import type { FilteringScrollingContactsTable_contactsData$key } from './__generated__/FilteringScrollingContactsTable_contactsData.graphql'
 import { appName } from '../consts'
-import ScrollingPaginationContactsTable from '../containers/ScrollingPaginationContactsTable'
+import ScrollingPaginationContactsTable from '../components/ScrollingPaginationContactsTable'
 import styles from '../App.module.css'
 
 // eslint-disable-next-line no-unused-vars

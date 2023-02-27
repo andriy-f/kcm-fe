@@ -9,9 +9,9 @@ import Toolbar from '@mui/material/Toolbar'
 
 import MainNav from './MainDrawer'
 // import styles from '../App.module.css'
-import AppProgress from '../containers/AppProgress'
+import AppProgress from './AppProgress'
 // import { sideNavActiveSetting } from '../consts'
-import MainNavPinSwitch from '../containers/MainNavPinSwitch'
+import MainNavPinSwitch from './MainNavPinSwitch'
 const mdTheme = createTheme()
 
 function AppLayout(props: PropsWithChildren) {

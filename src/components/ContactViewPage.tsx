@@ -4,7 +4,7 @@ import React from 'react'
 import { graphql } from 'react-relay'
 
 import NarrowLayout from '../components/NarrowLayout'
-import ContactView from '../containers/ContactView'
+import ContactView from '../components/ContactView'
 import { appName } from '../consts'
 import styles from '../App.module.css'
 import Contact from '../types/Contact'

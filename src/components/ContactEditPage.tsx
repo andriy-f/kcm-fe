@@ -4,7 +4,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { graphql, QueryRenderer } from 'react-relay'
 
-import ContactEdit from '../containers/ContactEdit'
+import ContactEdit from '../components/ContactEdit'
 import environment from '../graphql/relayEnvironment'
 import { appName } from '../consts'
 import styles from '../App.module.css'

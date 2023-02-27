@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import Root from './containers/Root'
+import Root from './components/Root'
 import reportWebVitals from './reportWebVitals'
 // import registerServiceWorker from './registerServiceWorker'
 // import './index.css'

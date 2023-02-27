@@ -4,19 +4,19 @@ import { Route } from 'react-router-dom'
 
 import Intro from './components/Intro'
 import LogInPage from './features/auth/LogIn'
-// import LogOutPage from './containers/LogOut'
+// import LogOutPage from './components/LogOut'
 import EditableContactsPage from './components/EditableContactsPage'
 import ReadonlyContactsPage from './components/ReadonlyContactsPage'
 import ContactEditPage from './components/ContactEditPage'
 import ContactViewPage from './components/ContactViewPage'
 import ContactCreatePage from './components/ContactCreatePage'
-import userProfile from './containers/userProfile'
+import userProfile from './components/userProfile'
 import NotFound from './components/NotFound'
 // import NotLoggedIn from './components/NotLoggedIn'
 import NotAuthorized from './features/auth/NotAuthorized'
-import DevPage from './containers/DevPage'
+import DevPage from './components/DevPage'
 import SettingsPage from './features/settings/SettingsPage'
-// import ConditionalAuthHOC from './containers/ConditionalAuthHOC'
+// import ConditionalAuthHOC from './components/ConditionalAuthHOC'
 
 // const DefaultConditionalAuthHOC = ConditionalAuthHOC({ NotLoggedIn, NotAuthorized })
 
