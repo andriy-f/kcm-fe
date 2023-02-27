@@ -59,8 +59,8 @@ export const selectCurrentUser = (state: RootState) => state.currentUser
 
 export const isUserLoggedIn = (user: UserState) => {
 
-  return user && Object.keys(user).length !== 0
-    && user.tokenExpiresOn && user.tokenExpiresOn >= Date.now()
+  return !!(user && Object.keys(user).length !== 0
+    && user.tokenExpiresOn && user.tokenExpiresOn >= Date.now())
 }
 
 export const isCurrentUserLoggedIn = (state: RootState) => isUserLoggedIn(state.currentUser)

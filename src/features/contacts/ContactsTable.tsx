@@ -2,11 +2,9 @@ import Button from '@mui/material/Button'
 import { usePaginationFragment } from 'react-relay'
 // import { graphql } from 'relay-runtime'
 
-// @ts-ignore
 import graphql from 'babel-plugin-relay/macro'
 
 import { ContactsTableFragment$key } from './__generated__/ContactsTableFragment.graphql'
-
 
 const ContactsTableFragment = graphql`
 fragment ContactsTableFragment on Query
