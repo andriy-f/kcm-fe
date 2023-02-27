@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2d2766b1c234f5fbfff3400eddf1c200>>
+ * @generated SignedSource<<3850c4797e868e19b75181f914b08529>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,32 +10,76 @@
 
 import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type ContactsPageQuery$variables = {};
-export type ContactsPageQuery$data = {
+export type ContactsTableRefetchQuery$variables = {
+  count?: number | null;
+  cursor?: string | null;
+  filterText?: string | null;
+};
+export type ContactsTableRefetchQuery$data = {
   readonly " $fragmentSpreads": FragmentRefs<"ContactsTableFragment">;
 };
-export type ContactsPageQuery = {
-  response: ContactsPageQuery$data;
-  variables: ContactsPageQuery$variables;
+export type ContactsTableRefetchQuery = {
+  response: ContactsTableRefetchQuery$data;
+  variables: ContactsTableRefetchQuery$variables;
 };
 
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
-    "kind": "Literal",
+    "defaultValue": 10,
+    "kind": "LocalArgument",
+    "name": "count"
+  },
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "cursor"
+  },
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "filterText"
+  }
+],
+v1 = {
+  "kind": "Variable",
+  "name": "filterText",
+  "variableName": "filterText"
+},
+v2 = [
+  {
+    "kind": "Variable",
+    "name": "after",
+    "variableName": "cursor"
+  },
+  (v1/*: any*/),
+  {
+    "kind": "Variable",
     "name": "first",
-    "value": 10
+    "variableName": "count"
   }
 ];
 return {
   "fragment": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "ContactsPageQuery",
+    "name": "ContactsTableRefetchQuery",
     "selections": [
       {
-        "args": null,
+        "args": [
+          {
+            "kind": "Variable",
+            "name": "count",
+            "variableName": "count"
+          },
+          {
+            "kind": "Variable",
+            "name": "cursor",
+            "variableName": "cursor"
+          },
+          (v1/*: any*/)
+        ],
         "kind": "FragmentSpread",
         "name": "ContactsTableFragment"
       }
@@ -45,13 +89,13 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "ContactsPageQuery",
+    "name": "ContactsTableRefetchQuery",
     "selections": [
       {
         "alias": null,
-        "args": (v0/*: any*/),
+        "args": (v2/*: any*/),
         "concreteType": "ContactConnection",
         "kind": "LinkedField",
         "name": "allContacts",
@@ -154,11 +198,11 @@ return {
             "storageKey": null
           }
         ],
-        "storageKey": "allContacts(first:10)"
+        "storageKey": null
       },
       {
         "alias": null,
-        "args": (v0/*: any*/),
+        "args": (v2/*: any*/),
         "filters": [
           "filterText"
         ],
@@ -170,16 +214,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "34e003946e1426e74f6ba829ac9ccd99",
+    "cacheID": "dc868fb4efd791b9c8d0aa2b9f488871",
     "id": null,
     "metadata": {},
-    "name": "ContactsPageQuery",
+    "name": "ContactsTableRefetchQuery",
     "operationKind": "query",
-    "text": "query ContactsPageQuery {\n  ...ContactsTableFragment\n}\n\nfragment ContactsTableFragment on Query {\n  allContacts(first: 10) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
+    "text": "query ContactsTableRefetchQuery(\n  $count: Int = 10\n  $cursor: String\n  $filterText: String\n) {\n  ...ContactsTableFragment_UImuz\n}\n\nfragment ContactsTableFragment_UImuz on Query {\n  allContacts(first: $count, after: $cursor, filterText: $filterText) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        phoneNumber\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "0fbecfa5c05e20c13d724286fdf42ed8";
+(node as any).hash = "6cd8566c700006731bf5d0b74c261d59";
 
 export default node;

@@ -1,23 +1,22 @@
-// @flow
-import debug from 'debug'
 import React from 'react'
+import debug from 'debug'
 import { graphql, useLazyLoadQuery } from 'react-relay'
-import { Link, useLoaderData } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import AddIcon from '@mui/icons-material/Add'
 
-import FilteringScrollingContactsTable from '../components/FilteringScrollingContactsTable'
 import type { ContactsPageQuery as ContactsPageQueryType } from './__generated__/ContactsPageQuery.graphql'
 import { appName } from '../consts'
 import styles from '../App.module.css'
+import ContactsTable from '../features/contacts/ContactsTable'
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':ContactsPage.js')
 
 const ContactsPageQuery = graphql`
-          query ContactsPageQuery {
-            ...FilteringScrollingContactsTable_contactsData
-          }
-        `
+  query ContactsPageQuery {
+    ...ContactsTableFragment
+  }
+`
 
 type Props = {
   readonly?: boolean
@@ -26,13 +25,13 @@ type Props = {
 function ContactsPage(props: Props) {
   // const preloaded = useLoaderData()
   const data = useLazyLoadQuery<ContactsPageQueryType>(ContactsPageQuery, {}) // todo
-    return (
-            <article className={styles.contactsPage}>
-              <FilteringScrollingContactsTable contactsData={data} readonly={!!props.readonly} />
-              <div className={styles.addItemButtonContainer}>
-                <Link to="/contacts/new"><AddIcon /></Link>
-              </div>
-            </article>)
-  }
+  return (
+    <article className={styles.contactsPage}>
+      <ContactsTable contacts={data} />
+      <div className={styles.addItemButtonContainer}>
+        <Link to="/contacts/new"><AddIcon /></Link>
+      </div>
+    </article>)
+}
 
 export default ContactsPage

@@ -3,8 +3,7 @@
       "src/**/*.*"
   ],
   "ignore": [
-      "src/components/__generated__",
-      "src/containers/__generated__"
+      "src/**/__generated__"
   ],
   "exec": "npm run relay"
 }

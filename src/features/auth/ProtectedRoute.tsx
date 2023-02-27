@@ -11,12 +11,13 @@ type Props = {
 
 export const ProtectedRoute = (props: React.PropsWithChildren<Props>) => {
   const { children, requiredPermissions } = props
-    const currentUser = useAppSelector(selectCurrentUser)
-    const isLoggedIn = isUserLoggedIn(currentUser)
-      if (isLoggedIn) {
-        const isAuthorized = requiredPermissions.every(p => currentUser.userData?.permissions.includes(p))
-        return isAuthorized ? children : <NotAuthorized />
-      } else {
-        return <NotLoggedIn />
-      }
-    }
+  const currentUser = useAppSelector(selectCurrentUser)
+  const isLoggedIn = isUserLoggedIn(currentUser)
+  console.log('ILI', isLoggedIn)
+  if (isLoggedIn) {
+    const isAuthorized = requiredPermissions.every(p => currentUser.userData?.permissions.includes(p))
+    return isAuthorized ? <>{children}</> : <NotAuthorized />
+  } else {
+    return <NotLoggedIn />
+  }
+}

@@ -1,2 +1,2 @@
 const clientSideApiUrl = (typeof window !== 'undefined' && window.kcm && window.kcm.apiUrl) || null
-export const BACKEND_URL = process.env.REACT_APP_KCM_BACKEND_URL || clientSideApiUrl
+export const APIURL = process.env.REACT_APP_KCM_BACKEND_URL || clientSideApiUrl

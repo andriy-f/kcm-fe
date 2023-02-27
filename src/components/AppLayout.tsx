@@ -6,6 +6,7 @@ import MuiAppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
 import Toolbar from '@mui/material/Toolbar'
+import { Outlet } from 'react-router-dom'
 
 import MainNav from './MainDrawer'
 // import styles from '../App.module.css'
@@ -33,7 +34,7 @@ function AppLayout(props: PropsWithChildren) {
               <MainNavPinSwitch />
             </Drawer>
             <AppProgress />
-            {props.children}
+            <Outlet />
           </Toolbar>
         </MuiAppBar>
       </Box>

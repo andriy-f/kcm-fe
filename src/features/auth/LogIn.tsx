@@ -8,7 +8,7 @@ import InputLabel from '@mui/material/InputLabel'
 import Snackbar from '@mui/material/Snackbar'
 // import { Form, Field } from 'react-final-form'
 
-import styles from '../App.module.css'
+import styles from '../../App.module.css'
 import ButtonPanel from '../../components/ButtonPanel'
 import { getUserFriendlyErrorMessage } from '../../utils'
 import { isCurrentUserLoggedIn, logIn as logInAction } from '../currentUser/userSlice'
