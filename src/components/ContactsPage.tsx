@@ -1,8 +1,11 @@
 import React from 'react'
 import debug from 'debug'
-import { graphql, useLazyLoadQuery } from 'react-relay'
+import { useLazyLoadQuery } from 'react-relay'
 import { Link } from 'react-router-dom'
 import AddIcon from '@mui/icons-material/Add'
+
+// @ts-ignore
+import graphql from 'babel-plugin-relay/macro'
 
 import type { ContactsPageQuery as ContactsPageQueryType } from './__generated__/ContactsPageQuery.graphql'
 import { appName } from '../consts'
