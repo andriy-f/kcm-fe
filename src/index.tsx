@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import Root from './components/App'
+import App from './components/App'
 import reportWebVitals from './reportWebVitals'
 // import registerServiceWorker from './registerServiceWorker'
 // import './index.css'
@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(
 )
 root.render(
   <React.StrictMode>
-    <Root />
+    <App />
   </React.StrictMode>
 )
 
