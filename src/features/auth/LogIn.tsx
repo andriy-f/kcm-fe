@@ -1,11 +1,13 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import TextField from '@mui/material/TextField'
 import FormControl from '@mui/material/FormControl'
 import FormHelperText from '@mui/material/FormHelperText'
 import Button from '@mui/material/Button'
 import Input from '@mui/material/Input'
 import InputLabel from '@mui/material/InputLabel'
 import Snackbar from '@mui/material/Snackbar'
+import Box from '@mui/material/Box'
 // import { Form, Field } from 'react-final-form'
 
 import styles from '../../App.module.css'
@@ -23,35 +25,29 @@ interface LogInFormProps {
   onSubmit: (data: LoginData) => void
 }
 
-function LoginForm(props: LogInFormProps ) {
+function LoginForm(props: LogInFormProps) {
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
-  const handleSubmit = () => { props.onSubmit({login, password}) }
+  const handleSubmit = () => { props.onSubmit({ login, password }) }
 
   return (
-      <form onSubmit={handleSubmit}>
-        <h3 className={styles.kTextCenter}>Log into site</h3>
-        <FormControl>
-          <InputLabel htmlFor="kcm-login">Login</InputLabel>
-          <Input id="kcm-login" aria-describedby="kcm-login-helper-text"
-            value={login}
-            onChange={e => setLogin(e.target.value)}
-            />
-          <FormHelperText id="kcm-login-helper-text">Your private login</FormHelperText>
-        </FormControl>
-        <FormControl>
-          <InputLabel htmlFor="kcm-password">Password</InputLabel>
-          <Input id="kcm-password" aria-describedby="kcm-password-helper-text"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            />
-          <FormHelperText id="kcm-password-helper-text">Your secret password</FormHelperText>
-        </FormControl>
-        <ButtonPanel>
-          <Button type="submit">Log in</Button>
-        </ButtonPanel>
-      </form>
-       )
+    <Box
+      component="form"
+      sx={{
+        '& > :not(style)': { m: 1 },
+      }}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit}
+    >
+      <h3 className={styles.kTextCenter}>Log into site</h3>
+      <TextField label="Login" value={login} onChange={e => { setLogin(e.target.value) }} />
+      <TextField label="Password" value={password} onChange={e => { setPassword(e.target.value) }} />
+      <ButtonPanel>
+        <Button type="submit">Log in</Button>
+      </ButtonPanel>
+    </Box>
+  )
 }
 
 // class LogInOld extends React.Component {
@@ -94,40 +90,40 @@ function LoginForm(props: LogInFormProps ) {
 
 //   render() {
 function LogIn() {
-    const [showMessage, setShowMessage] = useState(false)
-    const [errorInfo, setErrorInfo] = useState(null)
-    const isLoggedIn = useAppSelector(isCurrentUserLoggedIn)
-    const errorMessage = getUserFriendlyErrorMessage(errorInfo)
-    const dispatch = useAppDispatch()
-    const navigate = useNavigate()
-    const logIn = (data: LoginData) => dispatch(logInAction(data))
-    const handleLoginAsEditor = () => logIn({ login: 'demo-editor', 'password': 'aSuperSecret'})
-    const handleLoginAsViewer = () => logIn({ login: 'demo-viewer', 'password': 'aSuperSecret'})
+  const [showMessage, setShowMessage] = useState(false)
+  const [errorInfo, setErrorInfo] = useState(null)
+  const isLoggedIn = useAppSelector(isCurrentUserLoggedIn)
+  const errorMessage = getUserFriendlyErrorMessage(errorInfo)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const logIn = (data: LoginData) => dispatch(logInAction(data))
+  const handleLoginAsEditor = () => logIn({ login: 'demo-editor', 'password': 'aSuperSecret' })
+  const handleLoginAsViewer = () => logIn({ login: 'demo-viewer', 'password': 'aSuperSecret' })
 
-    if(isLoggedIn) {
-      navigate('/')
-      return null
-    } else {
+  if (isLoggedIn) {
+    navigate('/')
+    return null
+  } else {
     return (
-        <div className={styles.kFormContainer}>
-          <LoginForm onSubmit={logIn} />
-          <ButtonPanel>
-            <Button onClick={handleLoginAsEditor}>
-              Editor demo
-            </Button>
-            <Button onClick={handleLoginAsViewer}>
-               Viewer demo
-            </Button>
-          </ButtonPanel>
-          <Snackbar
-            open={showMessage && !!errorMessage}
-            message={errorMessage}
-            autoHideDuration={2000}
-            onClick={() => setShowMessage(false)}
-            onClose={() => setShowMessage(false)}
-          />
-        </div >
-      )
+      <div className={styles.kFormContainer}>
+        <LoginForm onSubmit={logIn} />
+        <ButtonPanel>
+          <Button onClick={handleLoginAsEditor}>
+            Editor demo
+          </Button>
+          <Button onClick={handleLoginAsViewer}>
+            Viewer demo
+          </Button>
+        </ButtonPanel>
+        <Snackbar
+          open={showMessage && !!errorMessage}
+          message={errorMessage}
+          autoHideDuration={2000}
+          onClick={() => setShowMessage(false)}
+          onClose={() => setShowMessage(false)}
+        />
+      </div >
+    )
   }
 }
 

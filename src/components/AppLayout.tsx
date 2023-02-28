@@ -1,44 +1,28 @@
 import React, { PropsWithChildren } from 'react'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-import CssBaseline from '@mui/material/CssBaseline'
 // import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 import MuiAppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
-import Drawer from '@mui/material/Drawer'
 import Toolbar from '@mui/material/Toolbar'
 import { Outlet } from 'react-router-dom'
 
-import MainNav from './MainDrawer'
-// import styles from '../App.module.css'
+import MainDrawer from './MainDrawer'
 import AppProgress from './AppProgress'
-// import { sideNavActiveSetting } from '../consts'
 import MainNavPinSwitch from './MainNavPinSwitch'
-const mdTheme = createTheme()
 
 function AppLayout(props: PropsWithChildren) {
-  // const toggleSideNav = () => { // TODO
-  // }
 
   return (
-    <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <MuiAppBar>
-          <Toolbar
-            sx={{
-              pr: '24px', // keep right padding when drawer closed
-            }}
-          >
-            <Drawer>
-              <MainNav />
-              <MainNavPinSwitch />
-            </Drawer>
-            <AppProgress />
-            <Outlet />
-          </Toolbar>
-        </MuiAppBar>
-      </Box>
-    </ThemeProvider>
+    <Box sx={{ display: 'flex' }}>
+      <MuiAppBar>
+        <Toolbar>
+          <AppProgress />
+        </Toolbar>
+      </MuiAppBar>
+      <MainDrawer />
+      <MainNavPinSwitch />
+      <Toolbar />
+      <Outlet />
+    </Box>
   )
 
 }

@@ -1,21 +1,17 @@
 import React from 'react'
-import { Provider as StoreProvider } from 'react-redux'
 import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom'
-import { persistStore } from 'redux-persist'
-
-import { store } from '../app/store'
 import ErrorPage from '../app/ErrorPage'
 import LogOut from '../features/auth/LogOut'
 import AppLayout from './AppLayout'
 import Intro from './Intro'
 import { ProtectedRoute } from '../features/auth/ProtectedRoute'
 import ContactsPage from './ContactsPage'
-import AppRelayEnvironment from '../relay/AppRelayEnvironment'
-
-persistStore(store) //TODO needed?
+import AppRelayEnvironmentProvider from '../relay/AppRelayEnvironment'
+import ReduxStoreProvider from '../app/ReduxStoreProvider'
+import AppThemeProvider from '../app/AppThemeProvider'
 
 const router = createBrowserRouter([
   {
@@ -30,10 +26,10 @@ const router = createBrowserRouter([
       {
         path: 'contacts/',
         element: (<>
-        <ProtectedRoute requiredPermissions={['contact-list-view']}>
-          <ContactsPage />
-          hello
-        </ProtectedRoute>)
+          <ProtectedRoute requiredPermissions={['contact-list-view']}>
+            <ContactsPage />
+            hello
+          </ProtectedRoute>)
         </>)
       },
       {
@@ -46,11 +42,13 @@ const router = createBrowserRouter([
 
 function Root() {
   return (
-    <AppRelayEnvironment>
-      <StoreProvider store={store}>
-        <RouterProvider router={router} />
-      </StoreProvider>
-    </AppRelayEnvironment>
+    <AppRelayEnvironmentProvider>
+      <ReduxStoreProvider>
+        <AppThemeProvider>
+          <RouterProvider router={router} />
+        </AppThemeProvider>
+      </ReduxStoreProvider>
+    </AppRelayEnvironmentProvider>
   )
 }
 

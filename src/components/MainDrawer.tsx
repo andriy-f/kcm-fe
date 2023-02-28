@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Toolbar from '@mui/material/Toolbar'
 import Drawer from '@mui/material/Drawer'
 
 import { isDev } from '../utils'
@@ -12,37 +13,39 @@ const MainDrawer = function () {
 
   const toggleDrawer =
     (open: boolean) =>
-    (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' ||
-        (event as React.KeyboardEvent).key === 'Shift')
-      ) {
-        return
+      (event: React.KeyboardEvent | React.MouseEvent) => {
+        if (
+          event.type === 'keydown' &&
+          ((event as React.KeyboardEvent).key === 'Tab' ||
+            (event as React.KeyboardEvent).key === 'Shift')
+        ) {
+          return
+        }
+
+        setDrawerOpen(open)
       }
 
-      setDrawerOpen(open)
-    }
+  const currentUser = useAppSelector(selectCurrentUser)
+  const isLoggedIn = useAppSelector(isCurrentUserLoggedIn)
+  const currentUserName = currentUser.userData?.name
 
-    const currentUser = useAppSelector(selectCurrentUser)
-    const isLoggedIn = useAppSelector(isCurrentUserLoggedIn)
-    const currentUserName = currentUser.userData?.name
-
-        return (
-            <Drawer
-              anchor="left"
-              open={drawerOpen}
-              onClose={toggleDrawer}
-               >
-                <NavLink to='/'>Intro</NavLink>
-                <NavLink to='/contacts'>Contacts</NavLink>
-                <NavLink to='/settings'>Settings</NavLink>
-                {isDev && <NavLink to='/dev' >Dev</NavLink>}
-                {isLoggedIn && <NavLink to='/userProfile'>{'Hi, ' + currentUserName}</NavLink>}
-                {isLoggedIn && <NavLink to='/logOut'>Log out</NavLink>}
-                {!isLoggedIn && <NavLink to="/logIn">Log in</NavLink>}
-            </Drawer>
-        )
+  return (
+    <Drawer
+      anchor="left"
+      open={drawerOpen}
+      onClose={toggleDrawer}
+    >
+      <Toolbar>
+        <NavLink to='/'>Intro</NavLink>
+        <NavLink to='/contacts'>Contacts</NavLink>
+        <NavLink to='/settings'>Settings</NavLink>
+        {isDev && <NavLink to='/dev' >Dev</NavLink>}
+        {isLoggedIn && <NavLink to='/userProfile'>{'Hi, ' + currentUserName}</NavLink>}
+        {isLoggedIn && <NavLink to='/logOut'>Log out</NavLink>}
+        {!isLoggedIn && <NavLink to="/logIn">Log in</NavLink>}
+      </Toolbar>
+    </Drawer>
+  )
 }
 
 export default MainDrawer
