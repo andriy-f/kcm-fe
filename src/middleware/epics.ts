@@ -1,3 +1,4 @@
+//TODO use or delete. Currently unused
 import { ajax } from 'rxjs/observable/dom/ajax'
 import { Observable } from 'rxjs'
 import 'rxjs/add/operator/mergeMap'
@@ -5,23 +6,23 @@ import 'rxjs/add/operator/map'
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
 import debug from 'debug'
 
-import { BACKEND_URL } from '../config'
+import { APIURL } from '../config'
 import { appName } from '../consts'
 import { commonAjaxRequestSettings } from '../utils'
 import {
   LOGIN, logInDone, logInError,
   LOGOFF, logOffDone, logOffError
-} from '../actions'
+} from '../features/currentUser/userSlice'
 import { urlJoin } from '../utils'
 
 // eslint-disable-next-line
 const logger = debug(appName + ':epics.js')
-const loginUrl = urlJoin(BACKEND_URL, '/account/logInWithCookie')
-const logoutUrl = urlJoin(BACKEND_URL, '/account/clearCookie')
+const loginUrl = urlJoin(APIURL, '/account/logInWithCookie')
+const logoutUrl = urlJoin(APIURL, '/account/clearCookie')
 
-const requestAuthenticateEpic = action$ =>
+const requestAuthenticateEpic = (action$: any) =>
   action$.ofType(LOGIN)
-    .mergeMap(action => ajax({
+    .mergeMap((action: any) => ajax({
       ...commonAjaxRequestSettings,
       url: loginUrl,
       method: 'POST',
@@ -34,9 +35,9 @@ const requestAuthenticateEpic = action$ =>
       })
     )
 
-const requestLogoffEpic = action$ =>
+const requestLogoffEpic = (action$: any) =>
   action$.ofType(LOGOFF)
-    .mergeMap(action => ajax({
+    .mergeMap((action: any) => ajax({
       ...commonAjaxRequestSettings,
       url: logoutUrl,
       method: 'POST'
@@ -50,4 +51,5 @@ const rootEpic = combineEpics(
   requestLogoffEpic
 )
 
-export const epicMiddleware = createEpicMiddleware(rootEpic)
+// TODO deal with as any
+export const epicMiddleware = createEpicMiddleware(rootEpic as any)
