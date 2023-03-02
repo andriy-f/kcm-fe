@@ -40,7 +40,7 @@ export const logInDone = createAction<UserActionPayload>(LOGIN_DONE)
 
 export const logOff = createAction(LOGOFF)
 export const logOffDone = createAction(LOGOFF_DONE)
-// export const logOffError = createAction(LOGOFF_ERROR)
+export const logOffError = createAction(LOGOFF_ERROR)
 
 export const currentUserReducer = createReducer(initialUserState, (builder) => {
   builder.addCase(logInDone, (state, action) => ({
