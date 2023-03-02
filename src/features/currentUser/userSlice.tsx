@@ -1,5 +1,7 @@
 import { RootState } from '../../app/store'
-import { createAction, createReducer } from '@reduxjs/toolkit'
+import { createAction, createAsyncThunk, createReducer } from '@reduxjs/toolkit'
+import { LoginData } from '../../types/LoginData'
+import { requestLogIn } from './currentUserApi'
 
 export const LOGIN = 'user/login'
 export const LOGIN_DONE = 'user/login_done'
@@ -22,7 +24,7 @@ interface CurrentUserData {
 export interface UserState {
   userData: CurrentUserData | null
   tokenExpiresOn: number | null
-  inProgress: boolean
+  loading: 'idle' | 'pending'
 }
 
 interface UserActionPayload {
@@ -33,7 +35,7 @@ interface UserActionPayload {
 const initialUserState: UserState = {
   userData: null,
   tokenExpiresOn: null,
-  inProgress: false
+  loading: 'idle'
 }
 
 export const logInDone = createAction<UserActionPayload>(LOGIN_DONE)
@@ -42,7 +44,16 @@ export const logOff = createAction(LOGOFF)
 export const logOffDone = createAction(LOGOFF_DONE)
 export const logOffError = createAction(LOGOFF_ERROR)
 
+export const requestLogInThunk = createAsyncThunk(
+  'users/fetchLogin',
+  async (loginData: LoginData, thunkAPI) => {
+    const response = await requestLogIn(loginData)
+    return response
+  }
+)
+
 export const currentUserReducer = createReducer(initialUserState, (builder) => {
+  // not needed without epics?
   builder.addCase(logInDone, (state, action) => ({
     ...state,
     userData: action.payload.userData,
@@ -52,6 +63,21 @@ export const currentUserReducer = createReducer(initialUserState, (builder) => {
     ...state,
     userData: null,
     tokenExpiresOn: null
+  }))
+  builder.addCase(requestLogInThunk.pending, (state, action) => ({
+    ...state,
+    loading: 'pending'
+  }))
+  builder.addCase(requestLogInThunk.fulfilled , (state, action) => ({
+    ...state,
+    userData: action.payload.userData,
+    tokenExpiresOn: action.payload.tokenExpiresOn,
+    loading: 'idle'
+  }))
+  builder.addCase(requestLogInThunk.rejected, (state, action) => ({
+    ...state,
+    error: 'login error',
+    loading: 'idle'
   }))
 })
 

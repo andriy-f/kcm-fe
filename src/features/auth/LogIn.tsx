@@ -9,7 +9,7 @@ import Box from '@mui/material/Box'
 import styles from '../../App.module.css'
 import ButtonPanel from '../../components/ButtonPanel'
 import { getUserFriendlyErrorMessage } from '../../utils'
-import { isCurrentUserLoggedIn, logIn as logInAction } from '../currentUser/userSlice'
+import { isCurrentUserLoggedIn, logIn as logInAction, requestLogInThunk } from '../currentUser/userSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { LoginData } from '../../types/LoginData'
 
@@ -91,7 +91,7 @@ function LogIn() {
   const errorMessage = getUserFriendlyErrorMessage(errorInfo)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const logIn = (data: LoginData) => dispatch(logInAction(data))
+  const logIn = (data: LoginData) => dispatch(requestLogInThunk(data))
   const handleLoginAsEditor = () => logIn({ login: 'demo-editor', 'password': 'aSuperSecret' })
   const handleLoginAsViewer = () => logIn({ login: 'demo-viewer', 'password': 'aSuperSecret' })
 
