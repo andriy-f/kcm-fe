@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import TextField from '@mui/material/TextField'
-import FormControl from '@mui/material/FormControl'
-import FormHelperText from '@mui/material/FormHelperText'
 import Button from '@mui/material/Button'
-import Input from '@mui/material/Input'
-import InputLabel from '@mui/material/InputLabel'
 import Snackbar from '@mui/material/Snackbar'
 import Box from '@mui/material/Box'
 // import { Form, Field } from 'react-final-form'
@@ -15,11 +11,7 @@ import ButtonPanel from '../../components/ButtonPanel'
 import { getUserFriendlyErrorMessage } from '../../utils'
 import { isCurrentUserLoggedIn, logIn as logInAction } from '../currentUser/userSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-
-interface LoginData {
-  login: string
-  password: string
-}
+import { LoginData } from '../../types/LoginData'
 
 interface LogInFormProps {
   onSubmit: (data: LoginData) => void
