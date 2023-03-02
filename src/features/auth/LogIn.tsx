@@ -28,7 +28,10 @@ interface LogInFormProps {
 function LoginForm(props: LogInFormProps) {
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
-  const handleSubmit = () => { props.onSubmit({ login, password }) }
+  const handleSubmit: React.FormEventHandler<HTMLElement> = (e) => {
+    e.preventDefault()
+    props.onSubmit({ login, password })
+  }
 
   return (
     <Box
