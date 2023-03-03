@@ -46,10 +46,10 @@ const requestLogoffEpic = (action$: any) =>
       .catch(error => Observable.of(logOffError(error)))
     )
 
-const rootEpic = combineEpics(
+export const rootEpic = combineEpics(
   requestAuthenticateEpic,
   requestLogoffEpic
 )
 
 // TODO deal with as any
-export const epicMiddleware = createEpicMiddleware(rootEpic as any)
+// export const epicMiddleware = createEpicMiddleware(rootEpic as any)
