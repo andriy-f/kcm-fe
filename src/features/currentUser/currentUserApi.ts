@@ -11,8 +11,7 @@ export function requestLogIn(loginData: LoginData) {
     credentials: 'include',
     method: 'POST',
     mode: 'cors',
-    headers: [['Content-Type', 'application/json']],
-    body: JSON.stringify(loginData),
+    body: new URLSearchParams({ ...loginData }),
   })
   .then(res => {
     if(!res.ok) {
