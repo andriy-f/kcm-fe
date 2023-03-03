@@ -3,18 +3,18 @@ import { createAction, createAsyncThunk, createReducer } from '@reduxjs/toolkit'
 import { LoginData } from '../../types/LoginData'
 import { requestLogIn } from './currentUserApi'
 
-export const LOGIN = 'user/login'
-export const LOGIN_DONE = 'user/login_done'
-export const LOGIN_ERROR = 'user/LOGIN_ERROR'
-export const LOGIN_CLEANUP = 'user/LOGIN_CLEANUP'
+export const LOGIN = 'viewer/login'
+export const LOGIN_DONE = 'viewer/login_done'
+export const LOGIN_ERROR = 'viewer/LOGIN_ERROR'
+export const LOGIN_CLEANUP = 'viewer/LOGIN_CLEANUP'
 
 export const logIn = createAction<{ login: string, password: string }>(LOGIN)
 export const logInError = createAction(LOGIN_ERROR)
 export const logInCleanup = createAction(LOGIN_CLEANUP)
 
-export const LOGOFF = 'user/LOGOFF'
-export const LOGOFF_DONE = 'user/LOGOFF_DONE'
-export const LOGOFF_ERROR = 'user/LOGOFF_ERROR'
+export const LOGOFF = 'viewer/LOGOFF'
+export const LOGOFF_DONE = 'viewer/LOGOFF_DONE'
+export const LOGOFF_ERROR = 'viewer/LOGOFF_ERROR'
 
 interface CurrentUserData {
   name: string
@@ -24,7 +24,8 @@ interface CurrentUserData {
 export interface UserState {
   userData: CurrentUserData | null
   tokenExpiresOn: number | null
-  loading: 'idle' | 'pending'
+  loading: boolean
+  error: string | null
 }
 
 interface UserActionPayload {
@@ -35,7 +36,8 @@ interface UserActionPayload {
 const initialUserState: UserState = {
   userData: null,
   tokenExpiresOn: null,
-  loading: 'idle'
+  loading: false,
+  error: null,
 }
 
 export const logInDone = createAction<UserActionPayload>(LOGIN_DONE)
@@ -45,7 +47,7 @@ export const logOffDone = createAction(LOGOFF_DONE)
 export const logOffError = createAction(LOGOFF_ERROR)
 
 export const requestLogInThunk = createAsyncThunk(
-  'users/fetchLogin',
+  'viewer/fetchLogin',
   async (loginData: LoginData, thunkAPI) => {
     const response = await requestLogIn(loginData)
     return response
@@ -66,22 +68,24 @@ export const currentUserReducer = createReducer(initialUserState, (builder) => {
   }))
   builder.addCase(requestLogInThunk.pending, (state, action) => ({
     ...state,
-    loading: 'pending'
+    loading: true
   }))
   builder.addCase(requestLogInThunk.fulfilled , (state, action) => ({
     ...state,
     userData: action.payload.userData,
     tokenExpiresOn: action.payload.tokenExpiresOn,
-    loading: 'idle'
+    error: null,
+    loading: false
   }))
   builder.addCase(requestLogInThunk.rejected, (state, action) => ({
     ...state,
     error: 'login error',
-    loading: 'idle'
+    loading: false
   }))
 })
 
 export const selectCurrentUser = (state: RootState) => state.currentUser
+export const selectError = (state: RootState) => state.currentUser.error
 
 export const isUserLoggedIn = (user: UserState) => {
 

@@ -8,8 +8,7 @@ import Box from '@mui/material/Box'
 
 import styles from '../../App.module.css'
 import ButtonPanel from '../../components/ButtonPanel'
-import { getUserFriendlyErrorMessage } from '../../utils'
-import { isCurrentUserLoggedIn, logIn as logInAction, requestLogInThunk } from '../currentUser/userSlice'
+import { isCurrentUserLoggedIn, requestLogInThunk, selectError } from '../currentUser/userSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { LoginData } from '../../types/LoginData'
 
@@ -85,10 +84,9 @@ function LoginForm(props: LogInFormProps) {
 
 //   render() {
 function LogIn() {
-  const [showMessage, setShowMessage] = useState(false)
-  const [errorInfo, setErrorInfo] = useState(null)
+  // const [showMessage, setShowMessage] = useState(true)
+  const errorMessage = useAppSelector(selectError)
   const isLoggedIn = useAppSelector(isCurrentUserLoggedIn)
-  const errorMessage = getUserFriendlyErrorMessage(errorInfo)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const logIn = (data: LoginData) => dispatch(requestLogInThunk(data))
@@ -110,13 +108,17 @@ function LogIn() {
             Viewer demo
           </Button>
         </ButtonPanel>
-        <Snackbar
+        <Box>
+          {errorMessage}
+        </Box>
+
+        {/* <Snackbar
           open={showMessage && !!errorMessage}
           message={errorMessage}
           autoHideDuration={2000}
           onClick={() => setShowMessage(false)}
           onClose={() => setShowMessage(false)}
-        />
+        /> */}
       </div >
     )
   }

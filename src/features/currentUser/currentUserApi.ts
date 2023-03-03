@@ -4,7 +4,7 @@ import { APIURL } from '../../config'
 import { LoginData } from '../../types/LoginData'
 
 const loginUrl = urlJoin(APIURL, '/account/logInWithCookie')
-const logoutUrl = urlJoin(APIURL, '/account/clearCookie')
+// const logoutUrl = urlJoin(APIURL, '/account/clearCookie')
 
 export function requestLogIn(loginData: LoginData) {
   return fetch(loginUrl, {
@@ -21,5 +21,4 @@ export function requestLogIn(loginData: LoginData) {
 
     return res.json()
   })
-
 }
