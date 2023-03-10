@@ -33,8 +33,8 @@ RUN su-exec node env NODE_ENV=production npm run build
 
 # Dev runtime config
 USER node
-EXPOSE 8080
-ENV PORT 8080
+EXPOSE 80
+ENV PORT 80
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["npm", "run", "dev"]
 
