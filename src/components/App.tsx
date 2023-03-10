@@ -12,6 +12,7 @@ import ContactsPage from './ContactsPage'
 import AppRelayEnvironmentProvider from '../relay/AppRelayEnvironment'
 import ReduxStoreProvider from '../app/ReduxStoreProvider'
 import AppThemeProvider from '../app/AppThemeProvider'
+import LogIn from '../features/auth/LogIn'
 
 const router = createBrowserRouter([
   {
@@ -28,9 +29,12 @@ const router = createBrowserRouter([
         element: (<>
           <ProtectedRoute requiredPermissions={['contact-list-view']}>
             <ContactsPage />
-            hello
-          </ProtectedRoute>)
+          </ProtectedRoute>
         </>)
+      },
+      {
+        path: 'user/logIn',
+        element: <LogIn />,
       },
       {
         path: 'user/logOut',
@@ -45,7 +49,9 @@ function Root() {
     <AppRelayEnvironmentProvider>
       <ReduxStoreProvider>
         <AppThemeProvider>
-          <RouterProvider router={router} />
+          <React.Suspense fallback={<div>loading...</div>} >
+            <RouterProvider router={router} />
+          </React.Suspense>
         </AppThemeProvider>
       </ReduxStoreProvider>
     </AppRelayEnvironmentProvider>
