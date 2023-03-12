@@ -7,6 +7,7 @@ import { isDev } from '../utils'
 import { NavLink } from 'react-router-dom'
 import { useAppSelector } from '../app/hooks'
 import { isCurrentUserLoggedIn, selectCurrentUser } from '../features/currentUser/userSlice'
+import Box from '@mui/material/Box'
 
 const MainDrawer = function () {
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -30,21 +31,23 @@ const MainDrawer = function () {
   const currentUserName = currentUser.userData?.name
 
   return (
-    <Drawer
-      anchor="left"
-      open={drawerOpen}
-      onClose={toggleDrawer}
-    >
-      <Toolbar>
-        <NavLink to='/'>Intro</NavLink>
-        <NavLink to='/contacts'>Contacts</NavLink>
-        <NavLink to='/settings'>Settings</NavLink>
-        {isDev && <NavLink to='/dev' >Dev</NavLink>}
-        {isLoggedIn && <NavLink to='/userProfile'>{'Hi, ' + currentUserName}</NavLink>}
-        {isLoggedIn && <NavLink to='/logOut'>Log out</NavLink>}
-        {!isLoggedIn && <NavLink to="/logIn">Log in</NavLink>}
-      </Toolbar>
-    </Drawer>
+    <Box component="nav">
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={toggleDrawer}
+      >
+        <Toolbar>
+          <NavLink to='/'>Intro</NavLink>
+          <NavLink to='/contacts'>Contacts</NavLink>
+          <NavLink to='/settings'>Settings</NavLink>
+          {isDev && <NavLink to='/dev' >Dev</NavLink>}
+          {isLoggedIn && <NavLink to='/userProfile'>{'Hi, ' + currentUserName}</NavLink>}
+          {isLoggedIn && <NavLink to='/logOut'>Log out</NavLink>}
+          {!isLoggedIn && <NavLink to="/logIn">Log in</NavLink>}
+        </Toolbar>
+      </Drawer>
+    </Box>
   )
 }
 

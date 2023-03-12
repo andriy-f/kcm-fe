@@ -1,10 +1,11 @@
+import Alert from '@mui/material/Alert'
 import React from 'react'
 
 import LogIn from './LogIn'
 
 const NotLoggedIn = () => (
   <>
-    <div>You are not logged in. Please Log in to continue.</div>
+    <Alert severity="info">You are not logged in. Please Log in to continue.</Alert>
     <LogIn />
   </>
 )

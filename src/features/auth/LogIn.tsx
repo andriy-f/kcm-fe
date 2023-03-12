@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-// import Snackbar from '@mui/material/Snackbar'
 import Box from '@mui/material/Box'
-// import { Form, Field } from 'react-final-form'
-import { startTransition } from 'react'
+import Alert from '@mui/material/Alert'
+import Container from '@mui/material/Container'
+import Stack from '@mui/material/Stack'
 
 import styles from '../../App.module.css'
 import ButtonPanel from '../../components/ButtonPanel'
@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { LoginData } from '../../types/LoginData'
 
 interface LogInFormProps {
+  errorMessage?: string | null
   onSubmit: (data: LoginData) => void
 }
 
@@ -24,20 +25,21 @@ function LoginForm(props: LogInFormProps) {
     e.preventDefault()
     props.onSubmit({ login, password })
   }
+  const { errorMessage } = props
 
   return (
     <Box
       component="form"
-      sx={{
-        '& > :not(style)': { m: 1 },
-      }}
       noValidate
       autoComplete="off"
       onSubmit={handleSubmit}
     >
       <h3 className={styles.kTextCenter}>Log into site</h3>
-      <TextField label="Login" value={login} onChange={e => { setLogin(e.target.value) }} />
-      <TextField label="Password" value={password} onChange={e => { setPassword(e.target.value) }} />
+      <Stack spacing={2}>
+        <TextField label="Login" value={login} onChange={e => { setLogin(e.target.value) }} />
+        <TextField label="Password" value={password} onChange={e => { setPassword(e.target.value) }} />
+        {errorMessage && <Alert severity='error'>{errorMessage}</Alert>}
+      </Stack>
       <ButtonPanel>
         <Button type="submit">Log in</Button>
       </ButtonPanel>
@@ -99,8 +101,8 @@ function LogIn() {
     return null
   } else {
     return (
-      <div className={styles.kFormContainer}>
-        <LoginForm onSubmit={logIn} />
+      <Container maxWidth="sm">
+        <LoginForm onSubmit={logIn} errorMessage={errorMessage}/>
         <ButtonPanel>
           <Button onClick={handleLoginAsEditor}>
             Editor demo
@@ -109,37 +111,9 @@ function LogIn() {
             Viewer demo
           </Button>
         </ButtonPanel>
-        <Box>
-          {errorMessage}
-        </Box>
-
-        {/* <Snackbar
-          open={showMessage && !!errorMessage}
-          message={errorMessage}
-          autoHideDuration={2000}
-          onClick={() => setShowMessage(false)}
-          onClose={() => setShowMessage(false)}
-        /> */}
-      </div >
+      </Container>
     )
   }
 }
-
-
-// const mapStateToProps = (state) => {
-//   const { currentUser, logIn } = state
-
-//   return {
-//     currentUser,
-//     logIn,
-//   }
-// }
-
-// const mapDispatchToProps = (dispatch) => ({
-//   initAuthenticate: (login, password) => dispatch(logIn(login, password)),
-//   cleanup: () => dispatch(logInCleanup())
-// })
-
-// export default connect(mapStateToProps, mapDispatchToProps)(LogIn)
 
 export default LogIn
