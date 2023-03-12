@@ -1,10 +1,15 @@
 import Button from '@mui/material/Button'
 import { usePaginationFragment } from 'react-relay'
-// import { graphql } from 'relay-runtime'
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 import graphql from 'babel-plugin-relay/macro'
 
 import { ContactsTableFragment$key } from './__generated__/ContactsTableFragment.graphql'
+import Title from '../common/Title';
 
 const ContactsTableFragment = graphql`
 fragment ContactsTableFragment on Query
@@ -32,7 +37,7 @@ fragment ContactsTableFragment on Query
   }
 `
 
-function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key}) {
+function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
   const {
     data,
     loadNext,
@@ -41,12 +46,34 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key}) {
   } = usePaginationFragment(ContactsTableFragment, contacts)
   const contactEdges = data.allContacts?.edges
   const handlePageEndReached = () => {
-    loadNext(3)
+    loadNext(12)
   }
   return (
     <>
-      {contactEdges?.map(e => <div>{e?.node?.firstName}</div>)}
-      <Button onClick={handlePageEndReached}>More</Button>
+      <Title>Contacts</Title>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>First</TableCell>
+            <TableCell>Last</TableCell>
+            <TableCell align="right"></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {contactEdges?.map((c) => (
+            <TableRow key={c?.node?.id}>
+              <TableCell>{c?.node?.firstName}</TableCell>
+              <TableCell>{c?.node?.lastName}</TableCell>
+              <TableCell align="right">Edit</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      {hasNext
+        && <Button
+          onClick={handlePageEndReached}
+          disabled={isLoadingNext}
+        >More</Button>}
     </>
   )
 }

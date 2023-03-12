@@ -14,7 +14,7 @@ import MainNavPinSwitch from './MainNavPinSwitch'
 function AppLayout(props: PropsWithChildren) {
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'block' }}>
       <MuiAppBar component="nav">
         <Toolbar>
         <IconButton aria-label="menu">
