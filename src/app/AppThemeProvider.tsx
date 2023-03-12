@@ -3,26 +3,28 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import Button from '@mui/material/Button'
 
-const ColorModeContext = React.createContext({ toggleColorMode: () => { } })
-const theme = createTheme()
+import { useAppSelector } from './hooks'
+import { selectTheme } from '../features/currentUser/userSlice'
 
 export default function AppThemeProvider({ children }: PropsWithChildren) {
-  const [mode, setMode] = React.useState<'light' | 'dark'>('light')
-  const colorMode = React.useMemo(
-    () => ({
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'))
-      },
-    }),
-    [],
+  const themeMode = useAppSelector(selectTheme)
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: themeMode,
+        },
+      }),
+    [themeMode],
   )
+
   return (
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline enableColorScheme />
-        <Button onClick={colorMode.toggleColorMode}>Switch theme</Button>
-        {children}
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline enableColorScheme />
+      <div>ya</div>
+      <div>ya</div>
+      <Button >Switch theme</Button>
+      {children}
+    </ThemeProvider>
   )
 }

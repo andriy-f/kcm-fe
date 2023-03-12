@@ -26,6 +26,7 @@ export interface UserState {
   tokenExpiresOn: number | null
   loading: boolean
   error: string | null
+  theme: 'dark' | 'light'
 }
 
 interface UserActionPayload {
@@ -37,6 +38,7 @@ const initialUserState: UserState = {
   userData: null,
   tokenExpiresOn: null,
   loading: false,
+  theme: 'light',
   error: null,
 }
 
@@ -45,6 +47,7 @@ export const logInDone = createAction<UserActionPayload>(LOGIN_DONE)
 export const logOff = createAction(LOGOFF)
 export const logOffDone = createAction(LOGOFF_DONE)
 export const logOffError = createAction(LOGOFF_ERROR)
+export const toggleTheme = createAction('viewer/toggleTheme')
 
 export const requestLogInThunk = createAsyncThunk(
   'viewer/fetchLogin',
@@ -66,6 +69,10 @@ export const currentUserReducer = createReducer(initialUserState, (builder) => {
     userData: null,
     tokenExpiresOn: null
   }))
+  builder.addCase(toggleTheme, (state, action) => ({
+    ...state,
+    theme: (state.theme === 'light' ? 'dark' : 'light')
+  }))
   builder.addCase(requestLogInThunk.pending, (state, action) => ({
     ...state,
     loading: true
@@ -85,6 +92,7 @@ export const currentUserReducer = createReducer(initialUserState, (builder) => {
 })
 
 export const selectCurrentUser = (state: RootState) => state.currentUser
+export const selectTheme = (state: RootState) => state.currentUser.theme
 export const selectError = (state: RootState) => state.currentUser.error
 
 export const isUserLoggedIn = (user: UserState) => {
