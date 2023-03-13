@@ -35,6 +35,7 @@ RUN su-exec node env NODE_ENV=production npm run build
 USER node
 EXPOSE 80
 ENV PORT 80
+STOPSIGNAL SIGINT
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["npm", "run", "dev"]
 
