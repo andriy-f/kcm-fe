@@ -21,9 +21,6 @@ export default function AppThemeProvider({ children }: PropsWithChildren) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
-      <div>ya</div>
-      <div>ya</div>
-      <Button >Switch theme</Button>
       {children}
     </ThemeProvider>
   )
