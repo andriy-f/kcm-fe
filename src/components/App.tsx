@@ -4,7 +4,7 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import ErrorPage from '../app/ErrorPage'
-import LogOut from '../features/auth/LogOut'
+import LogOut from '../features/auth/LogoutPage'
 import AppLayout from './AppLayout'
 import Intro from './Intro'
 import { ProtectedRoute } from '../features/auth/ProtectedRoute'
@@ -12,7 +12,7 @@ import ContactsPage from './ContactsPage'
 import AppRelayEnvironmentProvider from '../relay/AppRelayEnvironment'
 import ReduxStoreProvider from '../app/ReduxStoreProvider'
 import AppThemeProvider from '../app/AppThemeProvider'
-import LogIn from '../features/auth/LogIn'
+import LoginPage from '../features/auth/LoginPage'
 
 const router = createBrowserRouter([
   {
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'user/logIn',
-        element: <LogIn />,
+        element: <LoginPage />,
       },
       {
         path: 'user/logOut',

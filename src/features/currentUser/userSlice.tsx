@@ -12,9 +12,9 @@ export const logIn = createAction<{ login: string, password: string }>(LOGIN)
 export const logInError = createAction(LOGIN_ERROR)
 export const logInCleanup = createAction(LOGIN_CLEANUP)
 
-export const LOGOFF = 'viewer/LOGOFF'
-export const LOGOFF_DONE = 'viewer/LOGOFF_DONE'
-export const LOGOFF_ERROR = 'viewer/LOGOFF_ERROR'
+export const LOGOUT = 'viewer/LOGOUT'
+export const LOGOUT_DONE = 'viewer/LOGOUT_DONE'
+export const LOGOUT_ERROR = 'viewer/LOGOUT_ERROR'
 
 interface CurrentUserData {
   name: string
@@ -44,9 +44,9 @@ const initialUserState: UserState = {
 
 export const logInDone = createAction<UserActionPayload>(LOGIN_DONE)
 
-export const logOff = createAction(LOGOFF)
-export const logOffDone = createAction(LOGOFF_DONE)
-export const logOffError = createAction(LOGOFF_ERROR)
+export const logout = createAction(LOGOUT)
+export const logoutDone = createAction(LOGOUT_DONE)
+export const logoutError = createAction(LOGOUT_ERROR)
 export const toggleTheme = createAction('viewer/toggleTheme')
 
 export const requestLogInThunk = createAsyncThunk(
@@ -64,7 +64,7 @@ export const currentUserReducer = createReducer(initialUserState, (builder) => {
     userData: action.payload.userData,
     tokenExpiresOn: action.payload.tokenExpiresOn
   }))
-  builder.addCase(logOffDone, (state, _action) => ({
+  builder.addCase(logoutDone, (state, _action) => ({
     ...state,
     userData: null,
     tokenExpiresOn: null

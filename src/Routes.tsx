@@ -3,7 +3,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 
 import Intro from './components/Intro'
-import LogInPage from './features/auth/LogIn'
+import LogInPage from './features/auth/LoginPage'
 // import LogOutPage from './components/LogOut'
 import EditableContactsPage from './components/EditableContactsPage'
 import ReadonlyContactsPage from './components/ReadonlyContactsPage'

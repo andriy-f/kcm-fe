@@ -2,16 +2,16 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { isCurrentUserLoggedIn, logOff } from '../../features/currentUser/userSlice'
+import { isCurrentUserLoggedIn, logout } from '../currentUser/userSlice'
 
 function LogOut() {
 
   const dispatch = useAppDispatch()
-  const beginLogOff = () => dispatch(logOff())
+  const beginLogout = () => dispatch(logout())
   const navigate = useNavigate()
 
   useEffect(() => {
-      beginLogOff()
+      beginLogout()
   })
 
   const isLoggedIn = useAppSelector(isCurrentUserLoggedIn)

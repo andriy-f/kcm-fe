@@ -3,7 +3,7 @@ import { ajax } from 'rxjs/observable/dom/ajax'
 import { Observable } from 'rxjs'
 import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/map'
-import { combineEpics, createEpicMiddleware } from 'redux-observable'
+import { combineEpics } from 'redux-observable'
 import debug from 'debug'
 
 import { APIURL } from '../config'
@@ -11,7 +11,7 @@ import { appName } from '../consts'
 import { commonAjaxRequestSettings } from '../utils'
 import {
   LOGIN, logInDone, logInError,
-  LOGOFF, logOffDone, logOffError
+  LOGOUT, logoutDone, logoutError
 } from '../features/currentUser/userSlice'
 import { urlJoin } from '../utils'
 
@@ -36,20 +36,17 @@ const requestAuthenticateEpic = (action$: any) =>
     )
 
 const requestLogoffEpic = (action$: any) =>
-  action$.ofType(LOGOFF)
+  action$.ofType(LOGOUT)
     .mergeMap((action: any) => ajax({
       ...commonAjaxRequestSettings,
       url: logoutUrl,
       method: 'POST'
     })
-      .map(response => logOffDone(response.response))
-      .catch(error => Observable.of(logOffError(error)))
+      .map(response => logoutDone(response.response))
+      .catch(error => Observable.of(logoutError(error)))
     )
 
 export const rootEpic = combineEpics(
   requestAuthenticateEpic,
   requestLogoffEpic
 )
-
-// TODO deal with as any
-// export const epicMiddleware = createEpicMiddleware(rootEpic as any)
