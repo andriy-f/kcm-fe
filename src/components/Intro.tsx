@@ -39,15 +39,12 @@ const Intro = () => (
       </ul>
     </section>
     <section>
-      <h2>Technologies</h2>
+      <h2>Tech stack</h2>
       <ul>
         <li>React</li>
         <li>Redux</li>
         <li>GraphQL (next genetarion API)</li>
         <li>Service worker (Progressive Web App)</li>
-        <li>
-          Server-side rendering (SSR, Universal app)
-        </li>
         <li>NodeJS, MongoDB and TypeScript for back-end server</li>
       </ul>
     </section>
