@@ -9,7 +9,6 @@ import Brightness4Icon from '@mui/icons-material/Brightness4'
 
 import MainDrawer from './MainDrawer'
 import AppProgress from './AppProgress'
-import MainNavPinSwitch from './MainNavPinSwitch'
 import { useAppDispatch } from '../app/hooks'
 import { toggleTheme } from '../features/currentUser/userSlice'
 
@@ -24,7 +23,9 @@ function AppLayout() {
             <MenuIcon />
           </IconButton>
 
-          <IconButton aria-label="menu" onClick={() => dispatch(toggleTheme())}>
+          <Box sx={{ flexGrow: 1 }}></Box>
+
+          <IconButton aria-label="menu" onClick={() => dispatch(toggleTheme())} >
             <Brightness4Icon />
           </IconButton>
 
