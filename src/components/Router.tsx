@@ -9,6 +9,9 @@ import { ProtectedRoute } from '../features/auth/ProtectedRoute'
 import ContactsPage from './ContactsPage'
 import LoginPage from '../features/auth/LoginPage'
 
+export const loginPath = 'login'
+export const logoutPath = 'logout'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -28,11 +31,11 @@ const router = createBrowserRouter([
         </>)
       },
       {
-        path: 'user/login',
+        path: loginPath,
         element: <LoginPage />,
       },
       {
-        path: 'user/logout',
+        path: logoutPath,
         element: <LogOut />,
       },
     ]

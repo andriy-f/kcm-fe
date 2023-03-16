@@ -11,6 +11,7 @@ import MainDrawer from './MainDrawer'
 import AppProgress from './AppProgress'
 import { useAppDispatch } from '../app/hooks'
 import { toggleTheme } from '../features/currentUser/userSlice'
+import AuthenticationControl from '../features/currentUser/AuthenticationControl'
 
 function AppLayout() {
 
@@ -28,6 +29,8 @@ function AppLayout() {
           <IconButton aria-label="menu" onClick={() => dispatch(toggleTheme())} >
             <Brightness4Icon />
           </IconButton>
+
+          <AuthenticationControl />
 
           <AppProgress />
         </Toolbar>
