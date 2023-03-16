@@ -4,7 +4,6 @@ import { createLogger } from 'redux-logger'
 import { settingsReducer } from '../features/settings/settingsSlice'
 import { currentUserReducer } from '../features/currentUser/userSlice'
 
-// TODO implement
 export const store = configureStore({
   reducer: {
     settings: settingsReducer,
