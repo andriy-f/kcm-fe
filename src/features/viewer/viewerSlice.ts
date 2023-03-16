@@ -2,7 +2,7 @@ import { createAction, createAsyncThunk, createReducer } from '@reduxjs/toolkit'
 
 import { RootState } from '../../app/store'
 import { LoginData } from '../../types/LoginData'
-import { requestLogIn } from './currentUserApi'
+import { requestLogIn } from './viewerAPI'
 
 export const LOGIN = 'viewer/login'
 export const LOGIN_DONE = 'viewer/login_done'
@@ -17,13 +17,13 @@ export const LOGOUT = 'viewer/LOGOUT'
 export const LOGOUT_DONE = 'viewer/LOGOUT_DONE'
 export const LOGOUT_ERROR = 'viewer/LOGOUT_ERROR'
 
-interface CurrentUserData {
+interface ViewerData {
   name: string
   permissions: string[]
 }
 
-export interface UserState {
-  userData: CurrentUserData | null
+export interface ViewerState {
+  viewerData: ViewerData | null
   tokenExpiresOn: number | null
   loading: boolean
   error: string | null
@@ -31,12 +31,12 @@ export interface UserState {
 }
 
 interface UserActionPayload {
-  userData: CurrentUserData
+  viewerData: ViewerData
   tokenExpiresOn: number
 }
 
-const initialUserState: UserState = {
-  userData: null,
+const initialUserState: ViewerState = {
+  viewerData: null,
   tokenExpiresOn: null,
   loading: false,
   theme: 'light',
@@ -58,16 +58,16 @@ export const requestLogInThunk = createAsyncThunk(
   }
 )
 
-export const currentUserReducer = createReducer(initialUserState, (builder) => {
+export const viewerReducer = createReducer(initialUserState, (builder) => {
   // not needed without epics?
   builder.addCase(logInDone, (state, action) => ({
     ...state,
-    userData: action.payload.userData,
+    viewerData: action.payload.viewerData,
     tokenExpiresOn: action.payload.tokenExpiresOn
   }))
   builder.addCase(logoutDone, (state, _action) => ({
     ...state,
-    userData: null,
+    viewerData: null,
     tokenExpiresOn: null
   }))
   builder.addCase(toggleTheme, (state, action) => ({
@@ -80,7 +80,7 @@ export const currentUserReducer = createReducer(initialUserState, (builder) => {
   }))
   builder.addCase(requestLogInThunk.fulfilled , (state, action) => ({
     ...state,
-    userData: action.payload.userData,
+    viewerData: action.payload.userData,
     tokenExpiresOn: action.payload.tokenExpiresOn,
     error: null,
     loading: false
@@ -92,17 +92,17 @@ export const currentUserReducer = createReducer(initialUserState, (builder) => {
   }))
 })
 
-export const selectCurrentUser = (state: RootState) => state.currentUser
-export const selectTheme = (state: RootState) => state.currentUser.theme
-export const selectError = (state: RootState) => state.currentUser.error
+export const selectViewer = (state: RootState) => state.viewer
+export const selectTheme = (state: RootState) => state.viewer.theme
+export const selectError = (state: RootState) => state.viewer.error
 
-export const isUserLoggedIn = (user: UserState) => {
+export const isUserLoggedIn = (user: ViewerState) => {
 
   return !!(user && Object.keys(user).length !== 0
     && user.tokenExpiresOn && user.tokenExpiresOn >= Date.now())
 }
 
-export const isCurrentUserLoggedIn = (state: RootState) => isUserLoggedIn(state.currentUser)
+export const isCurrentUserLoggedIn = (state: RootState) => isUserLoggedIn(state.viewer)
 
 // const logInDefaultState = { isFetching: false }
 // const logIn = (state = logInDefaultState, action: Action) => switchcase({

@@ -10,8 +10,8 @@ import Brightness4Icon from '@mui/icons-material/Brightness4'
 import MainDrawer from './MainDrawer'
 import AppProgress from './AppProgress'
 import { useAppDispatch } from '../app/hooks'
-import { toggleTheme } from '../features/currentUser/userSlice'
-import AuthenticationControl from '../features/currentUser/AuthenticationControl'
+import { toggleTheme } from '../features/viewer/viewerSlice'
+import AuthenticationControl from '../features/viewer/AuthenticationControl'
 
 function AppLayout() {
 

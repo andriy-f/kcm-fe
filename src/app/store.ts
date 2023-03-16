@@ -14,7 +14,7 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 
 
 import { settingsReducer } from '../features/settings/settingsSlice'
-import { currentUserReducer } from '../features/currentUser/userSlice'
+import { viewerReducer } from '../features/viewer/viewerSlice'
 
 const persistConfig = {
   key: 'root',
@@ -23,7 +23,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   settings: settingsReducer,
-  currentUser: currentUserReducer
+  viewer: viewerReducer
 })
 
 const persistingReducer = persistReducer(persistConfig, rootReducer)

@@ -12,7 +12,7 @@ import { commonAjaxRequestSettings } from '../utils'
 import {
   LOGIN, logInDone, logInError,
   LOGOUT, logoutDone, logoutError
-} from '../features/currentUser/userSlice'
+} from '../features/viewer/viewerSlice'
 import { urlJoin } from '../utils'
 
 // eslint-disable-next-line

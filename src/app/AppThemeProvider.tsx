@@ -1,10 +1,9 @@
 import React, { PropsWithChildren } from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import Button from '@mui/material/Button'
 
 import { useAppSelector } from './hooks'
-import { selectTheme } from '../features/currentUser/userSlice'
+import { selectTheme } from '../features/viewer/viewerSlice'
 
 export default function AppThemeProvider({ children }: PropsWithChildren) {
   const themeMode = useAppSelector(selectTheme)

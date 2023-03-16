@@ -4,7 +4,7 @@ import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
 
 import ButtonPanel from '../../components/ButtonPanel'
-import { isCurrentUserLoggedIn, requestLogInThunk, selectError } from '../currentUser/userSlice'
+import { isCurrentUserLoggedIn, requestLogInThunk, selectError } from '../viewer/viewerSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { LoginData } from '../../types/LoginData'
 import LoginForm from './LoginForm'

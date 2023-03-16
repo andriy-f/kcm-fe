@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useAppSelector } from '../../app/hooks'
-import { isUserLoggedIn, selectCurrentUser } from '../currentUser/userSlice'
+import { isUserLoggedIn, selectViewer } from '../viewer/viewerSlice'
 import NotAuthorized from './NotAuthorized'
 import NotLoggedIn from './NotLoggedIn'
 
@@ -11,11 +11,11 @@ type Props = {
 
 export const ProtectedRoute = (props: React.PropsWithChildren<Props>) => {
   const { children, requiredPermissions } = props
-  const currentUser = useAppSelector(selectCurrentUser)
+  const currentUser = useAppSelector(selectViewer)
   const isLoggedIn = isUserLoggedIn(currentUser)
 
   if (isLoggedIn) {
-    const isAuthorized = requiredPermissions.every(p => currentUser.userData?.permissions.includes(p))
+    const isAuthorized = requiredPermissions.every(p => currentUser.viewerData?.permissions.includes(p))
     return isAuthorized ? <>{children}</> : <NotAuthorized />
   } else {
     return <NotLoggedIn />

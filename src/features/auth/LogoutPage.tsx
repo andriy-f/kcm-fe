@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { isCurrentUserLoggedIn, logout } from '../currentUser/userSlice'
+import { isCurrentUserLoggedIn, logout } from '../viewer/viewerSlice'
 
 function LogOut() {
 
