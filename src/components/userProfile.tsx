@@ -2,20 +2,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAppSelector } from '../app/hooks'
-import { selectViewer, isCurrentUserLoggedIn } from '../features/viewer/viewerSlice'
+import { selectViewer, isViewerLoggedIn } from '../features/viewer/viewerSlice'
 
 function UserProfilePage() {
 
-        const currentUser = useAppSelector(selectViewer)
-        const isLoggedIn = useAppSelector(isCurrentUserLoggedIn)
+        const viewer = useAppSelector(selectViewer)
+        const isLoggedIn = useAppSelector(isViewerLoggedIn)
         const isLoggedInStr = isLoggedIn ? 'yes' : 'no'
-        const expStr = currentUser.tokenExpiresOn ? new Date(currentUser.tokenExpiresOn).toString() : 'n/a'
+        const expStr = viewer.tokenExpiresOn ? new Date(viewer.tokenExpiresOn).toString() : 'n/a'
 
         return (
             <div>
                 <div>isLoggedIn: {isLoggedInStr}</div>
                 <div>Login expires(ed) at: {expStr}</div>
-                {isLoggedIn && <Link to="/logOut">Log out</Link>}
+                {isLoggedIn && <Link to="/logout">Log out</Link>}
             </div>
         )
     }

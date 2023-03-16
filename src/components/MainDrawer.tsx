@@ -6,7 +6,7 @@ import { isDev } from '../utils'
 // import RTButtonNavLink from '../components/RTButtonNavLink'
 import { NavLink } from 'react-router-dom'
 import { useAppSelector } from '../app/hooks'
-import { isCurrentUserLoggedIn, selectViewer } from '../features/viewer/viewerSlice'
+import { isUserLoggedIn, selectViewer } from '../features/viewer/viewerSlice'
 import Box from '@mui/material/Box'
 
 const MainDrawer = function () {
@@ -26,9 +26,9 @@ const MainDrawer = function () {
         setDrawerOpen(open)
       }
 
-  const currentUser = useAppSelector(selectViewer)
-  const isLoggedIn = useAppSelector(isCurrentUserLoggedIn)
-  const currentUserName = currentUser.viewerData?.name
+  const viewer = useAppSelector(selectViewer)
+  const isLoggedIn = isUserLoggedIn(viewer)
+  const viewerName = viewer.userData?.name
 
   return (
     <Box component="nav">
@@ -42,7 +42,7 @@ const MainDrawer = function () {
           <NavLink to='/contacts'>Contacts</NavLink>
           <NavLink to='/settings'>Settings</NavLink>
           {isDev && <NavLink to='/dev' >Dev</NavLink>}
-          {isLoggedIn && <NavLink to='/userProfile'>{'Hi, ' + currentUserName}</NavLink>}
+          {isLoggedIn && <NavLink to='/userProfile'>{'Hi, ' + viewerName}</NavLink>}
           {isLoggedIn && <NavLink to='/logOut'>Log out</NavLink>}
           {!isLoggedIn && <NavLink to="/logIn">Log in</NavLink>}
         </Toolbar>
