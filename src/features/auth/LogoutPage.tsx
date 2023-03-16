@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { isViewerLoggedIn, requestLogoutThunk } from '../viewer/viewerSlice'
@@ -8,7 +8,6 @@ function LogOut() {
 
   const dispatch = useAppDispatch()
   const beginLogout = () => dispatch(requestLogoutThunk())
-  const navigate = useNavigate()
 
   useEffect(() => {
       beginLogout()
@@ -18,8 +17,7 @@ function LogOut() {
   if(isLoggedIn) {
     return <span>Logging out...</span>
   } else {
-    navigate('/')
-    return null
+    return <Navigate to='/' />
   }
 }
 

@@ -1,5 +1,5 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Navigate } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
 
@@ -13,14 +13,12 @@ export default function LoginPage() {
   const errorMessage = useAppSelector(selectError)
   const isLoggedIn = useAppSelector(isViewerLoggedIn)
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
   const logIn = (data: LoginData) => dispatch(requestLogInThunk(data))
   const handleLoginAsEditor = () => logIn({ login: 'demo-editor', 'password': 'aSuperSecret' })
   const handleLoginAsViewer = () => logIn({ login: 'demo-viewer', 'password': 'aSuperSecret' })
 
   if (isLoggedIn) {
-    navigate('/')
-    return null
+    return <Navigate to='/' />
   } else {
     return (
       <Container maxWidth="sm">
