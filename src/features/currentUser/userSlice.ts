@@ -1,5 +1,6 @@
-import { RootState } from '../../app/store'
 import { createAction, createAsyncThunk, createReducer } from '@reduxjs/toolkit'
+
+import { RootState } from '../../app/store'
 import { LoginData } from '../../types/LoginData'
 import { requestLogIn } from './currentUserApi'
 
