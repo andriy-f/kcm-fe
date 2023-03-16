@@ -1,6 +1,15 @@
 import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit'
 import { createLogger } from 'redux-logger'
-import { persistStore, persistReducer } from 'redux-persist'
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 
 
@@ -21,7 +30,12 @@ const persistingReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
   reducer: persistingReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(createLogger()),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(createLogger()),
 })
 
 export const persistor = persistStore(store)
