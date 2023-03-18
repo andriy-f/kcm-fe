@@ -1,11 +1,9 @@
-// @flow
 import debug from 'debug'
 import React from 'react'
 
-
 import { appName } from '../consts'
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':AutoLoadMore.js')
 
 type Props = {
@@ -14,9 +12,9 @@ type Props = {
   children: any,
 }
 
-export default class extends React.Component<Props> {
-  wrapperRef: any
-  observer: any
+export default class AutoLoadMore extends React.Component<Props> {
+  wrapperRef: React.RefObject<HTMLDivElement>
+  observer: IntersectionObserver | null = null
 
   constructor(props: Props) {
     super(props)
@@ -29,13 +27,13 @@ export default class extends React.Component<Props> {
   }
 
   componentDidMount() {
-    if (window.IntersectionObserver && this.wrapperRef.current) {
+    if (this.observer && this.wrapperRef?.current) {
       this.observer.observe(this.wrapperRef.current)
     }
   }
 
   componentWillUnmount() {
-    if (window.IntersectionObserver && this.wrapperRef.current) {
+    if (this.observer && this.wrapperRef?.current) {
       this.observer.unobserve(this.wrapperRef.current)
     }
   }
