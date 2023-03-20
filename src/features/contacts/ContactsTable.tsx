@@ -1,4 +1,4 @@
-import React, { useTransition } from 'react'
+import React, { useRef, useTransition } from 'react'
 import Button from '@mui/material/Button'
 import { usePaginationFragment } from 'react-relay'
 import Table from '@mui/material/Table'
@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import TextField from '@mui/material/TextField'
 import CircularProgress from '@mui/material/CircularProgress'
+import { debounce } from 'throttle-debounce'
 
 import graphql from 'babel-plugin-relay/macro'
 
@@ -55,12 +56,16 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
   // Search-related
   const [filterText, setFilterText] = React.useState('')
   const [isPending, startTransition] = useTransition()
+  const refetchDebouncedRef = useRef(debounce(200, (filterText: string) => {
+    startTransition(() => {
+      refetch({ filterText })
+    })
+  }))
   const handleFilterChange: React.ChangeEventHandler<HTMLInputElement> =
     (e) => {
-      setFilterText(e.target.value)
-      startTransition(() => {
-        refetch({ filterText: e.target.value })
-      })
+      const value = e.target.value
+      setFilterText(value)
+      refetchDebouncedRef.current(value)
     }
 
   return (
