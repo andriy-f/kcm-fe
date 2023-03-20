@@ -6,10 +6,10 @@ import AddIcon from '@mui/icons-material/Add'
 
 import graphql from 'babel-plugin-relay/macro'
 
-import type { ContactsPageQuery as ContactsPageQueryType } from './__generated__/ContactsPageQuery.graphql'
-import { appName } from '../consts'
-import styles from '../App.module.css'
-import ContactsTable from '../features/contacts/ContactsTable'
+import type { ContactsPageQuery as ContactsPageQueryType } from '../../components/__generated__/ContactsPageQuery.graphql'
+import { appName } from '../../consts'
+import styles from '../../App.module.css'
+import ContactsTable from './ContactsTable'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':ContactsPage.js')

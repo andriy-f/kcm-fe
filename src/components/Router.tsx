@@ -6,7 +6,7 @@ import LogOut from '../features/auth/LogoutPage'
 import AppLayout from './AppLayout'
 import Intro from './Intro'
 import { ProtectedRoute } from '../features/auth/ProtectedRoute'
-import ContactsPage from './ContactsPage'
+import ContactsPage from '../features/contacts/ContactsPage'
 import LoginPage from '../features/auth/LoginPage'
 
 export const loginPath = 'login'
