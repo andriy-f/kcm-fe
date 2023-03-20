@@ -1,16 +1,16 @@
 import Button from '@mui/material/Button'
 import { usePaginationFragment } from 'react-relay'
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
 
 import graphql from 'babel-plugin-relay/macro'
 
 import { ContactsTableFragment$key } from './__generated__/ContactsTableFragment.graphql'
-import Title from '../common/Title';
-import AutoLoadMore from '../../components/AutoLoadMore';
+import Title from '../common/Title'
+import AutoLoadMore from '../../components/AutoLoadMore'
 
 const ContactsTableFragment = graphql`
 fragment ContactsTableFragment on Query
