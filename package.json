@@ -24,7 +24,7 @@
     "redux-persist": "^6.0.0",
     "relay-runtime": "^15.0.0",
     "rxjs": "^5.5.2",
-    "throttle-debounce": "^2.0.0",
+    "throttle-debounce": "^5.0.0",
     "urijs": "^1.19.11",
     "web-vitals": "^2.1.4"
   },
