@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useTransition } from 'react'
 import Button from '@mui/material/Button'
 import { usePaginationFragment } from 'react-relay'
 import Table from '@mui/material/Table'
@@ -7,6 +7,7 @@ import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import TextField from '@mui/material/TextField'
+import CircularProgress from '@mui/material/CircularProgress'
 
 import graphql from 'babel-plugin-relay/macro'
 
@@ -51,11 +52,15 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
   const contactEdges = data.allContacts?.edges
   const handlePageEndReached = () => { loadNext(12) }
 
+  // Search-related
   const [filterText, setFilterText] = React.useState('')
+  const [isPending, startTransition] = useTransition()
   const handleFilterChange: React.ChangeEventHandler<HTMLInputElement> =
     (e) => {
       setFilterText(e.target.value)
-      refetch({ filterText: e.target.value })
+      startTransition(() => {
+        refetch({ filterText: e.target.value })
+      })
     }
 
   return (
@@ -63,6 +68,7 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
       <Title>Contacts</Title>
       <TextField label='Search' variant='filled'
         value={filterText} onChange={handleFilterChange} />
+      {isPending && <CircularProgress />}
       <Table>
         <TableHead>
           <TableRow>
