@@ -1,3 +1,4 @@
+import React from 'react'
 import Button from '@mui/material/Button'
 import { usePaginationFragment } from 'react-relay'
 import Table from '@mui/material/Table'
@@ -5,6 +6,7 @@ import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
+import TextField from '@mui/material/TextField'
 
 import graphql from 'babel-plugin-relay/macro'
 
@@ -43,15 +45,24 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
     data,
     loadNext,
     hasNext,
-    isLoadingNext
+    isLoadingNext,
+    refetch,
   } = usePaginationFragment(ContactsTableFragment, contacts)
   const contactEdges = data.allContacts?.edges
-  const handlePageEndReached = () => {
-    loadNext(12)
-  }
+  const handlePageEndReached = () => { loadNext(12) }
+
+  const [filterText, setFilterText] = React.useState('')
+  const handleFilterChange: React.ChangeEventHandler<HTMLInputElement> =
+    (e) => {
+      setFilterText(e.target.value)
+      refetch({ filterText: e.target.value })
+    }
+
   return (
     <>
       <Title>Contacts</Title>
+      <TextField label='Search' variant='filled'
+        value={filterText} onChange={handleFilterChange} />
       <Table>
         <TableHead>
           <TableRow>
