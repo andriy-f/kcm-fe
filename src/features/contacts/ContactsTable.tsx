@@ -10,6 +10,7 @@ import graphql from 'babel-plugin-relay/macro'
 
 import { ContactsTableFragment$key } from './__generated__/ContactsTableFragment.graphql'
 import Title from '../common/Title';
+import AutoLoadMore from '../../components/AutoLoadMore';
 
 const ContactsTableFragment = graphql`
 fragment ContactsTableFragment on Query
@@ -69,11 +70,16 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
           ))}
         </TableBody>
       </Table>
-      {hasNext
-        && <Button
-          onClick={handlePageEndReached}
-          disabled={isLoadingNext}
-        >More</Button>}
+      {hasNext && (
+        <AutoLoadMore
+          hasMore={hasNext}
+          onLoadMore={handlePageEndReached}>
+          <Button
+            onClick={handlePageEndReached}
+            disabled={isLoadingNext}
+          >More</Button>
+        </AutoLoadMore>
+      )}
     </>
   )
 }
