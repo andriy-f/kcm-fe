@@ -54,7 +54,7 @@ export default function AuthenticationControl() {
         <MenuItem key='profile' onClick={handleCloseUserMenu}>
           <Typography textAlign='center'>Profile</Typography>
         </MenuItem>
-        <MenuItem key='logout' component={Link} to='/logout'>
+        <MenuItem key='logout' component={Link} to='/logout' onClick={handleCloseUserMenu}>
           <Typography textAlign='center'>Logout</Typography>
         </MenuItem>
       </Menu>
