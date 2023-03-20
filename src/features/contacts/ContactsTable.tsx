@@ -57,6 +57,8 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
           <TableRow>
             <TableCell>First</TableCell>
             <TableCell>Last</TableCell>
+            <TableCell>Email</TableCell>
+            <TableCell>Phone</TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
@@ -65,6 +67,8 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
             <TableRow key={c?.node?.id}>
               <TableCell>{c?.node?.firstName}</TableCell>
               <TableCell>{c?.node?.lastName}</TableCell>
+              <TableCell>{c?.node?.email}</TableCell>
+              <TableCell>{c?.node?.phoneNumber}</TableCell>
               <TableCell align="right">Edit</TableCell>
             </TableRow>
           ))}
