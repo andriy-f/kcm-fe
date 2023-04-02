@@ -6,7 +6,7 @@ import Fab from '@mui/material/Fab'
 
 import graphql from 'babel-plugin-relay/macro'
 
-import type { ContactsPageQuery as ContactsPageQueryType } from '../../components/__generated__/ContactsPageQuery.graphql'
+import type { ContactsPageQuery as ContactsPageQueryType } from './__generated__/ContactsPageQuery.graphql'
 import { appName } from '../../consts'
 import styles from '../../App.module.css'
 import ContactsTable from './ContactsTable'

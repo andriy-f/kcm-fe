@@ -3,11 +3,11 @@ import debug from 'debug'
 import React from 'react'
 import { graphql } from 'react-relay'
 
-import NarrowLayout from '../components/NarrowLayout'
-import ContactView from '../components/ContactView'
-import { appName } from '../consts'
-import styles from '../App.module.css'
-import Contact from '../types/Contact'
+import NarrowLayout from '../../components/NarrowLayout'
+import ContactView from './ContactView'
+import { appName } from '../../consts'
+import styles from '../../App.module.css'
+import Contact from '../../types/Contact'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactViewPage.js')

@@ -1,19 +1,3 @@
-// @flow
-import React from 'react'
-import { Route } from 'react-router-dom'
-
-import Intro from './components/Intro'
-import LogInPage from './features/auth/LoginPage'
-// import LogOutPage from './components/LogOut'
-import ContactEditPage from './components/ContactEditPage'
-import ContactViewPage from './components/ContactViewPage'
-import ContactCreatePage from './components/ContactCreatePage'
-import userProfile from './components/userProfile'
-import NotFound from './components/NotFound'
-// import NotLoggedIn from './components/NotLoggedIn'
-import NotAuthorized from './features/auth/NotAuthorized'
-import DevPage from './components/DevPage'
-import SettingsPage from './features/settings/SettingsPage'
 // import ConditionalAuthHOC from './components/ConditionalAuthHOC'
 
 // const DefaultConditionalAuthHOC = ConditionalAuthHOC({ NotLoggedIn, NotAuthorized })
@@ -42,3 +26,5 @@ import SettingsPage from './features/settings/SettingsPage'
 // )
 
 // export default Routes
+
+export {}

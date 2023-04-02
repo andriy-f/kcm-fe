@@ -5,8 +5,8 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 
 import styles from '../App.module.css'
-import { appName } from '../consts'
-import Contact from '../types/Contact'
+import { appName } from '../../consts'
+import Contact from '../../types/Contact'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactEditForm.js')

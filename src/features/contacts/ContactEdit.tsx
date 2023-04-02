@@ -2,10 +2,10 @@ import debug from 'debug'
 import React from 'react'
 import { graphql, createFragmentContainer, RelayProp } from 'react-relay'
 
-import { appName } from '../consts'
-import UpdateContactMutation from '../graphql/UpdateContactMutation'
-import ContactEditForm from '../components/ContactEditForm'
-import Contact from '../types/Contact'
+import { appName } from '../../consts'
+import UpdateContactMutation from '../../graphql/UpdateContactMutation'
+import ContactEditForm from './ContactEditForm'
+import Contact from '../../types/Contact'
 
 // eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ContactEdit.js')
