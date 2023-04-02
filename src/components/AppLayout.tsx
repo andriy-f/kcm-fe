@@ -1,12 +1,11 @@
-import React from 'react'
-import { Outlet, useNavigation } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Outlet } from 'react-router-dom'
 import MuiAppBar from '@mui/material/AppBar'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
-import LinearProgress from '@mui/material/LinearProgress'
 
 import MainDrawer from './MainDrawer'
 import AppProgress from './AppProgress'
@@ -17,12 +16,29 @@ import AuthenticationControl from '../features/viewer/AuthenticationControl'
 function AppLayout() {
 
   const dispatch = useAppDispatch()
-  const navigation = useNavigation()
+  // todo move drawerOpen to redux
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  const toggleDrawer =
+    (open: boolean) =>
+      (event: React.KeyboardEvent | React.MouseEvent) => {
+        if (
+          event.type === 'keydown' &&
+          ((event as React.KeyboardEvent).key === 'Tab' ||
+            (event as React.KeyboardEvent).key === 'Shift')
+        ) {
+          return
+        }
+
+        setDrawerOpen(open)
+      }
+
+
   return (
     <Box sx={{ display: 'block' }}>
       <MuiAppBar component="nav">
         <Toolbar>
-          <IconButton aria-label="menu">
+          <IconButton aria-label="menu" onClick={toggleDrawer(true)}>
             <MenuIcon />
           </IconButton>
 
@@ -36,10 +52,9 @@ function AppLayout() {
           <AuthenticationControl />
 
         </Toolbar>
-        {navigation.state === 'loading' && <LinearProgress />}
         <AppProgress />
       </MuiAppBar>
-      <MainDrawer />
+      <MainDrawer open={drawerOpen} toggle={toggleDrawer} />
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
         <Outlet />
