@@ -2,6 +2,7 @@ import React from 'react'
 import debug from 'debug'
 import { Link } from 'react-router-dom'
 import AddIcon from '@mui/icons-material/Add'
+import Fab from '@mui/material/Fab'
 
 import graphql from 'babel-plugin-relay/macro'
 
@@ -30,9 +31,19 @@ function ContactsPage(props: Props) {
   return (
     <article className={styles.contactsPage}>
       <ContactsTable contacts={data} />
-      <div className={styles.addItemButtonContainer}>
-        <Link to="/contacts/new"><AddIcon /></Link>
-      </div>
+
+      <Fab
+        sx={{
+          position: 'fixed',
+          bottom: '1.5rem',
+          right: '1.5rem'
+        }}
+        color="primary"
+        aria-label="add"
+        component={Link}
+        to='/contacts/new'>
+        <AddIcon />
+      </Fab>
     </article>)
 }
 
