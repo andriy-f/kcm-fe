@@ -1,7 +1,6 @@
 import React from 'react'
 import debug from 'debug'
-import { PreloadedQuery, usePreloadedQuery } from 'react-relay'
-import { Link, useLoaderData } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import AddIcon from '@mui/icons-material/Add'
 
 import graphql from 'babel-plugin-relay/macro'
@@ -10,6 +9,7 @@ import type { ContactsPageQuery as ContactsPageQueryType } from '../../component
 import { appName } from '../../consts'
 import styles from '../../App.module.css'
 import ContactsTable from './ContactsTable'
+import { useLazyLoadQuery } from 'react-relay'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':ContactsPage.js')
@@ -25,8 +25,8 @@ type Props = {
 }
 
 function ContactsPage(props: Props) {
-  const contactsQueryRef = useLoaderData() as PreloadedQuery<ContactsPageQueryType>
-  const data = usePreloadedQuery(ContactsPageQuery, contactsQueryRef)
+  const data = useLazyLoadQuery<ContactsPageQueryType>(ContactsPageQuery, {})
+
   return (
     <article className={styles.contactsPage}>
       <ContactsTable contacts={data} />
