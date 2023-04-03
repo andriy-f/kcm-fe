@@ -3,10 +3,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 
 import { useAppSelector } from './hooks'
-import { selectTheme } from '../features/viewer/viewerSlice'
+import { selectIsDarkTheme } from '../features/settings/settingsSlice'
 
 export default function AppThemeProvider({ children }: PropsWithChildren) {
-  const themeMode = useAppSelector(selectTheme)
+  const themeMode = useAppSelector(selectIsDarkTheme) ? 'dark' : 'light'
   const theme = React.useMemo(
     () =>
       createTheme({

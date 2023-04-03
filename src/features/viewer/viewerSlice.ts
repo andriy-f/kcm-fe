@@ -1,4 +1,4 @@
-import { createAction, createAsyncThunk, createReducer } from '@reduxjs/toolkit'
+import { createAsyncThunk, createReducer } from '@reduxjs/toolkit'
 
 import { RootState } from '../../app/store'
 import { LoginData } from '../../types/LoginData'
@@ -16,18 +16,15 @@ export interface ViewerState {
   tokenExpiresOn: number | null
   loading: boolean
   error: string | null
-  theme: 'dark' | 'light'
 }
 
 const initialViewerState: ViewerState = {
   userData: null,
   tokenExpiresOn: null,
   loading: false,
-  theme: 'light',
   error: null,
 }
 
-export const toggleTheme = createAction('viewer/toggleTheme')
 
 export const requestLogInThunk = createAsyncThunk(
   'viewer/requestLogin',
@@ -46,15 +43,11 @@ export const requestLogoutThunk = createAsyncThunk(
 )
 
 export const viewerReducer = createReducer(initialViewerState, (builder) => {
-  builder.addCase(toggleTheme, (state, action) => ({
-    ...state,
-    theme: (state.theme === 'light' ? 'dark' : 'light')
-  }))
   builder.addCase(requestLogInThunk.pending, (state, action) => ({
     ...state,
     loading: true
   }))
-  builder.addCase(requestLogInThunk.fulfilled , (state, action) => ({
+  builder.addCase(requestLogInThunk.fulfilled, (state, action) => ({
     ...state,
     userData: action.payload.userData,
     tokenExpiresOn: action.payload.tokenExpiresOn,
@@ -70,7 +63,7 @@ export const viewerReducer = createReducer(initialViewerState, (builder) => {
     ...state,
     loading: true
   }))
-  builder.addCase(requestLogoutThunk.fulfilled , (state, action) => ({
+  builder.addCase(requestLogoutThunk.fulfilled, (state, action) => ({
     ...state,
     userData: null,
     tokenExpiresOn: null,
@@ -85,7 +78,6 @@ export const viewerReducer = createReducer(initialViewerState, (builder) => {
 })
 
 export const selectViewer = (state: RootState) => state.viewer
-export const selectTheme = (state: RootState) => state.viewer.theme
 export const selectError = (state: RootState) => state.viewer.error
 
 export const isUserLoggedIn = (user: ViewerState) => {

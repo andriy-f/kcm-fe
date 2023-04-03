@@ -9,7 +9,7 @@ import Brightness4Icon from '@mui/icons-material/Brightness4'
 
 import AppProgress from './AppProgress'
 import { useAppDispatch } from '../app/hooks'
-import { toggleTheme } from '../features/viewer/viewerSlice'
+import { toggleTheme } from '../features/settings/settingsSlice'
 import AuthenticationControl from '../features/viewer/AuthenticationControl'
 import { setShowDrawer } from '../features/settings/settingsSlice'
 import AppDrawer from './AppDrawer'
