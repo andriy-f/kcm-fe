@@ -8,8 +8,8 @@ import Navigation from './Navigation'
 
 const AppDrawer = function () {
 
-  const dispatch = useAppDispatch()
   const drawerOpen = useAppSelector(selectShowDrawer)
+  const dispatch = useAppDispatch()
 
   const handleSetShowDrawer =
     (open: boolean) =>
