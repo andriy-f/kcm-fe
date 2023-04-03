@@ -1,3 +1,4 @@
+// TODO delete
 // import ConditionalAuthHOC from './components/ConditionalAuthHOC'
 
 // const DefaultConditionalAuthHOC = ConditionalAuthHOC({ NotLoggedIn, NotAuthorized })
