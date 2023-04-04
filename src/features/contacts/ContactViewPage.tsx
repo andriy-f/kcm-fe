@@ -22,12 +22,12 @@ function ContactViewPage(props: Props) {
   }
 
   const data = graphql`
-          query ContactViewPageQuery ($id: ID!) {
-            contact(id: $id) {
-            ...ContactView_contact
-            }
-          }
-        `
+    query ContactViewPageQuery ($id: ID!) {
+      contact(id: $id) {
+      ...ContactView_contact
+      }
+    }
+  `
 
   return (
     <NarrowLayout>

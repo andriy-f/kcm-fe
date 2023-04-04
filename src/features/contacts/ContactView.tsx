@@ -1,14 +1,17 @@
-// import debug from 'debug'
+import debug from 'debug'
 import React from 'react'
-import { graphql, createFragmentContainer } from 'react-relay'
+import { createFragmentContainer } from 'react-relay'
+import graphql from 'babel-plugin-relay/macro'
 import TextField from '@mui/material/TextField'
 import { Link } from 'react-router-dom'
 
-// import { appName } from '../consts'
+import { appName } from '../../consts'
 
-// eslint-disable-next-line no-unused-vars
-// const log = debug(appName + ':ContactView.js')
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const log = debug(appName + ':ContactView.js')
 
+const ContactViewQuery = graphql`
+`
 class ContactViewWrapper extends React.Component<any> {
 
   render() {
