@@ -10,9 +10,10 @@ import ListItemText from '@mui/material/ListItemText'
 const items = [
   { caption: 'Intro', to: '/' },
   { caption: 'Contacts', to: '/contacts' },
-  { caption: 'Settings', to: '/settings', hidden: true },
-  { caption: 'Dev', to: '/dev', hidden: !isDev || true }, // TODO: remove true
+  // { caption: 'Settings', to: '/settings' },
+  { caption: 'Dev', to: '/dev', hidden: !isDev },
 ]
+
 function Navigation() {
 
   return (
