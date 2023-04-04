@@ -8,6 +8,7 @@ import Intro from './Intro'
 import { ProtectedRoute } from '../features/auth/ProtectedRoute'
 import ContactsPage from '../features/contacts/ContactsPage'
 import LoginPage from '../features/auth/LoginPage'
+import ContactDetailsPage from '../features/contacts/ContactDetailsPage'
 
 export const loginPath = 'login'
 export const logoutPath = 'logout'
@@ -27,6 +28,14 @@ const router = createBrowserRouter([
         element: (<>
           <ProtectedRoute requiredPermissions={['contact-list-view']}>
             <ContactsPage />
+          </ProtectedRoute>
+        </>),
+      },
+      {
+        path: 'contact/:id',
+        element: (<>
+          <ProtectedRoute requiredPermissions={['contact-view']}>
+            <ContactDetailsPage />
           </ProtectedRoute>
         </>),
       },
