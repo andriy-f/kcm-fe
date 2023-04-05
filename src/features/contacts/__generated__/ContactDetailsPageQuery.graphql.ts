@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<6a72b034fa2c0957e209e4504c74af50>>
+ * @generated SignedSource<<c73c7540b0d7363461b25be425f09c80>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,7 +10,7 @@
 
 import { ConcreteRequest, Query } from 'relay-runtime';
 export type ContactDetailsPageQuery$variables = {
-  id: string;
+  contactId: string;
 };
 export type ContactDetailsPageQuery$data = {
   readonly contact: {
@@ -30,14 +30,14 @@ var v0 = [
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "id"
+    "name": "contactId"
   }
 ],
 v1 = [
   {
     "kind": "Variable",
-    "name": "id",
-    "variableName": "id"
+    "name": "contactId",
+    "variableName": "contactId"
   }
 ],
 v2 = {
@@ -125,16 +125,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "63c439d5c8541df2a7249d1c12a36cd1",
+    "cacheID": "01ca751ec93f8b3169422fc8dccd9f54",
     "id": null,
     "metadata": {},
     "name": "ContactDetailsPageQuery",
     "operationKind": "query",
-    "text": "query ContactDetailsPageQuery(\n  $id: ID!\n) {\n  contact(id: $id) {\n    firstName\n    lastName\n    email\n    phoneNumber\n    id\n  }\n}\n"
+    "text": "query ContactDetailsPageQuery(\n  $contactId: ID!\n) {\n  contact(contactId: $contactId) {\n    firstName\n    lastName\n    email\n    phoneNumber\n    id\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "8e801180c51f94613d8f4b6bf78af076";
+(node as any).hash = "e4fc36af9ba4c3e4f6b3f14022c34012";
 
 export default node;
