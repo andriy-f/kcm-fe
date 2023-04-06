@@ -3,10 +3,9 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Alert from '@mui/material/Alert'
 
+import Box from '@mui/material/Box'
 import Title from '../common/Title'
-import ButtonPanel from '../../components/ButtonPanel'
 import { LoginData } from '../../types/LoginData'
-import Container from '@mui/material/Container'
 
 interface Props {
   errorMessage?: string | null
@@ -23,11 +22,9 @@ export default function LoginForm(props: Props) {
   const { errorMessage } = props
 
   return (
-    <Container
-      maxWidth="xs"
+    <Box
       component="form"
-      onSubmit={handleSubmit}
-    >
+      onSubmit={handleSubmit}>
       <Title>Log into site</Title>
       <TextField label="Login" fullWidth type='text' margin="normal"
         value={login}
@@ -35,9 +32,10 @@ export default function LoginForm(props: Props) {
       <TextField label="Password" fullWidth type='password' margin="normal"
         value={password} onChange={e => { setPassword(e.target.value) }} />
       {errorMessage && <Alert severity='error'>{errorMessage}</Alert>}
-      <ButtonPanel>
-        <Button type="submit">Log in</Button>
-      </ButtonPanel>
-    </Container>
+
+      <Button fullWidth type="submit" variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+      >Log in</Button>
+    </Box>
   )
 }
