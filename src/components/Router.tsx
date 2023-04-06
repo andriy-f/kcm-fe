@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         </>),
       },
       {
-        path: 'contact/:contactId',
+        path: 'contact/:id',
         element: (<>
           <ProtectedRoute requiredPermissions={['contact-view']}>
             <ContactDetailsPage />

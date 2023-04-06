@@ -18,6 +18,7 @@ import graphql from 'babel-plugin-relay/macro'
 import { ContactsTableFragment$key } from './__generated__/ContactsTableFragment.graphql'
 import Title from '../common/Title'
 import AutoLoadMore from '../../components/AutoLoadMore'
+import { Link } from 'react-router-dom'
 
 const ContactsTableFragment = graphql`
 fragment ContactsTableFragment on Query
@@ -94,6 +95,7 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
               <TableCell>{c?.node?.lastName}</TableCell>
               <TableCell>{c?.node?.email}</TableCell>
               <TableCell>{c?.node?.phoneNumber}</TableCell>
+              <TableCell align="right"><Link to={`/contact/${c?.node?.id}`}>View</Link></TableCell>
               <TableCell align="right">Edit</TableCell>
             </TableRow>
           ))}

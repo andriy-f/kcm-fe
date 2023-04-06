@@ -2,20 +2,22 @@ import debug from 'debug'
 import React from 'react'
 import { useLazyLoadQuery } from 'react-relay'
 import Container from '@mui/material/Container'
+import { useParams } from 'react-router-dom'
 import graphql from 'babel-plugin-relay/macro'
 
 import { appName } from '../../consts'
-import styles from '../../App.module.css'
 import type { ContactDetailsPageQuery as ContactDetailsPageQueryType } from './__generated__/ContactDetailsPageQuery.graphql'
 import Title from '../common/Title'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
-// eslint-disable-next-line no-unused-vars
-const log = debug(appName + ':ContactDetailsPage.js')
+import Alert from '@mui/material/Alert'
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const log = debug(appName + ':ContactDetailsPage.tsx')
 
 const ContactDetailsPageQuery = graphql`
-  query ContactDetailsPageQuery ($contactId: ID!) {
-    contact(contactId: $contactId) {
+  query ContactDetailsPageQuery ($id: ID!) {
+    contact(id: $id) {
       firstName
       lastName
       email
@@ -26,15 +28,23 @@ const ContactDetailsPageQuery = graphql`
 
 
 function ContactDetailsPage() {
-  const data = useLazyLoadQuery<ContactDetailsPageQueryType>(ContactDetailsPageQuery, { contactId: '1' })
+  const id = useParams().id || ''
+  const data = useLazyLoadQuery<ContactDetailsPageQueryType>(ContactDetailsPageQuery, { id: id })
+  if (!id) {
+    return <Alert severity='error'> contactId is not defined </Alert>
+  }
 
+  const contact = data.contact
   return (
     <Container>
       <Box
         component="form">
         <Title>Contact</Title>
-        <TextField label="First name" variant="filled" disabled value={''} />
-        <TextField label="Last name" variant="filled" disabled value='to fill' />
+        <TextField fullWidth label="First name" variant="filled"
+          InputProps={{ readOnly: true }}
+          value={contact?.firstName} />
+        <TextField fullWidth label="Last name" variant="filled"
+          disabled value={contact?.lastName} />
       </Box>
     </Container>)
 }
