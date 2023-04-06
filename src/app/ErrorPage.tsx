@@ -1,8 +1,14 @@
+import debug from 'debug'
 import { useRouteError } from 'react-router-dom'
+
+import { appName } from '../consts'
+
+// eslint-disable-next-line no-unused-vars
+const log = debug(appName + ':ErrorPage.tsx')
 
 export default function ErrorPage() {
   const error: any = useRouteError()
-  console.error(error)
+  log(error)
 
   return (
     <div id="error-page">

@@ -1,5 +1,4 @@
-// TODO: delete?
-export default class RelayError extends Error {
+export default class AppRelayError extends Error {
   errors: any[]
 
   constructor(m: string, errors: any[]) {
@@ -7,6 +6,6 @@ export default class RelayError extends Error {
     this.errors = errors
 
     // Set the prototype explicitly.
-    Object.setPrototypeOf(this, RelayError.prototype)
+    Object.setPrototypeOf(this, AppRelayError.prototype)
   }
 }

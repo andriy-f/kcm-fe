@@ -11,40 +11,15 @@ import debug from 'debug'
 import { appName } from '../consts'
 import { APIURL } from '../config'
 import { urlJoin } from '../utils'
+import AppRelayError from './AppRelayError'
 
-// const {fetch} = fetchPonyfill()
 const graphqlURL = urlJoin(APIURL, '/graphql')
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':relayEnvironment.js')
 
-// const fetchFnOld: FetchFunction = (
-//   operation: any,
-//   variables: any,
-// ) => {
-//   log('relay operation', operation.text, variables)
-//   return fetch(graphqlURL, {
-//     credentials: 'include',
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({
-//       query: operation.text,
-//       variables,
-//     }),
-//   }).then(response => response.json()).then((json) => {
-//     log('relay result', json)
-//     if (json.errors) {
-//       return Promise.reject(new RelayError('GraphQL error', json.errors))
-//     }
-
-//     return json
-//   })
-// }
-
 const fetchFn: FetchFunction = (params, variables) => {
-  const response = fetch(graphqlURL, {
+  const res= fetch(graphqlURL, {
     credentials: 'include',
     method: 'POST',
     headers: [['Content-Type', 'application/json']],
@@ -53,8 +28,18 @@ const fetchFn: FetchFunction = (params, variables) => {
       variables,
     }),
   })
+  .then(r => r.json())
+  .then(json => {
+    if(json.errors) {
+      log('GraphQL errors', json.errors)
+      return Promise.reject(new AppRelayError('GraphQL error', json.errors))
+    }
 
-  return Observable.from(response.then((data) => data.json()))
+    return json
+  })
+
+
+  return Observable.from(res)
 }
 
 export function createEnvironment(): IEnvironment {
