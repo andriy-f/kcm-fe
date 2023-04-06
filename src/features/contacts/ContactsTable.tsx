@@ -12,6 +12,9 @@ import TableRow from '@mui/material/TableRow'
 import TextField from '@mui/material/TextField'
 import CircularProgress from '@mui/material/CircularProgress'
 import { debounce } from 'throttle-debounce'
+import IconButton from '@mui/material/IconButton'
+import PageviewIcon from '@mui/icons-material/Pageview'
+import EditIcon from '@mui/icons-material/Edit'
 
 import graphql from 'babel-plugin-relay/macro'
 
@@ -95,8 +98,14 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
               <TableCell>{c?.node?.lastName}</TableCell>
               <TableCell>{c?.node?.email}</TableCell>
               <TableCell>{c?.node?.phoneNumber}</TableCell>
-              <TableCell align="right"><Link to={`/contact/${c?.node?.id}`}>View</Link></TableCell>
-              <TableCell align="right">Edit</TableCell>
+              <TableCell align="right">
+                <IconButton component={Link} to={'/contact/' + c?.node?.id}>
+                  <PageviewIcon />
+                </IconButton>
+                <IconButton component={Link} to={'/contact/' + c?.node?.id}>
+                  <EditIcon />
+                </IconButton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
