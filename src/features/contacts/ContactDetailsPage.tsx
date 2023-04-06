@@ -45,11 +45,14 @@ function ContactDetailsPage() {
           }
         }}>
         <Title>Contact</Title>
-        <TextField fullWidth label="First name" variant="filled"
-          InputProps={{ readOnly: true }}
-          value={contact?.firstName} />
-        <TextField fullWidth label="Last name" variant="filled"
+        <TextField fullWidth label='First name' variant="filled"
+          disabled value={contact?.firstName} />
+        <TextField fullWidth label='Last name' variant="filled"
           disabled value={contact?.lastName} />
+        <TextField fullWidth label='Email' variant="filled"
+          disabled value={contact?.email} />
+        <TextField fullWidth label='Phone' variant="filled"
+          disabled value={contact?.phoneNumber} />
       </Box>
     </Container>)
 }
