@@ -38,7 +38,12 @@ function ContactDetailsPage() {
   return (
     <Container>
       <Box
-        component="form">
+        component="form"
+        sx={{
+          '& > div': {
+            m: 1,
+          }
+        }}>
         <Title>Contact</Title>
         <TextField fullWidth label="First name" variant="filled"
           InputProps={{ readOnly: true }}
