@@ -7,6 +7,7 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
+import LoginIcon from '@mui/icons-material/Login'
 
 import { useAppSelector } from '../../app/hooks'
 import { loginPath } from '../../components/Router'
@@ -59,5 +60,15 @@ export default function AuthenticationControl() {
         </MenuItem>
       </Menu>
     </>)
-    : (<Link to={loginPath}>Login</Link>)
+    : (
+      <Tooltip title='Login'>
+        <IconButton
+          component={Link}
+          to={loginPath}
+          aria-label='login'
+        >
+          <LoginIcon />
+        </IconButton>
+      </Tooltip>
+    )
 }
