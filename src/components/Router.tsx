@@ -9,6 +9,7 @@ import { ProtectedRoute } from '../features/auth/ProtectedRoute'
 import ContactsPage from '../features/contacts/ContactsPage'
 import LoginPage from '../features/auth/LoginPage'
 import ContactDetailsPage from '../features/contacts/ContactDetailsPage'
+import GraphQLPlayground from '../features/develop/Playground'
 
 export const loginPath = 'login'
 export const logoutPath = 'logout'
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
         </>),
       },
       {
-        path: 'contact/:id',
+        path: 'contact/:contactId',
         element: (<>
           <ProtectedRoute requiredPermissions={['contact-view']}>
             <ContactDetailsPage />
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: logoutPath,
         element: <LogOut />,
+      },
+      {
+        path: 'dev/playground',
+        element: <GraphQLPlayground />,
       },
     ]
   },

@@ -13,13 +13,13 @@ import { APIURL } from '../config'
 import { urlJoin } from '../utils'
 import AppRelayError from './AppRelayError'
 
-const graphqlURL = urlJoin(APIURL, '/graphql')
+export const graphqlURL = urlJoin(APIURL, '/graphql')
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':relayEnvironment.js')
 
 const fetchFn: FetchFunction = (params, variables) => {
-  const res= fetch(graphqlURL, {
+  const res = fetch(graphqlURL, {
     credentials: 'include',
     method: 'POST',
     headers: [['Content-Type', 'application/json']],
@@ -28,15 +28,15 @@ const fetchFn: FetchFunction = (params, variables) => {
       variables,
     }),
   })
-  .then(r => r.json())
-  .then(json => {
-    if(json.errors) {
-      log('GraphQL errors', json.errors)
-      return Promise.reject(new AppRelayError('GraphQL error', json.errors))
-    }
+    .then(r => r.json())
+    .then(json => {
+      if (json.errors) {
+        log('GraphQL errors', json.errors)
+        return Promise.reject(new AppRelayError('GraphQL error', json.errors))
+      }
 
-    return json
-  })
+      return json
+    })
 
 
   return Observable.from(res)
