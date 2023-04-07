@@ -35,6 +35,7 @@ function AppLayout() {
     <Box sx={{ display: 'block' }}>
       <MuiAppBar component="nav">
         <Toolbar>
+          {/** Menu button TODO extract into separate component */}
           <IconButton aria-label="menu" onClick={openDrawer}>
             <MenuIcon />
           </IconButton>
