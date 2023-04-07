@@ -41,6 +41,14 @@ const router = createBrowserRouter([
         </>),
       },
       {
+        path: 'contact/:id/edit',
+        element: (<>
+          <ProtectedRoute requiredPermissions={['contact-edit']}>
+            <ContactDetailsPage editable />
+          </ProtectedRoute>
+        </>),
+      },
+      {
         path: loginPath,
         element: <LoginPage />,
       },

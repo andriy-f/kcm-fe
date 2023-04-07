@@ -1,16 +1,17 @@
 import debug from 'debug'
 import React from 'react'
 import { useLazyLoadQuery } from 'react-relay'
-import Container from '@mui/material/Container'
 import { useParams } from 'react-router-dom'
 import graphql from 'babel-plugin-relay/macro'
+
+import Container from '@mui/material/Container'
+import TextField from '@mui/material/TextField'
+import Box from '@mui/material/Box'
+import Alert from '@mui/material/Alert'
 
 import { appName } from '../../consts'
 import type { ContactDetailsPageQuery as ContactDetailsPageQueryType } from './__generated__/ContactDetailsPageQuery.graphql'
 import Title from '../common/Title'
-import TextField from '@mui/material/TextField'
-import Box from '@mui/material/Box'
-import Alert from '@mui/material/Alert'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':ContactDetailsPage.tsx')
@@ -26,8 +27,18 @@ const ContactDetailsPageQuery = graphql`
   }
 `
 
+function ContactTextField({ label, value, disabled }: { label: string, value?: string | null, disabled: boolean }) {
+  return (
+    <TextField fullWidth label={label} variant="filled"
+      disabled={disabled} value={value} />
+  )
+}
 
-function ContactDetailsPage() {
+type ContactDetailsPageProps = {
+  editable?: boolean
+}
+
+function ContactDetailsPage({ editable }: ContactDetailsPageProps) {
   const id = useParams().id || ''
   const data = useLazyLoadQuery<ContactDetailsPageQueryType>(ContactDetailsPageQuery, { id: id })
   if (!id) {
@@ -45,14 +56,10 @@ function ContactDetailsPage() {
           }
         }}>
         <Title>Contact</Title>
-        <TextField fullWidth label='First name' variant="filled"
-          disabled value={contact?.firstName} />
-        <TextField fullWidth label='Last name' variant="filled"
-          disabled value={contact?.lastName} />
-        <TextField fullWidth label='Email' variant="filled"
-          disabled value={contact?.email} />
-        <TextField fullWidth label='Phone' variant="filled"
-          disabled value={contact?.phoneNumber} />
+        <ContactTextField label='First name' value={contact?.firstName} disabled={!editable} />
+        <ContactTextField label='Last name' value={contact?.lastName} disabled={!editable} />
+        <ContactTextField label='Email' value={contact?.email} disabled={!editable} />
+        <ContactTextField label='Phone' value={contact?.phoneNumber} disabled={!editable} />
       </Box>
     </Container>)
 }

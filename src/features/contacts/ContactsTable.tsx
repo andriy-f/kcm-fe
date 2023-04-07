@@ -4,6 +4,9 @@
 import React, { useRef, useTransition } from 'react'
 import Button from '@mui/material/Button'
 import { usePaginationFragment } from 'react-relay'
+import { debounce } from 'throttle-debounce'
+import graphql from 'babel-plugin-relay/macro'
+
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -11,12 +14,9 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import TextField from '@mui/material/TextField'
 import CircularProgress from '@mui/material/CircularProgress'
-import { debounce } from 'throttle-debounce'
 import IconButton from '@mui/material/IconButton'
 import PageviewIcon from '@mui/icons-material/Pageview'
 import EditIcon from '@mui/icons-material/Edit'
-
-import graphql from 'babel-plugin-relay/macro'
 
 import { ContactsTableFragment$key } from './__generated__/ContactsTableFragment.graphql'
 import Title from '../common/Title'
@@ -92,22 +92,25 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {contactEdges?.map((c) => (
-            <TableRow key={c?.node?.id}>
-              <TableCell>{c?.node?.firstName}</TableCell>
-              <TableCell>{c?.node?.lastName}</TableCell>
-              <TableCell>{c?.node?.email}</TableCell>
-              <TableCell>{c?.node?.phoneNumber}</TableCell>
-              <TableCell align="right">
-                <IconButton component={Link} to={'/contact/' + c?.node?.id}>
-                  <PageviewIcon />
-                </IconButton>
-                <IconButton component={Link} to={'/contact/' + c?.node?.id}>
-                  <EditIcon />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-          ))}
+          {contactEdges?.map((contactEdge) => {
+            const contact = contactEdge?.node
+            return (
+              <TableRow key={contact?.id}>
+                <TableCell>{contact?.firstName}</TableCell>
+                <TableCell>{contact?.lastName}</TableCell>
+                <TableCell>{contact?.email}</TableCell>
+                <TableCell>{contact?.phoneNumber}</TableCell>
+                <TableCell align="right">
+                  <IconButton component={Link} to={'/contact/' + contact?.id}>
+                    <PageviewIcon />
+                  </IconButton>
+                  <IconButton component={Link} to={'/contact/' + contact?.id + '/edit'}>
+                    <EditIcon />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            )
+          })}
         </TableBody>
       </Table>
       {hasNext && (
