@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+
 import Avatar from '@mui/material/Avatar'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
@@ -8,6 +9,9 @@ import MenuItem from '@mui/material/MenuItem'
 import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
 import LoginIcon from '@mui/icons-material/Login'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import Logout from '@mui/icons-material/Logout'
+import AccountBox from '@mui/icons-material/AccountBox'
 
 import { useAppSelector } from '../../app/hooks'
 import { loginPath } from '../../components/Router'
@@ -27,7 +31,7 @@ export default function AuthenticationControl() {
 
   return isLoggedIn
     ? (<>
-      <Tooltip title='Open settings'>
+      <Tooltip title='Account'>
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
           <Avatar alt={viewerName} src='#' />
         </IconButton>
@@ -53,9 +57,15 @@ export default function AuthenticationControl() {
         </MenuItem>
         <Divider />
         <MenuItem key='profile' onClick={handleCloseUserMenu}>
+          <ListItemIcon>
+            <AccountBox fontSize="small" />
+          </ListItemIcon>
           <Typography textAlign='center'>Profile</Typography>
         </MenuItem>
         <MenuItem key='logout' component={Link} to='/logout' onClick={handleCloseUserMenu}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
           <Typography textAlign='center'>Logout</Typography>
         </MenuItem>
       </Menu>
