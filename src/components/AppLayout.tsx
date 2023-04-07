@@ -5,14 +5,13 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import Brightness4Icon from '@mui/icons-material/Brightness4'
 
 import AppProgress from './AppProgress'
 import { useAppDispatch } from '../app/hooks'
-import { toggleTheme } from '../features/settings/settingsSlice'
 import AuthenticationControl from '../features/viewer/AuthenticationControl'
 import { setShowDrawer } from '../features/settings/settingsSlice'
 import AppDrawer from './AppDrawer'
+import ThemeSwitch from '../features/settings/ThemeSwitch'
 
 function AppLayout() {
 
@@ -43,9 +42,7 @@ function AppLayout() {
           <Box sx={{ flexGrow: 1 }}>
           </Box>
 
-          <IconButton aria-label="menu" onClick={() => dispatch(toggleTheme())} >
-            <Brightness4Icon />
-          </IconButton>
+          <ThemeSwitch />
 
           <AuthenticationControl />
 
