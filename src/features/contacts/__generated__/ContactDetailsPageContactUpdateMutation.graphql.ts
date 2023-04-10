@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<c9e82b92d5154ac07b77e0d6f4a6023c>>
+ * @generated SignedSource<<3e380aab646fd9953d1f9675134d1dae>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -18,10 +18,10 @@ export type UpdateContactInput = {
   lastName?: string | null;
   phoneNumber?: string | null;
 };
-export type UpdateContactMutation$variables = {
+export type ContactDetailsPageContactUpdateMutation$variables = {
   input: UpdateContactInput;
 };
-export type UpdateContactMutation$data = {
+export type ContactDetailsPageContactUpdateMutation$data = {
   readonly updateContact: {
     readonly contact: {
       readonly email: string | null;
@@ -32,9 +32,9 @@ export type UpdateContactMutation$data = {
     } | null;
   } | null;
 };
-export type UpdateContactMutation = {
-  response: UpdateContactMutation$data;
-  variables: UpdateContactMutation$variables;
+export type ContactDetailsPageContactUpdateMutation = {
+  response: ContactDetailsPageContactUpdateMutation$data;
+  variables: ContactDetailsPageContactUpdateMutation$variables;
 };
 
 const node: ConcreteRequest = (function(){
@@ -115,7 +115,7 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "UpdateContactMutation",
+    "name": "ContactDetailsPageContactUpdateMutation",
     "selections": (v1/*: any*/),
     "type": "Mutation",
     "abstractKey": null
@@ -124,20 +124,20 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "UpdateContactMutation",
+    "name": "ContactDetailsPageContactUpdateMutation",
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "09a37dd8a1adbc4d3475fde38310864b",
+    "cacheID": "e21a17db74c778b06eaf24c14c7b603d",
     "id": null,
     "metadata": {},
-    "name": "UpdateContactMutation",
+    "name": "ContactDetailsPageContactUpdateMutation",
     "operationKind": "mutation",
-    "text": "mutation UpdateContactMutation(\n  $input: UpdateContactInput!\n) {\n  updateContact(input: $input) {\n    contact {\n      id\n      firstName\n      lastName\n      email\n      phoneNumber\n    }\n  }\n}\n"
+    "text": "mutation ContactDetailsPageContactUpdateMutation(\n  $input: UpdateContactInput!\n) {\n  updateContact(input: $input) {\n    contact {\n      id\n      firstName\n      lastName\n      email\n      phoneNumber\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "8ebcff132c7276014bf2db29a30c46ad";
+(node as any).hash = "27348cec145d53b637bf135189d71ce5";
 
 export default node;

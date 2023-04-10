@@ -1,17 +1,17 @@
-import debug from 'debug'
 import React from 'react'
-import { useLazyLoadQuery } from 'react-relay'
-import { useParams } from 'react-router-dom'
+import debug from 'debug'
+import { useLazyLoadQuery, useMutation } from 'react-relay'
+import { useNavigate, useParams } from 'react-router-dom'
 import graphql from 'babel-plugin-relay/macro'
 
 import Container from '@mui/material/Container'
-import TextField from '@mui/material/TextField'
-import Box from '@mui/material/Box'
 import Alert from '@mui/material/Alert'
 
 import { appName } from '../../consts'
 import type { ContactDetailsPageQuery as ContactDetailsPageQueryType } from './__generated__/ContactDetailsPageQuery.graphql'
-import Title from '../common/Title'
+import ContactDetails from './ContactDetails'
+import LinearProgress from '@mui/material/LinearProgress'
+import Contact from '../../types/Contact'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':ContactDetailsPage.tsx')
@@ -19,6 +19,7 @@ const log = debug(appName + ':ContactDetailsPage.tsx')
 const ContactDetailsPageQuery = graphql`
   query ContactDetailsPageQuery ($id: ID!) {
     contact(id: $id) {
+      id
       firstName
       lastName
       email
@@ -27,12 +28,19 @@ const ContactDetailsPageQuery = graphql`
   }
 `
 
-function ContactTextField({ label, value, disabled }: { label: string, value?: string | null, disabled: boolean }) {
-  return (
-    <TextField fullWidth label={label} variant="filled"
-      disabled={disabled} value={value} />
-  )
-}
+const ContactDetailsPageContactUpdateMutation = graphql`
+  mutation ContactDetailsPageContactUpdateMutation ($input: UpdateContactInput!) {
+    updateContact (input: $input) {
+      contact {
+        id
+        firstName
+        lastName
+        email
+        phoneNumber
+      }
+    }
+  }
+`
 
 type ContactDetailsPageProps = {
   editable?: boolean
@@ -41,26 +49,42 @@ type ContactDetailsPageProps = {
 function ContactDetailsPage({ editable }: ContactDetailsPageProps) {
   const id = useParams().id || ''
   const data = useLazyLoadQuery<ContactDetailsPageQueryType>(ContactDetailsPageQuery, { id: id })
+  const [commitMutation, isMutationInFlight] = useMutation(ContactDetailsPageContactUpdateMutation)
+  const navigate = useNavigate()
+
   if (!id) {
-    return <Alert severity='error'> contactId is not defined </Alert>
+    return <Alert severity='error'> id is requred </Alert>
+  }
+
+  function handleSave(contact: Contact) {
+    commitMutation({
+      variables: {
+        input: {
+          id: id,
+          firstName: contact?.firstName,
+          lastName: contact?.lastName,
+          email: contact?.email,
+          phoneNumber: contact?.phoneNumber,
+        }
+      }
+    })
+    navigate('/contacts')
+  }
+
+  function handleCancel() {
+    navigate('/contacts') // TODO consirer use react-router action
   }
 
   const contact = data.contact
   return (
     <Container>
-      <Box
-        component="form"
-        sx={{
-          '& > div': {
-            m: 1,
-          }
-        }}>
-        <Title>Contact</Title>
-        <ContactTextField label='First name' value={contact?.firstName} disabled={!editable} />
-        <ContactTextField label='Last name' value={contact?.lastName} disabled={!editable} />
-        <ContactTextField label='Email' value={contact?.email} disabled={!editable} />
-        <ContactTextField label='Phone' value={contact?.phoneNumber} disabled={!editable} />
-      </Box>
+      {contact && <ContactDetails
+        initialContact={contact}
+        editable={editable}
+        onSave={handleSave}
+        onCancel={handleCancel}
+      />}
+      {isMutationInFlight && <LinearProgress />}
     </Container>)
 }
 

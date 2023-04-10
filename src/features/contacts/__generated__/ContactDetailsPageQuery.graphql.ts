@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<6a72b034fa2c0957e209e4504c74af50>>
+ * @generated SignedSource<<3e97202470d7e35a1dc6fab848a36b0f>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -16,6 +16,7 @@ export type ContactDetailsPageQuery$data = {
   readonly contact: {
     readonly email: string | null;
     readonly firstName: string | null;
+    readonly id: string;
     readonly lastName: string | null;
     readonly phoneNumber: string | null;
   } | null;
@@ -35,62 +36,65 @@ var v0 = [
 ],
 v1 = [
   {
-    "kind": "Variable",
-    "name": "id",
-    "variableName": "id"
+    "alias": null,
+    "args": [
+      {
+        "kind": "Variable",
+        "name": "id",
+        "variableName": "id"
+      }
+    ],
+    "concreteType": "Contact",
+    "kind": "LinkedField",
+    "name": "contact",
+    "plural": false,
+    "selections": [
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "id",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "firstName",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "lastName",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "email",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "phoneNumber",
+        "storageKey": null
+      }
+    ],
+    "storageKey": null
   }
-],
-v2 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "firstName",
-  "storageKey": null
-},
-v3 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "lastName",
-  "storageKey": null
-},
-v4 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "email",
-  "storageKey": null
-},
-v5 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "phoneNumber",
-  "storageKey": null
-};
+];
 return {
   "fragment": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "ContactDetailsPageQuery",
-    "selections": [
-      {
-        "alias": null,
-        "args": (v1/*: any*/),
-        "concreteType": "Contact",
-        "kind": "LinkedField",
-        "name": "contact",
-        "plural": false,
-        "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          (v5/*: any*/)
-        ],
-        "storageKey": null
-      }
-    ],
+    "selections": (v1/*: any*/),
     "type": "Query",
     "abstractKey": null
   },
@@ -99,42 +103,19 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "ContactDetailsPageQuery",
-    "selections": [
-      {
-        "alias": null,
-        "args": (v1/*: any*/),
-        "concreteType": "Contact",
-        "kind": "LinkedField",
-        "name": "contact",
-        "plural": false,
-        "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          (v5/*: any*/),
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "id",
-            "storageKey": null
-          }
-        ],
-        "storageKey": null
-      }
-    ]
+    "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "63c439d5c8541df2a7249d1c12a36cd1",
+    "cacheID": "b4e3c8fadf10c6e4152b7497d7179c44",
     "id": null,
     "metadata": {},
     "name": "ContactDetailsPageQuery",
     "operationKind": "query",
-    "text": "query ContactDetailsPageQuery(\n  $id: ID!\n) {\n  contact(id: $id) {\n    firstName\n    lastName\n    email\n    phoneNumber\n    id\n  }\n}\n"
+    "text": "query ContactDetailsPageQuery(\n  $id: ID!\n) {\n  contact(id: $id) {\n    id\n    firstName\n    lastName\n    email\n    phoneNumber\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "8e801180c51f94613d8f4b6bf78af076";
+(node as any).hash = "a04209816ed3821ddb3fbd8f39895138";
 
 export default node;
