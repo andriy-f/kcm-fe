@@ -7,11 +7,11 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 
 import AppProgress from './AppProgress'
-import { useAppDispatch } from '../app/hooks'
-import AuthenticationControl from '../features/viewer/AuthenticationControl'
-import { setShowDrawer } from '../features/settings/settingsSlice'
+import { useAppDispatch } from '../../app/hooks'
+import AuthenticationControl from '../viewer/AuthenticationControl'
+import { setShowDrawer } from '../settings/settingsSlice'
 import AppDrawer from './AppDrawer'
-import ThemeSwitch from '../features/settings/ThemeSwitch'
+import ThemeSwitch from '../settings/ThemeSwitch'
 
 function AppLayout() {
 

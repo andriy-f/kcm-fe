@@ -2,8 +2,8 @@ import React from 'react'
 import Drawer from '@mui/material/Drawer'
 import Box from '@mui/material/Box'
 
-import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { selectShowDrawer, setShowDrawer } from '../features/settings/settingsSlice'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { selectShowDrawer, setShowDrawer } from '../settings/settingsSlice'
 import Navigation from './Navigation'
 
 const AppDrawer = function () {

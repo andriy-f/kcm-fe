@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom'
 
 import ErrorPage from '../app/ErrorPage'
 import LogOut from '../features/auth/LogoutPage'
-import AppLayout from './AppLayout'
+import AppLayout from '../features/layout/AppLayout'
 import Intro from './Intro'
 import { ProtectedRoute } from '../features/auth/ProtectedRoute'
 import ContactsPage from '../features/contacts/ContactsPage'

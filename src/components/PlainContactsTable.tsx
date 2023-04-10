@@ -1,4 +1,4 @@
-// @flow
+// TODO delete after fully migrating
 import debug from 'debug'
 import React from 'react'
 import Table from '@mui/material/Table'

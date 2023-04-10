@@ -1,7 +1,7 @@
 import debug from 'debug'
 import React from 'react'
 
-import { appName } from '../consts'
+import { appName } from '../../consts'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':AutoLoadMore.js')

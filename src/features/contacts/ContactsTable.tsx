@@ -20,7 +20,7 @@ import EditIcon from '@mui/icons-material/Edit'
 
 import { ContactsTableFragment$key } from './__generated__/ContactsTableFragment.graphql'
 import Title from '../common/Title'
-import AutoLoadMore from '../../components/AutoLoadMore'
+import AutoLoadMore from '../common/AutoLoadMore'
 import { Link } from 'react-router-dom'
 
 const ContactsTableFragment = graphql`
