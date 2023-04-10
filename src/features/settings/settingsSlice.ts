@@ -56,7 +56,6 @@ export const selectIsDarkTheme = (state: RootState) => state.settings.darkTheme
 export const settingsReducer = createReducer(initialSettings, (builder) => {
   builder.addCase(toggleSetting, (state, action) => {
     let name = action.payload.name
-    console.log('state.dark', state.darkTheme)
     if (name in state) {
       const settingName = name as SettingName
       const oldSettingValue = state[settingName]
