@@ -1,12 +1,16 @@
 /**
- * TODO: add, edit, delete, view
+ * TODO: add create button functionality
  */
 import React, { useRef, useTransition } from 'react'
-import Button from '@mui/material/Button'
-import { usePaginationFragment } from 'react-relay'
+import debug from 'debug'
+import { useMutation, usePaginationFragment } from 'react-relay'
+import { Link } from 'react-router-dom'
 import { debounce } from 'throttle-debounce'
 import graphql from 'babel-plugin-relay/macro'
 
+import Button from '@mui/material/Button'
+import DialogTitle from '@mui/material/DialogTitle'
+import Dialog from '@mui/material/Dialog'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -17,11 +21,19 @@ import CircularProgress from '@mui/material/CircularProgress'
 import IconButton from '@mui/material/IconButton'
 import PageviewIcon from '@mui/icons-material/Pageview'
 import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
 
 import { ContactsTableFragment$key } from './__generated__/ContactsTableFragment.graphql'
 import Title from '../common/Title'
 import AutoLoadMore from '../common/AutoLoadMore'
-import { Link } from 'react-router-dom'
+import Contact from '../../types/Contact'
+import { appName } from '../../consts'
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const log = debug(appName + ':ContactsTable.tsx')
 
 const ContactsTableFragment = graphql`
 fragment ContactsTableFragment on Query
@@ -49,6 +61,45 @@ fragment ContactsTableFragment on Query
   }
 `
 
+const ContactsTableContactDeleteMutation = graphql`
+  mutation ContactsTableContactDeleteMutation ($input: DeleteContactInput!) {
+    deleteContact (input: $input) {
+      deletedId @deleteRecord
+      clientMutationId
+    }
+  }
+`
+
+function DeleteContactDialog({
+  open,
+  contact,
+  onConfirm,
+  onCancel,
+}: {
+  open: boolean
+  contact: Contact | null
+  onConfirm(): void
+  onCancel(): void
+}) {
+
+  return (
+    <Dialog
+      open={open}
+      onClose={onCancel}>
+      <DialogTitle>Delete contact?</DialogTitle>
+      <DialogContent>
+        {contact && <DialogContentText>
+          {contact.firstName} {contact.lastName}
+        </DialogContentText>}
+      </DialogContent>
+      <DialogActions >
+        <Button onClick={onCancel}>No</Button>
+        <Button autoFocus variant='contained' onClick={onConfirm}>Yes</Button>
+      </DialogActions>
+    </Dialog>
+  )
+}
+
 function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
   const {
     data,
@@ -74,6 +125,37 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
       setFilterText(value)
       refetchDebouncedRef.current(value)
     }
+
+  // Delete-related
+  const [commitDeleteMutation, isDeleteMutationInFlight] = useMutation(ContactsTableContactDeleteMutation)
+  const [deleteDialogContact, setDeleteDialogContact] = React.useState<Contact | null>(null)
+
+  const handleDeleteClick = (contact: Contact) => {
+    setDeleteDialogContact(contact)
+  }
+
+  const handleDeleteConfirm = () => {
+    if (deleteDialogContact) {
+      commitDeleteMutation({
+        variables: {
+          input: {
+            id: deleteDialogContact.id,
+          }
+        },
+        onCompleted(response, errors) {
+          if (errors) {
+            log(errors)
+          } else {
+            setDeleteDialogContact(null)
+          }
+        },
+      })
+    }
+  }
+
+  const handleDeleteCancel = () => {
+    setDeleteDialogContact(null)
+  }
 
   return (
     <>
@@ -107,6 +189,9 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
                   <IconButton component={Link} to={'/contact/' + contact?.id + '/edit'}>
                     <EditIcon />
                   </IconButton>
+                  <IconButton onClick={() => { contact && handleDeleteClick(contact) }}>
+                    <DeleteIcon />
+                  </IconButton>
                 </TableCell>
               </TableRow>
             )
@@ -123,6 +208,11 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
           >More</Button>
         </AutoLoadMore>
       )}
+      <DeleteContactDialog
+        open={!!deleteDialogContact}
+        contact={deleteDialogContact}
+        onConfirm={handleDeleteConfirm}
+        onCancel={handleDeleteCancel} />
     </>
   )
 }
