@@ -127,7 +127,7 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
     }
 
   // Delete-related
-  const [commitDeleteMutation, isDeleteMutationInFlight] = useMutation(ContactsTableContactDeleteMutation)
+  const [commitDeleteMutation] = useMutation(ContactsTableContactDeleteMutation)
   const [deleteDialogContact, setDeleteDialogContact] = React.useState<Contact | null>(null)
 
   const handleDeleteClick = (contact: Contact) => {
