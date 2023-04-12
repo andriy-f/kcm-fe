@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<ea1efff6731b3172807c448ff96305c0>>
+ * @generated SignedSource<<d11a82c1bc29b75bc83dc1f60ced7e28>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,6 +15,7 @@ export type DeleteContactInput = {
   id?: string | null;
 };
 export type ContactsTableContactDeleteMutation$variables = {
+  connections: ReadonlyArray<string>;
   input: DeleteContactInput;
 };
 export type ContactsTableContactDeleteMutation$data = {
@@ -29,28 +30,31 @@ export type ContactsTableContactDeleteMutation = {
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = [
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "input"
-  }
-],
-v1 = [
+var v0 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "connections"
+},
+v1 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "input"
+},
+v2 = [
   {
     "kind": "Variable",
     "name": "input",
     "variableName": "input"
   }
 ],
-v2 = {
+v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "deletedId",
   "storageKey": null
 },
-v3 = {
+v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -59,21 +63,24 @@ v3 = {
 };
 return {
   "fragment": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v0/*: any*/),
+      (v1/*: any*/)
+    ],
     "kind": "Fragment",
     "metadata": null,
     "name": "ContactsTableContactDeleteMutation",
     "selections": [
       {
         "alias": null,
-        "args": (v1/*: any*/),
+        "args": (v2/*: any*/),
         "concreteType": "DeleteContactPayload",
         "kind": "LinkedField",
         "name": "deleteContact",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/)
+          (v3/*: any*/),
+          (v4/*: any*/)
         ],
         "storageKey": null
       }
@@ -83,29 +90,39 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v1/*: any*/),
+      (v0/*: any*/)
+    ],
     "kind": "Operation",
     "name": "ContactsTableContactDeleteMutation",
     "selections": [
       {
         "alias": null,
-        "args": (v1/*: any*/),
+        "args": (v2/*: any*/),
         "concreteType": "DeleteContactPayload",
         "kind": "LinkedField",
         "name": "deleteContact",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
+          (v3/*: any*/),
           {
             "alias": null,
             "args": null,
             "filters": null,
-            "handle": "deleteRecord",
+            "handle": "deleteEdge",
             "key": "",
             "kind": "ScalarHandle",
-            "name": "deletedId"
+            "name": "deletedId",
+            "handleArgs": [
+              {
+                "kind": "Variable",
+                "name": "connections",
+                "variableName": "connections"
+              }
+            ]
           },
-          (v3/*: any*/)
+          (v4/*: any*/)
         ],
         "storageKey": null
       }
@@ -122,6 +139,6 @@ return {
 };
 })();
 
-(node as any).hash = "aadf3e277b9869f4c0ed1c7e97672a82";
+(node as any).hash = "9cdae2cd19260cbe8ee6e7d4a7343115";
 
 export default node;

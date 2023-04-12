@@ -3,7 +3,7 @@
  */
 import React, { useRef, useTransition } from 'react'
 import debug from 'debug'
-import { useMutation, usePaginationFragment } from 'react-relay'
+import { useMutation, usePaginationFragment, ConnectionHandler } from 'react-relay'
 import { Link } from 'react-router-dom'
 import { debounce } from 'throttle-debounce'
 import graphql from 'babel-plugin-relay/macro'
@@ -62,9 +62,12 @@ fragment ContactsTableFragment on Query
 `
 
 const ContactsTableContactDeleteMutation = graphql`
-  mutation ContactsTableContactDeleteMutation ($input: DeleteContactInput!) {
+  mutation ContactsTableContactDeleteMutation (
+    $input: DeleteContactInput!
+    $connections: [ID!]!
+  ) {
     deleteContact (input: $input) {
-      deletedId @deleteRecord
+      deletedId @deleteEdge(connections: $connections)
       clientMutationId
     }
   }
@@ -136,11 +139,13 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
 
   const handleDeleteConfirm = () => {
     if (deleteDialogContact) {
+      const connectionId = ConnectionHandler.getConnectionID('client:root', 'ContactsTableFragment_allContacts')
       commitDeleteMutation({
         variables: {
           input: {
             id: deleteDialogContact.id,
-          }
+          },
+          connections: [connectionId]
         },
         onCompleted(response, errors) {
           if (errors) {
