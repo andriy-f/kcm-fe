@@ -1,7 +1,7 @@
 import React, { useRef, useTransition } from 'react'
 import debug from 'debug'
 import { useMutation, usePaginationFragment, ConnectionHandler } from 'react-relay'
-import { Link } from 'react-router-dom'
+import { Link as RRLink } from 'react-router-dom'
 import { debounce } from 'throttle-debounce'
 import graphql from 'babel-plugin-relay/macro'
 
@@ -28,6 +28,7 @@ import Title from '../common/Title'
 import AutoLoadMore from '../common/AutoLoadMore'
 import Contact from '../../types/Contact'
 import { appName } from '../../consts'
+import Link from '@mui/material/Link'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':ContactsTable.tsx')
@@ -178,20 +179,28 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
         <TableBody>
           {contactEdges?.map((contactEdge) => {
             const contact = contactEdge?.node
-            return (
-              <TableRow key={contact?.id}>
-                <TableCell>{contact?.firstName}</TableCell>
-                <TableCell>{contact?.lastName}</TableCell>
-                <TableCell>{contact?.email}</TableCell>
-                <TableCell>{contact?.phoneNumber}</TableCell>
+            return contact && (
+              <TableRow key={contact.id}>
+                <TableCell>{contact.firstName}</TableCell>
+                <TableCell>{contact.lastName}</TableCell>
+                <TableCell>
+                  <Link href={'mailto:' + contact.email} target='_blank'>
+                    {contact.email}
+                  </Link>
+                </TableCell>
+                <TableCell>
+                  <Link href={'tel:' + contact.phoneNumber} target='_blank'>
+                    {contact.phoneNumber}
+                  </Link>
+                </TableCell>
                 <TableCell align="right">
-                  <IconButton component={Link} to={'/contact/' + contact?.id}>
+                  <IconButton component={RRLink} to={'/contact/' + contact.id}>
                     <PageviewIcon />
                   </IconButton>
-                  <IconButton component={Link} to={'/contact/' + contact?.id + '/edit'}>
+                  <IconButton component={RRLink} to={'/contact/' + contact.id + '/edit'}>
                     <EditIcon />
                   </IconButton>
-                  <IconButton onClick={() => { contact && handleDeleteClick(contact) }}>
+                  <IconButton onClick={() => { handleDeleteClick(contact) }}>
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
