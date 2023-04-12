@@ -1,5 +1,6 @@
 import { ComponentClass, createFactory } from 'react'
 
+// Unused, TODO consider removing
 const defaultProps = (props: object) => (BaseComponent: ComponentClass) => {
   const factory = createFactory(BaseComponent)
   const DefaultProps = (ownerProps: object) => factory(ownerProps)

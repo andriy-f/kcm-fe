@@ -1,6 +1,3 @@
-/**
- * TODO: add create button functionality
- */
 import React, { useRef, useTransition } from 'react'
 import debug from 'debug'
 import { useMutation, usePaginationFragment, ConnectionHandler } from 'react-relay'
