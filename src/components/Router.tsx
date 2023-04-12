@@ -10,6 +10,7 @@ import ContactsPage from '../features/contacts/ContactsPage'
 import LoginPage from '../features/auth/LoginPage'
 import ContactDetailsPage from '../features/contacts/ContactDetailsPage'
 import GraphQLPlayground from '../features/develop/Playground'
+import CreateContactPage from '../features/contacts/CreateContactPage'
 
 export const loginPath = 'login'
 export const logoutPath = 'logout'
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
         element: (<>
           <ProtectedRoute requiredPermissions={['contact-list-view']}>
             <ContactsPage />
+          </ProtectedRoute>
+        </>),
+      },
+      {
+        path: 'contact/new',
+        element: (<>
+          <ProtectedRoute requiredPermissions={['contact-edit']}>
+            <CreateContactPage />
           </ProtectedRoute>
         </>),
       },

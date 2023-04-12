@@ -41,7 +41,7 @@ function ContactsPage(props: Props) {
         color="primary"
         aria-label="add"
         component={Link}
-        to='/contacts/new'>
+        to='/contact/new'>
         <AddIcon />
       </Fab>
     </article>)
