@@ -12,9 +12,8 @@ import ContactDetailsPage from '../features/contacts/ContactDetailsPage'
 import GraphQLPlayground from '../features/develop/Playground'
 import CreateContactPage from '../features/contacts/CreateContactPage'
 import ProfilePage from '../features/viewer/ProfilePage'
-
-export const loginPath = 'login'
-export const logoutPath = 'logout'
+import { loginPath, logoutPath } from './../components/paths'
+import { DevPage } from '../features/develop/DevPage'
 
 const router = createBrowserRouter([
   {
@@ -69,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <ProfilePage />,
+      },
+      {
+        path: 'dev/',
+        element: <DevPage />,
       },
       {
         path: 'dev/playground',

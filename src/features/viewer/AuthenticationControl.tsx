@@ -14,7 +14,7 @@ import Logout from '@mui/icons-material/Logout'
 import AccountBox from '@mui/icons-material/AccountBox'
 
 import { useAppSelector } from '../../app/hooks'
-import { loginPath } from '../../components/Router'
+import { loginPath } from '../../components/paths'
 import { isUserLoggedIn, selectViewer } from './viewerSlice'
 
 export default function AuthenticationControl() {
