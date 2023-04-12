@@ -10,14 +10,14 @@ function LogOut() {
   const beginLogout = () => dispatch(requestLogoutThunk())
 
   useEffect(() => {
-      beginLogout()
+    beginLogout()
   })
 
   const isLoggedIn = useAppSelector(isViewerLoggedIn)
-  if(isLoggedIn) {
+  if (isLoggedIn) {
     return <span>Logging out...</span>
   } else {
-    return <Navigate to='/' />
+    return <Navigate to='/' replace={true} />
   }
 }
 

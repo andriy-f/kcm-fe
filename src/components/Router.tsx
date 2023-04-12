@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       {
         path: 'contacts/',
         element: (<>
-          <RequireAuth requiredPermissions={['contact-list-view']}>
+          <RequireAuth permissions={['contact-list-view']}>
             <ContactsPage />
           </RequireAuth>
         </>),
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       {
         path: 'contact/new',
         element: (<>
-          <RequireAuth requiredPermissions={['contact-edit']}>
+          <RequireAuth permissions={['contact-edit']}>
             <CreateContactPage />
           </RequireAuth>
         </>),
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       {
         path: 'contact/:id',
         element: (<>
-          <RequireAuth requiredPermissions={['contact-view']}>
+          <RequireAuth permissions={['contact-view']}>
             <ContactDetailsPage />
           </RequireAuth>
         </>),
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
       {
         path: 'contact/:id/edit',
         element: (<>
-          <RequireAuth requiredPermissions={['contact-edit']}>
+          <RequireAuth permissions={['contact-edit']}>
             <ContactDetailsPage editable />
           </RequireAuth>
         </>),
@@ -67,7 +67,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'profile',
-        element: <ProfilePage />,
+        element: (
+          <RequireAuth>
+            <ProfilePage />,
+          </RequireAuth>
+        ),
       },
       {
         path: 'dev/',

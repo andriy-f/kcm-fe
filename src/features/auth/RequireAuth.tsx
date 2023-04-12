@@ -1,24 +1,29 @@
 import React from 'react'
+import { Navigate } from 'react-router-dom'
 
 import { useAppSelector } from '../../app/hooks'
 import { isUserLoggedIn, selectViewer } from '../viewer/viewerSlice'
 import NotAuthorized from './NotAuthorized'
-import NotLoggedIn from './NotLoggedIn'
+import { loginPath } from '../../components/paths'
 
 type Props = {
-  requiredPermissions: string[]
+  permissions?: string[]
 }
 
-const RequireAuth = (props: React.PropsWithChildren<Props>) => {
-  const { children, requiredPermissions } = props
+/**
+ * Require user being logged in.
+ * If permissions are specified, require user having all of them.
+ */
+const RequireAuth = ({ children, permissions }: React.PropsWithChildren<Props>) => {
   const viewer = useAppSelector(selectViewer)
   const isLoggedIn = isUserLoggedIn(viewer)
 
   if (isLoggedIn) {
-    const isAuthorized = requiredPermissions.every(p => viewer.userData?.permissions.includes(p))
+    const isAuthorized = permissions?.every(p => viewer.userData?.permissions?.includes(p))
     return isAuthorized ? <>{children}</> : <NotAuthorized />
   } else {
-    return <NotLoggedIn />
+    // TODO redirect to login page with redirect url
+    return <Navigate to={'/' + loginPath} />
   }
 }
 
