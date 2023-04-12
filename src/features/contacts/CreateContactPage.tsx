@@ -34,6 +34,8 @@ function CreateContactPage() {
   const [commitMutation, isMutationInFlight] = useMutation(ContactDetailsPageContactUpdateMutation)
   const navigate = useNavigate()
 
+  // TODO: consider @appendEdge when contact list is almost empty
+  // so that new contact is visible without a page refresh
   function handleSave(contact: Contact) {
     commitMutation({
       variables: {
