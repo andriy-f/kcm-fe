@@ -9,7 +9,7 @@ type Props = {
   requiredPermissions: string[]
 }
 
-export const ProtectedRoute = (props: React.PropsWithChildren<Props>) => {
+const RequireAuth = (props: React.PropsWithChildren<Props>) => {
   const { children, requiredPermissions } = props
   const viewer = useAppSelector(selectViewer)
   const isLoggedIn = isUserLoggedIn(viewer)
@@ -21,3 +21,5 @@ export const ProtectedRoute = (props: React.PropsWithChildren<Props>) => {
     return <NotLoggedIn />
   }
 }
+
+export default RequireAuth

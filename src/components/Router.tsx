@@ -5,7 +5,7 @@ import ErrorPage from '../app/ErrorPage'
 import LogOut from '../features/auth/LogoutPage'
 import AppLayout from '../features/layout/AppLayout'
 import Intro from './Intro'
-import { ProtectedRoute } from '../features/auth/ProtectedRoute'
+import RequireAuth from '../features/auth/RequireAuth'
 import ContactsPage from '../features/contacts/ContactsPage'
 import LoginPage from '../features/auth/LoginPage'
 import ContactDetailsPage from '../features/contacts/ContactDetailsPage'
@@ -28,33 +28,33 @@ const router = createBrowserRouter([
       {
         path: 'contacts/',
         element: (<>
-          <ProtectedRoute requiredPermissions={['contact-list-view']}>
+          <RequireAuth requiredPermissions={['contact-list-view']}>
             <ContactsPage />
-          </ProtectedRoute>
+          </RequireAuth>
         </>),
       },
       {
         path: 'contact/new',
         element: (<>
-          <ProtectedRoute requiredPermissions={['contact-edit']}>
+          <RequireAuth requiredPermissions={['contact-edit']}>
             <CreateContactPage />
-          </ProtectedRoute>
+          </RequireAuth>
         </>),
       },
       {
         path: 'contact/:id',
         element: (<>
-          <ProtectedRoute requiredPermissions={['contact-view']}>
+          <RequireAuth requiredPermissions={['contact-view']}>
             <ContactDetailsPage />
-          </ProtectedRoute>
+          </RequireAuth>
         </>),
       },
       {
         path: 'contact/:id/edit',
         element: (<>
-          <ProtectedRoute requiredPermissions={['contact-edit']}>
+          <RequireAuth requiredPermissions={['contact-edit']}>
             <ContactDetailsPage editable />
-          </ProtectedRoute>
+          </RequireAuth>
         </>),
       },
       {
