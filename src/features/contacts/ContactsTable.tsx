@@ -179,10 +179,19 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
         <TableBody>
           {contactEdges?.map((contactEdge) => {
             const contact = contactEdge?.node
+            const contactViewLink = contact ? '/contact/' + contact.id : ''
             return contact && (
               <TableRow key={contact.id}>
-                <TableCell>{contact.firstName}</TableCell>
-                <TableCell>{contact.lastName}</TableCell>
+                <TableCell>
+                  <RRLink to={contactViewLink}>
+                    {contact.firstName}
+                  </RRLink>
+                </TableCell>
+                <TableCell>
+                  <RRLink to={contactViewLink}>
+                    {contact.lastName}
+                  </RRLink>
+                </TableCell>
                 <TableCell>
                   <Link href={'mailto:' + contact.email} target='_blank'>
                     {contact.email}
@@ -194,10 +203,10 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
                   </Link>
                 </TableCell>
                 <TableCell align="right">
-                  <IconButton component={RRLink} to={'/contact/' + contact.id}>
+                  <IconButton component={RRLink} to={contactViewLink}>
                     <PageviewIcon />
                   </IconButton>
-                  <IconButton component={RRLink} to={'/contact/' + contact.id + '/edit'}>
+                  <IconButton component={RRLink} to={contactViewLink + '/edit'}>
                     <EditIcon />
                   </IconButton>
                   <IconButton onClick={() => { handleDeleteClick(contact) }}>
