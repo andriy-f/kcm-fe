@@ -5,9 +5,10 @@ import { useNavigate } from 'react-router-dom'
 import graphql from 'babel-plugin-relay/macro'
 
 import Container from '@mui/material/Container'
+import LinearProgress from '@mui/material/LinearProgress'
+
 import { appName } from '../../consts'
 import ContactDetails from './ContactDetails'
-import LinearProgress from '@mui/material/LinearProgress'
 import Contact from '../../types/Contact'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
