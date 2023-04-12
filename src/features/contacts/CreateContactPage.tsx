@@ -1,6 +1,6 @@
 import React from 'react'
 import debug from 'debug'
-import { useMutation } from 'react-relay'
+import { ConnectionHandler, useMutation } from 'react-relay'
 import { useNavigate } from 'react-router-dom'
 import graphql from 'babel-plugin-relay/macro'
 
@@ -14,10 +14,14 @@ import Contact from '../../types/Contact'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':CreateContactPage.tsx')
 
-const ContactDetailsPageContactUpdateMutation = graphql`
-  mutation CreateContactPageContactCreateMutation ($input: CreateContactInput!) {
+// TODO: @appendNode or @appendEdge?
+const CreateContactPageContactCreateMutation = graphql`
+  mutation CreateContactPageContactCreateMutation (
+    $input: CreateContactInput!
+    $connections: [ID!]!
+    ) {
     createContact (input: $input) {
-      contact {
+      contact @appendNode(connections: $connections, edgeTypeName: "ContactEdge") {
         id
         contactId
         firstName
@@ -32,12 +36,11 @@ const ContactDetailsPageContactUpdateMutation = graphql`
 
 function CreateContactPage() {
 
-  const [commitMutation, isMutationInFlight] = useMutation(ContactDetailsPageContactUpdateMutation)
+  const [commitMutation, isMutationInFlight] = useMutation(CreateContactPageContactCreateMutation)
   const navigate = useNavigate()
 
-  // TODO: consider @appendEdge when contact list is almost empty
-  // so that new contact is visible without a page refresh
   function handleSave(contact: Contact) {
+    const connectionId = ConnectionHandler.getConnectionID('client:root', 'ContactsTableFragment_allContacts')
     commitMutation({
       variables: {
         input: {
@@ -45,7 +48,8 @@ function CreateContactPage() {
           lastName: contact.lastName,
           email: contact.email,
           phoneNumber: contact.phoneNumber,
-        }
+        },
+        connections: [connectionId]
       }
     })
     navigate('/contacts')
