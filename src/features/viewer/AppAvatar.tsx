@@ -17,7 +17,7 @@ import { useAppSelector } from '../../app/hooks'
 import { loginPath } from '../../components/paths'
 import { isUserLoggedIn, selectViewer } from './viewerSlice'
 
-export default function AuthenticationControl() {
+export default function AppAvatar() {
 
   const viewer = useAppSelector(selectViewer)
   const viewerName = viewer.userData?.name

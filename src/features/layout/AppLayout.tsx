@@ -8,7 +8,7 @@ import Toolbar from '@mui/material/Toolbar'
 
 import AppProgress from './AppProgress'
 import { useAppDispatch } from '../../app/hooks'
-import AuthenticationControl from '../viewer/AuthenticationControl'
+import AppAvatar from '../viewer/AppAvatar'
 import { setShowDrawer } from '../settings/settingsSlice'
 import AppDrawer from './AppDrawer'
 import ThemeSwitch from '../settings/ThemeSwitch'
@@ -45,7 +45,7 @@ function AppLayout() {
 
           <ThemeSwitch />
 
-          <AuthenticationControl />
+          <AppAvatar />
 
         </Toolbar>
         <AppProgress />
