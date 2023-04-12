@@ -11,6 +11,7 @@ import LoginPage from '../features/auth/LoginPage'
 import ContactDetailsPage from '../features/contacts/ContactDetailsPage'
 import GraphQLPlayground from '../features/develop/Playground'
 import CreateContactPage from '../features/contacts/CreateContactPage'
+import ProfilePage from '../features/viewer/ProfilePage'
 
 export const loginPath = 'login'
 export const logoutPath = 'logout'
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: logoutPath,
         element: <LogOut />,
+      },
+      {
+        path: 'profile',
+        element: <ProfilePage />,
       },
       {
         path: 'dev/playground',

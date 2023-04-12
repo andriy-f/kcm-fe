@@ -56,7 +56,7 @@ export default function AuthenticationControl() {
           <Typography textAlign='center'>Hello, {viewerName}</Typography>
         </MenuItem>
         <Divider />
-        <MenuItem key='profile' onClick={handleCloseUserMenu}>
+        <MenuItem key='profile' component={Link} to='/profile' onClick={handleCloseUserMenu}>
           <ListItemIcon>
             <AccountBox fontSize="small" />
           </ListItemIcon>
