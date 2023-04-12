@@ -193,12 +193,12 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
                   </RRLink>
                 </TableCell>
                 <TableCell>
-                  <Link href={'mailto:' + contact.email} target='_blank'>
+                  <Link href={'mailto:' + contact.email} target='_blank' rel='noreferrer'>
                     {contact.email}
                   </Link>
                 </TableCell>
                 <TableCell>
-                  <Link href={'tel:' + contact.phoneNumber} target='_blank'>
+                  <Link href={'tel:' + contact.phoneNumber} target='_blank' rel='noreferrer'>
                     {contact.phoneNumber}
                   </Link>
                 </TableCell>
