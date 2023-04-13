@@ -73,14 +73,23 @@ function ContactDetails(props: Props) {
         onChange={handleChange}
       />
 
-      {editable && <Button fullWidth type="submit" variant="contained"
-        sx={{ mt: 3, mb: 2 }}
-      >Save</Button>}
+      <Box
+        sx={{ display: 'flex', justifyContent: 'center' }}>
+        {editable && (
+          <Button
+            type="submit"
+            variant="contained"
+          >
+            Save
+          </Button>)}
 
-      {<Button fullWidth variant='outlined'
-        onClick={props.onCancel}
-        sx={{ mt: 3, mb: 2 }}
-      >Back</Button>}
+        {<Button
+          variant='outlined'
+          onClick={props.onCancel}
+          sx={{ ml: 1 }}
+        >
+          Back</Button>}
+      </Box>
     </Box>
   )
 }
