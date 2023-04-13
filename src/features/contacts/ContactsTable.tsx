@@ -1,13 +1,12 @@
 import React, { useRef, useTransition } from 'react'
 import debug from 'debug'
-import { useMutation, usePaginationFragment, ConnectionHandler } from 'react-relay'
+import { PayloadError } from 'relay-runtime'
+import { usePaginationFragment } from 'react-relay'
 import { Link as RRLink } from 'react-router-dom'
 import { debounce } from 'throttle-debounce'
 import graphql from 'babel-plugin-relay/macro'
 
 import Button from '@mui/material/Button'
-import DialogTitle from '@mui/material/DialogTitle'
-import Dialog from '@mui/material/Dialog'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -19,16 +18,14 @@ import IconButton from '@mui/material/IconButton'
 import PageviewIcon from '@mui/icons-material/Pageview'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
+import Link from '@mui/material/Link'
 
 import { ContactsTableFragment$key } from './__generated__/ContactsTableFragment.graphql'
 import Title from '../common/Title'
 import AutoLoadMore from '../common/AutoLoadMore'
 import Contact from '../../types/Contact'
 import { appName } from '../../consts'
-import Link from '@mui/material/Link'
+import { DeleteContactDialog } from './DeleteContactDialog'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':ContactsTable.tsx')
@@ -59,48 +56,6 @@ fragment ContactsTableFragment on Query
   }
 `
 
-const ContactsTableContactDeleteMutation = graphql`
-  mutation ContactsTableContactDeleteMutation (
-    $input: DeleteContactInput!
-    $connections: [ID!]!
-  ) {
-    deleteContact (input: $input) {
-      deletedId @deleteEdge(connections: $connections)
-      clientMutationId
-    }
-  }
-`
-
-function DeleteContactDialog({
-  open,
-  contact,
-  onConfirm,
-  onCancel,
-}: {
-  open: boolean
-  contact: Contact | null
-  onConfirm(): void
-  onCancel(): void
-}) {
-
-  return (
-    <Dialog
-      open={open}
-      onClose={onCancel}>
-      <DialogTitle>Delete contact?</DialogTitle>
-      <DialogContent>
-        {contact && <DialogContentText>
-          {contact.firstName} {contact.lastName}
-        </DialogContentText>}
-      </DialogContent>
-      <DialogActions >
-        <Button onClick={onCancel}>No</Button>
-        <Button autoFocus variant='contained' onClick={onConfirm}>Yes</Button>
-      </DialogActions>
-    </Dialog>
-  )
-}
-
 function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
   const {
     data,
@@ -128,36 +83,22 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
     }
 
   // Delete-related
-  const [commitDeleteMutation] = useMutation(ContactsTableContactDeleteMutation)
   const [deleteDialogContact, setDeleteDialogContact] = React.useState<Contact | null>(null)
 
   const handleDeleteClick = (contact: Contact) => {
     setDeleteDialogContact(contact)
   }
 
-  const handleDeleteConfirm = () => {
-    if (deleteDialogContact) {
-      const connectionId = ConnectionHandler.getConnectionID('client:root', 'ContactsTableFragment_allContacts')
-      commitDeleteMutation({
-        variables: {
-          input: {
-            id: deleteDialogContact.id,
-          },
-          connections: [connectionId]
-        },
-        onCompleted(response, errors) {
-          if (errors) {
-            log(errors)
-          } else {
-            setDeleteDialogContact(null)
-          }
-        },
-      })
-    }
+  const handleDeleted = () => {
+    setDeleteDialogContact(null)
   }
 
   const handleDeleteCancel = () => {
     setDeleteDialogContact(null)
+  }
+
+  const handleDeleteError = (errors: PayloadError[]) => {
+    log(errors)
   }
 
   return (
@@ -166,6 +107,13 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
       <TextField label='Search' variant='filled'
         value={filterText} onChange={handleFilterChange} />
       {isPending && <CircularProgress />}
+      <DeleteContactDialog
+        open={!!deleteDialogContact}
+        contact={deleteDialogContact}
+        onDelete={handleDeleted}
+        onCancel={handleDeleteCancel}
+        onError={handleDeleteError}
+      />
       <Table>
         <TableHead>
           <TableRow>
@@ -228,11 +176,6 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
           >More</Button>
         </AutoLoadMore>
       )}
-      <DeleteContactDialog
-        open={!!deleteDialogContact}
-        contact={deleteDialogContact}
-        onConfirm={handleDeleteConfirm}
-        onCancel={handleDeleteCancel} />
     </>
   )
 }
