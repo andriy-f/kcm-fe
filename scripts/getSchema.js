@@ -1,6 +1,8 @@
 #!/usr/bin/env babel-node
 
-const fetch = require('isomorphic-fetch');
+import fetchPonyfill from 'fetch-ponyfill'
+
+const {fetch} = fetchPonyfill()
 const fs = require('fs');
 const path = require('path')
 

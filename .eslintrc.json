@@ -1,5 +1,9 @@
 {
-  "extends": "react-app",
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "plugin:react-hooks/recommended"
+  ],
   "rules": {
     "semi": ["warn", "never"],
     "quotes": ["warn", "single"]
