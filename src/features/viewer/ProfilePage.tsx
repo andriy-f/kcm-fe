@@ -13,11 +13,11 @@ function ProfilePage() {
     const expStr = viewer.tokenExpiresOn ? new Date(viewer.tokenExpiresOn).toString() : 'n/a'
 
     return (
-      <div>
+      <>
         <div>isLoggedIn: {isLoggedInStr}</div>
         <div>Login expires(ed) at: {expStr}</div>
         {isLoggedIn && <RRLink to="/logout">Log out</RRLink>}
-      </div>
+      </>
     )
   } else {
     return (
