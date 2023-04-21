@@ -61,6 +61,7 @@
     "concurrently": "^7.6.0",
     "eslint": "^8.32.0",
     "nodemon": "^2.0.20",
+    "react-test-renderer": "^18.2.0",
     "relay-compiler": "^15.0.0"
   }
 }
