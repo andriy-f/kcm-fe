@@ -45,6 +45,10 @@ export const getUserFriendlyErrorMessage = (error: any) => {
 }
 
 export const urlJoin = (baseUrl: string, url: string) => {
+  if(!baseUrl) {
+    return url
+  }
+
   var theUrl = new URI(url)
   if (theUrl.is('relative')) {
     theUrl = theUrl.absoluteTo(baseUrl)

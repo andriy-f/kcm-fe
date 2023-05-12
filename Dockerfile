@@ -1,5 +1,5 @@
 # Dev image
-FROM node:18-alpine as build
+FROM node:18-alpine as base
 
 RUN apk add --no-cache su-exec tini
 
@@ -19,7 +19,6 @@ RUN set -ex; \
   su-exec node npm cache clean --force; \
   apk del .gyp;
 
-# Build app
 COPY --chown=node:node tsconfig.json ./
 COPY --chown=node:node .eslintrc.json ./
 COPY --chown=node:node nodemon-relay.json ./
@@ -29,8 +28,10 @@ COPY --chown=node:node assets ./assets
 COPY --chown=node:node public ./public
 COPY --chown=node:node scripts ./scripts
 COPY --chown=node:node src ./src
-RUN su-exec node env NODE_ENV=production npm run build
 
+# Development
+# ===========
+FROM base as development
 # Dev runtime config
 USER node
 EXPOSE 80
@@ -38,10 +39,15 @@ ENV PORT 80
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["npm", "run", "dev"]
 
+# Build
+# =====
+FROM base as build
+RUN su-exec node env NODE_ENV=production npm run build
+
 # ==========
 # Prod image
 # ==========
-FROM nginx:alpine
+FROM nginx:alpine as production
 
 # Prepare app dir
 WORKDIR /usr/share/nginx/html
