@@ -5,9 +5,7 @@ name: Build and Test in NodeJS
 
 on:
   push:
-    # Disable automatic runs
-    branches: []
-    # branches: [ "main" ]
+    branches: [ "main" ]
 
 jobs:
   build:
