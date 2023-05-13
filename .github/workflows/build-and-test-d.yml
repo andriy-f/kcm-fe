@@ -40,8 +40,8 @@ jobs:
           context: .
           target: test
           push: false
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=${{ github.ref_name}}-test
+          cache-to: type=gha,mode=max,scope=${{ github.ref_name}}-test
 
       - name: Build Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
@@ -49,5 +49,5 @@ jobs:
           context: .
           target: production
           push: false
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=${{ github.ref_name}}-prod
+          cache-to: type=gha,mode=max,scope=${{ github.ref_name}}-prod
