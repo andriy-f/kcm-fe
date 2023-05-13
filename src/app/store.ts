@@ -15,6 +15,7 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 
 import { settingsReducer } from '../features/settings/settingsSlice'
 import { viewerReducer } from '../features/viewer/viewerSlice'
+import { shouldLogRedux } from '../config'
 
 const persistConfig = {
   key: 'root',
@@ -28,6 +29,8 @@ const rootReducer = combineReducers({
 
 const persistingReducer = persistReducer(persistConfig, rootReducer)
 
+const additionalMiddleware = shouldLogRedux ? [createLogger()] : []
+
 export const store = configureStore({
   reducer: persistingReducer,
   middleware: (getDefaultMiddleware) =>
@@ -35,7 +38,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(createLogger()),
+    }).concat(additionalMiddleware),
 })
 
 export const persistor = persistStore(store)
