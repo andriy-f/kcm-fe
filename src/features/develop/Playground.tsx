@@ -3,7 +3,9 @@ import React from 'react'
 import { graphqlURL } from '../../relay/environment'
 
 const Playground = () => (
-  null
+  <div>
+    Here will be graphql interface to {graphqlURL}
+  </div>
   // <GraphiQL
   //   fetcher={async graphQLParams => {
   //     const data = await fetch(
