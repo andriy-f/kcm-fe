@@ -33,6 +33,7 @@ export default function LoginForm(props: Props) {
         type='text'
         margin='normal'
         required
+        autoComplete='login'
         value={login}
         onChange={e => { setLogin(e.target.value) }}
       />
@@ -42,6 +43,7 @@ export default function LoginForm(props: Props) {
         type='password'
         margin="normal"
         required
+        autoComplete='current-password'
         value={password}
         onChange={e => { setPassword(e.target.value) }}
       />
