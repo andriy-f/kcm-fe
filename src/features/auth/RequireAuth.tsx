@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 
 import { useAppSelector } from '../../app/hooks'
 import { isUserLoggedIn, selectViewer } from '../viewer/viewerSlice'
@@ -18,6 +18,7 @@ type Props = {
 const RequireAuth = ({ children, permissions }: React.PropsWithChildren<Props>) => {
   const viewer = useAppSelector(selectViewer)
   const isLoggedIn = isUserLoggedIn(viewer)
+  const location = useLocation()
 
   if (isLoggedIn) {
     const isAuthorized = (permissions && permissions.length > 0)
@@ -26,8 +27,7 @@ const RequireAuth = ({ children, permissions }: React.PropsWithChildren<Props>) 
 
     return isAuthorized ? <>{children}</> : <NotAuthorized />
   } else {
-    // TODO redirect to login page with redirect url
-    return <Navigate to={'/' + loginPath} />
+    return <Navigate to={'/' + loginPath} state={{ from: location.pathname }} />
   }
 }
 

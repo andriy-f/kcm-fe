@@ -8,13 +8,13 @@ export const commonAjaxRequestSettings = {
   responseType: 'json',
 }
 
-const switchcaseSimple = (cases: { [prop: string]: unknown})  => (defaultCase: unknown) => (key: string) =>
+const switchcaseSimple = (cases: { [prop: string]: unknown }) => (defaultCase: unknown) => (key: string) =>
   key in cases ? cases[key] : defaultCase
 
 const executeIfFunction = (f: any) =>
   f instanceof Function ? f() : f
 
-export const switchcase = (cases: { [prop: string]: unknown})  => (defaultCase: unknown) => (key: string) =>
+export const switchcase = (cases: { [prop: string]: unknown }) => (defaultCase: unknown) => (key: string) =>
   executeIfFunction(switchcaseSimple(cases)(defaultCase)(key))
 
 // Sample usage in redux reducer
@@ -45,7 +45,7 @@ export const getUserFriendlyErrorMessage = (error: any) => {
 }
 
 export const urlJoin = (baseUrl: string, url: string) => {
-  if(!baseUrl) {
+  if (!baseUrl) {
     return url
   }
 
@@ -55,4 +55,8 @@ export const urlJoin = (baseUrl: string, url: string) => {
   }
 
   return theUrl.toString()
+}
+
+export const isRelativeUrl = (url: string) => {
+  return url.startsWith('/') && !url.startsWith('//')
 }
