@@ -1,5 +1,3 @@
-import URI from 'urijs'
-
 export const isDev = process.env.NODE_ENV === 'development'
 
 export const commonAjaxRequestSettings = {
@@ -44,19 +42,56 @@ export const getUserFriendlyErrorMessage = (error: any) => {
     .join(' ')
 }
 
-export const urlJoin = (baseUrl: string, url: string) => {
+export const urlJoin = (baseUrl: string | null, url: string) => {
   if (!baseUrl) {
     return url
   }
 
-  var theUrl = new URI(url)
-  if (theUrl.is('relative')) {
-    theUrl = theUrl.absoluteTo(baseUrl)
+  if (isAbsoluteUrl(url)) {
+    return url
   }
 
-  return theUrl.toString()
+  if (isRelativeUrl(url)) {
+    return removeTrailing(baseUrl, '/') + '/' + removePrefix(url, '/')
+  }
+}
+
+export const isAbsoluteUrl = (url: string) => {
+  return url.startsWith('http://')
+    || url.startsWith('https://')
+    || url.startsWith('//')
+    || url.startsWith('data:')
+    || url.startsWith('mailto:')
+    || url.startsWith('tel:')
+    // eslint-disable-next-line no-script-url
+    || url.startsWith('javascript:')
 }
 
 export const isRelativeUrl = (url: string) => {
   return url.startsWith('/') && !url.startsWith('//')
+}
+
+export const removeTrailing = (str: string, char: string) => {
+  if (char.length !== 1) {
+    throw new Error('char must be a single character')
+  }
+
+  if (!str.endsWith(char)) {
+    return str
+  }
+
+  let lastCharIndex = str.length - 1
+  while (str[lastCharIndex] === char) {
+    lastCharIndex--
+  }
+
+  return str.substring(0, lastCharIndex)
+}
+
+export const removePrefix = (str: string, prefix: string) => {
+  if (!str.startsWith(prefix)) {
+    return str
+  }
+
+  return str.substring(prefix.length)
 }
