@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { isDev } from '../../utils'
+import { isDevEnv } from '../../config'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
@@ -16,7 +16,7 @@ const items = [
   { caption: 'Intro', to: '/', icon: <HomeIcon /> },
   { caption: 'Contacts', to: '/contacts', icon: <ContactsIcon /> },
   // { caption: 'Settings', to: '/settings', icon: <SettingsIcon /> },
-  { caption: 'Dev', to: '/dev', icon: <DeveloperModeIcon />, hidden: !isDev },
+  { caption: 'Dev', to: '/dev', icon: <DeveloperModeIcon />, hidden: !isDevEnv },
 ]
 
 function Navigation() {
