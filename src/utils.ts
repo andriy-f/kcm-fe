@@ -42,6 +42,9 @@ export const getUserFriendlyErrorMessage = (error: any) => {
     .join(' ')
 }
 
+/**
+ * Join baseUrl and url in simple cases
+ */
 export const urlJoin = (baseUrl: string | null, url: string) => {
   if (!baseUrl) {
     return url
