@@ -1,9 +1,9 @@
 
 import { urlJoin } from '../../utils'
-import { APIURL } from '../../config'
+import { beUrl } from '../../config'
 import { LoginData } from '../../types/LoginData'
 
-const loginUrl = urlJoin(APIURL, '/account/logInWithCookie')
+const loginUrl = urlJoin(beUrl, '/account/logInWithCookie')
 
 const fetchParams: RequestInit = {
     credentials: 'include',
@@ -25,7 +25,7 @@ export function requestLogIn(loginData: LoginData) {
   })
 }
 
-const logoutUrl = urlJoin(APIURL, '/account/clearCookie')
+const logoutUrl = urlJoin(beUrl, '/account/clearCookie')
 
 export function requestLogout() {
   return fetch(logoutUrl, {

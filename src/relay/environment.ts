@@ -9,11 +9,11 @@ import type { FetchFunction, IEnvironment } from 'relay-runtime'
 import debug from 'debug'
 
 import { appName } from '../consts'
-import { APIURL } from '../config'
+import { beUrl } from '../config'
 import { urlJoin } from '../utils'
 import AppRelayError from './AppRelayError'
 
-export const graphqlURL = urlJoin(APIURL, '/graphql')
+export const graphqlURL = urlJoin(beUrl, '/graphql')
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':relayEnvironment.js')
