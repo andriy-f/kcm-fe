@@ -54,6 +54,7 @@ export const urlJoin = (baseUrl: string | null, url: string) => {
     return url
   }
 
+  // url should be relative here
   return removeTrailing(baseUrl, '/') + '/' + removePrefix(url, '/')
 }
 
