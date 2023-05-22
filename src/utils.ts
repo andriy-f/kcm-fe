@@ -54,9 +54,7 @@ export const urlJoin = (baseUrl: string | null, url: string) => {
     return url
   }
 
-  if (isRelativeUrl(url)) {
-    return removeTrailing(baseUrl, '/') + '/' + removePrefix(url, '/')
-  }
+  return removeTrailing(baseUrl, '/') + '/' + removePrefix(url, '/')
 }
 
 export const isAbsoluteUrl = (url: string) => {
