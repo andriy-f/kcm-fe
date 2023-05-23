@@ -51,6 +51,7 @@ jobs:
           push: false
           cache-from: type=gha,scope=${{ github.ref_name}}-prod
           cache-to: type=gha,mode=max,scope=${{ github.ref_name}}-prod
-          labels: |
-            org.opencontainers.image.version=2.0.2
-            org.opencontainers.image.revision=${{ github.sha }}
+          # labels: |
+          #   org.opencontainers.image.version=2.0.2
+          #   org.opencontainers.image.revision=${{ github.sha }}
+          labels: org.opencontainers.image.version=2.0.2
