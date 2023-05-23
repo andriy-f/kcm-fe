@@ -9,6 +9,10 @@ const clientSideApiUrl = (
 // URL to the KCM backend
 export const beUrl = process.env.REACT_APP_KCM_BACKEND_URL || clientSideApiUrl
 
+if (!beUrl) {
+  throw new Error('Backend URL was not set up.')
+}
+
 export const shouldLogRedux =
   process.env.CI !== 'true' &&
   process.env.NODE_ENV === 'development'
