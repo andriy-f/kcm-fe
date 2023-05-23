@@ -41,7 +41,11 @@ CMD ["npm", "run", "dev"]
 # Unit tests
 # =====
 FROM base as test
-RUN su-exec node env NODE_ENV=test CI=true npm run test
+RUN su-exec node env \
+  REACT_APP_KCM_BACKEND_URL=http://localhost:3000 \
+  NODE_ENV=test \
+  CI=true \
+  npm run test
 
 # Build
 # =====
