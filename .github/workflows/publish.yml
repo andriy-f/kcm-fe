@@ -60,5 +60,5 @@ jobs:
           cache-to: type=gha,mode=max,scope=${{ github.ref_name}}-prod
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           labels: |
-            org.opencontainers.image.version=2.0.2
+            org.opencontainers.image.version=${{ github.event.release.tag_name }}
             org.opencontainers.image.revision=${{ github.sha }}
