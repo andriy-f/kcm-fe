@@ -4,7 +4,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import ErrorPage from '../app/ErrorPage'
 import LogOut from '../features/auth/LogoutPage'
 import AppLayout from '../features/layout/AppLayout'
-import Intro from './Intro'
+import About from '../features/about/About'
 import RequireAuth from '../features/auth/RequireAuth'
 import ContactsPage from '../features/contacts/ContactsPage'
 import LoginPage from '../features/auth/LoginPage'
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Intro />
+        element: <About />
       },
       {
         path: 'contacts/',

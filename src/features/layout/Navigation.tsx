@@ -13,7 +13,7 @@ import ContactsIcon from '@mui/icons-material/Contacts'
 import DeveloperModeIcon from '@mui/icons-material/DeveloperMode'
 
 const items = [
-  { caption: 'Intro', to: '/', icon: <HomeIcon /> },
+  { caption: 'About', to: '/', icon: <HomeIcon /> },
   { caption: 'Contacts', to: '/contacts', icon: <ContactsIcon /> },
   // { caption: 'Settings', to: '/settings', icon: <SettingsIcon /> },
   { caption: 'Dev', to: '/dev', icon: <DeveloperModeIcon />, hidden: !isDevEnv },
