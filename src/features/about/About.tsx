@@ -16,7 +16,7 @@ const About = () => (
       <Typography variant="h4">Description</Typography>
       <Typography variant="body1" gutterBottom>
         This is an example of contact manager application, implemented as separate front-end and back-end services connected via GraphQL.<br/>
-        Such an architecture enables developers to relatively easy replace some service with another,
+        Such an architecture enables developers to relatively easy replace some service with another, for example if you want to replace old backend with new one using up-to-date technologies.
       </Typography>
     </section>
     <section>
