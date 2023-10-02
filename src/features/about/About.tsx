@@ -13,13 +13,14 @@ const About = () => (
       <Typography variant="h1" textAlign='center'>K Contact Manager</Typography>
     </Container>
     <section>
-      <Typography variant="h5">Description</Typography>
+      <Typography variant="h3">Description</Typography>
       <Typography variant="body1" gutterBottom>
-        This is example of contact manager application. It shows how it be implemented as separate front-end and back-end services.
+        This is an example of contact manager application, implemented as separate front-end and back-end services connected via GraphQL.<br/>
+        Such an architecture enables developers to relatively easy replace some service with another,
       </Typography>
     </section>
     <section>
-      <Typography variant="h5">Usage</Typography>
+      <Typography variant="h3">Usage</Typography>
       <Typography variant="body1" gutterBottom>
         Use top-left menu button to show navigation panel
       </Typography>
@@ -29,7 +30,7 @@ const About = () => (
       {/* <strong>Mobile and tablets: </strong>You can click "Add to Home screen" in supported mobile browser's menu to install this app on your device. (Progressive web app) */}
     </section>
     <section>
-      <Typography variant="h5">Features</Typography>
+      <Typography variant="h3">Features</Typography>
       <Typography variant="body1" gutterBottom>
         <ul>
           <li>Contact management (CRUD)</li>
@@ -41,14 +42,24 @@ const About = () => (
       </Typography>
     </section>
     <section>
-      <Typography variant="h5">Technologies</Typography>
+      <Typography variant="h3">Technologies</Typography>
+      <Typography variant="h4">Front end</Typography>
       <Typography variant="body1">
         <ul>
           <li>React</li>
           <li>Redux</li>
+          <li>TypeScript</li>
           <li>GraphQL (next genetarion API)</li>
-          <li>Service worker (Progressive Web App)</li>
-          <li>NodeJS, MongoDB and TypeScript for back-end server</li>
+          {/* <li>Service worker (Progressive Web App)</li> */}
+        </ul>
+      </Typography>
+      <Typography variant="h4">Back end</Typography>
+      <Typography variant="body1">
+        <ul>
+          <li>NodeJS</li>
+          <li>MongoDB</li>
+          <li>TypeScript</li>
+          <li>GraphQL</li>
         </ul>
       </Typography>
     </section>
