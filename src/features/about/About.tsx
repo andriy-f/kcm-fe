@@ -31,7 +31,7 @@ const About = () => (
     </section>
     <section>
       <Typography variant="h4">Features</Typography>
-      <Typography variant="body1" gutterBottom>
+      {/* <Typography variant="body1" variantMapping={{ 'body1': 'div' }}> */}
         <ul>
           <li>Contact management (CRUD)</li>
           <li>Material Design</li>
@@ -39,7 +39,7 @@ const About = () => (
           <li>Filtering</li>
           <li>Pagination (via infinite scrolling)</li>
         </ul>
-      </Typography>
+      {/* </Typography> */}
     </section>
     <section>
       <Typography variant="h4">Technologies</Typography>
