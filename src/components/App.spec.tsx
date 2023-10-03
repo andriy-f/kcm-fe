@@ -1,19 +1,12 @@
 import React from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { BrowserRouter } from 'react-router-dom'
 
 import App from './App'
 
 it('renders without crashing', () => {
   render(<App />)
 })
-
-// it('Has "Welcome" text in it', () => {
-//   render(<App />)
-//   const welcome = screen.getByText(/Welcome/i)
-//   expect(welcome).toBeInTheDocument()
-// })
 
 it('Contacts link on About page is working', async () => {
   render(<App />)
