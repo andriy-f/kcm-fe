@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<9ba9a18d18586c87ab0bb81f389bf4cd>>
+ * @generated SignedSource<<016032550fe8b6f9eedd7e0e65ce36d6>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,11 +10,11 @@
 
 import { ConcreteRequest, Mutation } from 'relay-runtime';
 export type CreateContactInput = {
-  clientMutationId?: string | null;
-  email?: string | null;
+  clientMutationId?: string | null | undefined;
+  email?: string | null | undefined;
   firstName: string;
   lastName: string;
-  phoneNumber?: string | null;
+  phoneNumber?: string | null | undefined;
 };
 export type CreateContactPageContactCreateMutation$variables = {
   connections: ReadonlyArray<string>;
@@ -22,16 +22,16 @@ export type CreateContactPageContactCreateMutation$variables = {
 };
 export type CreateContactPageContactCreateMutation$data = {
   readonly createContact: {
-    readonly clientMutationId: string | null;
+    readonly clientMutationId: string | null | undefined;
     readonly contact: {
-      readonly contactId: string | null;
-      readonly email: string | null;
-      readonly firstName: string | null;
+      readonly contactId: string | null | undefined;
+      readonly email: string | null | undefined;
+      readonly firstName: string | null | undefined;
       readonly id: string;
-      readonly lastName: string | null;
-      readonly phoneNumber: string | null;
-    } | null;
-  } | null;
+      readonly lastName: string | null | undefined;
+      readonly phoneNumber: string | null | undefined;
+    } | null | undefined;
+  } | null | undefined;
 };
 export type CreateContactPageContactCreateMutation = {
   response: CreateContactPageContactCreateMutation$data;

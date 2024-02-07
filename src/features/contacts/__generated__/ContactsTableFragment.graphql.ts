@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<4287cf012c02f38869e1bf6c60016596>>
+ * @generated SignedSource<<4690c849475acf00898693548e9bd088>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -14,20 +14,22 @@ export type ContactsTableFragment$data = {
   readonly allContacts: {
     readonly edges: ReadonlyArray<{
       readonly node: {
-        readonly email: string | null;
-        readonly firstName: string | null;
+        readonly email: string | null | undefined;
+        readonly firstName: string | null | undefined;
         readonly id: string;
-        readonly lastName: string | null;
-        readonly phoneNumber: string | null;
-      } | null;
-    } | null> | null;
-  } | null;
+        readonly lastName: string | null | undefined;
+        readonly phoneNumber: string | null | undefined;
+      } | null | undefined;
+    } | null | undefined> | null | undefined;
+  } | null | undefined;
   readonly " $fragmentType": "ContactsTableFragment";
 };
 export type ContactsTableFragment$key = {
   readonly " $data"?: ContactsTableFragment$data;
   readonly " $fragmentSpreads": FragmentRefs<"ContactsTableFragment">;
 };
+
+import ContactsTableRefetchQuery_graphql from './ContactsTableRefetchQuery.graphql';
 
 const node: ReaderFragment = (function(){
 var v0 = [
@@ -71,7 +73,7 @@ return {
         "path": (v0/*: any*/)
       },
       "fragmentPathInResult": [],
-      "operation": require('./ContactsTableRefetchQuery.graphql')
+      "operation": ContactsTableRefetchQuery_graphql
     }
   },
   "name": "ContactsTableFragment",

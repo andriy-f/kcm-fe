@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<7d782e646de2e0b9dea4b84b475dea91>>
+ * @generated SignedSource<<8289cdafb67b7564282a87ae59396ce9>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,9 +10,9 @@
 
 import { ConcreteRequest, Mutation } from 'relay-runtime';
 export type DeleteContactInput = {
-  clientMutationId?: string | null;
-  contactId?: string | null;
-  id?: string | null;
+  clientMutationId?: string | null | undefined;
+  contactId?: string | null | undefined;
+  id?: string | null | undefined;
 };
 export type DeleteContactDialogDeleteContactMutation$variables = {
   connections: ReadonlyArray<string>;
@@ -20,9 +20,9 @@ export type DeleteContactDialogDeleteContactMutation$variables = {
 };
 export type DeleteContactDialogDeleteContactMutation$data = {
   readonly deleteContact: {
-    readonly clientMutationId: string | null;
-    readonly deletedId: string | null;
-  } | null;
+    readonly clientMutationId: string | null | undefined;
+    readonly deletedId: string | null | undefined;
+  } | null | undefined;
 };
 export type DeleteContactDialogDeleteContactMutation = {
   response: DeleteContactDialogDeleteContactMutation$data;

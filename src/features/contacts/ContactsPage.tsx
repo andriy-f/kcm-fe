@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import AddIcon from '@mui/icons-material/Add'
 import Fab from '@mui/material/Fab'
 
-import graphql from 'babel-plugin-relay/macro'
+import { graphql } from 'react-relay'
 
 import type { ContactsPageQuery as ContactsPageQueryType } from './__generated__/ContactsPageQuery.graphql'
 import { appName } from '../../consts'
