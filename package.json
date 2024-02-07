@@ -2,6 +2,7 @@
   "name": "fe2",
   "version": "2.0.2",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
