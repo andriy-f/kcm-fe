@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<3e97202470d7e35a1dc6fab848a36b0f>>
+ * @generated SignedSource<<d639e47e17fe624e9486677eeb7adb7b>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -14,12 +14,12 @@ export type ContactDetailsPageQuery$variables = {
 };
 export type ContactDetailsPageQuery$data = {
   readonly contact: {
-    readonly email: string | null;
-    readonly firstName: string | null;
+    readonly email: string | null | undefined;
+    readonly firstName: string | null | undefined;
     readonly id: string;
-    readonly lastName: string | null;
-    readonly phoneNumber: string | null;
-  } | null;
+    readonly lastName: string | null | undefined;
+    readonly phoneNumber: string | null | undefined;
+  } | null | undefined;
 };
 export type ContactDetailsPageQuery = {
   response: ContactDetailsPageQuery$data;

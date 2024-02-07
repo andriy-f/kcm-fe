@@ -5,16 +5,18 @@ const clientSideApiUrl = (
   && window.kcm.apiUrl
 ) || null
 
-// process.env.REACT_APP_KCM_BACKEND_URL is set up in development mode
+// VITE_KCM_BACKEND_URL is set up in development mode
+const serverSideApiUrl = import.meta.env.VITE_KCM_BACKEND_URL
+
 // URL to the KCM backend
-export const beUrl = process.env.REACT_APP_KCM_BACKEND_URL || clientSideApiUrl
+export const beUrl = serverSideApiUrl || clientSideApiUrl
 
 if (!beUrl) {
   throw new Error('Backend URL was not set up.')
 }
 
 export const shouldLogRedux =
-  process.env.CI !== 'true' &&
-  process.env.NODE_ENV === 'development'
+  import.meta.env.CI !== 'true' &&
+  import.meta.env.NODE_ENV === 'development'
 
-export const isDevEnv = process.env.NODE_ENV === 'development'
+export const isDevEnv = import.meta.env.NODE_ENV === 'development'

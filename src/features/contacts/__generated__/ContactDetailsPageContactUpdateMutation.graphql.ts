@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<3e380aab646fd9953d1f9675134d1dae>>
+ * @generated SignedSource<<909bb198705f9e367f2238b8b2b720b3>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,13 +10,13 @@
 
 import { ConcreteRequest, Mutation } from 'relay-runtime';
 export type UpdateContactInput = {
-  clientMutationId?: string | null;
-  contactId?: string | null;
-  email?: string | null;
-  firstName?: string | null;
-  id?: string | null;
-  lastName?: string | null;
-  phoneNumber?: string | null;
+  clientMutationId?: string | null | undefined;
+  contactId?: string | null | undefined;
+  email?: string | null | undefined;
+  firstName?: string | null | undefined;
+  id?: string | null | undefined;
+  lastName?: string | null | undefined;
+  phoneNumber?: string | null | undefined;
 };
 export type ContactDetailsPageContactUpdateMutation$variables = {
   input: UpdateContactInput;
@@ -24,13 +24,13 @@ export type ContactDetailsPageContactUpdateMutation$variables = {
 export type ContactDetailsPageContactUpdateMutation$data = {
   readonly updateContact: {
     readonly contact: {
-      readonly email: string | null;
-      readonly firstName: string | null;
+      readonly email: string | null | undefined;
+      readonly firstName: string | null | undefined;
       readonly id: string;
-      readonly lastName: string | null;
-      readonly phoneNumber: string | null;
-    } | null;
-  } | null;
+      readonly lastName: string | null | undefined;
+      readonly phoneNumber: string | null | undefined;
+    } | null | undefined;
+  } | null | undefined;
 };
 export type ContactDetailsPageContactUpdateMutation = {
   response: ContactDetailsPageContactUpdateMutation$data;

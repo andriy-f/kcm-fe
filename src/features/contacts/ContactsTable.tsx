@@ -4,7 +4,7 @@ import { PayloadError } from 'relay-runtime'
 import { usePaginationFragment } from 'react-relay'
 import { Link as RRLink } from 'react-router-dom'
 import { debounce } from 'throttle-debounce'
-import graphql from 'babel-plugin-relay/macro'
+import { graphql } from 'react-relay'
 
 import Button from '@mui/material/Button'
 import Table from '@mui/material/Table'

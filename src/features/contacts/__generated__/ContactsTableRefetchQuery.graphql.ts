@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<3850c4797e868e19b75181f914b08529>>
+ * @generated SignedSource<<b832f61a3c4ace10ab910d440fbcc1ab>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,9 +11,9 @@
 import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type ContactsTableRefetchQuery$variables = {
-  count?: number | null;
-  cursor?: string | null;
-  filterText?: string | null;
+  count?: number | null | undefined;
+  cursor?: string | null | undefined;
+  filterText?: string | null | undefined;
 };
 export type ContactsTableRefetchQuery$data = {
   readonly " $fragmentSpreads": FragmentRefs<"ContactsTableFragment">;

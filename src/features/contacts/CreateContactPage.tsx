@@ -2,7 +2,7 @@ import React from 'react'
 import debug from 'debug'
 import { ConnectionHandler, useMutation } from 'react-relay'
 import { useNavigate } from 'react-router-dom'
-import graphql from 'babel-plugin-relay/macro'
+import { graphql } from 'react-relay'
 
 import Container from '@mui/material/Container'
 import LinearProgress from '@mui/material/LinearProgress'

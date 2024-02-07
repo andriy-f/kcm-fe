@@ -2,7 +2,7 @@ import React from 'react'
 import debug from 'debug'
 import { useMutation, ConnectionHandler } from 'react-relay'
 
-import graphql from 'babel-plugin-relay/macro'
+import { graphql } from 'react-relay'
 import Button from '@mui/material/Button'
 import DialogTitle from '@mui/material/DialogTitle'
 import Dialog from '@mui/material/Dialog'
