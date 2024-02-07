@@ -39,6 +39,7 @@ FROM base as development
 USER node
 EXPOSE 80
 ENV PORT 80
+ENV HOST 0.0.0.0
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["npm", "run", "dev"]
 
