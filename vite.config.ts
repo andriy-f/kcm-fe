@@ -5,7 +5,7 @@ import myRelayPlugin from './myRelayPlugin'
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    port: parseInt(process.env.PORT) || 5173,
+    port: (process.env.PORT && parseInt(process.env.PORT)) || 5173,
     host: process.env.HOST || 'localhost',
   },
   plugins: [react(), myRelayPlugin],
