@@ -18,15 +18,10 @@ RUN set -ex; \
   su-exec node npm cache clean --force; \
   apk del .gyp;
 
-COPY --chown=node:node tsconfig.json ./
-COPY --chown=node:node tsconfig.node.json ./
-COPY --chown=node:node nodemon-relay.json ./
-COPY --chown=node:node vite.config.ts ./
-COPY --chown=node:node myRelayPlugin.ts ./
-COPY --chown=node:node .eslintrc.cjs ./
-COPY --chown=node:node relay.config.json ./
-COPY --chown=node:node schema.graphql ./
-COPY --chown=node:node index.html ./
+COPY --chown=node:node tsconfig.json tsconfig.node.json nodemon-relay.json ./
+COPY --chown=node:node vite.config.ts myRelayPlugin.ts .eslintrc.cjs ./
+COPY --chown=node:node relay.config.json jest.config.mjs schema.graphql index.html ./
+COPY --chown=node:node config ./config
 COPY --chown=node:node assets ./assets
 COPY --chown=node:node public ./public
 COPY --chown=node:node scripts ./scripts
