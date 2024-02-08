@@ -1,6 +1,20 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import myRelayPlugin from './myRelayPlugin'
+
+const defineValues = {
+  'process.env.DEBUG': JSON.stringify(process.env.DEBUG),
+  'process.env.HOME': JSON.stringify('/home/'),
+  'process.env.VITE_KCM_BACKEND_URL': JSON.stringify(process.env.VITE_KCM_BACKEND_URL),
+  'process.env.CI': JSON.stringify(process.env.CI),
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+}
+
+const finalDefineValues = process.env.NODE_ENV !== 'test' ? {
+  ...defineValues,
+  'process.platform': JSON.stringify(process.platform),
+} : defineValues
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,12 +23,10 @@ export default defineConfig({
     host: process.env.HOST || 'localhost',
   },
   plugins: [react(), myRelayPlugin],
-  define: {
-    'process.platform': JSON.stringify(process.platform),
-    'process.env.DEBUG': JSON.stringify(process.env.DEBUG),
-    'process.env.HOME': JSON.stringify('/home/'),
-    'process.env.VITE_KCM_BACKEND_URL': JSON.stringify(process.env.VITE_KCM_BACKEND_URL),
-    'process.env.CI': JSON.stringify(process.env.CI),
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+  define: finalDefineValues,
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: 'src/setupTests.ts',
   }
 })
