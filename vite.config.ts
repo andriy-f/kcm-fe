@@ -25,6 +25,7 @@ export default defineConfig({
   plugins: [react(), myRelayPlugin],
   define: finalDefineValues,
   test: {
+    pool: 'forks',
     environment: 'jsdom',
     globals: true,
     setupFiles: 'src/setupTests.ts',
