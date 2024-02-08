@@ -1,18 +1,19 @@
 import debug from 'debug'
-import React from 'react'
+import React, { Component, PropsWithChildren } from 'react'
 
 import { appName } from '../../consts'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':AutoLoadMore.js')
 
-type Props = {
+type MyProps = {
   hasMore: boolean,
   onLoadMore(): void,
-  children: any,
 }
 
-export default class AutoLoadMore extends React.Component<Props> {
+type Props = PropsWithChildren<MyProps>
+
+export default class AutoLoadMore extends Component<Props> {
   wrapperRef: React.RefObject<HTMLDivElement>
   observer: IntersectionObserver | null = null
 
@@ -38,7 +39,7 @@ export default class AutoLoadMore extends React.Component<Props> {
     }
   }
 
-  _handleIntersection: IntersectionObserverCallback = (entries, observer) => {
+  _handleIntersection: IntersectionObserverCallback = (entries) => {
     if (entries.some(e => e.isIntersecting)) {
       this.props.onLoadMore()
     }
