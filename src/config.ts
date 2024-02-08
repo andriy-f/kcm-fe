@@ -6,7 +6,7 @@ const clientSideApiUrl = (
 ) || null
 
 // VITE_KCM_BACKEND_URL is set up in development mode
-const serverSideApiUrl = import.meta.env.VITE_KCM_BACKEND_URL
+const serverSideApiUrl = process.env.VITE_KCM_BACKEND_URL
 
 // URL to the KCM backend
 export const beUrl = serverSideApiUrl || clientSideApiUrl
@@ -16,7 +16,7 @@ if (!beUrl) {
 }
 
 export const shouldLogRedux =
-  import.meta.env.CI !== 'true' &&
-  import.meta.env.NODE_ENV === 'development'
+  process.env.CI !== 'true' &&
+  process.env.NODE_ENV === 'development'
 
-export const isDevEnv = import.meta.env.NODE_ENV === 'development'
+export const isDevEnv = process.env.NODE_ENV === 'development'

@@ -13,5 +13,8 @@ export default defineConfig({
     'process.platform': JSON.stringify(process.platform),
     'process.env.DEBUG': JSON.stringify(process.env.DEBUG),
     'process.env.HOME': JSON.stringify('/home/'),
+    'process.env.VITE_KCM_BACKEND_URL': JSON.stringify(process.env.VITE_KCM_BACKEND_URL),
+    'process.env.CI': JSON.stringify(process.env.CI),
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
   }
 })
