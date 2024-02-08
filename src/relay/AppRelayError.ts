@@ -1,7 +1,7 @@
 export default class AppRelayError extends Error {
-  errors: any[]
+  errors: unknown[]
 
-  constructor(m: string, errors: any[]) {
+  constructor(m: string, errors: unknown[]) {
     super(m)
     this.errors = errors
 

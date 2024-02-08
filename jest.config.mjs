@@ -5,6 +5,9 @@ const config = {
   setupFilesAfterEnv: [
     '<rootDir>/src/setupTests.ts'
   ],
+  transform: {
+    '^.+\\.css$': '<rootDir>/config/jest/cssTransform.mjs',
+  },
 }
 
 export default config
