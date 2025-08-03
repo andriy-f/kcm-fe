@@ -51,7 +51,7 @@ RUN su-exec node env \
   REACT_APP_KCM_BACKEND_URL=http://localhost:3000 \
   NODE_ENV=test \
   CI=true \
-  npm run test
+  pnpm run test
 
 # Build
 # =====
