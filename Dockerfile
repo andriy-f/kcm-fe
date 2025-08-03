@@ -25,13 +25,7 @@ RUN set -ex; \
   su-exec node pnpm install --frozen-lockfile; \
   apk del .gyp;
 
-COPY --chown=node:node tsconfig.json tsconfig.node.json nodemon-relay.json ./
-COPY --chown=node:node vite.config.ts myRelayPlugin.ts .eslintrc.cjs ./
-COPY --chown=node:node relay.config.json schema.graphql index.html ./
-COPY --chown=node:node assets ./assets
-COPY --chown=node:node public ./public
-COPY --chown=node:node scripts ./scripts
-COPY --chown=node:node src ./src
+COPY --chown=node:node . .
 
 # Development
 # ===========

@@ -1,37 +1,8 @@
-# From .gitignore
-
-# dependencies
-/node_modules
-
-# testing
-/coverage
-
-# production
-/build
-/buildServer
-
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Custom
-/newrelic.js
-/newrelic_agent.log
-
-# Tern
-.tern-port
-
-# ====================
-
-# Not needed in Docker
-/.git
-/Dockerfile
-/README.md
+node_modules
+dist
+.github
+.devcontainer
+.vscode
+.git
+.env
+*.md
