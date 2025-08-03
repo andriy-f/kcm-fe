@@ -4,8 +4,10 @@
 	"name": "KCM Frontend dev container",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"dockerFile": "Dockerfile",
+	// Mounts parent (KCM) directory as workspace.
 	"workspaceMount": "source=${localWorkspaceFolder}/../,target=/KCM,type=bind,consistency=cached",
 	"workspaceFolder": "/KCM/${localWorkspaceFolderBasename}",
+	// This one is for optimizing pnpm store usage across containers.
 	"mounts": [
 		{
 			"source": "${localEnv:MY_PNPM_STORE_PATH}",
@@ -13,6 +15,7 @@
 			"type": "bind"
 		}
 	],
+	// This one is podman specific
 	"runArgs": [
 		"--userns=keep-id:uid=1000,gid=1000"
 	]
