@@ -1,0 +1,17 @@
+services:
+
+  frontend:
+    image: kcm-fe-test
+    build:
+      context: .
+      target: base
+    command: "pnpm run test"
+    networks:
+      - internal
+    environment:
+      - REACT_APP_KCM_BACKEND_URL=http://localhost:3000
+      - NODE_ENV=test
+      - CI=true
+
+networks:
+  internal:

@@ -33,15 +33,6 @@ ENV HOST=0.0.0.0
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["pnpm", "run", "dev"]
 
-# Unit tests
-# =====
-FROM base AS test
-RUN env \
-  REACT_APP_KCM_BACKEND_URL=http://localhost:3000 \
-  NODE_ENV=test \
-  CI=true \
-  pnpm run test
-
 # Build
 # =====
 FROM base AS build
