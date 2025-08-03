@@ -3,8 +3,9 @@ FROM node:22-alpine as base
 RUN apk add --no-cache su-exec tini
 
 USER node
-ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
-ENV PATH=$PATH:/home/node/.npm-global/bin
+ENV MY_BIN_DIR=/home/node/bin
+RUN mkdir -p $MY_BIN_DIR
+ENV PATH=$PATH:$MY_BIN_DIR
 
 # Prepare app dir
 USER root
@@ -12,8 +13,7 @@ WORKDIR /app
 RUN chown node:node .
 
 USER node
-RUN mkdir -p $NPM_CONFIG_PREFIX 
-RUN corepack enable --install-directory $NPM_CONFIG_PREFIX pnpm
+RUN corepack enable --install-directory $MY_BIN_DIR pnpm
 RUN corepack install -g pnpm@latest-10
 
 USER root
@@ -56,7 +56,8 @@ RUN su-exec node env \
 # Build
 # =====
 FROM base as build
-RUN su-exec node env NODE_ENV=production npm run build
+USER node
+RUN NODE_ENV=production pnpm run build
 
 # ==========
 # Prod image
