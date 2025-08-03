@@ -1,4 +1,4 @@
-FROM node:20-alpine as base
+FROM node:22-alpine as base
 
 RUN apk add --no-cache su-exec tini
 
@@ -11,11 +11,10 @@ RUN chown node:node .
 
 # Restore packages
 RUN apk add --no-cache --virtual .gyp python3 make g++
-COPY --chown=node:node package.json package-lock.json ./
+COPY --chown=node:node package.json pnpm-lock.yaml ./
 ENV NODE_ENV development
 RUN set -ex; \
-  su-exec node npm ci; \
-  su-exec node npm cache clean --force; \
+  su-exec node pnpm install --frozen-lockfile; \
   apk del .gyp;
 
 COPY --chown=node:node tsconfig.json tsconfig.node.json nodemon-relay.json ./
