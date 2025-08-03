@@ -1,47 +1,42 @@
-FROM node:22-alpine as base
+FROM node:22-alpine AS base
 
 RUN apk add --no-cache su-exec tini
 
-USER node
-ENV MY_BIN_DIR=/home/node/bin
-RUN mkdir -p $MY_BIN_DIR
-ENV PATH=$PATH:$MY_BIN_DIR
-
 # Prepare app dir
-USER root
 WORKDIR /app
 RUN chown node:node .
 
 USER node
+
+ENV MY_BIN_DIR=/home/node/bin
+RUN mkdir -p $MY_BIN_DIR
+ENV PATH=$PATH:$MY_BIN_DIR
+
 RUN corepack enable --install-directory $MY_BIN_DIR pnpm
 RUN corepack install -g pnpm@latest-10
 
-USER root
 # Restore packages
-RUN apk add --no-cache --virtual .gyp python3 make g++
 COPY --chown=node:node package.json pnpm-lock.yaml ./
-ENV NODE_ENV development
-RUN set -ex; \
-  su-exec node pnpm install --frozen-lockfile; \
-  apk del .gyp;
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store NODE_ENV=development pnpm install --frozen-lockfile;
 
+# Copy source code
 COPY --chown=node:node . .
 
 # Development
 # ===========
-FROM base as development
+FROM base AS development
 # Dev runtime config
 USER node
 EXPOSE 80
-ENV PORT 80
-ENV HOST 0.0.0.0
+ENV PORT=80
+ENV HOST=0.0.0.0
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["pnpm", "run", "dev"]
 
 # Unit tests
 # =====
-FROM base as test
-RUN su-exec node env \
+FROM base AS test
+RUN env \
   REACT_APP_KCM_BACKEND_URL=http://localhost:3000 \
   NODE_ENV=test \
   CI=true \
@@ -49,14 +44,13 @@ RUN su-exec node env \
 
 # Build
 # =====
-FROM base as build
-USER node
-RUN NODE_ENV=production pnpm run build
+FROM base AS build
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store NODE_ENV=production pnpm run build
 
 # ==========
 # Prod image
 # ==========
-FROM nginx:alpine as production
+FROM nginx:alpine AS production
 
 # Prepare app dir
 WORKDIR /usr/share/nginx/html
