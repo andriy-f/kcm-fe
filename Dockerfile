@@ -2,13 +2,21 @@ FROM node:22-alpine as base
 
 RUN apk add --no-cache su-exec tini
 
+USER node
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 ENV PATH=$PATH:/home/node/.npm-global/bin
 
 # Prepare app dir
+USER root
 WORKDIR /app
 RUN chown node:node .
 
+USER node
+RUN mkdir -p $NPM_CONFIG_PREFIX 
+RUN corepack enable --install-directory $NPM_CONFIG_PREFIX pnpm
+RUN corepack install -g pnpm@latest-10
+
+USER root
 # Restore packages
 RUN apk add --no-cache --virtual .gyp python3 make g++
 COPY --chown=node:node package.json pnpm-lock.yaml ./
@@ -34,7 +42,7 @@ EXPOSE 80
 ENV PORT 80
 ENV HOST 0.0.0.0
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["npm", "run", "dev"]
+CMD ["pnpm", "run", "dev"]
 
 # Unit tests
 # =====
