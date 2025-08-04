@@ -8,7 +8,7 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 
-import type Contact from '../../types/Contact'
+import { type Contact } from '../../types/Contact'
 import CircularProgress from '@mui/material/CircularProgress'
 import { type PayloadError } from 'relay-runtime'
 
