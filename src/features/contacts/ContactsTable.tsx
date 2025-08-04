@@ -27,7 +27,6 @@ import { type Contact } from '../../types/Contact'
 import { appName } from '../../consts'
 import { DeleteContactDialog } from './DeleteContactDialog'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':ContactsTable.tsx')
 
 const ContactsTableFragment = graphql`

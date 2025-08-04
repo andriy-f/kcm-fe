@@ -15,7 +15,6 @@ import AppRelayError from './AppRelayError'
 
 export const graphqlURL = urlJoin(beUrl, '/graphql')
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const log = debug(appName + ':relayEnvironment.js')
 
 const fetchFn: FetchFunction = (params, variables) => {

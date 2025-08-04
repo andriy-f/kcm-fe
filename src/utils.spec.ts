@@ -57,7 +57,6 @@ describe('isRelativeUrl tests', () => {
   })
 
   it('should return false for javascript urls', () => {
-    // eslint-disable-next-line no-script-url
     expect(isRelativeUrl('javascript:void(0)')).toBeFalsy()
   })
 })

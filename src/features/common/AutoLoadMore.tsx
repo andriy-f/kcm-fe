@@ -1,10 +1,4 @@
-import debug from 'debug'
 import React, { Component, type PropsWithChildren } from 'react'
-
-import { appName } from '../../consts'
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const log = debug(appName + ':AutoLoadMore.js')
 
 type MyProps = {
   hasMore: boolean,

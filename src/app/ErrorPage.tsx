@@ -8,7 +8,6 @@ type ReactRouteError = {
   message?: string
 }
 
-// eslint-disable-next-line no-unused-vars
 const log = debug(appName + ':ErrorPage.tsx')
 
 export default function ErrorPage() {

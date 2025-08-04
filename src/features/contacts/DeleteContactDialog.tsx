@@ -47,11 +47,11 @@ export function DeleteContactDialog({
           },
           connections: [connectionId]
         },
-        onCompleted(response, errors) {
+        onCompleted(_response, errors) {
           if (errors) {
-            onError && onError(errors)
+            onError?.(errors)
           } else {
-            onDelete && onDelete()
+            onDelete?.()
           }
         },
       })

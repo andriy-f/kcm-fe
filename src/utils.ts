@@ -72,7 +72,6 @@ export const isAbsoluteUrl = (url: string) => {
     || url.startsWith('data:')
     || url.startsWith('mailto:')
     || url.startsWith('tel:')
-    // eslint-disable-next-line no-script-url
     || url.startsWith('javascript:')
 }
 
