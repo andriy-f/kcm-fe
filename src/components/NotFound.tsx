@@ -1,6 +1,4 @@
-import React from 'react'
-
- const NotFound = () => (
+const NotFound = () => (
     <div>Not Found</div>
 )
 

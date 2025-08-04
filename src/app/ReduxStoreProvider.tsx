@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 import { PersistGate } from 'redux-persist/integration/react'
 
 import { Provider as StoreProvider } from 'react-redux'
