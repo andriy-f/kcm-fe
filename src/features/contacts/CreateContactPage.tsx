@@ -6,7 +6,7 @@ import Container from '@mui/material/Container'
 import LinearProgress from '@mui/material/LinearProgress'
 
 import ContactDetails from './ContactDetails'
-import type Contact from '../../types/Contact'
+import { type Contact } from '../../types/Contact'
 
 // TODO: @appendNode or @appendEdge?
 const CreateContactPageContactCreateMutation = graphql`

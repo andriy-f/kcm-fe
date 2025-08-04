@@ -8,7 +8,7 @@ import Alert from '@mui/material/Alert'
 import type { ContactDetailsPageQuery as ContactDetailsPageQueryType } from './__generated__/ContactDetailsPageQuery.graphql'
 import ContactDetails from './ContactDetails'
 import LinearProgress from '@mui/material/LinearProgress'
-import type Contact from '../../types/Contact'
+import { type Contact } from '../../types/Contact'
 const ContactDetailsPageQuery = graphql`
   query ContactDetailsPageQuery ($id: ID!) {
     contact(id: $id) {

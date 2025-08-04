@@ -23,7 +23,7 @@ import Link from '@mui/material/Link'
 import { type ContactsTableFragment$key } from './__generated__/ContactsTableFragment.graphql'
 import Title from '../common/Title'
 import AutoLoadMore from '../common/AutoLoadMore'
-import type Contact from '../../types/Contact'
+import { type Contact } from '../../types/Contact'
 import { appName } from '../../consts'
 import { DeleteContactDialog } from './DeleteContactDialog'
 

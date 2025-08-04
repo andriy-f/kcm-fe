@@ -5,7 +5,7 @@ import Button from '@mui/material/Button'
 import TextField, { type TextFieldProps } from '@mui/material/TextField'
 
 import Title from '../common/Title'
-import type Contact from '../../types/Contact'
+import { type Contact } from '../../types/Contact'
 
 type Props = {
   editable?: boolean,
