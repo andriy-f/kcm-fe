@@ -1,6 +1,6 @@
 #!/bin/sh
 DEST=/usr/share/nginx/html/index.html
 TEMPLATE=${DEST}.template
-envsubst '$VITE_KCM_BACKEND_URL $VITE_KCM_GOOGLE_TRACKING_ID' <${TEMPLATE} >${DEST}
+envsubst '$VITE_KCM_BACKEND_URL' <${TEMPLATE} >${DEST}
 
 exec "$@"
