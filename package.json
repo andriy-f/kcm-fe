@@ -60,7 +60,7 @@
     "@types/redux-logger": "^3.0.9",
     "@types/relay-runtime": "^17.0.4",
     "@types/throttle-debounce": "^5.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "babel-plugin-relay": "^16.2.0",
