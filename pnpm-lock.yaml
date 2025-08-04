@@ -96,6 +96,9 @@ importers:
       '@types/redux-logger':
         specifier: ^3.0.9
         version: 3.0.13
+      '@types/relay-runtime':
+        specifier: ^17.0.4
+        version: 17.0.4
       '@types/throttle-debounce':
         specifier: ^5.0.0
         version: 5.0.2
@@ -895,6 +898,9 @@ packages:
 
   '@types/redux-logger@3.0.13':
     resolution: {integrity: sha512-jylqZXQfMxahkuPcO8J12AKSSCQngdEWQrw7UiLUJzMBcv1r4Qg77P6mjGLjM27e5gFQDPD8vwUMJ9AyVxFSsg==}
+
+  '@types/relay-runtime@17.0.4':
+    resolution: {integrity: sha512-fB77br4lXlBYM/HpI6VI6KCrj5pw0LiAnkZOkffjirNYso+dzXGWkeIm0G0MGszD8WY1et+r1Uj2TA6rscBXNQ==}
 
   '@types/relay-runtime@19.0.2':
     resolution: {integrity: sha512-lcWb+/7cPG21UgtK/fdpt8QgtV2GYc8TQIusZUBL1k2oy+8oNwYQAAj0/j1pkg77sk/p5MQPQZYOWN9i8wpUhg==}
@@ -3317,6 +3323,8 @@ snapshots:
   '@types/redux-logger@3.0.13':
     dependencies:
       redux: 5.0.1
+
+  '@types/relay-runtime@17.0.4': {}
 
   '@types/relay-runtime@19.0.2': {}
 
