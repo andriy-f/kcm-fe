@@ -5,5 +5,6 @@ set -ex
 MY_CONTAINER_ENGINE=${CONTAINER_ENGINE:-docker}
 
 echo "Running Frontend tests..."
-$MY_CONTAINER_ENGINE compose -f test-compose.yml run --build frontend
+$MY_CONTAINER_ENGINE compose -f test-compose.yml build --pull frontend
+$MY_CONTAINER_ENGINE compose -f test-compose.yml run frontend
 $MY_CONTAINER_ENGINE compose -f test-compose.yml down --remove-orphans --volumes
