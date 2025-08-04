@@ -1,5 +1,3 @@
-import React from 'react'
-import debug from 'debug'
 import { useLazyLoadQuery, useMutation } from 'react-relay'
 import { useNavigate, useParams } from 'react-router-dom'
 import { graphql } from 'react-relay'
@@ -7,15 +5,10 @@ import { graphql } from 'react-relay'
 import Container from '@mui/material/Container'
 import Alert from '@mui/material/Alert'
 
-import { appName } from '../../consts'
 import type { ContactDetailsPageQuery as ContactDetailsPageQueryType } from './__generated__/ContactDetailsPageQuery.graphql'
 import ContactDetails from './ContactDetails'
 import LinearProgress from '@mui/material/LinearProgress'
-import Contact from '../../types/Contact'
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const log = debug(appName + ':ContactDetailsPage.tsx')
-
+import type Contact from '../../types/Contact'
 const ContactDetailsPageQuery = graphql`
   query ContactDetailsPageQuery ($id: ID!) {
     contact(id: $id) {

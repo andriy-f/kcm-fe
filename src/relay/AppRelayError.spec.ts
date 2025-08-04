@@ -1,4 +1,5 @@
 import AppRelayError from './AppRelayError'
+import { describe, it, expect } from 'vitest'
 
 describe('RelayError tests', () => {
   it('type tests', () => {

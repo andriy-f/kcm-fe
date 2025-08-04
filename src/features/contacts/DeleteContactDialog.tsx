@@ -1,5 +1,3 @@
-import React from 'react'
-import debug from 'debug'
 import { useMutation, ConnectionHandler } from 'react-relay'
 
 import { graphql } from 'react-relay'
@@ -10,13 +8,9 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 
-import { appName } from '../../consts'
-import Contact from '../../types/Contact'
+import type Contact from '../../types/Contact'
 import CircularProgress from '@mui/material/CircularProgress'
-import { PayloadError } from 'relay-runtime'
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const log = debug(appName + ':DeleteContactDialog.tsx')
+import { type PayloadError } from 'relay-runtime'
 
 const DeleteContactDialogDeleteContactMutation = graphql`
   mutation DeleteContactDialogDeleteContactMutation (

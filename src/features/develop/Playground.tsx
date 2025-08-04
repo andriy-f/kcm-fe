@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { graphqlURL } from '../../relay/environment'
 
 const Playground = () => (

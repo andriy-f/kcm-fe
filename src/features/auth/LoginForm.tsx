@@ -5,7 +5,7 @@ import Alert from '@mui/material/Alert'
 
 import Box from '@mui/material/Box'
 import Title from '../common/Title'
-import { LoginData } from '../../types/LoginData'
+import { type LoginData } from '../../types/LoginData'
 
 interface Props {
   errorMessage?: string | null

@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import TextField, { TextFieldProps } from '@mui/material/TextField'
+import TextField, { type TextFieldProps } from '@mui/material/TextField'
 
 import Title from '../common/Title'
-import Contact from '../../types/Contact'
+import type Contact from '../../types/Contact'
 
 type Props = {
   editable?: boolean,

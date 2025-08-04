@@ -1,4 +1,4 @@
-import { ComponentClass, createFactory } from 'react'
+import { type ComponentClass, createFactory } from 'react'
 
 // Unused, TODO consider removing
 const defaultProps = (props: object) => (BaseComponent: ComponentClass) => {

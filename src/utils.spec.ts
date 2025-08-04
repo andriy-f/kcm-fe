@@ -1,4 +1,5 @@
 import { urlJoin, isRelativeUrl } from './utils'
+import { describe, it, expect } from 'vitest'
 
 describe('urlJoin tests', () => {
   it('should return url if baseUrl is empty', () => {

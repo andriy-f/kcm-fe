@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Link as RRLink } from 'react-router-dom'
 
 import Alert from '@mui/material/Alert'

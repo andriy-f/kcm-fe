@@ -1,4 +1,3 @@
-import React from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
@@ -6,7 +5,7 @@ import Container from '@mui/material/Container'
 import ButtonPanel from '../../components/ButtonPanel'
 import { isViewerLoggedIn, requestLogInThunk, selectError } from '../viewer/viewerSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { LoginData } from '../../types/LoginData'
+import { type LoginData } from '../../types/LoginData'
 import LoginForm from './LoginForm'
 import { isRelativeUrl } from '../../utils'
 

@@ -1,5 +1,5 @@
 import debug from 'debug'
-import React, { Component, PropsWithChildren } from 'react'
+import React, { Component, type PropsWithChildren } from 'react'
 
 import { appName } from '../../consts'
 

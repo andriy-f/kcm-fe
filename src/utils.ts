@@ -7,7 +7,7 @@ export const commonAjaxRequestSettings = {
 const switchcaseSimple = (cases: { [prop: string]: unknown }) => (defaultCase: unknown) => (key: string) =>
   key in cases ? cases[key] : defaultCase
 
-const executeIfFunction = (f: any) =>
+const executeIfFunction = (f: (() => unknown) | unknown) =>
   f instanceof Function ? f() : f
 
 export const switchcase = (cases: { [prop: string]: unknown }) => (defaultCase: unknown) => (key: string) =>
@@ -21,7 +21,16 @@ export const switchcase = (cases: { [prop: string]: unknown }) => (defaultCase: 
 //         'DECREMENT': () => state - 1
 //     })(state)(action.type)
 
-export const getUserFriendlyErrorMessage = (error: any) => {
+type MyError = {
+  status?: number
+  message?: string
+  xhr?: {
+    response?: {
+      message?: string
+    }
+  }
+}
+export const getUserFriendlyErrorMessage = (error: MyError | null | undefined) => {
   let errorMessage = undefined
 
   switch (error && error.status) {

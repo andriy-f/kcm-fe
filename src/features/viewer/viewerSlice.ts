@@ -1,7 +1,7 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit'
 
-import { RootState } from '../../app/store'
-import { LoginData } from '../../types/LoginData'
+import { type RootState } from '../../app/store'
+import { type LoginData } from '../../types/LoginData'
 import { requestLogIn, requestLogout } from './viewerAPI'
 
 export const LOGIN = 'viewer/login'
@@ -28,7 +28,7 @@ const initialViewerState: ViewerState = {
 
 export const requestLogInThunk = createAsyncThunk(
   'viewer/requestLogin',
-  async (loginData: LoginData, thunkAPI) => {
+  async (loginData: LoginData) => {
     const response = await requestLogIn(loginData)
     return response
   }
@@ -36,14 +36,14 @@ export const requestLogInThunk = createAsyncThunk(
 
 export const requestLogoutThunk = createAsyncThunk(
   'viewer/requestLogout',
-  async (thunkAPI) => {
+  async () => {
     const response = await requestLogout()
     return response
   }
 )
 
 export const viewerReducer = createReducer(initialViewerState, (builder) => {
-  builder.addCase(requestLogInThunk.pending, (state, action) => ({
+  builder.addCase(requestLogInThunk.pending, (state) => ({
     ...state,
     loading: true
   }))
@@ -54,23 +54,23 @@ export const viewerReducer = createReducer(initialViewerState, (builder) => {
     error: null,
     loading: false
   }))
-  builder.addCase(requestLogInThunk.rejected, (state, action) => ({
+  builder.addCase(requestLogInThunk.rejected, (state) => ({
     ...state,
     error: 'login error',
     loading: false
   }))
-  builder.addCase(requestLogoutThunk.pending, (state, action) => ({
+  builder.addCase(requestLogoutThunk.pending, (state) => ({
     ...state,
     loading: true
   }))
-  builder.addCase(requestLogoutThunk.fulfilled, (state, action) => ({
+  builder.addCase(requestLogoutThunk.fulfilled, (state) => ({
     ...state,
     userData: null,
     tokenExpiresOn: null,
     error: null,
     loading: false
   }))
-  builder.addCase(requestLogoutThunk.rejected, (state, action) => ({
+  builder.addCase(requestLogoutThunk.rejected, (state) => ({
     ...state,
     error: 'logout error',
     loading: false

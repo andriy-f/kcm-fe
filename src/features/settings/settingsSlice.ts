@@ -1,6 +1,6 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
-import { RootState } from '../../app/store'
+import { type RootState } from '../../app/store'
 
 export const TOGGLE_SETTING = 'settings/toggle'
 export const SET_SETTING = 'settings/set'
@@ -55,7 +55,7 @@ export const selectIsDarkTheme = (state: RootState) => state.settings.darkTheme
 // Reducer
 export const settingsReducer = createReducer(initialSettings, (builder) => {
   builder.addCase(toggleSetting, (state, action) => {
-    let name = action.payload.name
+    const name = action.payload.name
     if (name in state) {
       const settingName = name as SettingName
       const oldSettingValue = state[settingName]

@@ -1,7 +1,6 @@
 /**
  * TODO: add external links
  */
-import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { Container, Typography } from '@mui/material'
@@ -15,7 +14,7 @@ const About = () => (
     <section>
       <Typography variant="h4">Description</Typography>
       <Typography variant="body1" gutterBottom>
-        This is an example of contact manager application, implemented as separate front-end and back-end services connected via GraphQL.<br/>
+        This is an example of contact manager application, implemented as separate front-end and back-end services connected via GraphQL.<br />
         Such an architecture enables developers to relatively easy replace some service with another, for example if you want to replace old backend with new one using up-to-date technologies.
       </Typography>
     </section>
@@ -32,13 +31,13 @@ const About = () => (
     <section>
       <Typography variant="h4">Features</Typography>
       {/* <Typography variant="body1" variantMapping={{ 'body1': 'div' }}> */}
-        <ul>
-          <li>Contact management (CRUD)</li>
-          <li>Material Design</li>
-          <li>Authentication</li>
-          <li>Filtering</li>
-          <li>Pagination (via infinite scrolling)</li>
-        </ul>
+      <ul>
+        <li>Contact management (CRUD)</li>
+        <li>Material Design</li>
+        <li>Authentication</li>
+        <li>Filtering</li>
+        <li>Pagination (via infinite scrolling)</li>
+      </ul>
       {/* </Typography> */}
     </section>
     <section>

@@ -1,5 +1,3 @@
-import React from 'react'
-import debug from 'debug'
 import { Link } from 'react-router-dom'
 import AddIcon from '@mui/icons-material/Add'
 import Fab from '@mui/material/Fab'
@@ -7,13 +5,9 @@ import Fab from '@mui/material/Fab'
 import { graphql } from 'react-relay'
 
 import type { ContactsPageQuery as ContactsPageQueryType } from './__generated__/ContactsPageQuery.graphql'
-import { appName } from '../../consts'
 import styles from '../../App.module.css'
 import ContactsTable from './ContactsTable'
 import { useLazyLoadQuery } from 'react-relay'
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const log = debug(appName + ':ContactsPage.js')
 
 export const ContactsPageQuery = graphql`
   query ContactsPageQuery {
@@ -21,11 +15,7 @@ export const ContactsPageQuery = graphql`
   }
 `
 
-type Props = {
-  readonly?: boolean
-}
-
-function ContactsPage(props: Props) {
+function ContactsPage() {
   const data = useLazyLoadQuery<ContactsPageQueryType>(ContactsPageQuery, {})
 
   return (
