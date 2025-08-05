@@ -118,8 +118,8 @@ importers:
         specifier: ^3.5.0
         version: 3.11.0(vite@7.0.6(@types/node@22.17.0))
       babel-plugin-relay:
-        specifier: ^18.2.0
-        version: 18.2.0
+        specifier: ^20.1.0
+        version: 20.1.0
       concurrently:
         specifier: ^7.6.0
         version: 7.6.0
@@ -1188,8 +1188,8 @@ packages:
     resolution: {integrity: sha512-Cg7TFGpIr01vOQNODXOOaGz2NpCU5gl8x1qJFbb6hbZxR7XrcE2vtbAsTAbJ7/xwJtUuJEw8K8Zr/AE0LHlesg==}
     engines: {node: '>=10', npm: '>=6'}
 
-  babel-plugin-relay@18.2.0:
-    resolution: {integrity: sha512-icTICGxKvlmhOvw+MESI/xBsY3J+vsNzgyq6/FL2c/hMnsYJ10IIM6Nps4M3cdUxQfS9CCUTXsbz2/kfmYLzhQ==}
+  babel-plugin-relay@20.1.0:
+    resolution: {integrity: sha512-IfEWbuG/eVY6Ax/FirXUCeWZdYqb9VvUhSP4q/R33DUtKaozPo/xEvy9/70KlKuNn/hA4ZtuuY4uSVg/pQ+How==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -3686,7 +3686,7 @@ snapshots:
       cosmiconfig: 7.1.0
       resolve: 1.22.10
 
-  babel-plugin-relay@18.2.0:
+  babel-plugin-relay@20.1.0:
     dependencies:
       babel-plugin-macros: 2.8.0
       cosmiconfig: 5.2.1
