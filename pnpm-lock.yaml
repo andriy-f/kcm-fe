@@ -42,8 +42,8 @@ importers:
         specifier: ^8.0.2
         version: 8.1.3(@types/react-dom@18.3.7(@types/react@18.3.23))(@types/react@18.3.23)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(redux@5.0.1)
       react-relay:
-        specifier: ^16.2.0
-        version: 16.2.0(react@18.3.1)
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.3.1)
       react-router-dom:
         specifier: ^6.8.0
         version: 6.30.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -54,8 +54,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(react@18.3.1)(redux@5.0.1)
       relay-runtime:
-        specifier: ^16.2.0
-        version: 16.2.0
+        specifier: ^18.2.0
+        version: 18.2.0
       throttle-debounce:
         specifier: ^5.0.0
         version: 5.0.2
@@ -94,8 +94,8 @@ importers:
         specifier: ^18.3.7
         version: 18.3.7(@types/react@18.3.23)
       '@types/react-relay':
-        specifier: ^16.0.6
-        version: 16.0.6
+        specifier: ^18.2.0
+        version: 18.2.0
       '@types/react-router-dom':
         specifier: ^5.3.3
         version: 5.3.3
@@ -103,8 +103,8 @@ importers:
         specifier: ^3.0.13
         version: 3.0.13
       '@types/relay-runtime':
-        specifier: ^17.0.4
-        version: 17.0.4
+        specifier: ^18.2.5
+        version: 18.2.5
       '@types/throttle-debounce':
         specifier: ^5.0.0
         version: 5.0.2
@@ -118,8 +118,8 @@ importers:
         specifier: ^3.5.0
         version: 3.11.0(vite@7.0.6(@types/node@22.17.0))
       babel-plugin-relay:
-        specifier: ^16.2.0
-        version: 16.2.0
+        specifier: ^18.2.0
+        version: 18.2.0
       concurrently:
         specifier: ^7.6.0
         version: 7.6.0
@@ -145,8 +145,8 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
       relay-compiler:
-        specifier: ^16.2.0
-        version: 16.2.0
+        specifier: ^18.2.0
+        version: 18.2.0
       typescript:
         specifier: ~5.8.3
         version: 5.8.3
@@ -933,8 +933,8 @@ packages:
     peerDependencies:
       '@types/react': ^18.0.0
 
-  '@types/react-relay@16.0.6':
-    resolution: {integrity: sha512-VTntVQJhlwQYNUlbNgGf8RYy7EtQPRZqsD/w2Si0ygZspJXuNlVdRkklWMFN99EMRhHDpqlNHD8i3wIs7QRz9g==}
+  '@types/react-relay@18.2.0':
+    resolution: {integrity: sha512-F1QvwX9nnK33hzvsQfkAfDtwTWp195LpFXuArdmZFor9ELPu7SuxO6dlJGjRvXLRvBz3oJILniKL/8mGYPAZdA==}
 
   '@types/react-router-dom@5.3.3':
     resolution: {integrity: sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw==}
@@ -953,11 +953,8 @@ packages:
   '@types/redux-logger@3.0.13':
     resolution: {integrity: sha512-jylqZXQfMxahkuPcO8J12AKSSCQngdEWQrw7UiLUJzMBcv1r4Qg77P6mjGLjM27e5gFQDPD8vwUMJ9AyVxFSsg==}
 
-  '@types/relay-runtime@17.0.4':
-    resolution: {integrity: sha512-fB77br4lXlBYM/HpI6VI6KCrj5pw0LiAnkZOkffjirNYso+dzXGWkeIm0G0MGszD8WY1et+r1Uj2TA6rscBXNQ==}
-
-  '@types/relay-runtime@19.0.2':
-    resolution: {integrity: sha512-lcWb+/7cPG21UgtK/fdpt8QgtV2GYc8TQIusZUBL1k2oy+8oNwYQAAj0/j1pkg77sk/p5MQPQZYOWN9i8wpUhg==}
+  '@types/relay-runtime@18.2.5':
+    resolution: {integrity: sha512-2ukE6xQMIpa3kG8F33kXZMcGl/VJdDjNW3eKjQVe1AZQaYnIpNX8vXpcRD6pc+No2rOwVFLbQ6thaPSXPs8ouQ==}
 
   '@types/semver@7.7.0':
     resolution: {integrity: sha512-k107IF4+Xr7UHjwDc7Cfd6PRQfbdkiRabXGRjo07b4WyPahFBZCZ1sE+BNxYIJPPg73UkfOsVOLwqVc/6ETrIA==}
@@ -1191,8 +1188,8 @@ packages:
     resolution: {integrity: sha512-Cg7TFGpIr01vOQNODXOOaGz2NpCU5gl8x1qJFbb6hbZxR7XrcE2vtbAsTAbJ7/xwJtUuJEw8K8Zr/AE0LHlesg==}
     engines: {node: '>=10', npm: '>=6'}
 
-  babel-plugin-relay@16.2.0:
-    resolution: {integrity: sha512-+3n7kSFH5MelySnO5MLXl2S+Bq4nAGcdWylXeqNXZODbzgYtqak194Z4u5KElLAHGhsyKIMTW7qazBPvMbxhFQ==}
+  babel-plugin-relay@18.2.0:
+    resolution: {integrity: sha512-icTICGxKvlmhOvw+MESI/xBsY3J+vsNzgyq6/FL2c/hMnsYJ10IIM6Nps4M3cdUxQfS9CCUTXsbz2/kfmYLzhQ==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -2109,8 +2106,8 @@ packages:
       redux:
         optional: true
 
-  react-relay@16.2.0:
-    resolution: {integrity: sha512-f/HtC4whyYmK6/WUeOVakXRoBkV+JEgoSeBHXfIC2U6AuH14NrKXnFicX65LksfzgD1OUfYF6IqGQ4MvO52lTQ==}
+  react-relay@18.2.0:
+    resolution: {integrity: sha512-/yHlv4pj3IQQPtDzYLfVk6P4wrOSvYPu/5ySPcRp4xV3pn9xoVOHVczSLcZkRVf72lJu8CIjoT8rn3roaGoFyQ==}
     peerDependencies:
       react: ^16.9.0 || ^17 || ^18
 
@@ -2184,12 +2181,12 @@ packages:
     resolution: {integrity: sha512-dYqgNSZbDwkaJ2ceRd9ojCGjBq+mOm9LmtXnAnEGyHhN/5R7iDW2TRw3h+o/jCFxus3P2LfWIIiwowAjANm7IA==}
     engines: {node: '>= 0.4'}
 
-  relay-compiler@16.2.0:
-    resolution: {integrity: sha512-KuyzUBKL9PZRNtIZWNlWEOl7OliUxaGJ2d+3mkiWEiGCEuGnNTxqEg4kJyL341aIGZC4gSqEpfvRTcMqnSM4qQ==}
+  relay-compiler@18.2.0:
+    resolution: {integrity: sha512-P3o5/Gv/oLC9hckUaz/a+KvDgbFERpjtz5lgsJSIQILg9paaF3k1yaX9qSxErGuU4icZvjoK5G82a/bfPgGZpA==}
     hasBin: true
 
-  relay-runtime@16.2.0:
-    resolution: {integrity: sha512-SrIyYItH1EZUj37NI8nZALasuq7mNyFrrSNgMefhgxNZxTVnr1KCp43LaxUfZqhsWbw4Y00JSGDRQXlcv4STHQ==}
+  relay-runtime@18.2.0:
+    resolution: {integrity: sha512-r4FYWlx1dPwFW+KQnuF1ugwVKR4toIFduCGheEf2paRc6nEEcCIgd2p2Jx2gRF+4niO3mCbRZvqdCoKaznUDzg==}
 
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
@@ -3356,10 +3353,10 @@ snapshots:
     dependencies:
       '@types/react': 18.3.23
 
-  '@types/react-relay@16.0.6':
+  '@types/react-relay@18.2.0':
     dependencies:
       '@types/react': 18.3.23
-      '@types/relay-runtime': 19.0.2
+      '@types/relay-runtime': 18.2.5
 
   '@types/react-router-dom@5.3.3':
     dependencies:
@@ -3385,9 +3382,7 @@ snapshots:
     dependencies:
       redux: 5.0.1
 
-  '@types/relay-runtime@17.0.4': {}
-
-  '@types/relay-runtime@19.0.2': {}
+  '@types/relay-runtime@18.2.5': {}
 
   '@types/semver@7.7.0': {}
 
@@ -3691,7 +3686,7 @@ snapshots:
       cosmiconfig: 7.1.0
       resolve: 1.22.10
 
-  babel-plugin-relay@16.2.0:
+  babel-plugin-relay@18.2.0:
     dependencies:
       babel-plugin-macros: 2.8.0
       cosmiconfig: 5.2.1
@@ -4664,14 +4659,14 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       redux: 5.0.1
 
-  react-relay@16.2.0(react@18.3.1):
+  react-relay@18.2.0(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.28.2
       fbjs: 3.0.5
       invariant: 2.2.4
       nullthrows: 1.1.1
       react: 18.3.1
-      relay-runtime: 16.2.0
+      relay-runtime: 18.2.0
     transitivePeerDependencies:
       - encoding
 
@@ -4751,9 +4746,9 @@ snapshots:
       gopd: 1.2.0
       set-function-name: 2.0.2
 
-  relay-compiler@16.2.0: {}
+  relay-compiler@18.2.0: {}
 
-  relay-runtime@16.2.0:
+  relay-runtime@18.2.0:
     dependencies:
       '@babel/runtime': 7.28.2
       fbjs: 3.0.5

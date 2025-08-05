@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<016032550fe8b6f9eedd7e0e65ce36d6>>
+ * @generated SignedSource<<8e6b9acc59f902a00a7a847d2ac05ddf>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -8,7 +8,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ConcreteRequest, Mutation } from 'relay-runtime';
+import { ConcreteRequest } from 'relay-runtime';
 export type CreateContactInput = {
   clientMutationId?: string | null | undefined;
   email?: string | null | undefined;

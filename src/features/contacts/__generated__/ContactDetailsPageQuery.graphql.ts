@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<d639e47e17fe624e9486677eeb7adb7b>>
+ * @generated SignedSource<<4138f98c573190cc0765f47f1261c64e>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -8,7 +8,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ConcreteRequest, Query } from 'relay-runtime';
+import { ConcreteRequest } from 'relay-runtime';
 export type ContactDetailsPageQuery$variables = {
   id: string;
 };

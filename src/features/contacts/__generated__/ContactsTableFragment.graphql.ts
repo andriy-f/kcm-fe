@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<4690c849475acf00898693548e9bd088>>
+ * @generated SignedSource<<57a37ef0d97e1b738b691115fc908c06>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -8,7 +8,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ReaderFragment, RefetchableFragment } from 'relay-runtime';
+import { ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type ContactsTableFragment$data = {
   readonly allContacts: {

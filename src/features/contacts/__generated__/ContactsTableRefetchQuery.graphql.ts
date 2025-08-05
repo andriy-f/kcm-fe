@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b832f61a3c4ace10ab910d440fbcc1ab>>
+ * @generated SignedSource<<a9b669768c18e31c4770841bb9cad87e>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -8,7 +8,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ConcreteRequest, Query } from 'relay-runtime';
+import { ConcreteRequest } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type ContactsTableRefetchQuery$variables = {
   count?: number | null | undefined;
