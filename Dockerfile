@@ -1,10 +1,11 @@
 FROM node:22-alpine AS base
 
-RUN apk add --no-cache su-exec tini
+RUN apk update && apk add su-exec tini jq
 
 # Prepare app dir
 WORKDIR /app
 RUN chown node:node .
+RUN npm install -g corepack@latest
 
 USER node
 
@@ -12,8 +13,8 @@ ENV MY_BIN_DIR=/home/node/bin
 RUN mkdir -p $MY_BIN_DIR
 ENV PATH=$PATH:$MY_BIN_DIR
 
-RUN corepack enable --install-directory $MY_BIN_DIR pnpm
-RUN corepack install -g pnpm@latest-10
+RUN corepack enable --install-directory $MY_BIN_DIR pnpm \
+  && corepack install -g pnpm@latest-10
 
 # Restore packages
 COPY --chown=node:node package.json pnpm-lock.yaml ./
@@ -22,6 +23,10 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store NODE_ENV=development pnpm inst
 # Copy source code
 COPY --chown=node:node . .
 
+# Version
+RUN jq .version package.json -r > ./public/version.txt
+
+# ===========
 # Development
 # ===========
 FROM base AS development
@@ -38,9 +43,9 @@ CMD ["pnpm", "run", "dev"]
 FROM base AS build
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store NODE_ENV=production pnpm run build
 
-# ==========
+# ===========
 # Prod image
-# ==========
+# ===========
 FROM nginx:alpine AS production
 
 # Prepare app dir
