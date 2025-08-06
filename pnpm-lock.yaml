@@ -145,8 +145,8 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
       relay-compiler:
-        specifier: ^18.2.0
-        version: 18.2.0
+        specifier: ^20.1.0
+        version: 20.1.0
       typescript:
         specifier: ~5.8.3
         version: 5.8.3
@@ -2181,8 +2181,8 @@ packages:
     resolution: {integrity: sha512-dYqgNSZbDwkaJ2ceRd9ojCGjBq+mOm9LmtXnAnEGyHhN/5R7iDW2TRw3h+o/jCFxus3P2LfWIIiwowAjANm7IA==}
     engines: {node: '>= 0.4'}
 
-  relay-compiler@18.2.0:
-    resolution: {integrity: sha512-P3o5/Gv/oLC9hckUaz/a+KvDgbFERpjtz5lgsJSIQILg9paaF3k1yaX9qSxErGuU4icZvjoK5G82a/bfPgGZpA==}
+  relay-compiler@20.1.0:
+    resolution: {integrity: sha512-QpIdE68NqdFnO0TObCYqEmUdXRcgG/VY/UH+p1kIxdXIM08YfliVf7ck5ypkKAj1iB/invDhsKb1W7PMAuYTAQ==}
     hasBin: true
 
   relay-runtime@18.2.0:
@@ -4746,7 +4746,7 @@ snapshots:
       gopd: 1.2.0
       set-function-name: 2.0.2
 
-  relay-compiler@18.2.0: {}
+  relay-compiler@20.1.0: {}
 
   relay-runtime@18.2.0:
     dependencies:
