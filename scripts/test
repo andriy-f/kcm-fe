@@ -1,10 +1,18 @@
 #!/bin/sh
 
-set -ex
+SYSTEM_CONTAINER_ENGINE=$(command -v docker || command -v podman);
+MY_CONTAINER_ENGINE=${CONTAINER_ENGINE:-${SYSTEM_CONTAINER_ENGINE}};
 
-MY_CONTAINER_ENGINE=${CONTAINER_ENGINE:-docker}
+if [ -z "${MY_CONTAINER_ENGINE}" ]; then
+  echo "No container engine found. Please install Podman or Docker.";
+  exit 1;
+fi
 
-echo "Running Frontend tests..."
-$MY_CONTAINER_ENGINE compose -f test-compose.yml build --pull frontend
-$MY_CONTAINER_ENGINE compose -f test-compose.yml run frontend
-$MY_CONTAINER_ENGINE compose -f test-compose.yml down --remove-orphans --volumes
+echo "Using container engine: ${MY_CONTAINER_ENGINE}";
+
+set -ex;
+
+echo "Running Frontend tests...";
+$MY_CONTAINER_ENGINE compose -f test-compose.yml build --pull frontend;
+$MY_CONTAINER_ENGINE compose -f test-compose.yml run frontend;
+$MY_CONTAINER_ENGINE compose -f test-compose.yml down --remove-orphans --volumes;
