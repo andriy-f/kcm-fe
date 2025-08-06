@@ -26,3 +26,6 @@ updates:
    # Check for updates once a week
    schedule:
      interval: "weekly"
+   ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
