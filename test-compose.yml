@@ -9,7 +9,6 @@ services:
     networks:
       - internal
     environment:
-      - REACT_APP_KCM_BACKEND_URL=http://localhost:3000
       - NODE_ENV=test
       - CI=true
 
