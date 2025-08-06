@@ -1,6 +1,6 @@
 {
-  "name": "fe2",
-  "version": "2.0.2",
+  "name": "kcm-frontend",
+  "version": "2.0.3",
   "private": true,
   "type": "module",
   "dependencies": {
@@ -47,12 +47,12 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.28.0",
     "@eslint/js": "^9.32.0",
+    "@swc/core": "^1.13.3",
+    "@swc/plugin-relay": "^9.0.2",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "@testing-library/user-event": "^14.5.2",
-    "@types/babel__core": "^7.20.5",
     "@types/debug": "^4.1.7",
     "@types/node": "^22.17.0",
     "@types/react": "^18.3.23",
@@ -62,10 +62,7 @@
     "@types/redux-logger": "^3.0.13",
     "@types/relay-runtime": "^18.2.5",
     "@types/throttle-debounce": "^5.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
-    "babel-plugin-relay": "^18.2.0",
     "concurrently": "^7.6.0",
     "eslint": "^9.32.0",
     "eslint-plugin-react-hooks": "^5.2.0",

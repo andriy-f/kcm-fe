@@ -16,9 +16,13 @@ ENV PATH=$PATH:$MY_BIN_DIR
 RUN corepack enable --install-directory $MY_BIN_DIR pnpm \
   && corepack install -g pnpm@latest-10
 
-# Restore packages
-COPY --chown=node:node package.json pnpm-lock.yaml ./
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store NODE_ENV=development pnpm install --frozen-lockfile;
+# Fetch packages
+COPY --chown=node:node pnpm-lock.yaml ./
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm fetch;
+
+# Install packages
+COPY --chown=node:node package.json ./
+RUN pnpm install --offline --frozen-lockfile;
 
 # Copy source code
 COPY --chown=node:node . .
