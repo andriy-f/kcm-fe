@@ -27,5 +27,5 @@ updates:
    schedule:
      interval: "weekly"
    ignore:
-      - dependency-name: "*"
+      - dependency-name: "node"
         update-types: ["version-update:semver-major"]
