@@ -1,3 +1,5 @@
+name: kcm-frontend-tests
+
 services:
 
   frontend:
