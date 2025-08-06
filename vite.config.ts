@@ -1,7 +1,6 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import myRelayPlugin from './myRelayPlugin'
 
 const defineValues = {
   'process.env.DEBUG': JSON.stringify(process.env.DEBUG),
@@ -19,10 +18,18 @@ const finalDefineValues = process.env.NODE_ENV !== 'test' ? {
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    port: (process.env.PORT && parseInt(process.env.PORT)) || 5173,
+    port: process.env.PORT ? parseInt(process.env.PORT) : 5173,
     host: process.env.HOST || 'localhost',
   },
-  plugins: [react(), myRelayPlugin],
+  plugins: [react({
+    plugins: [
+      ['@swc/plugin-relay', {
+        rootDir: __dirname,
+        language: "typescript",
+        eagerEsModules: true,
+      }]
+    ]
+  })],
   define: finalDefineValues,
   test: {
     pool: 'forks',

@@ -26,6 +26,8 @@ yarn-error.log*
 # Tern
 .tern-port
 
+.swc
+
 # Custom
 /newrelic.js
 /newrelic_agent.log
