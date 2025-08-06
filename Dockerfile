@@ -38,8 +38,8 @@ RUN jq .version package.json -r > ./public/version.txt
 FROM base AS development
 # Dev runtime config
 USER node
-EXPOSE 80
-ENV PORT=80
+EXPOSE 8080
+ENV PORT=8080
 ENV HOST=0.0.0.0
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["pnpm", "run", "dev"]
@@ -63,6 +63,7 @@ COPY default.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist ./
 RUN mv ./index.html ./index.html.template
 
+EXPOSE 8080
 # Runtime config
 ENTRYPOINT ["/docker-entrypoint"]
 CMD ["nginx", "-g", "daemon off;"]
