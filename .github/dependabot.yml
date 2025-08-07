@@ -11,6 +11,11 @@ updates:
    schedule:
      interval: weekly
 
+ - package-ecosystem: "github-actions"
+   directory: "/"
+   schedule:
+     interval: weekly
+
  # Enable version updates for npm
  - package-ecosystem: "npm"
    # Look for `package.json` and `lock` files in the `root` directory
