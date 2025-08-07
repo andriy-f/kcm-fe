@@ -39,8 +39,8 @@ importers:
         specifier: ^8.0.2
         version: 8.1.3(@types/react-dom@18.3.7(@types/react@18.3.23))(@types/react@18.3.23)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(redux@5.0.1)
       react-relay:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.3.1)
+        specifier: ^20.1.1
+        version: 20.1.1(react@18.3.1)
       react-router-dom:
         specifier: ^7.7.1
         version: 7.7.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1872,10 +1872,10 @@ packages:
       redux:
         optional: true
 
-  react-relay@18.2.0:
-    resolution: {integrity: sha512-/yHlv4pj3IQQPtDzYLfVk6P4wrOSvYPu/5ySPcRp4xV3pn9xoVOHVczSLcZkRVf72lJu8CIjoT8rn3roaGoFyQ==}
+  react-relay@20.1.1:
+    resolution: {integrity: sha512-pwl7wHHXCOx32dOg4TVNkhVojgGVvOBMo9pcMGeM1BIFYvmwGauKTtBB+qr5buXHGooCL8TXjMVg+ZLizIsbeQ==}
     peerDependencies:
-      react: ^16.9.0 || ^17 || ^18
+      react: ^16.9.0 || ^17 || ^18 || ^19
 
   react-router-dom@7.7.1:
     resolution: {integrity: sha512-bavdk2BA5r3MYalGKZ01u8PGuDBloQmzpBZVhDLrOOv1N943Wq6dcM9GhB3x8b7AbqPMEezauv4PeGkAJfy7FQ==}
@@ -1952,6 +1952,9 @@ packages:
 
   relay-runtime@18.2.0:
     resolution: {integrity: sha512-r4FYWlx1dPwFW+KQnuF1ugwVKR4toIFduCGheEf2paRc6nEEcCIgd2p2Jx2gRF+4niO3mCbRZvqdCoKaznUDzg==}
+
+  relay-runtime@20.1.1:
+    resolution: {integrity: sha512-N98ZkkyuIHdXmHaPuljihM1QbFYXATF0gxA0CESFphszsQzXs9A/zZloVfzdOI/xg3B3CfM/5nozvIoeTDIcfw==}
 
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
@@ -4104,14 +4107,14 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       redux: 5.0.1
 
-  react-relay@18.2.0(react@18.3.1):
+  react-relay@20.1.1(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.28.2
       fbjs: 3.0.5
       invariant: 2.2.4
       nullthrows: 1.1.1
       react: 18.3.1
-      relay-runtime: 18.2.0
+      relay-runtime: 20.1.1
     transitivePeerDependencies:
       - encoding
 
@@ -4192,6 +4195,14 @@ snapshots:
   relay-compiler@18.2.0: {}
 
   relay-runtime@18.2.0:
+    dependencies:
+      '@babel/runtime': 7.28.2
+      fbjs: 3.0.5
+      invariant: 2.2.4
+    transitivePeerDependencies:
+      - encoding
+
+  relay-runtime@20.1.1:
     dependencies:
       '@babel/runtime': 7.28.2
       fbjs: 3.0.5
