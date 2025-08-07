@@ -15,7 +15,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
     "react-relay": "^18.2.0",
-    "react-router-dom": "^6.8.0",
+    "react-router-dom": "^7.7.1",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "relay-runtime": "^18.2.0",
