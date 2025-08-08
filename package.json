@@ -61,7 +61,7 @@
     "@types/redux-logger": "^3.0.13",
     "@types/relay-runtime": "^19.0.2",
     "@types/throttle-debounce": "^5.0.0",
-    "@vitejs/plugin-react-swc": "^3.5.0",
+    "@vitejs/plugin-react-swc": "^4.0.0",
     "concurrently": "^9.2.0",
     "eslint": "^9.32.0",
     "eslint-plugin-react-hooks": "^5.2.0",
