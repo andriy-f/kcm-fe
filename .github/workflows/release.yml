@@ -7,7 +7,7 @@
 # To get a newer version, you will need to update the SHA.
 # You can also reference a tag or branch, but the action may change without warning.
 
-name: Publish Docker image
+name: Release
 
 on:
   release:
@@ -48,16 +48,21 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Test Docker image
+      - name: Build test image
         uses: docker/build-push-action@v6
         with:
           context: .
-          target: test
+          target: base
           push: false
-          cache-from: type=gha,scope=${{ github.ref_name}}-test
-          cache-to: type=gha,mode=max,scope=${{ github.ref_name}}-test
+          load: true
+          tags: kcm-fe-test
+          cache-from: type=gha,scope=${{ github.ref_name}}-base
+          cache-to: type=gha,mode=max,scope=${{ github.ref_name}}-base
 
-      - name: Build and push Docker image
+      - name: Run tests
+        run: ./scripts/test
+
+      - name: Build and publish image
         uses: docker/build-push-action@v6
         with:
           context: .
