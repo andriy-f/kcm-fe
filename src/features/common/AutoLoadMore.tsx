@@ -8,7 +8,7 @@ type MyProps = {
 type Props = PropsWithChildren<MyProps>
 
 export default class AutoLoadMore extends Component<Props> {
-  wrapperRef: React.RefObject<HTMLDivElement>
+  wrapperRef: React.RefObject<HTMLDivElement | null>
   observer: IntersectionObserver | null = null
 
   constructor(props: Props) {
