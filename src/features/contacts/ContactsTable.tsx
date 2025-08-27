@@ -1,9 +1,9 @@
-import React, { useRef, useTransition } from 'react'
+import React, { useTransition } from 'react'
 import debug from 'debug'
 import { type PayloadError } from 'relay-runtime'
 import { usePaginationFragment } from 'react-relay'
 import { Link as RRLink } from 'react-router-dom'
-import { debounce } from 'throttle-debounce'
+import { useDebouncedCallback } from 'use-debounce'
 import { graphql } from 'react-relay'
 
 import Button from '@mui/material/Button'
@@ -67,19 +67,12 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
   const handlePageEndReached = () => { loadNext(12) }
 
   // Search-related
-  const [filterText, setFilterText] = React.useState('')
   const [isPending, startTransition] = useTransition()
-  const refetchDebouncedRef = useRef(debounce(200, (filterText: string) => {
+  const debouncedRefetch = useDebouncedCallback((value: string) => {
     startTransition(() => {
-      refetch({ filterText })
+      refetch({ filterText: value })
     })
-  }))
-  const handleFilterChange: React.ChangeEventHandler<HTMLInputElement> =
-    (e) => {
-      const value = e.target.value
-      setFilterText(value)
-      refetchDebouncedRef.current(value)
-    }
+  }, 200)
 
   // Delete-related
   const [deleteDialogContact, setDeleteDialogContact] = React.useState<Contact | null>(null)
@@ -103,8 +96,14 @@ function ContactsTable({ contacts }: { contacts: ContactsTableFragment$key }) {
   return (
     <>
       <Title>Contacts</Title>
-      <TextField label='Search' variant='filled'
-        value={filterText} onChange={handleFilterChange} />
+      <TextField
+        label='Search'
+        defaultValue={''}
+        variant='filled'
+        onChange={(e) => {
+          debouncedRefetch(e.target.value)
+        }}
+      />
       {isPending && <CircularProgress />}
       <DeleteContactDialog
         open={!!deleteDialogContact}

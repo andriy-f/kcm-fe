@@ -53,9 +53,9 @@ importers:
       relay-runtime:
         specifier: ^20.1.1
         version: 20.1.1
-      throttle-debounce:
-        specifier: ^5.0.2
-        version: 5.0.2
+      use-debounce:
+        specifier: ^10.0.5
+        version: 10.0.5(react@19.1.1)
       web-vitals:
         specifier: ^5.1.0
         version: 5.1.0
@@ -105,9 +105,6 @@ importers:
       '@types/relay-runtime':
         specifier: ^19.0.2
         version: 19.0.2
-      '@types/throttle-debounce':
-        specifier: ^5.0.2
-        version: 5.0.2
       '@vitejs/plugin-react-swc':
         specifier: ^4.0.1
         version: 4.0.1(vite@7.1.3(@types/node@22.18.0))
@@ -906,9 +903,6 @@ packages:
 
   '@types/relay-runtime@19.0.2':
     resolution: {integrity: sha512-lcWb+/7cPG21UgtK/fdpt8QgtV2GYc8TQIusZUBL1k2oy+8oNwYQAAj0/j1pkg77sk/p5MQPQZYOWN9i8wpUhg==}
-
-  '@types/throttle-debounce@5.0.2':
-    resolution: {integrity: sha512-pDzSNulqooSKvSNcksnV72nk8p7gRqN8As71Sp28nov1IgmPKWbOEIwAWvBME5pPTtaXJAvG3O4oc76HlQ4kqQ==}
 
   '@types/use-sync-external-store@0.0.6':
     resolution: {integrity: sha512-zFDAD+tlpf2r4asuHEj0XH6pY6i0g5NeAHPn+15wk3BV6JA69eERFXC1gyGThDkVa1zCyKr5jox1+2LbV/AMLg==}
@@ -1885,10 +1879,6 @@ packages:
   symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
 
-  throttle-debounce@5.0.2:
-    resolution: {integrity: sha512-B71/4oyj61iNH0KeCamLuE2rmKuTO5byTOSVwECM5FA7TiAiAW+UqTKZ9ERueC4qvgSttUhdmq1mXC3kJqGX7A==}
-    engines: {node: '>=12.22'}
-
   tinybench@2.9.0:
     resolution: {integrity: sha512-0+DUvqWMValLmha6lr4kD8iAMK1HzV0/aKnCtWb9v9641TnP/MFb7Pc2bxoxQjTXAErryXVgUOfv2YqNllqGeg==}
 
@@ -1978,6 +1968,12 @@ packages:
 
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
+
+  use-debounce@10.0.5:
+    resolution: {integrity: sha512-Q76E3lnIV+4YT9AHcrHEHYmAd9LKwUAbPXDm7FlqVGDHiSOhX3RDjT8dm0AxbJup6WgOb1YEcKyCr11kBJR5KQ==}
+    engines: {node: '>= 16.0.0'}
+    peerDependencies:
+      react: '*'
 
   use-sync-external-store@1.5.0:
     resolution: {integrity: sha512-Rb46I4cGGVBmjamjphe8L/UnvJD+uPPtTkNvX5mZgqdbavhI4EbgIWJiIHXJ8bc/i9EQGPRh4DwEURJ552Do0A==}
@@ -2795,8 +2791,6 @@ snapshots:
       redux: 5.0.1
 
   '@types/relay-runtime@19.0.2': {}
-
-  '@types/throttle-debounce@5.0.2': {}
 
   '@types/use-sync-external-store@0.0.6': {}
 
@@ -3824,8 +3818,6 @@ snapshots:
 
   symbol-tree@3.2.4: {}
 
-  throttle-debounce@5.0.2: {}
-
   tinybench@2.9.0: {}
 
   tinyexec@0.3.2: {}
@@ -3897,6 +3889,10 @@ snapshots:
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
+
+  use-debounce@10.0.5(react@19.1.1):
+    dependencies:
+      react: 19.1.1
 
   use-sync-external-store@1.5.0(react@19.1.1):
     dependencies:
