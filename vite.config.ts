@@ -1,6 +1,7 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+import tailwindcss from '@tailwindcss/vite'
 
 const defineValues = {
   'process.env.DEBUG': JSON.stringify(process.env.DEBUG),
@@ -21,15 +22,18 @@ export default defineConfig({
     port: process.env.PORT ? parseInt(process.env.PORT) : 5173,
     host: process.env.HOST || 'localhost',
   },
-  plugins: [react({
-    plugins: [
-      ['@swc/plugin-relay', {
-        rootDir: __dirname,
-        language: "typescript",
-        eagerEsModules: true,
-      }]
-    ]
-  })],
+  plugins: [
+    react({
+      plugins: [
+        ['@swc/plugin-relay', {
+          rootDir: __dirname,
+          language: "typescript",
+          eagerEsModules: true,
+        }],
+      ]
+    }),
+    tailwindcss()
+  ],
   define: finalDefineValues,
   test: {
     pool: 'forks',
