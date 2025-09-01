@@ -16,6 +16,7 @@
 		}
 	],
 	// This one is podman specific
+	// Not strictly necessary but gives correct owner group for files created within the container
 	"runArgs": [
 		"--userns=keep-id:uid=1000,gid=1000"
 	]
