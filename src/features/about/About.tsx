@@ -1,9 +1,4 @@
-/**
- * TODO: add external links
- */
 import { Link } from 'react-router-dom'
-
-import { Typography } from '@mui/material'
 
 const About = () => (
   <article>
