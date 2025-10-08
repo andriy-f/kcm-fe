@@ -23,6 +23,9 @@ updates:
    # Check the npm registry for updates every day (weekdays)
    schedule:
      interval: "daily"
+   ignore:
+     - dependency-name: "@types/node"
+       update-types: ["version-update:semver-major"]
 
   # Enable version updates for Docker
  - package-ecosystem: "docker"
