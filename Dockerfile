@@ -22,9 +22,9 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm fetch;
 
 # Install packages
 COPY --chown=node:node package.json ./
+RUN corepack install
 RUN pnpm install --offline --frozen-lockfile;
 
-RUN corepack install
 
 # Copy source code
 COPY --chown=node:node . .
