@@ -18,7 +18,8 @@ RUN corepack enable --install-directory $MY_BIN_DIR pnpm \
 
 # Fetch packages
 COPY --chown=node:node pnpm-lock.yaml ./
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm fetch;
+# RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm fetch;
+RUN pnpm fetch;
 
 # Install packages
 COPY --chown=node:node package.json ./
@@ -47,7 +48,8 @@ CMD ["pnpm", "run", "dev"]
 # Build
 # =====
 FROM base AS build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store NODE_ENV=production pnpm run build
+# RUN --mount=type=cache,id=pnpm,target=/pnpm/store NODE_ENV=production pnpm run build
+RUN NODE_ENV=production pnpm run build
 
 # ===========
 # Prod image
