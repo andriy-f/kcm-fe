@@ -73,8 +73,8 @@ importers:
         specifier: ^1.15.3
         version: 1.15.3
       '@swc/plugin-relay':
-        specifier: ^11.1.0
-        version: 11.1.0
+        specifier: ^12.0.1
+        version: 12.0.1
       '@testing-library/dom':
         specifier: ^10.4.1
         version: 10.4.1
@@ -852,8 +852,8 @@ packages:
   '@swc/counter@0.1.3':
     resolution: {integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==}
 
-  '@swc/plugin-relay@11.1.0':
-    resolution: {integrity: sha512-gI+ldYTWFtzfTDS99yLu7T2OvfHsBT6oieRr4QM7CJSm1es0oKrQumYSu7KvgHPDOQ6PZyPsR1Kw9Xi0GXY+bg==}
+  '@swc/plugin-relay@12.0.1':
+    resolution: {integrity: sha512-KnNI8x+CqgzZ8JoljJjm6siq62wOxJ0/sLmOavUqgYPp4SKS6uhl+0yCCA7pw/kYedjO04TqxYGcX9h/dzWXmA==}
 
   '@swc/types@0.1.25':
     resolution: {integrity: sha512-iAoY/qRhNH8a/hBvm3zKj9qQ4oc2+3w1unPJa2XvTK3XjeLXtzcCingVPw/9e5mn1+0yPqxcBGp9Jf0pkfMb1g==}
@@ -2993,7 +2993,7 @@ snapshots:
 
   '@swc/counter@0.1.3': {}
 
-  '@swc/plugin-relay@11.1.0':
+  '@swc/plugin-relay@12.0.1':
     dependencies:
       '@swc/counter': 0.1.3
 
