@@ -109,8 +109,8 @@ importers:
         specifier: ^3.0.13
         version: 3.0.13
       '@types/relay-runtime':
-        specifier: ^19.0.3
-        version: 19.0.3
+        specifier: ^20.1.0
+        version: 20.1.0
       '@vitejs/plugin-react-swc':
         specifier: ^4.2.2
         version: 4.2.2(vite@7.2.7(@types/node@22.19.2)(jiti@2.6.1)(lightningcss@1.30.2))
@@ -1035,8 +1035,8 @@ packages:
   '@types/redux-logger@3.0.13':
     resolution: {integrity: sha512-jylqZXQfMxahkuPcO8J12AKSSCQngdEWQrw7UiLUJzMBcv1r4Qg77P6mjGLjM27e5gFQDPD8vwUMJ9AyVxFSsg==}
 
-  '@types/relay-runtime@19.0.3':
-    resolution: {integrity: sha512-pvpWWQq5e9KeESF8klQaP2igLLhr2bRd3XxVCxNpGElsPQiP6Mejr59RT9/OGY3O3i8jAGGQsshVe0QCQDbxNg==}
+  '@types/relay-runtime@20.1.0':
+    resolution: {integrity: sha512-KujDVDPWjvRxd4YBTp0ppYqOCrJhsVwH8v18vicUBFRfgG/mqEPfK1rpI2Bz7vL08/CUiyHv7CR3CnqE4PUpbA==}
 
   '@types/use-sync-external-store@0.0.6':
     resolution: {integrity: sha512-zFDAD+tlpf2r4asuHEj0XH6pY6i0g5NeAHPn+15wk3BV6JA69eERFXC1gyGThDkVa1zCyKr5jox1+2LbV/AMLg==}
@@ -3139,7 +3139,7 @@ snapshots:
   '@types/react-relay@18.2.1':
     dependencies:
       '@types/react': 19.2.7
-      '@types/relay-runtime': 19.0.3
+      '@types/relay-runtime': 20.1.0
 
   '@types/react-router-dom@5.3.3':
     dependencies:
@@ -3164,7 +3164,7 @@ snapshots:
     dependencies:
       redux: 5.0.1
 
-  '@types/relay-runtime@19.0.3': {}
+  '@types/relay-runtime@20.1.0': {}
 
   '@types/use-sync-external-store@0.0.6': {}
 

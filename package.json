@@ -62,7 +62,7 @@
     "@types/react-relay": "^18.2.1",
     "@types/react-router-dom": "^5.3.3",
     "@types/redux-logger": "^3.0.13",
-    "@types/relay-runtime": "^19.0.3",
+    "@types/relay-runtime": "^20.1.0",
     "@vitejs/plugin-react-swc": "^4.2.2",
     "concurrently": "^9.2.1",
     "eslint": "^9.39.1",
