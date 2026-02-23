@@ -34,24 +34,20 @@ const About = () => (
     <section className='my-4'>
       <h3 className="text-xl md:text-2xl lg:text-3xl font-bold">Technologies</h3>
       <h4 className="text-lg md:text-xl lg:text-2xl font-bold">Front-end</h4>
-      <p>
-        <ul className='list-disc pl-5'>
-          <li>React</li>
-          <li>Redux</li>
-          <li>TypeScript</li>
-          <li>GraphQL (next generation API)</li>
-          {/* <li>Service worker (Progressive Web App)</li> */}
-        </ul>
-      </p>
+      <ul className='list-disc pl-5'>
+        <li>React</li>
+        <li>Redux</li>
+        <li>TypeScript</li>
+        <li>GraphQL (next generation API)</li>
+        {/* <li>Service worker (Progressive Web App)</li> */}
+      </ul>
       <h4 className="text-lg md:text-xl lg:text-2xl font-bold">Back-end</h4>
-      <p>
-        <ul className='list-disc pl-5'>
-          <li>NodeJS</li>
-          <li>MongoDB</li>
-          <li>TypeScript</li>
-          <li>GraphQL</li>
-        </ul>
-      </p>
+      <ul className='list-disc pl-5'>
+        <li>NodeJS</li>
+        <li>MongoDB</li>
+        <li>TypeScript</li>
+        <li>GraphQL</li>
+      </ul>
     </section>
     <section className='text-center'>
       <Link to="/contacts" className='bg-blue-500 text-white py-2 px-4 rounded'>Go to Contacts</Link>
