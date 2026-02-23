@@ -31,7 +31,7 @@ type MyError = {
   }
 }
 export const getUserFriendlyErrorMessage = (error: MyError | null | undefined) => {
-  let errorMessage = undefined
+  let errorMessage
 
   switch (error && error.status) {
     case 0:
